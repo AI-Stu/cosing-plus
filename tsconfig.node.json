@@ -1,4 +1,5 @@
 {
+  "extends": "@cosing/tsconfig/node.json",
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,

@@ -16,7 +16,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     proxyObj[env.VITE_APP_BASE_API_DEV] = {
       target: env.VITE_APP_BASE_URL_DEV,
       changeOrigin: true,
-      rewrite: path => path.replace(new RegExp(`^${env.VITE_APP_BASE_API_DEV}`), ''),
+      rewrite: (path: string) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API_DEV}`), ''),
     }
   }
   return {

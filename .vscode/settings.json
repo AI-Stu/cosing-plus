@@ -1,15 +1,15 @@
 {
-  // Disable the default formatter, use eslint instead
+  // 禁用默认格式化程序，改用 eslint
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
-  // Auto fix
+  // 自动修复
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
 
-  // Silent the stylistic rules in you IDE, but still auto fix them
+  // 在 IDE 中静默样式规则，但仍会自动修复它们
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off", "fixable": true },
     { "rule": "format/*", "severity": "off", "fixable": true },
@@ -23,7 +23,7 @@
     { "rule": "*semi", "severity": "off", "fixable": true }
   ],
 
-  // Enable eslint for all supported languages
+  // 为所有支持的语言启用 eslint
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -45,5 +45,45 @@
     "scss",
     "pcss",
     "postcss"
-  ]
+  ],
+
+  // 在使用搜索功能时，将这些文件夹/文件排除在外
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/*.log": true,
+    "**/*.log*": true,
+    "**/bower_components": true,
+    "**/dist": true,
+    "**/elehukouben": true,
+    "**/.git": true,
+    "**/.github": true,
+    "**/.gitignore": true,
+    "**/.svn": true,
+    "**/.DS_Store": true,
+    "**/.vitepress/cache": true,
+    "**/.idea": true,
+    "**/.vscode": false,
+    "**/.yarn": true,
+    "**/tmp": true,
+    "*.xml": true,
+    "out": true,
+    "dist": true,
+    "node_modules": true,
+    "CHANGELOG.md": true,
+    "**/pnpm-lock.yaml": true,
+    "**/yarn.lock": true
+  },
+
+  // 控制相关文件嵌套展示
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "$(capture).test.ts, $(capture).test.tsx, $(capture).spec.ts, $(capture).spec.tsx, $(capture).d.ts",
+    "*.tsx": "$(capture).test.ts, $(capture).test.tsx, $(capture).spec.ts, $(capture).spec.tsx,$(capture).d.ts",
+    "*.env": "$(capture).env.*",
+    "README.md": "README*,CHANGELOG*,LICENSE,CNAME",
+    "package.json": "pnpm-lock.yaml,pnpm-workspace.yaml,.gitattributes,.gitignore,.gitpod.yml,.npmrc,.browserslistrc,.node-version,.git*,.tazerc.json",
+    "eslint.config.mjs": ".eslintignore,.prettierignore,.stylelintignore,.commitlintrc.*,.prettierrc.*,stylelint.config.*,.lintstagedrc.mjs,cspell.json",
+    "tailwind.config.mjs": "postcss.*"
+  }
 }

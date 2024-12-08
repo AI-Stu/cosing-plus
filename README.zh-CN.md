@@ -70,6 +70,20 @@ pnpm install
 
 # 启动项目
 pnpm dev
+
+```
+
+```bash
+
+# 一次性安装父工程和子工程的所有依赖：
+pnpm i
+
+# 安装依赖到父工程：
+pnpm add <dependent name> -w / pnpm add <dependent name> -wD
+
+# 安装依赖到指定的子工程：
+pnpm add <dependent name> -r --filter <project name>
+
 ```
 
 ## 贡献

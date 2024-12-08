@@ -116,11 +116,11 @@ function instancePromise<R = any, T = any>(options: AxiosOptions<T> & RequestCon
       resolve(res as any)
     }).catch((e: Error | AxiosError) => {
       reject(e)
+    }).finally(() => {
+      if (loading) {
+        axiosLoading.closeLoading()
+      }
     })
-      .finally(() => {
-        if (loading)
-          axiosLoading.closeLoading()
-      })
   })
 }
 export function useGet< R = any, T = any>(url: string, params?: T, config?: AxiosRequestConfig & RequestConfigExtra): Promise<ResponseBody<R>> {

@@ -10,7 +10,12 @@ dayjs.extend(duration)
 
 const fileListTotal: number[] = []
 
-function recursiveDirectory(folder: string, callback: Function): void {
+/**
+ * 递归目录
+ * @param folder 目录路径
+ * @param callback
+ */
+function recursiveDirectory(folder: string, callback: () => void): void {
   readdir(folder, (err, files: string[]) => {
     if (err)
       throw err
@@ -40,16 +45,28 @@ function sum(arr: number[]) {
     return t + c
   }, 0)
 }
-function formatBytes(a: number, b?: number): string {
-  if (a === 0)
+
+/**
+ * 格式化文件大小
+ * @param fileSize
+ * @param fixed
+ * @returns
+ */
+function formatBytes(fileSize: number, fixed?: number): string {
+  if (fileSize === 0)
     return '0 Bytes'
   const c = 1024
-  const d = b || 2
+  const d = fixed || 2
   const e = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-  const f = Math.floor(Math.log(a) / Math.log(c))
-  return `${Number.parseFloat((a / c ** f).toFixed(d))} ${e[f]}`
+  const f = Math.floor(Math.log(fileSize) / Math.log(c))
+  return `${Number.parseFloat((fileSize / c ** f).toFixed(d))} ${e[f]}`
 }
 
+/**
+ * vite 打包信息
+ * @param name
+ * @returns
+ */
 export function viteBuildInfo(name: string): Plugin {
   let config: ResolvedConfig
   let startTime: Dayjs
@@ -63,13 +80,13 @@ export function viteBuildInfo(name: string): Plugin {
       console.log(
         bold(
           green(
-            `👏欢迎使用${blue(`[${name}]`)}，现在正全力为您${config.command === 'build' ? '打包' : '编译'
-            }`,
+            `👏 欢迎使用${blue(`[${name}]`)}，正在为您${config.command === 'build' ? '打包' : '编译'}`,
           ),
         ),
       )
-      if (config.command === 'build')
+      if (config.command === 'build') {
         startTime = dayjs(new Date())
+      }
     },
     closeBundle() {
       if (config.command === 'build') {
@@ -81,8 +98,8 @@ export function viteBuildInfo(name: string): Plugin {
                 `恭喜打包完成🎉（总用时${dayjs
                   .duration(endTime.diff(startTime))
                   .format('mm分ss秒')}，打包后的大小为${formatBytes(
-                    sum(fileListTotal),
-                  )}）`,
+                  sum(fileListTotal),
+                )}）`,
               ),
             ),
           )
