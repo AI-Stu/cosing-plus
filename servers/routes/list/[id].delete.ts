@@ -1,5 +1,5 @@
 export default eventHandler((event) => {
-  const id = event.context.params.id
+  const id = event?.context?.params?.id
   if (typeof id !== 'number') {
     setResponseStatus(event, 403)
     return {

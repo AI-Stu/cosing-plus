@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer'
+
 export default eventHandler(async (event) => {
   const body = await readBody(event)
   const { type } = body

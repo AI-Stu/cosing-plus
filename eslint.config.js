@@ -14,5 +14,6 @@ export default antfu({
     'style/quote-props': 0,
     'unused-imports/no-unused-vars': 0,
     'ts/no-unused-expressions': 0,
+    // 'n/prefer-global/buffer': ['error', 'always' | 'never'],
   },
 })

@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer'
+
 export default eventHandler((event) => {
   const token = getHeader(event, 'Authorization')
   const username = Buffer.from(token, 'base64').toString('utf-8')

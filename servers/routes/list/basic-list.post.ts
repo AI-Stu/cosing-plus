@@ -68,8 +68,9 @@ export default eventHandler(async (_event) => {
   }
 
   // 配置任务时间
-  for (let i = 0; i < data.length; i++)
+  for (let i = 0; i < data.length; i++) {
     data[i].start = dayjs().subtract(i, 'hour').format('YYYY-MM-DD HH:mm')
+  }
 
   return {
     code: 200,

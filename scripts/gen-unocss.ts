@@ -1,4 +1,5 @@
-import path from 'path'
+import path from 'node:path'
+import * as process from 'node:process'
 import { theme } from 'ant-design-vue'
 import lodash from 'lodash'
 import fsExtra from 'fs-extra'
@@ -7,7 +8,7 @@ const { defaultAlgorithm, defaultSeed } = theme
 
 const mapToken = defaultAlgorithm(defaultSeed)
 
-const formatKey = (key: string, prefixCls: string) => {
+function formatKey(key: string, prefixCls: string) {
   return `${prefixCls}${lodash.kebabCase(key)}`
 }
 const prefixCls = '--pro-ant-'
