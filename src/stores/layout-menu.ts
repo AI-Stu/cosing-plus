@@ -57,7 +57,7 @@ export const useLayoutMenu = defineStore('layout-menu', () => {
     if (latestOpenKey) {
       if (!rootSubmenuKeys.includes(latestOpenKey)) {
         // 与 前一项比较 是否为同一级，同级则移除前一项
-        const prevKey = innerOpenKeys[innerOpenKeys.length - 2]
+        const prevKey = innerOpenKeys[innerOpenKeys.length - 2] as string
         const preMenuItem = findMenuByPath(prevKey)(menuData.value)
         const latestOpenMenuItem = findMenuByPath(latestOpenKey)(menuData.value)
         if (preMenuItem && latestOpenMenuItem && preMenuItem.parentId === latestOpenMenuItem.parentId)
@@ -75,7 +75,7 @@ export const useLayoutMenu = defineStore('layout-menu', () => {
 
   const handleSelectedKeys = (val: string[]) => {
     // 如果点击的是外部的菜单，那么我们就不需要设置成为激活的状态
-    const path = val[0]
+    const path = val[0] || ''
     if (!isUrl(path))
       selectedKeys.value = val
   }

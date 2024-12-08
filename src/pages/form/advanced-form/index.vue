@@ -69,7 +69,7 @@ const state = reactive({
       editable: false,
       department: '财务部',
     },
-  ],
+  ] as any,
 })
 function handleAdd() {
   const key = state.data.length === 0 ? '1' : (Number.parseInt(state.data[state.data.length - 1].key) + 1).toString()
@@ -84,7 +84,7 @@ function handleAdd() {
   state.data.push(newData)
 }
 function remove(key: string) {
-  state.data = state.data.filter(item => item.key !== key)
+  state.data = state.data.filter((item: any) => item.key !== key)
 }
 </script>
 

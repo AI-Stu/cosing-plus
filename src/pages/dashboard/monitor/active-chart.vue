@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
     </div>
     <div>
       <div class="activeChartGrid">
-        <p>{{ [...activeData].sort()[activeData.length - 1]?.y + 200 }} 亿元</p>
+        <p>{{ ([...activeData].sort()[activeData.length - 1]?.y || 0) + 200 }} 亿元</p>
         <p>{{ [...activeData].sort()[Math.floor(activeData.length / 2)]?.y }} 亿元</p>
       </div>
       <div class="dashedLine">

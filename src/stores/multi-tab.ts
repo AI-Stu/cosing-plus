@@ -77,10 +77,10 @@ export const useMultiTab = defineStore('multi-tab', () => {
       message.error('当前页签不存在无法关闭')
       return
     }
-    const item = list.value[index]
+    const item = list.value[index] as any
     // 需要判断当前的标签是不是被选中，如果是，还需要判断当前是不是第一个页签，如果是，那么就需要激活上一个页签，如果不是，那就需要激活下一个页签
     if (item.fullPath === activeKey.value) {
-      const newItem = index === 0 ? list.value[index + 1] : list.value[index - 1]
+      const newItem = index === 0 ? list.value[index + 1] : list.value[index - 1] as any
       activeKey.value = newItem.fullPath
       router.push(newItem.fullPath)
     }

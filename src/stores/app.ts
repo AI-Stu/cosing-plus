@@ -45,14 +45,14 @@ export const useAppStore = defineStore('app', () => {
     },
     components: {},
   })
-  const locale = ref<string>(lsLocaleState.value)
+  const locale = ref<string>(lsLocaleState.value || '')
   const toggleLocale = (locale: string) => {
     lsLocaleState.value = locale
   }
   const toggleCompact = (isCompact = true) => {
     // 判断是否存在compactAlgorithm
     if (Array.isArray(themeConfig.algorithm)) {
-      const index = themeConfig.algorithm.findIndex(item => item === compactAlgorithm)
+      const index = themeConfig.algorithm.findIndex((item: any) => item === compactAlgorithm)
       if (index >= 0 && isCompact) {
         return
       }
@@ -117,7 +117,7 @@ export const useAppStore = defineStore('app', () => {
 
   // 监听isDark的变化
   watch(preferredLanguages, () => {
-    toggleLocale(preferredLanguages.value[0])
+    toggleLocale(preferredLanguages.value[0] || '')
   })
 
   const toggleCollapsed = (collapsed: boolean) => {
