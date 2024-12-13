@@ -23,7 +23,7 @@ const data = ref([
     link: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png',
   },
   {
-    title: 'Antdv Pro',
+    title: 'Cosing Plus',
     link: '/logo.svg',
   },
   {

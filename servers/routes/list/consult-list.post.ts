@@ -53,7 +53,7 @@ export default eventHandler(async (_event) => {
     },
     {
       id: 6,
-      name: 'Antdv Pro',
+      name: 'Cosing Plus',
       callNo: 2000,
       desc: '不管何时何地，做你想做的事永远都不嫌晚',
       status: STATUS.OFF,

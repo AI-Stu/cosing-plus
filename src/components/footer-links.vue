@@ -7,7 +7,7 @@ defineOptions({
 </script>
 
 <template>
-  <a decoration-none href="https://antdv-pro.com" target="_blank">Antdv Pro</a>
+  <a decoration-none href="https://antdv-pro.com" target="_blank">Cosing Plus</a>
   <a decoration-none href="https://github.com/antdv-pro/antdv-admin-pro" target="_blank">
     <GithubOutlined />
   </a>

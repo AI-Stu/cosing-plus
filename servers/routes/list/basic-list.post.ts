@@ -38,7 +38,7 @@ export default eventHandler(async (_event) => {
       content: '希望是件美丽的东西，也许是最好的东西',
     },
     {
-      title: 'Antdv Pro',
+      title: 'Cosing Plus',
       link: '/logo.svg',
       percent: 80,
       status: 'active',

@@ -1,6 +1,6 @@
 export default {
   //  登录页面
-  'pages.layouts.userLayout.title': 'Antdv Pro 是一个基于Ant Design Vue的通用中台管理系统',
+  'pages.layouts.userLayout.title': 'Cosing Plus 是一个基于Ant Design Vue的通用中台管理系统',
   'pages.login.accountLogin.tab': '账户密码登录',
   'pages.login.accountLogin.errorMessage': '错误的用户名和密码(admin/admin)',
   'pages.login.failure': '登录失败，请重试！',
