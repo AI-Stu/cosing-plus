@@ -58,7 +58,7 @@ export const useI18nLocale = createSharedComposable(() => {
     const route = router.currentRoute.value
     useMetaTitle(route)
   }, {
-    immediate: true,
+    immediate: true
   })
 
   // 切换多语言功能
@@ -73,6 +73,6 @@ export const useI18nLocale = createSharedComposable(() => {
     locale,
     t,
     antd,
-    setLocale,
+    setLocale
   }
 })

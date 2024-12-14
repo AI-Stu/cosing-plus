@@ -9,41 +9,41 @@ const statusMap = {
   0: '关闭',
   1: '运行中',
   2: '上线',
-  3: '错误',
+  3: '错误'
 }
 const message = useMessage()
 const columns = shallowRef([
   {
     title: '#',
-    dataIndex: 'id',
+    dataIndex: 'id'
   },
   {
     title: '规则名称',
-    dataIndex: 'name',
+    dataIndex: 'name'
   },
   {
     title: '描述',
-    dataIndex: 'desc',
+    dataIndex: 'desc'
   },
   {
     title: '服务调用次数',
-    dataIndex: 'callNo',
+    dataIndex: 'callNo'
   },
   {
     title: '状态',
     dataIndex: 'status',
-    width: 100,
+    width: 100
   },
   {
     title: '上次调度时间',
     dataIndex: 'updatedAt',
-    width: 200,
+    width: 200
   },
   {
     title: '操作',
     dataIndex: 'action',
-    width: 200,
-  },
+    width: 200
+  }
 ])
 const loading = shallowRef(false)
 const pagination = reactive<PaginationProps>({
@@ -58,7 +58,7 @@ const pagination = reactive<PaginationProps>({
     pagination.pageSize = pageSize
     pagination.current = current
     init()
-  },
+  }
 })
 const dataSource = shallowRef<ConsultTableModel[]>([])
 const formModel = reactive<ConsultTableParams>({
@@ -66,7 +66,7 @@ const formModel = reactive<ConsultTableParams>({
   callNo: undefined,
   desc: undefined,
   status: undefined,
-  updatedAt: undefined,
+  updatedAt: undefined
 })
 
 const tableSize = ref<string[]>(['large'])
@@ -74,18 +74,18 @@ const sizeItems = ref<MenuProps['items']>([
   {
     key: 'large',
     label: '默认',
-    title: '默认',
+    title: '默认'
   },
   {
     key: 'middle',
     label: '中等',
-    title: '中等',
+    title: '中等'
   },
   {
     key: 'small',
     label: '紧凑',
-    title: '紧凑',
-  },
+    title: '紧凑'
+  }
 ])
 const open = ref(false)
 const options = computed(() => {
@@ -94,12 +94,12 @@ const options = computed(() => {
       return {
         label: item.title,
         value: item.dataIndex,
-        disabled: true,
+        disabled: true
       }
     }
     return {
       label: item.title,
-      value: item.dataIndex,
+      value: item.dataIndex
     }
   })
 })
@@ -108,7 +108,7 @@ const getCheckList = computed(() => columns.value.map(item => item.dataIndex))
 const state = reactive({
   indeterminate: false,
   checkAll: true,
-  checkList: getCheckList.value,
+  checkList: getCheckList.value
 })
 
 async function init() {
@@ -119,7 +119,7 @@ async function init() {
     const { data } = await getListApi({
       ...formModel,
       current: pagination.current,
-      pageSize: pagination.pageSize,
+      pageSize: pagination.pageSize
     })
     dataSource.value = data ?? []
   }
@@ -207,7 +207,7 @@ const filterColumns = ref(filterAction(getCheckList.value))
 function handleCheckAllChange(e: any) {
   Object.assign(state, {
     checkList: e.target.checked ? getCheckList.value : [],
-    indeterminate: true,
+    indeterminate: true
   })
   filterColumns.value = e.target.checked ? filterAction(getCheckList.value) : filterColumns.value.filter(item => item.dataIndex === 'action')
 }
@@ -217,7 +217,7 @@ watch(
   (val) => {
     state.indeterminate = !!val.length && val.length < getCheckList.value.length
     state.checkAll = val.length === getCheckList.value.length
-  },
+  }
 )
 
 /**

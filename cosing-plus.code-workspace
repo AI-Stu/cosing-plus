@@ -5,10 +5,6 @@
       "path": "online-common/internal/lint-configs/eslint-config",
     },
     {
-      "name": "@cosing/prettier-config",
-      "path": "online-common/internal/lint-configs/prettier-config",
-    },
-    {
       "name": "@cosing/stylelint-config",
       "path": "online-common/internal/lint-configs/stylelint-config",
     },

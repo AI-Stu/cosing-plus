@@ -33,7 +33,7 @@ function formatMenu(route: RouteRecordRaw, path?: string) {
     keepAlive: route.meta?.keepAlive || false,
     name: route.name as string,
     url: route.meta?.url || '',
-    target: route.meta?.target || '_blank',
+    target: route.meta?.target || '_blank'
   }
 }
 
@@ -90,8 +90,8 @@ export function generateTreeRoutes(menus: MenuData) {
         hideChildrenInMenu: menuItem?.hideChildrenInMenu,
         hideInBreadcrumb: menuItem?.hideInBreadcrumb,
         target: menuItem?.target,
-        locale: menuItem?.locale,
-      },
+        locale: menuItem?.locale
+      }
     } as RouteRecordRaw
     const menu = formatMenu(route)
     routeDataMap.set(menuItem.id, route)
@@ -128,7 +128,7 @@ export function generateTreeRoutes(menus: MenuData) {
   }
   return {
     menuData,
-    routeData,
+    routeData
   }
 }
 
@@ -155,7 +155,7 @@ export async function generateRoutes() {
 
   return {
     menuData,
-    routeData: dynamicRoutes,
+    routeData: dynamicRoutes
   }
 }
 
@@ -200,7 +200,7 @@ export function generateFlatRoutes(routes: RouteRecordRaw[]) {
     name: 'ROOT_EMPTY_PATH',
     // fix: https://github.com/antdv-pro/antdv-pro/issues/179
     // component: getRouterModule('RouteView'),
-    children: flatRoutesList,
+    children: flatRoutesList
   }
   return [parentRoute]
 }

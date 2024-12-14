@@ -1,19 +1,39 @@
 import antfu from '@antfu/eslint-config'
-
-export default antfu({
-  ignores: [
-    'types/auto-imports.d.ts',
-    'types/components.d.ts',
-    'public',
-    'tsconfig.*.json',
-    'tsconfig.json',
-  ],
-}, {
-  rules: {
-    'no-console': 0,
-    'style/quote-props': 0,
-    'unused-imports/no-unused-vars': 0,
-    'ts/no-unused-expressions': 0,
-    // 'n/prefer-global/buffer': ['error', 'always' | 'never'],
+import globals from 'globals'
+// import autoImport from './.eslintrc-auto-import.js'
+export default antfu(
+  // 针对antfu配置的配置选项
+  {
+    typescript: true,
+    vue: true,
+    languageOptions: {
+      // globals: autoImport?.globals,
+      globals: globals.browser
+    },
+    ignores: [
+      'types/auto-imports.d.ts',
+      'types/components.d.ts',
+      'public',
+      'tsconfig.*.json',
+      'tsconfig.json'
+    ]
   },
-})
+  // ESLint扁平化配置，
+  {
+    rules: {
+      'no-console': 'off',
+      'style/quote-props': 'off',
+      'unused-imports/no-unused-vars': 'off',
+      'ts/no-unused-expressions': 'off',
+      'comma-dangle': ['error', 'never'], // 禁止最后一个元素后面加逗号
+      'style/comma-dangle': 'off' // 禁止最后一个元素后面加逗号
+    }
+  },
+  {
+    files: ['**/*.json'],
+    rules: {
+      'comma-dangle': ['error', 'never'], // 禁止最后一个元素后面加逗号
+      'style/comma-dangle': 'off' // 禁止最后一个元素后面加逗号
+    }
+  }
+)

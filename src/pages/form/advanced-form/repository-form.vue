@@ -4,8 +4,8 @@ import type { FormInstance } from 'ant-design-vue'
 defineProps({
   showSubmit: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 const formRef = ref<FormInstance>()
 async function handleSubmit() {
@@ -23,10 +23,10 @@ const formState = reactive<Record<string, any>>({
   owner: null,
   approver: null,
   dateRange: null,
-  type: null,
+  type: null
 })
 defineExpose({
-  handleSubmit,
+  handleSubmit
 })
 </script>
 

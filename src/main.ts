@@ -5,7 +5,7 @@ import Root from './App.vue'
 import { setupI18n } from './locales'
 import {
   setupAccessDirective,
-  setupLoadingDirective,
+  setupLoadingDirective
 } from './directive'
 import router from '~/router'
 import '~/router/router-guard'

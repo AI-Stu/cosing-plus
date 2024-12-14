@@ -64,7 +64,7 @@ export interface MenuSelectEvent {
 const proLayoutEvents = {
   'onUpdate:openKeys': eventType<(val: string[]) => void>(),
   'onUpdate:selectedKeys': eventType<(val: string[]) => void>(),
-  'onMenuSelect': eventType<(data: MenuSelectEvent) => void>(),
+  'onMenuSelect': eventType<(data: MenuSelectEvent) => void>()
 }
 
 export const proLayoutProps = {
@@ -93,7 +93,7 @@ export const proLayoutProps = {
   // 选中菜单
   selectedKeys: arrayType<string[]>(),
   copyright: stringType(),
-  ...proLayoutEvents,
+  ...proLayoutEvents
 }
 
 export type ProLayoutProps = Partial<ExtractPropTypes<typeof proLayoutProps>>

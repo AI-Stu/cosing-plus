@@ -19,7 +19,7 @@ const {
   headerHeight,
   fixedSider,
   isMobile,
-  header,
+  header
 } = useLayoutState()
 
 const prefixCls = shallowRef('ant-pro-sider')
@@ -29,7 +29,7 @@ const siderStyle = computed<CSSProperties>(() => {
     paddingTop: `${layout.value !== 'side' && !isMobile.value ? headerHeight.value : 0}px`,
     transition:
         'background-color 0.3s ease 0s, min-width 0.3s ease 0s, max-width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) 0s',
-    overflow: 'hidden',
+    overflow: 'hidden'
   }
 
   // bugfix https://github.com/antdv-pro/antdv-pro/issues/173
@@ -42,7 +42,7 @@ const siderStyle = computed<CSSProperties>(() => {
 const cls = computed(() => ({
   [prefixCls.value]: true,
   [`${prefixCls.value}-fixed`]: fixedSider.value,
-  [`${prefixCls.value}-layout-${layout.value}`]: !!layout.value,
+  [`${prefixCls.value}-layout-${layout.value}`]: !!layout.value
 }))
 
 const showLogo = computed(() => {

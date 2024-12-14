@@ -8,12 +8,12 @@ interface ListType {
 const list = shallowRef<ListType[]>([
   {
     name: '全部',
-    key: 'all',
+    key: 'all'
   },
   ...number.map((v, index) => ({
     name: `类目${v}`,
-    key: `category${index + 1}`,
-  })),
+    key: `category${index + 1}`
+  }))
 ])
 const activeList = ref<string[]>([])
 function handleClick(item: ListType) {
@@ -49,23 +49,23 @@ function handleClick(item: ListType) {
 const authorList = shallowRef([
   {
     label: '付晓晓',
-    value: '付晓晓',
+    value: '付晓晓'
   },
   {
     label: '周毛毛',
-    value: '周毛毛',
-  },
+    value: '周毛毛'
+  }
 ])
 // 好评度
 const praiseList = shallowRef([
   {
     label: '优秀',
-    value: 1,
+    value: 1
   },
   {
     label: '普通',
-    value: 2,
-  },
+    value: 2
+  }
 ])
 </script>
 

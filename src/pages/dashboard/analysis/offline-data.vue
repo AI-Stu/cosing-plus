@@ -6,8 +6,8 @@ import CustomLine from '~/pages/dashboard/analysis/components/custom-line.vue'
 defineProps({
   loading: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const activeKey = ref()
@@ -18,246 +18,246 @@ function handleTabChange() {
 const offlineData = [
   {
     name: 'Stores 0',
-    cvr: 0.9,
+    cvr: 0.9
   },
   {
     name: 'Stores 1',
-    cvr: 0.9,
+    cvr: 0.9
   },
   {
     name: 'Stores 2',
-    cvr: 0.2,
+    cvr: 0.2
   },
   {
     name: 'Stores 3',
-    cvr: 0.1,
+    cvr: 0.1
   },
   {
     name: 'Stores 4',
-    cvr: 0.1,
+    cvr: 0.1
   },
   {
     name: 'Stores 5',
-    cvr: 0.2,
+    cvr: 0.2
   },
   {
     name: 'Stores 6',
-    cvr: 0.3,
+    cvr: 0.3
   },
   {
     name: 'Stores 7',
-    cvr: 0.7,
+    cvr: 0.7
   },
   {
     name: 'Stores 8',
-    cvr: 0.9,
+    cvr: 0.9
   },
   {
     name: 'Stores 9',
-    cvr: 0.6,
-  },
+    cvr: 0.6
+  }
 ]
 const offlineChartData = [
   {
     date: '03:26',
     type: '客流量',
-    value: 36,
+    value: 36
   },
   {
     date: '03:26',
     type: '支付笔数',
-    value: 53,
+    value: 53
   },
   {
     date: '03:56',
     type: '客流量',
-    value: 98,
+    value: 98
   },
   {
     date: '03:56',
     type: '支付笔数',
-    value: 31,
+    value: 31
   },
   {
     date: '04:26',
     type: '客流量',
-    value: 62,
+    value: 62
   },
   {
     date: '04:26',
     type: '支付笔数',
-    value: 109,
+    value: 109
   },
   {
     date: '04:56',
     type: '客流量',
-    value: 76,
+    value: 76
   },
   {
     date: '04:56',
     type: '支付笔数',
-    value: 11,
+    value: 11
   },
   {
     date: '05:26',
     type: '客流量',
-    value: 39,
+    value: 39
   },
   {
     date: '05:26',
     type: '支付笔数',
-    value: 56,
+    value: 56
   },
   {
     date: '05:56',
     type: '客流量',
-    value: 52,
+    value: 52
   },
   {
     date: '05:56',
     type: '支付笔数',
-    value: 98,
+    value: 98
   },
   {
     date: '06:26',
     type: '客流量',
-    value: 29,
+    value: 29
   },
   {
     date: '06:26',
     type: '支付笔数',
-    value: 101,
+    value: 101
   },
   {
     date: '06:56',
     type: '客流量',
-    value: 10,
+    value: 10
   },
   {
     date: '06:56',
     type: '支付笔数',
-    value: 13,
+    value: 13
   },
   {
     date: '07:26',
     type: '客流量',
-    value: 29,
+    value: 29
   },
   {
     date: '07:26',
     type: '支付笔数',
-    value: 62,
+    value: 62
   },
   {
     date: '07:56',
     type: '客流量',
-    value: 70,
+    value: 70
   },
   {
     date: '07:56',
     type: '支付笔数',
-    value: 20,
+    value: 20
   },
   {
     date: '08:26',
     type: '客流量',
-    value: 21,
+    value: 21
   },
   {
     date: '08:26',
     type: '支付笔数',
-    value: 41,
+    value: 41
   },
   {
     date: '08:56',
     type: '客流量',
-    value: 86,
+    value: 86
   },
   {
     date: '08:56',
     type: '支付笔数',
-    value: 104,
+    value: 104
   },
   {
     date: '09:26',
     type: '客流量',
-    value: 91,
+    value: 91
   },
   {
     date: '09:26',
     type: '支付笔数',
-    value: 76,
+    value: 76
   },
   {
     date: '09:56',
     type: '客流量',
-    value: 31,
+    value: 31
   },
   {
     date: '09:56',
     type: '支付笔数',
-    value: 72,
+    value: 72
   },
   {
     date: '10:26',
     type: '客流量',
-    value: 14,
+    value: 14
   },
   {
     date: '10:26',
     type: '支付笔数',
-    value: 37,
+    value: 37
   },
   {
     date: '10:56',
     type: '客流量',
-    value: 45,
+    value: 45
   },
   {
     date: '10:56',
     type: '支付笔数',
-    value: 106,
+    value: 106
   },
   {
     date: '11:26',
     type: '客流量',
-    value: 31,
+    value: 31
   },
   {
     date: '11:26',
     type: '支付笔数',
-    value: 69,
+    value: 69
   },
   {
     date: '11:56',
     type: '客流量',
-    value: 99,
+    value: 99
   },
   {
     date: '11:56',
     type: '支付笔数',
-    value: 103,
+    value: 103
   },
   {
     date: '12:26',
     type: '客流量',
-    value: 49,
+    value: 49
   },
   {
     date: '12:26',
     type: '支付笔数',
-    value: 33,
+    value: 33
   },
   {
     date: '12:56',
     type: '客流量',
-    value: 86,
+    value: 86
   },
   {
     date: '12:56',
     type: '支付笔数',
-    value: 23,
-  },
+    value: 23
+  }
 ]
 </script>
 

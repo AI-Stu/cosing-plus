@@ -12,16 +12,16 @@ const data = computed<DataItem[]>(() => {
   return [
     {
       title: t('account.settings.account.taobao'),
-      avatar: 'TaobaoOutlined',
+      avatar: 'TaobaoOutlined'
     },
     {
       title: t('account.settings.account.alipay'),
-      avatar: 'AlipayOutlined',
+      avatar: 'AlipayOutlined'
     },
     {
       title: t('account.settings.account.dingding'),
-      avatar: 'DingdingOutlined',
-    },
+      avatar: 'DingdingOutlined'
+    }
   ]
 })
 </script>

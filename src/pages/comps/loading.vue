@@ -13,7 +13,7 @@ const loadingList = ref([
   'cube',
   'preloader',
   'chase',
-  'dot',
+  'dot'
 ])
 
 function startCustomLoading(val: number) {

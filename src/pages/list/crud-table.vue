@@ -10,20 +10,20 @@ const message = useMessage()
 const columns = shallowRef([
   {
     title: '名',
-    dataIndex: 'name',
+    dataIndex: 'name'
   },
   {
     title: '值',
-    dataIndex: 'value',
+    dataIndex: 'value'
   },
   {
     title: '描述',
-    dataIndex: 'remark',
+    dataIndex: 'remark'
   },
   {
     title: '操作',
-    dataIndex: 'action',
-  },
+    dataIndex: 'action'
+  }
 ])
 
 const { state, initQuery, resetQuery, query } = useTableQuery({
@@ -31,12 +31,12 @@ const { state, initQuery, resetQuery, query } = useTableQuery({
   queryParams: {
     name: undefined,
     value: undefined,
-    remark: undefined,
+    remark: undefined
   },
   afterQuery: (res) => {
     console.log(res)
     return res
-  },
+  }
 })
 
 const crudTableModal = ref<InstanceType<typeof CrudTableModal>>()

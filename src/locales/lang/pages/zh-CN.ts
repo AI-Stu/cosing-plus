@@ -194,5 +194,5 @@ export default {
   'account.settings.message.title3': '待办任务',
   'account.settings.message.desc1': '其他用户的消息将以站内信的形式通知',
   'account.settings.message.desc2': '系统消息将以站内信的形式通知',
-  'account.settings.message.desc3': '待办任务将以站内信的形式通知',
+  'account.settings.message.desc3': '待办任务将以站内信的形式通知'
 }

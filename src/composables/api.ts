@@ -4,5 +4,5 @@ export {
   useDelete,
   useGet,
   usePost,
-  usePut,
+  usePut
 }

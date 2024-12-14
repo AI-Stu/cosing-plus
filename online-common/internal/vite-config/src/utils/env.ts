@@ -36,14 +36,14 @@ function getConfFiles() {
  */
 async function loadEnv<T = Record<string, string>>(
   match = 'VITE_GLOB_',
-  confFiles = getConfFiles(),
+  confFiles = getConfFiles()
 ) {
   let envConfig = {}
 
   for (const confFile of confFiles) {
     try {
       const envPath = await fsp.readFile(join(process.cwd(), confFile), {
-        encoding: 'utf8',
+        encoding: 'utf8'
       })
       const env = dotenv.parse(envPath)
       envConfig = { ...envConfig, ...env }
@@ -69,7 +69,7 @@ async function loadEnv<T = Record<string, string>>(
  */
 async function loadAndConvertEnv(
   match = 'VITE_',
-  confFiles = getConfFiles(),
+  confFiles = getConfFiles()
 ): Promise<
   {
     appTitle: string
@@ -89,7 +89,7 @@ async function loadAndConvertEnv(
     VITE_NITRO_MOCK,
     VITE_PORT,
     VITE_PWA,
-    VITE_VISUALIZER,
+    VITE_VISUALIZER
   } = envConfig
 
   const compressTypes = (VITE_COMPRESS ?? '')
@@ -102,12 +102,12 @@ async function loadAndConvertEnv(
     base: getString(VITE_BASE, '/'),
     compress: compressTypes.length > 0,
     compressTypes,
-    devtools: getBoolean(VITE_DEVTOOLS),
+    isDevTools: getBoolean(VITE_DEVTOOLS),
     injectAppLoading: getBoolean(VITE_INJECT_APP_LOADING),
     nitroMock: getBoolean(VITE_NITRO_MOCK),
     port: getNumber(VITE_PORT, 5173),
     pwa: getBoolean(VITE_PWA),
-    visualizer: getBoolean(VITE_VISUALIZER),
+    visualizer: getBoolean(VITE_VISUALIZER)
   }
 }
 

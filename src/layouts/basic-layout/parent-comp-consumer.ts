@@ -25,7 +25,7 @@ export const ParentCompConsumer = defineComponent({
               const comp1: any = isFunction(parentComp) ? defineAsyncComponent(parentComp as any) : parentComp
               if (comp) {
                 comp = h(comp1, null, {
-                  default: () => comp,
+                  default: () => comp
                 })
               }
               else {
@@ -41,5 +41,5 @@ export const ParentCompConsumer = defineComponent({
       }
       return slots?.default?.()
     }
-  },
+  }
 })

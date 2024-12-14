@@ -16,7 +16,7 @@
     "build:nitro": "mist build nitro",
     "start:nirto": "node .output/server/index.mjs",
     "preview": "mist preview",
-    "lint": "eslint src --fix",
+    "lint:fix": "eslint src --fix",
     "typecheck": "vue-tsc --noEmit",
     "bump:patch": "changelogen --bump --output CHANGELOG.md --release",
     "bump:minor": "changelogen --bump --output CHANGELOG.md --release --minor",
@@ -68,6 +68,7 @@
     "esno": "catalog:",
     "execa": "catalog:",
     "fs-extra": "catalog:",
+    "globals": "catalog:",
     "husky": "catalog:",
     "jsdom": "catalog:",
     "less": "catalog:",
@@ -89,6 +90,7 @@
     "vitest": "catalog:",
     "vue-tsc": "catalog:"
   },
+  "overrides": { "eslint": "^9.14.0" },
   "lint-staged": {
     "**/*.{vue,ts,js,jsx,tsx}": "eslint src --fix"
   }

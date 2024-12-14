@@ -10,29 +10,29 @@ const columns = ref([
     title: t('profile.advanced.log-type'),
     dataIndex: 'type',
     key: 'type',
-    slots: { customRender: 'type' },
+    slots: { customRender: 'type' }
   },
   {
     title: t('profile.advanced.log-owner'),
     dataIndex: 'owner',
     key: 'owner',
-    width: 100,
+    width: 100
   },
   {
     title: t('profile.advanced.log-result'),
     dataIndex: 'result',
-    key: 'result',
+    key: 'result'
   },
   {
     title: t('profile.advanced.log-time'),
     dataIndex: 'time',
-    key: 'time',
+    key: 'time'
   },
   {
     title: t('profile.advanced.log-info'),
     dataIndex: 'info',
-    key: 'info',
-  },
+    key: 'info'
+  }
 ])
 
 const data = [
@@ -42,7 +42,7 @@ const data = [
     owner: '烟雨',
     result: '成功',
     time: dayjs().format('YYYY-MM-DD hh:mm'),
-    info: '无',
+    info: '无'
   },
   {
     key: '2',
@@ -50,7 +50,7 @@ const data = [
     owner: '烟雨',
     result: '成功',
     time: dayjs().format('YYYY-MM-DD hh:mm'),
-    info: '无',
+    info: '无'
   },
   {
     key: '3',
@@ -58,8 +58,8 @@ const data = [
     owner: '烟雨',
     result: '成功',
     time: dayjs().format('YYYY-MM-DD hh:mm'),
-    info: '无',
-  },
+    info: '无'
+  }
 ]
 
 function getI18n(key: any) {

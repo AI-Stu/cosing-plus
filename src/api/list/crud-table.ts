@@ -26,5 +26,5 @@ export async function deleteApi(id: string | number) {
 
 export type{
   CrudTableParams,
-  CrudTableModel,
+  CrudTableModel
 }

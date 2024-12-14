@@ -8,8 +8,8 @@ const data = {
         type: 'Point',
         coordinates: [
           103.893473101,
-          36.51870146,
-        ],
+          36.51870146
+        ]
       },
       properties: {
         ADM0_NAME: 'China',
@@ -36,8 +36,8 @@ const data = {
         Short_Name_FR: 'Chine',
         Short_Name_ES: 'China',
         Short_Name_RU: 'Китай',
-        Short_Name_AR: 'الصين',
-      },
+        Short_Name_AR: 'الصين'
+      }
     },
     {
       type: 'Feature',
@@ -46,8 +46,8 @@ const data = {
         type: 'Point',
         coordinates: [
           127.829343915,
-          36.367702276,
-        ],
+          36.367702276
+        ]
       },
       properties: {
         ADM0_NAME: 'Republic of Korea',
@@ -74,8 +74,8 @@ const data = {
         Short_Name_FR: 'République de Corée',
         Short_Name_ES: 'República de Corea',
         Short_Name_RU: 'Республика Корея',
-        Short_Name_AR: 'جمهورية كوريا',
-      },
+        Short_Name_AR: 'جمهورية كوريا'
+      }
     },
     {
       type: 'Feature',
@@ -84,8 +84,8 @@ const data = {
         type: 'Point',
         coordinates: [
           134.490975946,
-          -25.733260232,
-        ],
+          -25.733260232
+        ]
       },
       properties: {
         ADM0_NAME: 'Australia',
@@ -112,8 +112,8 @@ const data = {
         Short_Name_FR: 'Australie',
         Short_Name_ES: 'Australia',
         Short_Name_RU: 'Австралия',
-        Short_Name_AR: 'أستراليا',
-      },
+        Short_Name_AR: 'أستراليا'
+      }
     },
     {
       type: 'Feature',
@@ -122,8 +122,8 @@ const data = {
         type: 'Point',
         coordinates: [
           113.252212273,
-          2.36614385200005,
-        ],
+          2.36614385200005
+        ]
       },
       properties: {
         ADM0_NAME: 'Malaysia',
@@ -150,8 +150,8 @@ const data = {
         Short_Name_FR: 'Malaisie',
         Short_Name_ES: 'Malasia',
         Short_Name_RU: 'Малайзия',
-        Short_Name_AR: 'ماليزيا',
-      },
+        Short_Name_AR: 'ماليزيا'
+      }
     },
     {
       type: 'Feature',
@@ -160,8 +160,8 @@ const data = {
         type: 'Point',
         coordinates: [
           138.756881,
-          36.466956,
-        ],
+          36.466956
+        ]
       },
       properties: {
         ADM0_NAME: 'Japan',
@@ -188,8 +188,8 @@ const data = {
         Short_Name_FR: 'Japon',
         Short_Name_ES: 'Japón',
         Short_Name_RU: 'Япония',
-        Short_Name_AR: 'اليابان',
-      },
+        Short_Name_AR: 'اليابان'
+      }
     },
     {
       type: 'Feature',
@@ -198,8 +198,8 @@ const data = {
         type: 'Point',
         coordinates: [
           122.873607427,
-          11.747402026,
-        ],
+          11.747402026
+        ]
       },
       properties: {
         ADM0_NAME: 'Philippines',
@@ -226,8 +226,8 @@ const data = {
         Short_Name_FR: 'Philippines',
         Short_Name_ES: 'Filipinas',
         Short_Name_RU: 'Филиппины',
-        Short_Name_AR: 'الفلبين',
-      },
+        Short_Name_AR: 'الفلبين'
+      }
     },
     {
       type: 'Feature',
@@ -236,8 +236,8 @@ const data = {
         type: 'Point',
         coordinates: [
           103.807653591,
-          1.35118038100006,
-        ],
+          1.35118038100006
+        ]
       },
       properties: {
         ADM0_NAME: 'Singapore',
@@ -264,8 +264,8 @@ const data = {
         Short_Name_FR: 'Singapour',
         Short_Name_ES: 'Singapur',
         Short_Name_RU: 'Сингапур',
-        Short_Name_AR: 'سنغافورة',
-      },
+        Short_Name_AR: 'سنغافورة'
+      }
     },
     {
       type: 'Feature',
@@ -274,8 +274,8 @@ const data = {
         type: 'Point',
         coordinates: [
           171.603971284,
-          -41.837106886,
-        ],
+          -41.837106886
+        ]
       },
       properties: {
         ADM0_NAME: 'New Zealand',
@@ -302,8 +302,8 @@ const data = {
         Short_Name_FR: 'Nouvelle-Zélande',
         Short_Name_ES: 'Nueva Zelandia',
         Short_Name_RU: 'Новая Зеландия',
-        Short_Name_AR: 'نيوزيلندا',
-      },
+        Short_Name_AR: 'نيوزيلندا'
+      }
     },
     {
       type: 'Feature',
@@ -312,8 +312,8 @@ const data = {
         type: 'Point',
         coordinates: [
           108.371477,
-          15.8749560000001,
-        ],
+          15.8749560000001
+        ]
       },
       properties: {
         ADM0_NAME: 'Viet Nam',
@@ -340,8 +340,8 @@ const data = {
         Short_Name_FR: 'Viet Nam',
         Short_Name_ES: 'Viet Nam',
         Short_Name_RU: 'Вьетнам',
-        Short_Name_AR: 'فييت نام',
-      },
+        Short_Name_AR: 'فييت نام'
+      }
     },
     {
       type: 'Feature',
@@ -350,8 +350,8 @@ const data = {
         type: 'Point',
         coordinates: [
           114.761320882,
-          4.52147838100007,
-        ],
+          4.52147838100007
+        ]
       },
       properties: {
         ADM0_NAME: 'Brunei Darussalam',
@@ -378,8 +378,8 @@ const data = {
         Short_Name_FR: 'Brunéi Darussalam',
         Short_Name_ES: 'Brunei Darussalam',
         Short_Name_RU: 'Бруней-Даруссалам ',
-        Short_Name_AR: 'بروني دار السلام',
-      },
+        Short_Name_AR: 'بروني دار السلام'
+      }
     },
     {
       type: 'Feature',
@@ -388,8 +388,8 @@ const data = {
         type: 'Point',
         coordinates: [
           104.92123962,
-          12.714029941,
-        ],
+          12.714029941
+        ]
       },
       properties: {
         ADM0_NAME: 'Cambodia',
@@ -416,8 +416,8 @@ const data = {
         Short_Name_FR: 'Cambodge',
         Short_Name_ES: 'Camboya',
         Short_Name_RU: 'Камбоджа',
-        Short_Name_AR: 'كمبوديا',
-      },
+        Short_Name_AR: 'كمبوديا'
+      }
     },
     {
       type: 'Feature',
@@ -426,8 +426,8 @@ const data = {
         type: 'Point',
         coordinates: [
           144.775856782,
-          13.4440310690001,
-        ],
+          13.4440310690001
+        ]
       },
       properties: {
         ADM0_NAME: 'Guam',
@@ -454,8 +454,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -464,8 +464,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -149.567999999,
-          -17.5319999979999,
-        ],
+          -17.5319999979999
+        ]
       },
       properties: {
         ADM0_NAME: 'French Polynesia',
@@ -492,8 +492,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -502,8 +502,8 @@ const data = {
         type: 'Point',
         coordinates: [
           165.671849774,
-          -21.2946141899999,
-        ],
+          -21.2946141899999
+        ]
       },
       properties: {
         ADM0_NAME: 'New Caledonia',
@@ -530,8 +530,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -540,8 +540,8 @@ const data = {
         type: 'Point',
         coordinates: [
           103.083031076,
-          46.8352087220001,
-        ],
+          46.8352087220001
+        ]
       },
       properties: {
         ADM0_NAME: 'Mongolia',
@@ -568,8 +568,8 @@ const data = {
         Short_Name_FR: 'Mongolie',
         Short_Name_ES: 'Mongolia',
         Short_Name_RU: 'Монголия',
-        Short_Name_AR: 'منغوليا',
-      },
+        Short_Name_AR: 'منغوليا'
+      }
     },
     {
       type: 'Feature',
@@ -578,8 +578,8 @@ const data = {
         type: 'Point',
         coordinates: [
           178.182000002,
-          -17.8549999969999,
-        ],
+          -17.8549999969999
+        ]
       },
       properties: {
         ADM0_NAME: 'Fiji',
@@ -606,8 +606,8 @@ const data = {
         Short_Name_FR: 'Fidji',
         Short_Name_ES: 'Fiji',
         Short_Name_RU: 'Фиджи ',
-        Short_Name_AR: 'فيجي',
-      },
+        Short_Name_AR: 'فيجي'
+      }
     },
     {
       type: 'Feature',
@@ -616,8 +616,8 @@ const data = {
         type: 'Point',
         coordinates: [
           103.763405594,
-          18.5024505710001,
-        ],
+          18.5024505710001
+        ]
       },
       properties: {
         ADM0_NAME: 'Lao People\'s Democratic Republic',
@@ -644,8 +644,8 @@ const data = {
         Short_Name_FR: 'République démocratique populaire lao',
         Short_Name_ES: 'República Democrática Popular Lao',
         Short_Name_RU: 'Лаосская Народно-Демократическая Республика',
-        Short_Name_AR: 'جمهورية لاوس الديمقراطية الشعبية',
-      },
+        Short_Name_AR: 'جمهورية لاوس الديمقراطية الشعبية'
+      }
     },
     {
       type: 'Feature',
@@ -654,8 +654,8 @@ const data = {
         type: 'Point',
         coordinates: [
           145.587832112,
-          16.255704635,
-        ],
+          16.255704635
+        ]
       },
       properties: {
         ADM0_NAME: 'Northern Mariana Islands (Commonwealth of the)',
@@ -682,8 +682,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -692,8 +692,8 @@ const data = {
         type: 'Point',
         coordinates: [
           145.253687589,
-          -6.47589334999998,
-        ],
+          -6.47589334999998
+        ]
       },
       properties: {
         ADM0_NAME: 'Papua New Guinea',
@@ -720,8 +720,8 @@ const data = {
         Short_Name_FR: 'Papouasie-Nouvelle-Guinée',
         Short_Name_ES: 'Papua Nueva Guinea',
         Short_Name_RU: 'Папуа-Новая Гвинея',
-        Short_Name_AR: 'بابوا غينيا الجديدة',
-      },
+        Short_Name_AR: 'بابوا غينيا الجديدة'
+      }
     },
     {
       type: 'Feature',
@@ -730,8 +730,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -3.64931117899994,
-          40.2274959580001,
-        ],
+          40.2274959580001
+        ]
       },
       properties: {
         ADM0_NAME: 'Spain',
@@ -758,8 +758,8 @@ const data = {
         Short_Name_FR: 'Espagne',
         Short_Name_ES: 'España',
         Short_Name_RU: 'Испания',
-        Short_Name_AR: 'إسبانيا',
-      },
+        Short_Name_AR: 'إسبانيا'
+      }
     },
     {
       type: 'Feature',
@@ -768,8 +768,8 @@ const data = {
         type: 'Point',
         coordinates: [
           12.071655591,
-          42.7911916680001,
-        ],
+          42.7911916680001
+        ]
       },
       properties: {
         ADM0_NAME: 'Italy',
@@ -796,8 +796,8 @@ const data = {
         Short_Name_FR: 'Italie',
         Short_Name_ES: 'Italia',
         Short_Name_RU: 'Италия',
-        Short_Name_AR: 'إيطاليا',
-      },
+        Short_Name_AR: 'إيطاليا'
+      }
     },
     {
       type: 'Feature',
@@ -806,8 +806,8 @@ const data = {
         type: 'Point',
         coordinates: [
           10.392329666,
-          51.110153956,
-        ],
+          51.110153956
+        ]
       },
       properties: {
         ADM0_NAME: 'Germany',
@@ -834,8 +834,8 @@ const data = {
         Short_Name_FR: 'Allemagne',
         Short_Name_ES: 'Alemania',
         Short_Name_RU: 'Германия',
-        Short_Name_AR: 'ألمانيا',
-      },
+        Short_Name_AR: 'ألمانيا'
+      }
     },
     {
       type: 'Feature',
@@ -844,8 +844,8 @@ const data = {
         type: 'Point',
         coordinates: [
           2.55042645600003,
-          46.5648740250001,
-        ],
+          46.5648740250001
+        ]
       },
       properties: {
         ADM0_NAME: 'France',
@@ -872,8 +872,8 @@ const data = {
         Short_Name_FR: 'France',
         Short_Name_ES: 'Francia',
         Short_Name_RU: 'Франция',
-        Short_Name_AR: 'فرنسا',
-      },
+        Short_Name_AR: 'فرنسا'
+      }
     },
     {
       type: 'Feature',
@@ -882,8 +882,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -2.90049476399997,
-          54.160179204,
-        ],
+          54.160179204
+        ]
       },
       properties: {
         ADM0_NAME: 'The United Kingdom',
@@ -910,8 +910,8 @@ const data = {
         Short_Name_FR: 'Royaume-Uni de Grande-Bretagne et d\'Irlande du Nord',
         Short_Name_ES: 'Reino Unido de Gran Bretaña e Irlanda del Norte',
         Short_Name_RU: 'Соединенное Королевство Великобритании и Северной Ирландии',
-        Short_Name_AR: 'المملكة المتحدة لبريطانيا العظمى وآيرلندا الشمالية ',
-      },
+        Short_Name_AR: 'المملكة المتحدة لبريطانيا العظمى وآيرلندا الشمالية '
+      }
     },
     {
       type: 'Feature',
@@ -920,8 +920,8 @@ const data = {
         type: 'Point',
         coordinates: [
           35.1792181100001,
-          39.0606185600001,
-        ],
+          39.0606185600001
+        ]
       },
       properties: {
         ADM0_NAME: 'Turkey',
@@ -948,8 +948,8 @@ const data = {
         Short_Name_FR: 'Turquie',
         Short_Name_ES: 'Turquía',
         Short_Name_RU: 'Турция',
-        Short_Name_AR: 'تركيا',
-      },
+        Short_Name_AR: 'تركيا'
+      }
     },
     {
       type: 'Feature',
@@ -958,8 +958,8 @@ const data = {
         type: 'Point',
         coordinates: [
           8.23458738300008,
-          46.8025828,
-        ],
+          46.8025828
+        ]
       },
       properties: {
         ADM0_NAME: 'Switzerland',
@@ -986,8 +986,8 @@ const data = {
         Short_Name_FR: 'Suisse',
         Short_Name_ES: 'Suiza',
         Short_Name_RU: 'Швейцария',
-        Short_Name_AR: 'سويسرا',
-      },
+        Short_Name_AR: 'سويسرا'
+      }
     },
     {
       type: 'Feature',
@@ -996,8 +996,8 @@ const data = {
         type: 'Point',
         coordinates: [
           4.66434840900007,
-          50.6429517600001,
-        ],
+          50.6429517600001
+        ]
       },
       properties: {
         ADM0_NAME: 'Belgium',
@@ -1024,8 +1024,8 @@ const data = {
         Short_Name_FR: 'Belgique',
         Short_Name_ES: 'Bélgica',
         Short_Name_RU: 'Бельгия',
-        Short_Name_AR: 'بلجيكا',
-      },
+        Short_Name_AR: 'بلجيكا'
+      }
     },
     {
       type: 'Feature',
@@ -1034,8 +1034,8 @@ const data = {
         type: 'Point',
         coordinates: [
           5.60099775900005,
-          52.253576303,
-        ],
+          52.253576303
+        ]
       },
       properties: {
         ADM0_NAME: 'Netherlands',
@@ -1062,8 +1062,8 @@ const data = {
         Short_Name_FR: 'Pays-Bas',
         Short_Name_ES: 'Países Bajos',
         Short_Name_RU: 'Нидерланды',
-        Short_Name_AR: 'هولندا',
-      },
+        Short_Name_AR: 'هولندا'
+      }
     },
     {
       type: 'Feature',
@@ -1072,8 +1072,8 @@ const data = {
         type: 'Point',
         coordinates: [
           14.1399883120001,
-          47.59295768,
-        ],
+          47.59295768
+        ]
       },
       properties: {
         ADM0_NAME: 'Austria',
@@ -1100,8 +1100,8 @@ const data = {
         Short_Name_FR: 'Autriche',
         Short_Name_ES: 'Austria',
         Short_Name_RU: 'Австрия',
-        Short_Name_AR: 'النمسا',
-      },
+        Short_Name_AR: 'النمسا'
+      }
     },
     {
       type: 'Feature',
@@ -1110,8 +1110,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -8.46736074199993,
-          39.6026951090001,
-        ],
+          39.6026951090001
+        ]
       },
       properties: {
         ADM0_NAME: 'Portugal',
@@ -1138,8 +1138,8 @@ const data = {
         Short_Name_FR: 'Portugal',
         Short_Name_ES: 'Portugal',
         Short_Name_RU: 'Португалия',
-        Short_Name_AR: 'البرتغال',
-      },
+        Short_Name_AR: 'البرتغال'
+      }
     },
     {
       type: 'Feature',
@@ -1148,8 +1148,8 @@ const data = {
         type: 'Point',
         coordinates: [
           34.9659827130001,
-          31.3580565250001,
-        ],
+          31.3580565250001
+        ]
       },
       properties: {
         ADM0_NAME: 'Israel',
@@ -1176,8 +1176,8 @@ const data = {
         Short_Name_FR: 'Israël',
         Short_Name_ES: 'Israel',
         Short_Name_RU: 'Израиль',
-        Short_Name_AR: 'إسرائيل',
-      },
+        Short_Name_AR: 'إسرائيل'
+      }
     },
     {
       type: 'Feature',
@@ -1186,8 +1186,8 @@ const data = {
         type: 'Point',
         coordinates: [
           16.741155258,
-          62.7877422610001,
-        ],
+          62.7877422610001
+        ]
       },
       properties: {
         ADM0_NAME: 'Sweden',
@@ -1214,8 +1214,8 @@ const data = {
         Short_Name_FR: 'Suède',
         Short_Name_ES: 'Suecia',
         Short_Name_RU: 'Швеция',
-        Short_Name_AR: 'السويد',
-      },
+        Short_Name_AR: 'السويد'
+      }
     },
     {
       type: 'Feature',
@@ -1224,8 +1224,8 @@ const data = {
         type: 'Point',
         coordinates: [
           14.0750891050001,
-          64.447848874,
-        ],
+          64.447848874
+        ]
       },
       properties: {
         ADM0_NAME: 'Norway',
@@ -1252,8 +1252,8 @@ const data = {
         Short_Name_FR: 'Norvège',
         Short_Name_ES: 'Noruega',
         Short_Name_RU: 'Норвегия',
-        Short_Name_AR: 'النرويج',
-      },
+        Short_Name_AR: 'النرويج'
+      }
     },
     {
       type: 'Feature',
@@ -1262,8 +1262,8 @@ const data = {
         type: 'Point',
         coordinates: [
           96.689442146,
-          61.9882456010001,
-        ],
+          61.9882456010001
+        ]
       },
       properties: {
         ADM0_NAME: 'Russian Federation',
@@ -1290,8 +1290,8 @@ const data = {
         Short_Name_FR: 'Fédération de Russie',
         Short_Name_ES: 'Federación de Rusia',
         Short_Name_RU: 'Российская Федерация',
-        Short_Name_AR: 'الاتحاد الروسي',
-      },
+        Short_Name_AR: 'الاتحاد الروسي'
+      }
     },
     {
       type: 'Feature',
@@ -1300,8 +1300,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -8.15157629999993,
-          53.1770868180001,
-        ],
+          53.1770868180001
+        ]
       },
       properties: {
         ADM0_NAME: 'Ireland',
@@ -1328,8 +1328,8 @@ const data = {
         Short_Name_FR: 'Irlande',
         Short_Name_ES: 'Irlanda',
         Short_Name_RU: 'Ирландия',
-        Short_Name_AR: 'آيرلندا',
-      },
+        Short_Name_AR: 'آيرلندا'
+      }
     },
     {
       type: 'Feature',
@@ -1338,8 +1338,8 @@ const data = {
         type: 'Point',
         coordinates: [
           15.338339951,
-          49.743036139,
-        ],
+          49.743036139
+        ]
       },
       properties: {
         ADM0_NAME: 'Czechia',
@@ -1366,8 +1366,8 @@ const data = {
         Short_Name_FR: 'Tchéquie',
         Short_Name_ES: 'Chequia',
         Short_Name_RU: 'Чехия',
-        Short_Name_AR: 'تشيكيا',
-      },
+        Short_Name_AR: 'تشيكيا'
+      }
     },
     {
       type: 'Feature',
@@ -1376,8 +1376,8 @@ const data = {
         type: 'Point',
         coordinates: [
           10.0508208200001,
-          55.962332802,
-        ],
+          55.962332802
+        ]
       },
       properties: {
         ADM0_NAME: 'Denmark',
@@ -1404,8 +1404,8 @@ const data = {
         Short_Name_FR: 'Danemark',
         Short_Name_ES: 'Dinamarca',
         Short_Name_RU: 'Дания',
-        Short_Name_AR: 'الدانمرك',
-      },
+        Short_Name_AR: 'الدانمرك'
+      }
     },
     {
       type: 'Feature',
@@ -1414,8 +1414,8 @@ const data = {
         type: 'Point',
         coordinates: [
           19.4009201690001,
-          52.1247240530001,
-        ],
+          52.1247240530001
+        ]
       },
       properties: {
         ADM0_NAME: 'Poland',
@@ -1442,8 +1442,8 @@ const data = {
         Short_Name_FR: 'Pologne',
         Short_Name_ES: 'Polonia',
         Short_Name_RU: 'Польша',
-        Short_Name_AR: 'بولندا',
-      },
+        Short_Name_AR: 'بولندا'
+      }
     },
     {
       type: 'Feature',
@@ -1452,8 +1452,8 @@ const data = {
         type: 'Point',
         coordinates: [
           24.96990758,
-          45.843605584,
-        ],
+          45.843605584
+        ]
       },
       properties: {
         ADM0_NAME: 'Romania',
@@ -1480,8 +1480,8 @@ const data = {
         Short_Name_FR: 'Roumanie',
         Short_Name_ES: 'Rumania',
         Short_Name_RU: 'Румыния',
-        Short_Name_AR: 'رومانيا',
-      },
+        Short_Name_AR: 'رومانيا'
+      }
     },
     {
       type: 'Feature',
@@ -1490,8 +1490,8 @@ const data = {
         type: 'Point',
         coordinates: [
           6.08754415700002,
-          49.7709639620001,
-        ],
+          49.7709639620001
+        ]
       },
       properties: {
         ADM0_NAME: 'Luxembourg',
@@ -1518,8 +1518,8 @@ const data = {
         Short_Name_FR: 'Luxembourg',
         Short_Name_ES: 'Luxemburgo',
         Short_Name_RU: 'Люксембург',
-        Short_Name_AR: 'لكسمبرغ',
-      },
+        Short_Name_AR: 'لكسمبرغ'
+      }
     },
     {
       type: 'Feature',
@@ -1528,8 +1528,8 @@ const data = {
         type: 'Point',
         coordinates: [
           26.258842304,
-          64.4943312920001,
-        ],
+          64.4943312920001
+        ]
       },
       properties: {
         ADM0_NAME: 'Finland',
@@ -1556,8 +1556,8 @@ const data = {
         Short_Name_FR: 'Finlande',
         Short_Name_ES: 'Finlandia',
         Short_Name_RU: 'Финляндия',
-        Short_Name_AR: 'فنلندا',
-      },
+        Short_Name_AR: 'فنلندا'
+      }
     },
     {
       type: 'Feature',
@@ -1566,8 +1566,8 @@ const data = {
         type: 'Point',
         coordinates: [
           20.8113308580001,
-          44.0338722170001,
-        ],
+          44.0338722170001
+        ]
       },
       properties: {
         ADM0_NAME: 'Serbia',
@@ -1594,8 +1594,8 @@ const data = {
         Short_Name_FR: 'Serbie',
         Short_Name_ES: 'Serbia',
         Short_Name_RU: 'Сербия',
-        Short_Name_AR: 'صربيا',
-      },
+        Short_Name_AR: 'صربيا'
+      }
     },
     {
       type: 'Feature',
@@ -1604,8 +1604,8 @@ const data = {
         type: 'Point',
         coordinates: [
           22.9879848,
-          39.0445287420001,
-        ],
+          39.0445287420001
+        ]
       },
       properties: {
         ADM0_NAME: 'Greece',
@@ -1632,8 +1632,8 @@ const data = {
         Short_Name_FR: 'Grèce',
         Short_Name_ES: 'Grecia',
         Short_Name_RU: 'Греция',
-        Short_Name_AR: 'اليونان',
-      },
+        Short_Name_AR: 'اليونان'
+      }
     },
     {
       type: 'Feature',
@@ -1642,8 +1642,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -18.6057025969999,
-          64.9976499840001,
-        ],
+          64.9976499840001
+        ]
       },
       properties: {
         ADM0_NAME: 'Iceland',
@@ -1670,8 +1670,8 @@ const data = {
         Short_Name_FR: 'Islande',
         Short_Name_ES: 'Islandia',
         Short_Name_RU: 'Исландия',
-        Short_Name_AR: 'آيسلندا',
-      },
+        Short_Name_AR: 'آيسلندا'
+      }
     },
     {
       type: 'Feature',
@@ -1680,8 +1680,8 @@ const data = {
         type: 'Point',
         coordinates: [
           31.3878455180001,
-          49.0160942850001,
-        ],
+          49.0160942850001
+        ]
       },
       properties: {
         ADM0_NAME: 'Ukraine',
@@ -1708,8 +1708,8 @@ const data = {
         Short_Name_FR: 'Ukraine',
         Short_Name_ES: 'Ucrania',
         Short_Name_RU: 'Украина',
-        Short_Name_AR: 'أوكرانيا',
-      },
+        Short_Name_AR: 'أوكرانيا'
+      }
     },
     {
       type: 'Feature',
@@ -1718,8 +1718,8 @@ const data = {
         type: 'Point',
         coordinates: [
           16.409342489,
-          45.043636959,
-        ],
+          45.043636959
+        ]
       },
       properties: {
         ADM0_NAME: 'Croatia',
@@ -1746,8 +1746,8 @@ const data = {
         Short_Name_FR: 'Croatie',
         Short_Name_ES: 'Croacia',
         Short_Name_RU: 'Хорватия',
-        Short_Name_AR: 'كرواتيا',
-      },
+        Short_Name_AR: 'كرواتيا'
+      }
     },
     {
       type: 'Feature',
@@ -1756,8 +1756,8 @@ const data = {
         type: 'Point',
         coordinates: [
           25.525770902,
-          58.674007869,
-        ],
+          58.674007869
+        ]
       },
       properties: {
         ADM0_NAME: 'Estonia',
@@ -1784,8 +1784,8 @@ const data = {
         Short_Name_FR: 'Estonie',
         Short_Name_ES: 'Estonia',
         Short_Name_RU: 'Эстония',
-        Short_Name_AR: 'إستونيا',
-      },
+        Short_Name_AR: 'إستونيا'
+      }
     },
     {
       type: 'Feature',
@@ -1794,8 +1794,8 @@ const data = {
         type: 'Point',
         coordinates: [
           14.8270744380001,
-          46.123550256,
-        ],
+          46.123550256
+        ]
       },
       properties: {
         ADM0_NAME: 'Slovenia',
@@ -1822,8 +1822,8 @@ const data = {
         Short_Name_FR: 'Slovénie',
         Short_Name_ES: 'Eslovenia',
         Short_Name_RU: 'Словения',
-        Short_Name_AR: 'سلوفينيا',
-      },
+        Short_Name_AR: 'سلوفينيا'
+      }
     },
     {
       type: 'Feature',
@@ -1832,8 +1832,8 @@ const data = {
         type: 'Point',
         coordinates: [
           28.4743431700001,
-          47.1933256130001,
-        ],
+          47.1933256130001
+        ]
       },
       properties: {
         ADM0_NAME: 'Republic of Moldova',
@@ -1860,8 +1860,8 @@ const data = {
         Short_Name_FR: 'République de Moldova',
         Short_Name_ES: 'la República de Moldova',
         Short_Name_RU: 'Республика Молдова',
-        Short_Name_AR: ' جمهورية مولدوفا',
-      },
+        Short_Name_AR: ' جمهورية مولدوفا'
+      }
     },
     {
       type: 'Feature',
@@ -1870,8 +1870,8 @@ const data = {
         type: 'Point',
         coordinates: [
           23.8968307550001,
-          55.3358501330001,
-        ],
+          55.3358501330001
+        ]
       },
       properties: {
         ADM0_NAME: 'Lithuania',
@@ -1898,8 +1898,8 @@ const data = {
         Short_Name_FR: 'Lituanie',
         Short_Name_ES: 'Lituania',
         Short_Name_RU: 'Литва',
-        Short_Name_AR: 'ليتوانيا',
-      },
+        Short_Name_AR: 'ليتوانيا'
+      }
     },
     {
       type: 'Feature',
@@ -1908,8 +1908,8 @@ const data = {
         type: 'Point',
         coordinates: [
           44.947934237,
-          40.2864168850001,
-        ],
+          40.2864168850001
+        ]
       },
       properties: {
         ADM0_NAME: 'Armenia',
@@ -1936,8 +1936,8 @@ const data = {
         Short_Name_FR: 'Arménie',
         Short_Name_ES: 'Armenia',
         Short_Name_RU: 'Армения',
-        Short_Name_AR: 'أرمينيا',
-      },
+        Short_Name_AR: 'أرمينيا'
+      }
     },
     {
       type: 'Feature',
@@ -1946,8 +1946,8 @@ const data = {
         type: 'Point',
         coordinates: [
           19.413428132,
-          47.166479059,
-        ],
+          47.166479059
+        ]
       },
       properties: {
         ADM0_NAME: 'Hungary',
@@ -1974,8 +1974,8 @@ const data = {
         Short_Name_FR: 'Hongrie',
         Short_Name_ES: 'Hungría',
         Short_Name_RU: 'Венгрия',
-        Short_Name_AR: 'هنغاريا',
-      },
+        Short_Name_AR: 'هنغاريا'
+      }
     },
     {
       type: 'Feature',
@@ -1984,8 +1984,8 @@ const data = {
         type: 'Point',
         coordinates: [
           17.788588722,
-          44.166459531,
-        ],
+          44.166459531
+        ]
       },
       properties: {
         ADM0_NAME: 'Bosnia and Herzegovina',
@@ -2012,8 +2012,8 @@ const data = {
         Short_Name_FR: 'Bosnie-Herzégovine',
         Short_Name_ES: 'Bosnia y Herzegovina',
         Short_Name_RU: 'Босния и Герцеговина',
-        Short_Name_AR: 'البوسنة والهرسك',
-      },
+        Short_Name_AR: 'البوسنة والهرسك'
+      }
     },
     {
       type: 'Feature',
@@ -2022,8 +2022,8 @@ const data = {
         type: 'Point',
         coordinates: [
           67.3013001780001,
-          48.160042703,
-        ],
+          48.160042703
+        ]
       },
       properties: {
         ADM0_NAME: 'Kazakhstan',
@@ -2050,8 +2050,8 @@ const data = {
         Short_Name_FR: 'Kazakhstan',
         Short_Name_ES: 'Kazajstán',
         Short_Name_RU: 'Казахстан',
-        Short_Name_AR: 'كازاخستان',
-      },
+        Short_Name_AR: 'كازاخستان'
+      }
     },
     {
       type: 'Feature',
@@ -2060,8 +2060,8 @@ const data = {
         type: 'Point',
         coordinates: [
           47.5323268120001,
-          40.292219501,
-        ],
+          40.292219501
+        ]
       },
       properties: {
         ADM0_NAME: 'Azerbaijan',
@@ -2088,8 +2088,8 @@ const data = {
         Short_Name_FR: 'Azerbaïdjan',
         Short_Name_ES: 'Azerbaiyán',
         Short_Name_RU: 'Азербайджан',
-        Short_Name_AR: 'أذربيجان',
-      },
+        Short_Name_AR: 'أذربيجان'
+      }
     },
     {
       type: 'Feature',
@@ -2098,8 +2098,8 @@ const data = {
         type: 'Point',
         coordinates: [
           28.046964476,
-          53.5402195120001,
-        ],
+          53.5402195120001
+        ]
       },
       properties: {
         ADM0_NAME: 'Belarus',
@@ -2126,8 +2126,8 @@ const data = {
         Short_Name_FR: 'Bélarus',
         Short_Name_ES: 'Belarús',
         Short_Name_RU: 'Беларусь',
-        Short_Name_AR: 'بيلاروس',
-      },
+        Short_Name_AR: 'بيلاروس'
+      }
     },
     {
       type: 'Feature',
@@ -2136,8 +2136,8 @@ const data = {
         type: 'Point',
         coordinates: [
           21.699148501,
-          41.5992207530001,
-        ],
+          41.5992207530001
+        ]
       },
       properties: {
         ADM0_NAME: 'North Macedonia',
@@ -2164,8 +2164,8 @@ const data = {
         Short_Name_FR: 'Macédoine du Nord',
         Short_Name_ES: 'Macedonia del Norte',
         Short_Name_RU: 'Северная Македония',
-        Short_Name_AR: 'مقدونيا الشمالية',
-      },
+        Short_Name_AR: 'مقدونيا الشمالية'
+      }
     },
     {
       type: 'Feature',
@@ -2174,8 +2174,8 @@ const data = {
         type: 'Point',
         coordinates: [
           24.9291533160001,
-          56.857669393,
-        ],
+          56.857669393
+        ]
       },
       properties: {
         ADM0_NAME: 'Latvia',
@@ -2202,8 +2202,8 @@ const data = {
         Short_Name_FR: 'Lettonie',
         Short_Name_ES: 'Letonia',
         Short_Name_RU: 'Латвия',
-        Short_Name_AR: 'لاتفيا',
-      },
+        Short_Name_AR: 'لاتفيا'
+      }
     },
     {
       type: 'Feature',
@@ -2212,8 +2212,8 @@ const data = {
         type: 'Point',
         coordinates: [
           25.234757556,
-          42.7603214050001,
-        ],
+          42.7603214050001
+        ]
       },
       properties: {
         ADM0_NAME: 'Bulgaria',
@@ -2240,8 +2240,8 @@ const data = {
         Short_Name_FR: 'Bulgarie',
         Short_Name_ES: 'Bulgaria',
         Short_Name_RU: 'Болгария',
-        Short_Name_AR: 'بلغاريا',
-      },
+        Short_Name_AR: 'بلغاريا'
+      }
     },
     {
       type: 'Feature',
@@ -2250,8 +2250,8 @@ const data = {
         type: 'Point',
         coordinates: [
           1.57568832800007,
-          42.548582966,
-        ],
+          42.548582966
+        ]
       },
       properties: {
         ADM0_NAME: 'Andorra',
@@ -2278,8 +2278,8 @@ const data = {
         Short_Name_FR: 'Andorre',
         Short_Name_ES: 'Andorra',
         Short_Name_RU: 'Андорра',
-        Short_Name_AR: 'أندورا',
-      },
+        Short_Name_AR: 'أندورا'
+      }
     },
     {
       type: 'Feature',
@@ -2288,8 +2288,8 @@ const data = {
         type: 'Point',
         coordinates: [
           19.4914502780001,
-          48.7073588010001,
-        ],
+          48.7073588010001
+        ]
       },
       properties: {
         ADM0_NAME: 'Slovakia',
@@ -2316,8 +2316,8 @@ const data = {
         Short_Name_FR: 'Slovaquie',
         Short_Name_ES: 'Eslovaquia',
         Short_Name_RU: 'Словакия',
-        Short_Name_AR: 'سلوفاكيا',
-      },
+        Short_Name_AR: 'سلوفاكيا'
+      }
     },
     {
       type: 'Feature',
@@ -2326,8 +2326,8 @@ const data = {
         type: 'Point',
         coordinates: [
           33.2186370790001,
-          35.042991746,
-        ],
+          35.042991746
+        ]
       },
       properties: {
         ADM0_NAME: 'Cyprus',
@@ -2354,8 +2354,8 @@ const data = {
         Short_Name_FR: 'Chypre',
         Short_Name_ES: 'Chipre',
         Short_Name_RU: 'Кипр',
-        Short_Name_AR: 'قبرص',
-      },
+        Short_Name_AR: 'قبرص'
+      }
     },
     {
       type: 'Feature',
@@ -2364,8 +2364,8 @@ const data = {
         type: 'Point',
         coordinates: [
           63.169505783,
-          41.750416607,
-        ],
+          41.750416607
+        ]
       },
       properties: {
         ADM0_NAME: 'Uzbekistan',
@@ -2392,8 +2392,8 @@ const data = {
         Short_Name_FR: 'Ouzbékistan',
         Short_Name_ES: 'Uzbekistán',
         Short_Name_RU: 'Узбекистан',
-        Short_Name_AR: 'أوزبكستان',
-      },
+        Short_Name_AR: 'أوزبكستان'
+      }
     },
     {
       type: 'Feature',
@@ -2402,8 +2402,8 @@ const data = {
         type: 'Point',
         coordinates: [
           20.0691781670001,
-          41.145958029,
-        ],
+          41.145958029
+        ]
       },
       properties: {
         ADM0_NAME: 'Albania',
@@ -2430,8 +2430,8 @@ const data = {
         Short_Name_FR: 'Albanie',
         Short_Name_ES: 'Albania',
         Short_Name_RU: 'Албания',
-        Short_Name_AR: 'ألبانيا',
-      },
+        Short_Name_AR: 'ألبانيا'
+      }
     },
     {
       type: 'Feature',
@@ -2440,8 +2440,8 @@ const data = {
         type: 'Point',
         coordinates: [
           12.4603576160001,
-          43.9419147360001,
-        ],
+          43.9419147360001
+        ]
       },
       properties: {
         ADM0_NAME: 'San Marino',
@@ -2468,8 +2468,8 @@ const data = {
         Short_Name_FR: 'Saint-Marin',
         Short_Name_ES: 'San Marino',
         Short_Name_RU: 'Сан-Марино',
-        Short_Name_AR: 'سان مارينو',
-      },
+        Short_Name_AR: 'سان مارينو'
+      }
     },
     {
       type: 'Feature',
@@ -2478,8 +2478,8 @@ const data = {
         type: 'Point',
         coordinates: [
           14.404573585,
-          35.9203665150001,
-        ],
+          35.9203665150001
+        ]
       },
       properties: {
         ADM0_NAME: 'Malta',
@@ -2506,8 +2506,8 @@ const data = {
         Short_Name_FR: 'Malte',
         Short_Name_ES: 'Malta',
         Short_Name_RU: 'Мальта',
-        Short_Name_AR: 'مالطة',
-      },
+        Short_Name_AR: 'مالطة'
+      }
     },
     {
       type: 'Feature',
@@ -2516,8 +2516,8 @@ const data = {
         type: 'Point',
         coordinates: [
           74.555492998,
-          41.464907168,
-        ],
+          41.464907168
+        ]
       },
       properties: {
         ADM0_NAME: 'Kyrgyzstan',
@@ -2544,8 +2544,8 @@ const data = {
         Short_Name_FR: 'Kirghizistan',
         Short_Name_ES: 'Kirguistán',
         Short_Name_RU: 'Кыргызстан',
-        Short_Name_AR: 'قيرغيزستان',
-      },
+        Short_Name_AR: 'قيرغيزستان'
+      }
     },
     {
       type: 'Feature',
@@ -2554,8 +2554,8 @@ const data = {
         type: 'Point',
         coordinates: [
           19.264632787,
-          42.796243544,
-        ],
+          42.796243544
+        ]
       },
       properties: {
         ADM0_NAME: 'Montenegro',
@@ -2582,8 +2582,8 @@ const data = {
         Short_Name_FR: 'Monténégro',
         Short_Name_ES: 'Montenegro',
         Short_Name_RU: 'Черногория',
-        Short_Name_AR: 'الجبل الأسود',
-      },
+        Short_Name_AR: 'الجبل الأسود'
+      }
     },
     {
       type: 'Feature',
@@ -2592,8 +2592,8 @@ const data = {
         type: 'Point',
         coordinates: [
           43.517571151,
-          42.1763258280001,
-        ],
+          42.1763258280001
+        ]
       },
       properties: {
         ADM0_NAME: 'Georgia',
@@ -2620,8 +2620,8 @@ const data = {
         Short_Name_FR: 'Géorgie',
         Short_Name_ES: 'Georgia',
         Short_Name_RU: 'Грузия',
-        Short_Name_AR: 'جورجيا',
-      },
+        Short_Name_AR: 'جورجيا'
+      }
     },
     {
       type: 'Feature',
@@ -2630,8 +2630,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -6.86363601799997,
-          62.050314004,
-        ],
+          62.050314004
+        ]
       },
       properties: {
         ADM0_NAME: 'Faroe Islands',
@@ -2658,8 +2658,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -2668,8 +2668,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -2.12891773399997,
-          49.2194981580001,
-        ],
+          49.2194981580001
+        ]
       },
       properties: {
         ADM0_NAME: 'Jersey',
@@ -2696,8 +2696,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -2706,8 +2706,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -2.57582282299995,
-          49.459046304,
-        ],
+          49.459046304
+        ]
       },
       properties: {
         ADM0_NAME: 'Guernsey',
@@ -2734,8 +2734,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -2744,8 +2744,8 @@ const data = {
         type: 'Point',
         coordinates: [
           20.9369550000001,
-          42.568695,
-        ],
+          42.568695
+        ]
       },
       properties: {
         ADM0_NAME: 'Kosovo[1]',
@@ -2772,8 +2772,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -2782,8 +2782,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -4.52652992499998,
-          54.2288332950001,
-        ],
+          54.2288332950001
+        ]
       },
       properties: {
         ADM0_NAME: 'Isle of Man',
@@ -2810,8 +2810,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -2820,8 +2820,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -5.34488893099996,
-          36.1381932030001,
-        ],
+          36.1381932030001
+        ]
       },
       properties: {
         ADM0_NAME: 'Gibraltar',
@@ -2848,8 +2848,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -2858,8 +2858,8 @@ const data = {
         type: 'Point',
         coordinates: [
           9.55526492600006,
-          47.1525954850001,
-        ],
+          47.1525954850001
+        ]
       },
       properties: {
         ADM0_NAME: 'Liechtenstein',
@@ -2886,8 +2886,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -2896,8 +2896,8 @@ const data = {
         type: 'Point',
         coordinates: [
           7.41201715200003,
-          43.7503461470001,
-        ],
+          43.7503461470001
+        ]
       },
       properties: {
         ADM0_NAME: 'Monaco',
@@ -2924,8 +2924,8 @@ const data = {
         Short_Name_FR: 'Monaco',
         Short_Name_ES: 'Mónaco',
         Short_Name_RU: 'Монако',
-        Short_Name_AR: 'موناكو',
-      },
+        Short_Name_AR: 'موناكو'
+      }
     },
     {
       type: 'Feature',
@@ -2934,8 +2934,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -41.39096667,
-          74.7189535310001,
-        ],
+          74.7189535310001
+        ]
       },
       properties: {
         ADM0_NAME: 'Greenland',
@@ -2962,8 +2962,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -2972,8 +2972,8 @@ const data = {
         type: 'Point',
         coordinates: [
           12.4857111430001,
-          41.893241947,
-        ],
+          41.893241947
+        ]
       },
       properties: {
         ADM0_NAME: 'Holy See',
@@ -3000,8 +3000,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -3010,8 +3010,8 @@ const data = {
         type: 'Point',
         coordinates: [
           79.6188182980001,
-          22.881320567,
-        ],
+          22.881320567
+        ]
       },
       properties: {
         ADM0_NAME: 'India',
@@ -3038,8 +3038,8 @@ const data = {
         Short_Name_FR: 'Inde',
         Short_Name_ES: 'India',
         Short_Name_RU: 'Индия',
-        Short_Name_AR: 'الهند',
-      },
+        Short_Name_AR: 'الهند'
+      }
     },
     {
       type: 'Feature',
@@ -3048,8 +3048,8 @@ const data = {
         type: 'Point',
         coordinates: [
           113.355162997,
-          -0.950074241999971,
-        ],
+          -0.950074241999971
+        ]
       },
       properties: {
         ADM0_NAME: 'Indonesia',
@@ -3076,8 +3076,8 @@ const data = {
         Short_Name_FR: 'Indonésie',
         Short_Name_ES: 'Indonesia',
         Short_Name_RU: 'Индонезия',
-        Short_Name_AR: 'إندونيسيا',
-      },
+        Short_Name_AR: 'إندونيسيا'
+      }
     },
     {
       type: 'Feature',
@@ -3086,8 +3086,8 @@ const data = {
         type: 'Point',
         coordinates: [
           101.014907816,
-          15.1198987560001,
-        ],
+          15.1198987560001
+        ]
       },
       properties: {
         ADM0_NAME: 'Thailand',
@@ -3114,8 +3114,8 @@ const data = {
         Short_Name_FR: 'Thaïlande',
         Short_Name_ES: 'Tailandia',
         Short_Name_RU: 'Таиланд',
-        Short_Name_AR: 'تايلند',
-      },
+        Short_Name_AR: 'تايلند'
+      }
     },
     {
       type: 'Feature',
@@ -3124,8 +3124,8 @@ const data = {
         type: 'Point',
         coordinates: [
           80.7042626200001,
-          7.61236242700005,
-        ],
+          7.61236242700005
+        ]
       },
       properties: {
         ADM0_NAME: 'Sri Lanka',
@@ -3152,8 +3152,8 @@ const data = {
         Short_Name_FR: 'Sri Lanka',
         Short_Name_ES: 'Sri Lanka',
         Short_Name_RU: 'Шри-Ланка',
-        Short_Name_AR: 'سري لانكا',
-      },
+        Short_Name_AR: 'سري لانكا'
+      }
     },
     {
       type: 'Feature',
@@ -3162,8 +3162,8 @@ const data = {
         type: 'Point',
         coordinates: [
           90.2709257590001,
-          23.833007201,
-        ],
+          23.833007201
+        ]
       },
       properties: {
         ADM0_NAME: 'Bangladesh',
@@ -3190,8 +3190,8 @@ const data = {
         Short_Name_FR: 'Bangladesh',
         Short_Name_ES: 'Bangladesh',
         Short_Name_RU: 'Бангладеш',
-        Short_Name_AR: 'بنغلاديش',
-      },
+        Short_Name_AR: 'بنغلاديش'
+      }
     },
     {
       type: 'Feature',
@@ -3200,8 +3200,8 @@ const data = {
         type: 'Point',
         coordinates: [
           96.508682057,
-          21.1400953610001,
-        ],
+          21.1400953610001
+        ]
       },
       properties: {
         ADM0_NAME: 'Myanmar',
@@ -3228,8 +3228,8 @@ const data = {
         Short_Name_FR: 'Myanmar',
         Short_Name_ES: 'Myanmar',
         Short_Name_RU: 'Мьянма',
-        Short_Name_AR: 'ميانمار',
-      },
+        Short_Name_AR: 'ميانمار'
+      }
     },
     {
       type: 'Feature',
@@ -3238,8 +3238,8 @@ const data = {
         type: 'Point',
         coordinates: [
           73.2517847770001,
-          3.37481931800005,
-        ],
+          3.37481931800005
+        ]
       },
       properties: {
         ADM0_NAME: 'Maldives',
@@ -3266,8 +3266,8 @@ const data = {
         Short_Name_FR: 'Maldives',
         Short_Name_ES: 'Maldivas',
         Short_Name_RU: 'Мальдивские Острова',
-        Short_Name_AR: 'ملديف',
-      },
+        Short_Name_AR: 'ملديف'
+      }
     },
     {
       type: 'Feature',
@@ -3276,8 +3276,8 @@ const data = {
         type: 'Point',
         coordinates: [
           83.9385170750001,
-          28.253007847,
-        ],
+          28.253007847
+        ]
       },
       properties: {
         ADM0_NAME: 'Nepal',
@@ -3304,8 +3304,8 @@ const data = {
         Short_Name_FR: 'Népal',
         Short_Name_ES: 'Nepal',
         Short_Name_RU: 'Непал',
-        Short_Name_AR: 'نيبال',
-      },
+        Short_Name_AR: 'نيبال'
+      }
     },
     {
       type: 'Feature',
@@ -3314,8 +3314,8 @@ const data = {
         type: 'Point',
         coordinates: [
           90.4294327480001,
-          27.415460823,
-        ],
+          27.415460823
+        ]
       },
       properties: {
         ADM0_NAME: 'Bhutan',
@@ -3342,8 +3342,8 @@ const data = {
         Short_Name_FR: 'Bhoutan',
         Short_Name_ES: 'Bhután',
         Short_Name_RU: 'Бутан',
-        Short_Name_AR: 'بوتان',
-      },
+        Short_Name_AR: 'بوتان'
+      }
     },
     {
       type: 'Feature',
@@ -3352,8 +3352,8 @@ const data = {
         type: 'Point',
         coordinates: [
           125.860996098,
-          -8.82052123499994,
-        ],
+          -8.82052123499994
+        ]
       },
       properties: {
         ADM0_NAME: 'Timor-Leste',
@@ -3380,8 +3380,8 @@ const data = {
         Short_Name_FR: 'Timor-Leste',
         Short_Name_ES: 'Timor-Leste',
         Short_Name_RU: 'Тимор-Лешти',
-        Short_Name_AR: 'تيمور- ليشتي',
-      },
+        Short_Name_AR: 'تيمور- ليشتي'
+      }
     },
     {
       type: 'Feature',
@@ -3390,8 +3390,8 @@ const data = {
         type: 'Point',
         coordinates: [
           54.301413763,
-          32.564799586,
-        ],
+          32.564799586
+        ]
       },
       properties: {
         ADM0_NAME: 'Iran (Islamic Republic of)',
@@ -3418,8 +3418,8 @@ const data = {
         Short_Name_FR: 'Iran (République islamique d\')',
         Short_Name_ES: 'Irán (República Islámica del)',
         Short_Name_RU: 'Иран (Исламская Республика)',
-        Short_Name_AR: 'إيران (جمهورية - الإسلامية)',
-      },
+        Short_Name_AR: 'إيران (جمهورية - الإسلامية)'
+      }
     },
     {
       type: 'Feature',
@@ -3428,8 +3428,8 @@ const data = {
         type: 'Point',
         coordinates: [
           69.3858188080001,
-          29.966788981,
-        ],
+          29.966788981
+        ]
       },
       properties: {
         ADM0_NAME: 'Pakistan',
@@ -3456,8 +3456,8 @@ const data = {
         Short_Name_FR: 'Pakistan',
         Short_Name_ES: 'Pakistán',
         Short_Name_RU: 'Пакистан',
-        Short_Name_AR: 'باكستان',
-      },
+        Short_Name_AR: 'باكستان'
+      }
     },
     {
       type: 'Feature',
@@ -3466,8 +3466,8 @@ const data = {
         type: 'Point',
         coordinates: [
           44.5704496550001,
-          24.0808819160001,
-        ],
+          24.0808819160001
+        ]
       },
       properties: {
         ADM0_NAME: 'Saudi Arabia',
@@ -3494,8 +3494,8 @@ const data = {
         Short_Name_FR: 'Arabie saoudite',
         Short_Name_ES: 'Arabia Saudita',
         Short_Name_RU: 'Саудовская Аравия',
-        Short_Name_AR: 'المملكة العربية السعودية',
-      },
+        Short_Name_AR: 'المملكة العربية السعودية'
+      }
     },
     {
       type: 'Feature',
@@ -3504,8 +3504,8 @@ const data = {
         type: 'Point',
         coordinates: [
           54.3321987830001,
-          23.912672544,
-        ],
+          23.912672544
+        ]
       },
       properties: {
         ADM0_NAME: 'United Arab Emirates',
@@ -3532,8 +3532,8 @@ const data = {
         Short_Name_FR: 'Émirats arabes unis',
         Short_Name_ES: 'Emiratos Árabes Unidos',
         Short_Name_RU: 'Объединенные Арабские Эмираты',
-        Short_Name_AR: 'الإمارات العربية المتحدة',
-      },
+        Short_Name_AR: 'الإمارات العربية المتحدة'
+      }
     },
     {
       type: 'Feature',
@@ -3542,8 +3542,8 @@ const data = {
         type: 'Point',
         coordinates: [
           51.1912008290001,
-          25.3158099720001,
-        ],
+          25.3158099720001
+        ]
       },
       properties: {
         ADM0_NAME: 'Qatar',
@@ -3570,8 +3570,8 @@ const data = {
         Short_Name_FR: 'Qatar',
         Short_Name_ES: 'Qatar',
         Short_Name_RU: 'Катар',
-        Short_Name_AR: 'قطر',
-      },
+        Short_Name_AR: 'قطر'
+      }
     },
     {
       type: 'Feature',
@@ -3580,8 +3580,8 @@ const data = {
         type: 'Point',
         coordinates: [
           29.7821070850001,
-          26.5565645950001,
-        ],
+          26.5565645950001
+        ]
       },
       properties: {
         ADM0_NAME: 'Egypt',
@@ -3608,8 +3608,8 @@ const data = {
         Short_Name_FR: 'Égypte',
         Short_Name_ES: 'Egipto',
         Short_Name_RU: 'Египет',
-        Short_Name_AR: 'مصر',
-      },
+        Short_Name_AR: 'مصر'
+      }
     },
     {
       type: 'Feature',
@@ -3618,8 +3618,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -6.31780294899994,
-          31.8835569710001,
-        ],
+          31.8835569710001
+        ]
       },
       properties: {
         ADM0_NAME: 'Morocco',
@@ -3646,8 +3646,8 @@ const data = {
         Short_Name_FR: 'Maroc',
         Short_Name_ES: 'Marruecos',
         Short_Name_RU: 'Марокко',
-        Short_Name_AR: 'المغرب',
-      },
+        Short_Name_AR: 'المغرب'
+      }
     },
     {
       type: 'Feature',
@@ -3656,8 +3656,8 @@ const data = {
         type: 'Point',
         coordinates: [
           43.7722455160001,
-          33.048006538,
-        ],
+          33.048006538
+        ]
       },
       properties: {
         ADM0_NAME: 'Iraq',
@@ -3684,8 +3684,8 @@ const data = {
         Short_Name_FR: 'Iraq',
         Short_Name_ES: 'Iraq',
         Short_Name_RU: 'Ирак',
-        Short_Name_AR: 'العراق',
-      },
+        Short_Name_AR: 'العراق'
+      }
     },
     {
       type: 'Feature',
@@ -3694,8 +3694,8 @@ const data = {
         type: 'Point',
         coordinates: [
           50.5624891480001,
-          26.0194739230001,
-        ],
+          26.0194739230001
+        ]
       },
       properties: {
         ADM0_NAME: 'Bahrain',
@@ -3722,8 +3722,8 @@ const data = {
         Short_Name_FR: 'Bahreïn',
         Short_Name_ES: 'Bahrein',
         Short_Name_RU: 'Бахрейн',
-        Short_Name_AR: 'البحرين',
-      },
+        Short_Name_AR: 'البحرين'
+      }
     },
     {
       type: 'Feature',
@@ -3732,8 +3732,8 @@ const data = {
         type: 'Point',
         coordinates: [
           47.5935512790001,
-          29.342509057,
-        ],
+          29.342509057
+        ]
       },
       properties: {
         ADM0_NAME: 'Kuwait',
@@ -3760,8 +3760,8 @@ const data = {
         Short_Name_FR: 'Koweït',
         Short_Name_ES: 'Kuwait',
         Short_Name_RU: 'Кувейт',
-        Short_Name_AR: 'الكويت',
-      },
+        Short_Name_AR: 'الكويت'
+      }
     },
     {
       type: 'Feature',
@@ -3770,8 +3770,8 @@ const data = {
         type: 'Point',
         coordinates: [
           9.56156142200007,
-          34.1112491690001,
-        ],
+          34.1112491690001
+        ]
       },
       properties: {
         ADM0_NAME: 'Tunisia',
@@ -3798,8 +3798,8 @@ const data = {
         Short_Name_FR: 'Tunisie',
         Short_Name_ES: 'Túnez',
         Short_Name_RU: 'Тунис',
-        Short_Name_AR: 'تونس',
-      },
+        Short_Name_AR: 'تونس'
+      }
     },
     {
       type: 'Feature',
@@ -3808,8 +3808,8 @@ const data = {
         type: 'Point',
         coordinates: [
           35.8880612290001,
-          33.920393044,
-        ],
+          33.920393044
+        ]
       },
       properties: {
         ADM0_NAME: 'Lebanon',
@@ -3836,8 +3836,8 @@ const data = {
         Short_Name_FR: 'Liban',
         Short_Name_ES: 'Líbano',
         Short_Name_RU: 'Ливан',
-        Short_Name_AR: 'لبنان',
-      },
+        Short_Name_AR: 'لبنان'
+      }
     },
     {
       type: 'Feature',
@@ -3846,8 +3846,8 @@ const data = {
         type: 'Point',
         coordinates: [
           36.786941142,
-          31.253381786,
-        ],
+          31.253381786
+        ]
       },
       properties: {
         ADM0_NAME: 'Jordan',
@@ -3874,8 +3874,8 @@ const data = {
         Short_Name_FR: 'Jordanie',
         Short_Name_ES: 'Jordania',
         Short_Name_RU: 'Иордания',
-        Short_Name_AR: 'الأردن',
-      },
+        Short_Name_AR: 'الأردن'
+      }
     },
     {
       type: 'Feature',
@@ -3884,8 +3884,8 @@ const data = {
         type: 'Point',
         coordinates: [
           66.0265297700001,
-          33.8389011570001,
-        ],
+          33.8389011570001
+        ]
       },
       properties: {
         ADM0_NAME: 'Afghanistan',
@@ -3912,8 +3912,8 @@ const data = {
         Short_Name_FR: 'Afghanistan',
         Short_Name_ES: 'Afganistán',
         Short_Name_RU: 'Афганистан',
-        Short_Name_AR: 'أفغانستان',
-      },
+        Short_Name_AR: 'أفغانستان'
+      }
     },
     {
       type: 'Feature',
@@ -3922,8 +3922,8 @@ const data = {
         type: 'Point',
         coordinates: [
           56.1098174690001,
-          20.6020836820001,
-        ],
+          20.6020836820001
+        ]
       },
       properties: {
         ADM0_NAME: 'Oman',
@@ -3950,8 +3950,8 @@ const data = {
         Short_Name_FR: 'Oman',
         Short_Name_ES: 'Omán',
         Short_Name_RU: 'Оман',
-        Short_Name_AR: 'عمان',
-      },
+        Short_Name_AR: 'عمان'
+      }
     },
     {
       type: 'Feature',
@@ -3960,8 +3960,8 @@ const data = {
         type: 'Point',
         coordinates: [
           35.2037687770001,
-          31.9139511390001,
-        ],
+          31.9139511390001
+        ]
       },
       properties: {
         ADM0_NAME: 'occupied Palestinian territory',
@@ -3988,8 +3988,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -3998,8 +3998,8 @@ const data = {
         type: 'Point',
         coordinates: [
           42.5779402960001,
-          11.7498128010001,
-        ],
+          11.7498128010001
+        ]
       },
       properties: {
         ADM0_NAME: 'Djibouti',
@@ -4026,8 +4026,8 @@ const data = {
         Short_Name_FR: 'Djibouti',
         Short_Name_ES: 'Djibouti',
         Short_Name_RU: 'Джибути',
-        Short_Name_AR: 'جيبوتي',
-      },
+        Short_Name_AR: 'جيبوتي'
+      }
     },
     {
       type: 'Feature',
@@ -4036,8 +4036,8 @@ const data = {
         type: 'Point',
         coordinates: [
           38.5058474360001,
-          35.0130727170001,
-        ],
+          35.0130727170001
+        ]
       },
       properties: {
         ADM0_NAME: 'Syrian Arab Republic',
@@ -4064,8 +4064,8 @@ const data = {
         Short_Name_FR: 'République arabe syrienne',
         Short_Name_ES: 'República Árabe Siria',
         Short_Name_RU: 'Сирийская Арабская Республика',
-        Short_Name_AR: 'الجمهورية العربية السورية',
-      },
+        Short_Name_AR: 'الجمهورية العربية السورية'
+      }
     },
     {
       type: 'Feature',
@@ -4074,8 +4074,8 @@ const data = {
         type: 'Point',
         coordinates: [
           18.0231862690001,
-          27.0440452400001,
-        ],
+          27.0440452400001
+        ]
       },
       properties: {
         ADM0_NAME: 'Libya',
@@ -4102,8 +4102,8 @@ const data = {
         Short_Name_FR: 'Libye',
         Short_Name_ES: 'Libia',
         Short_Name_RU: 'Ливия',
-        Short_Name_AR: 'ليبيا',
-      },
+        Short_Name_AR: 'ليبيا'
+      }
     },
     {
       type: 'Feature',
@@ -4112,8 +4112,8 @@ const data = {
         type: 'Point',
         coordinates: [
           30.004381349,
-          16.048838211,
-        ],
+          16.048838211
+        ]
       },
       properties: {
         ADM0_NAME: 'Sudan',
@@ -4140,8 +4140,8 @@ const data = {
         Short_Name_FR: 'Soudan',
         Short_Name_ES: 'Sudán',
         Short_Name_RU: 'Судан',
-        Short_Name_AR: 'السودان',
-      },
+        Short_Name_AR: 'السودان'
+      }
     },
     {
       type: 'Feature',
@@ -4150,8 +4150,8 @@ const data = {
         type: 'Point',
         coordinates: [
           47.9564849590001,
-          5.73058895600008,
-        ],
+          5.73058895600008
+        ]
       },
       properties: {
         ADM0_NAME: 'Somalia',
@@ -4178,8 +4178,8 @@ const data = {
         Short_Name_FR: 'Somalie',
         Short_Name_ES: 'Somalia',
         Short_Name_RU: 'Сомали',
-        Short_Name_AR: 'الصومال',
-      },
+        Short_Name_AR: 'الصومال'
+      }
     },
     {
       type: 'Feature',
@@ -4188,8 +4188,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -101.433248,
-          39.8897640000001,
-        ],
+          39.8897640000001
+        ]
       },
       properties: {
         ADM0_NAME: 'United States of America',
@@ -4216,8 +4216,8 @@ const data = {
         Short_Name_FR: 'États-Unis d\'Amérique',
         Short_Name_ES: 'Estados Unidos de América',
         Short_Name_RU: 'Соединенные Штаты Америки',
-        Short_Name_AR: 'الولايات المتحدة الأمريكية ',
-      },
+        Short_Name_AR: 'الولايات المتحدة الأمريكية '
+      }
     },
     {
       type: 'Feature',
@@ -4226,8 +4226,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -101.433248,
-          57.393067,
-        ],
+          57.393067
+        ]
       },
       properties: {
         ADM0_NAME: 'Canada',
@@ -4254,8 +4254,8 @@ const data = {
         Short_Name_FR: 'Canada',
         Short_Name_ES: 'Canadá',
         Short_Name_RU: 'Канада',
-        Short_Name_AR: 'كندا',
-      },
+        Short_Name_AR: 'كندا'
+      }
     },
     {
       type: 'Feature',
@@ -4264,8 +4264,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -53.088754363,
-          -10.772282796,
-        ],
+          -10.772282796
+        ]
       },
       properties: {
         ADM0_NAME: 'Brazil',
@@ -4292,8 +4292,8 @@ const data = {
         Short_Name_FR: 'Brésil',
         Short_Name_ES: 'Brasil',
         Short_Name_RU: 'Бразилия',
-        Short_Name_AR: 'البرازيل',
-      },
+        Short_Name_AR: 'البرازيل'
+      }
     },
     {
       type: 'Feature',
@@ -4302,8 +4302,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -71.380093845,
-          -37.868119222,
-        ],
+          -37.868119222
+        ]
       },
       properties: {
         ADM0_NAME: 'Chile',
@@ -4330,8 +4330,8 @@ const data = {
         Short_Name_FR: 'Chili',
         Short_Name_ES: 'Chile',
         Short_Name_RU: 'Чили',
-        Short_Name_AR: 'شيلي',
-      },
+        Short_Name_AR: 'شيلي'
+      }
     },
     {
       type: 'Feature',
@@ -4340,8 +4340,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -78.780961767,
-          -1.42528336599997,
-        ],
+          -1.42528336599997
+        ]
       },
       properties: {
         ADM0_NAME: 'Ecuador',
@@ -4368,8 +4368,8 @@ const data = {
         Short_Name_FR: 'Équateur',
         Short_Name_ES: 'Ecuador',
         Short_Name_RU: 'Эквадор',
-        Short_Name_AR: 'إكوادور',
-      },
+        Short_Name_AR: 'إكوادور'
+      }
     },
     {
       type: 'Feature',
@@ -4378,8 +4378,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -102.534990927,
-          23.950928413,
-        ],
+          23.950928413
+        ]
       },
       properties: {
         ADM0_NAME: 'Mexico',
@@ -4406,8 +4406,8 @@ const data = {
         Short_Name_FR: 'Mexique',
         Short_Name_ES: 'México',
         Short_Name_RU: 'Мексика',
-        Short_Name_AR: 'المكسيك',
-      },
+        Short_Name_AR: 'المكسيك'
+      }
     },
     {
       type: 'Feature',
@@ -4416,8 +4416,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -80.1090688369999,
-          8.50544318000004,
-        ],
+          8.50544318000004
+        ]
       },
       properties: {
         ADM0_NAME: 'Panama',
@@ -4444,8 +4444,8 @@ const data = {
         Short_Name_FR: 'Panama',
         Short_Name_ES: 'Panamá',
         Short_Name_RU: 'Панама',
-        Short_Name_AR: 'بنما',
-      },
+        Short_Name_AR: 'بنما'
+      }
     },
     {
       type: 'Feature',
@@ -4454,8 +4454,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -74.375406681,
-          -9.16377132599996,
-        ],
+          -9.16377132599996
+        ]
       },
       properties: {
         ADM0_NAME: 'Peru',
@@ -4482,8 +4482,8 @@ const data = {
         Short_Name_FR: 'Pérou',
         Short_Name_ES: 'Perú',
         Short_Name_RU: 'Перу',
-        Short_Name_AR: 'بيرو',
-      },
+        Short_Name_AR: 'بيرو'
+      }
     },
     {
       type: 'Feature',
@@ -4492,8 +4492,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -70.485434472,
-          18.8930938570001,
-        ],
+          18.8930938570001
+        ]
       },
       properties: {
         ADM0_NAME: 'Dominican Republic',
@@ -4520,8 +4520,8 @@ const data = {
         Short_Name_FR: 'République dominicaine',
         Short_Name_ES: 'República Dominicana',
         Short_Name_RU: 'Доминиканская Республика',
-        Short_Name_AR: 'الجمهورية الدومينيكية',
-      },
+        Short_Name_AR: 'الجمهورية الدومينيكية'
+      }
     },
     {
       type: 'Feature',
@@ -4530,8 +4530,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -65.167484744,
-          -35.376672529,
-        ],
+          -35.376672529
+        ]
       },
       properties: {
         ADM0_NAME: 'Argentina',
@@ -4558,8 +4558,8 @@ const data = {
         Short_Name_FR: 'Argentine',
         Short_Name_ES: 'Argentina',
         Short_Name_RU: 'Аргентина',
-        Short_Name_AR: 'الأرجنتين',
-      },
+        Short_Name_AR: 'الأرجنتين'
+      }
     },
     {
       type: 'Feature',
@@ -4568,8 +4568,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -73.075763345,
-          3.90037400800003,
-        ],
+          3.90037400800003
+        ]
       },
       properties: {
         ADM0_NAME: 'Colombia',
@@ -4596,8 +4596,8 @@ const data = {
         Short_Name_FR: 'Colombie',
         Short_Name_ES: 'Colombia',
         Short_Name_RU: 'Колумбия',
-        Short_Name_AR: 'كولومبيا',
-      },
+        Short_Name_AR: 'كولومبيا'
+      }
     },
     {
       type: 'Feature',
@@ -4606,8 +4606,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -66.466127479,
-          18.220930739,
-        ],
+          18.220930739
+        ]
       },
       properties: {
         ADM0_NAME: 'Puerto Rico',
@@ -4634,8 +4634,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -4644,8 +4644,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -84.189038674,
-          9.97052135000007,
-        ],
+          9.97052135000007
+        ]
       },
       properties: {
         ADM0_NAME: 'Costa Rica',
@@ -4672,8 +4672,8 @@ const data = {
         Short_Name_FR: 'Costa Rica',
         Short_Name_ES: 'Costa Rica',
         Short_Name_RU: 'Коста-Рика',
-        Short_Name_AR: 'كوستاريكا',
-      },
+        Short_Name_AR: 'كوستاريكا'
+      }
     },
     {
       type: 'Feature',
@@ -4682,8 +4682,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -56.012173616,
-          -32.7995699159999,
-        ],
+          -32.7995699159999
+        ]
       },
       properties: {
         ADM0_NAME: 'Uruguay',
@@ -4710,8 +4710,8 @@ const data = {
         Short_Name_FR: 'Uruguay',
         Short_Name_ES: 'Uruguay',
         Short_Name_RU: 'Уругвай',
-        Short_Name_AR: 'أوروغواي',
-      },
+        Short_Name_AR: 'أوروغواي'
+      }
     },
     {
       type: 'Feature',
@@ -4720,8 +4720,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -79.0381997969999,
-          21.621420958,
-        ],
+          21.621420958
+        ]
       },
       properties: {
         ADM0_NAME: 'Cuba',
@@ -4748,8 +4748,8 @@ const data = {
         Short_Name_FR: 'Cuba',
         Short_Name_ES: 'Cuba',
         Short_Name_RU: 'Куба',
-        Short_Name_AR: 'كوبا',
-      },
+        Short_Name_AR: 'كوبا'
+      }
     },
     {
       type: 'Feature',
@@ -4758,8 +4758,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -86.619658987,
-          14.819348125,
-        ],
+          14.819348125
+        ]
       },
       properties: {
         ADM0_NAME: 'Honduras',
@@ -4786,8 +4786,8 @@ const data = {
         Short_Name_FR: 'Honduras',
         Short_Name_ES: 'Honduras',
         Short_Name_RU: 'Гондурас',
-        Short_Name_AR: 'هندوراس',
-      },
+        Short_Name_AR: 'هندوراس'
+      }
     },
     {
       type: 'Feature',
@@ -4796,8 +4796,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -64.6705484729999,
-          -16.7151098919999,
-        ],
+          -16.7151098919999
+        ]
       },
       properties: {
         ADM0_NAME: 'Bolivia (Plurinational State of)',
@@ -4824,8 +4824,8 @@ const data = {
         Short_Name_FR: 'Bolivie (État plurinational de)',
         Short_Name_ES: 'Bolivia (Estado Plurinacional de)  ',
         Short_Name_RU: 'Боливия (Многонациональное Государство)',
-        Short_Name_AR: 'بوليفيا (دولة - المتعددة القوميات)',
-      },
+        Short_Name_AR: 'بوليفيا (دولة - المتعددة القوميات)'
+      }
     },
     {
       type: 'Feature',
@@ -4834,8 +4834,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -61.021473822,
-          14.6527741950001,
-        ],
+          14.6527741950001
+        ]
       },
       properties: {
         ADM0_NAME: 'Martinique',
@@ -4862,8 +4862,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -4872,8 +4872,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -66.1662151469999,
-          7.12493711500002,
-        ],
+          7.12493711500002
+        ]
       },
       properties: {
         ADM0_NAME: 'Venezuela (Bolivarian Republic of)',
@@ -4900,8 +4900,8 @@ const data = {
         Short_Name_FR: 'Venezuela (République bolivarienne du)',
         Short_Name_ES: 'Venezuela (República Bolivariana de)',
         Short_Name_RU: 'Венесуэла (Боливарианская Республика)',
-        Short_Name_AR: 'فنزويلا',
-      },
+        Short_Name_AR: 'فنزويلا'
+      }
     },
     {
       type: 'Feature',
@@ -4910,8 +4910,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -61.530392424,
-          16.2012635740001,
-        ],
+          16.2012635740001
+        ]
       },
       properties: {
         ADM0_NAME: 'Guadeloupe',
@@ -4938,8 +4938,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -4948,8 +4948,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -58.390951781,
-          -23.236128874,
-        ],
+          -23.236128874
+        ]
       },
       properties: {
         ADM0_NAME: 'Paraguay',
@@ -4976,8 +4976,8 @@ const data = {
         Short_Name_FR: 'Paraguay',
         Short_Name_ES: 'Paraguay',
         Short_Name_RU: 'Парагвай',
-        Short_Name_AR: 'باراغواي',
-      },
+        Short_Name_AR: 'باراغواي'
+      }
     },
     {
       type: 'Feature',
@@ -4986,8 +4986,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -61.2526372249999,
-          10.4683642860001,
-        ],
+          10.4683642860001
+        ]
       },
       properties: {
         ADM0_NAME: 'Trinidad and Tobago',
@@ -5014,8 +5014,8 @@ const data = {
         Short_Name_FR: 'Trinité-et-Tobago',
         Short_Name_ES: 'Trinidad y Tabago',
         Short_Name_RU: 'Тринидад и Тобаго ',
-        Short_Name_AR: 'ترينيداد وتوباغو',
-      },
+        Short_Name_AR: 'ترينيداد وتوباغو'
+      }
     },
     {
       type: 'Feature',
@@ -5024,8 +5024,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -53.2412669619999,
-          3.92438820100006,
-        ],
+          3.92438820100006
+        ]
       },
       properties: {
         ADM0_NAME: 'French Guiana',
@@ -5052,8 +5052,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5062,8 +5062,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -69.977133134,
-          12.5166873650001,
-        ],
+          12.5166873650001
+        ]
       },
       properties: {
         ADM0_NAME: 'Aruba',
@@ -5090,8 +5090,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5100,8 +5100,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -88.8656067429999,
-          13.736145316,
-        ],
+          13.736145316
+        ]
       },
       properties: {
         ADM0_NAME: 'El Salvador',
@@ -5128,8 +5128,8 @@ const data = {
         Short_Name_FR: 'El Salvador',
         Short_Name_ES: 'El Salvador',
         Short_Name_RU: 'Сальвадор',
-        Short_Name_AR: 'السلفادور',
-      },
+        Short_Name_AR: 'السلفادور'
+      }
     },
     {
       type: 'Feature',
@@ -5138,8 +5138,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -90.356949304,
-          15.7023025980001,
-        ],
+          15.7023025980001
+        ]
       },
       properties: {
         ADM0_NAME: 'Guatemala',
@@ -5166,8 +5166,8 @@ const data = {
         Short_Name_FR: 'Guatemala',
         Short_Name_ES: 'Guatemala',
         Short_Name_RU: 'Гватемала',
-        Short_Name_AR: 'غواتيمالا',
-      },
+        Short_Name_AR: 'غواتيمالا'
+      }
     },
     {
       type: 'Feature',
@@ -5176,8 +5176,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -77.3197508119999,
-          18.151330639,
-        ],
+          18.151330639
+        ]
       },
       properties: {
         ADM0_NAME: 'Jamaica',
@@ -5204,8 +5204,8 @@ const data = {
         Short_Name_FR: 'Jamaïque',
         Short_Name_ES: 'Jamaica',
         Short_Name_RU: 'Ямайка',
-        Short_Name_AR: 'جامايكا',
-      },
+        Short_Name_AR: 'جامايكا'
+      }
     },
     {
       type: 'Feature',
@@ -5214,8 +5214,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -59.5621269649999,
-          13.1787990180001,
-        ],
+          13.1787990180001
+        ]
       },
       properties: {
         ADM0_NAME: 'Barbados',
@@ -5242,8 +5242,8 @@ const data = {
         Short_Name_FR: 'Barbade',
         Short_Name_ES: 'Barbados',
         Short_Name_RU: 'Барбадос',
-        Short_Name_AR: 'بربادوس',
-      },
+        Short_Name_AR: 'بربادوس'
+      }
     },
     {
       type: 'Feature',
@@ -5252,8 +5252,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -64.7869272139999,
-          17.967889896,
-        ],
+          17.967889896
+        ]
       },
       properties: {
         ADM0_NAME: 'United States Virgin Islands',
@@ -5280,8 +5280,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5290,8 +5290,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -64.7563772199999,
-          32.3134949820001,
-        ],
+          32.3134949820001
+        ]
       },
       properties: {
         ADM0_NAME: 'Bermuda',
@@ -5318,8 +5318,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5328,8 +5328,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -80.82909683,
-          19.4315249970001,
-        ],
+          19.4315249970001
+        ]
       },
       properties: {
         ADM0_NAME: 'Cayman Islands',
@@ -5356,8 +5356,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5366,8 +5366,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -63.064572292,
-          18.0876049020001,
-        ],
+          18.0876049020001
+        ]
       },
       properties: {
         ADM0_NAME: 'Saint Martin',
@@ -5394,8 +5394,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5404,8 +5404,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -76.5004385,
-          24.166682904,
-        ],
+          24.166682904
+        ]
       },
       properties: {
         ADM0_NAME: 'Bahamas',
@@ -5432,8 +5432,8 @@ const data = {
         Short_Name_FR: 'Bahamas',
         Short_Name_ES: 'Bahamas',
         Short_Name_RU: 'Багамские Острова',
-        Short_Name_AR: 'جزر البهاما',
-      },
+        Short_Name_AR: 'جزر البهاما'
+      }
     },
     {
       type: 'Feature',
@@ -5442,8 +5442,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -58.9741634929999,
-          4.79237827200006,
-        ],
+          4.79237827200006
+        ]
       },
       properties: {
         ADM0_NAME: 'Guyana',
@@ -5470,8 +5470,8 @@ const data = {
         Short_Name_FR: 'Guyana',
         Short_Name_ES: 'Guyana',
         Short_Name_RU: 'Гайана',
-        Short_Name_AR: 'غيانا',
-      },
+        Short_Name_AR: 'غيانا'
+      }
     },
     {
       type: 'Feature',
@@ -5480,8 +5480,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -63.061943376,
-          18.046835238,
-        ],
+          18.046835238
+        ]
       },
       properties: {
         ADM0_NAME: 'Sint Maarten',
@@ -5508,8 +5508,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5518,8 +5518,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -72.683580138,
-          18.9390013620001,
-        ],
+          18.9390013620001
+        ]
       },
       properties: {
         ADM0_NAME: 'Haiti',
@@ -5546,8 +5546,8 @@ const data = {
         Short_Name_FR: 'Haïti',
         Short_Name_ES: 'Haití',
         Short_Name_RU: 'Гаити',
-        Short_Name_AR: 'هايتي',
-      },
+        Short_Name_AR: 'هايتي'
+      }
     },
     {
       type: 'Feature',
@@ -5556,8 +5556,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -60.968690838,
-          13.8981151830001,
-        ],
+          13.8981151830001
+        ]
       },
       properties: {
         ADM0_NAME: 'Saint Lucia',
@@ -5584,8 +5584,8 @@ const data = {
         Short_Name_FR: 'Sainte-Lucie',
         Short_Name_ES: 'Santa Lucía',
         Short_Name_RU: 'Сент-Люсия',
-        Short_Name_AR: 'سانت لوسيا',
-      },
+        Short_Name_AR: 'سانت لوسيا'
+      }
     },
     {
       type: 'Feature',
@@ -5594,8 +5594,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -61.650039087,
-          12.162515732,
-        ],
+          12.162515732
+        ]
       },
       properties: {
         ADM0_NAME: 'Grenada',
@@ -5622,8 +5622,8 @@ const data = {
         Short_Name_FR: 'Grenade',
         Short_Name_ES: 'Granada',
         Short_Name_RU: 'Гренада',
-        Short_Name_AR: 'غرينادا',
-      },
+        Short_Name_AR: 'غرينادا'
+      }
     },
     {
       type: 'Feature',
@@ -5632,8 +5632,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -68.967490546,
-          12.187797523,
-        ],
+          12.187797523
+        ]
       },
       properties: {
         ADM0_NAME: 'Curaçao',
@@ -5660,8 +5660,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5670,8 +5670,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -61.355493849,
-          15.4366125190001,
-        ],
+          15.4366125190001
+        ]
       },
       properties: {
         ADM0_NAME: 'Dominica',
@@ -5698,8 +5698,8 @@ const data = {
         Short_Name_FR: 'Dominique',
         Short_Name_ES: 'Dominica',
         Short_Name_RU: 'Доминика',
-        Short_Name_AR: 'دومينيكا',
-      },
+        Short_Name_AR: 'دومينيكا'
+      }
     },
     {
       type: 'Feature',
@@ -5708,8 +5708,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -55.9115812429999,
-          4.12671321000005,
-        ],
+          4.12671321000005
+        ]
       },
       properties: {
         ADM0_NAME: 'Suriname',
@@ -5736,8 +5736,8 @@ const data = {
         Short_Name_FR: 'Suriname',
         Short_Name_ES: 'Suriname',
         Short_Name_RU: 'Суринам',
-        Short_Name_AR: 'سورينام',
-      },
+        Short_Name_AR: 'سورينام'
+      }
     },
     {
       type: 'Feature',
@@ -5746,8 +5746,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -62.696173968,
-          17.2658565570001,
-        ],
+          17.2658565570001
+        ]
       },
       properties: {
         ADM0_NAME: 'Saint Kitts and Nevis',
@@ -5774,8 +5774,8 @@ const data = {
         Short_Name_FR: 'Saint-Kitts-et-Nevis',
         Short_Name_ES: 'Saint Kitts y Nevis',
         Short_Name_RU: 'Сент-Китс и Невис',
-        Short_Name_AR: 'سانت كيتس ونيفس',
-      },
+        Short_Name_AR: 'سانت كيتس ونيفس'
+      }
     },
     {
       type: 'Feature',
@@ -5784,8 +5784,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -61.791127591,
-          17.280137,
-        ],
+          17.280137
+        ]
       },
       properties: {
         ADM0_NAME: 'Antigua and Barbuda',
@@ -5812,8 +5812,8 @@ const data = {
         Short_Name_FR: 'Antigua-et-Barbuda',
         Short_Name_ES: 'Antigua y Barbuda',
         Short_Name_RU: 'Антигуа и Барбуда',
-        Short_Name_AR: 'أنتيغوا وبربودا',
-      },
+        Short_Name_AR: 'أنتيغوا وبربودا'
+      }
     },
     {
       type: 'Feature',
@@ -5822,8 +5822,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -62.186921449,
-          16.7357596900001,
-        ],
+          16.7357596900001
+        ]
       },
       properties: {
         ADM0_NAME: 'Montserrat',
@@ -5850,8 +5850,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5882,8 +5882,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -5892,8 +5892,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -88.682785445,
-          17.218528292,
-        ],
+          17.218528292
+        ]
       },
       properties: {
         ADM0_NAME: 'Belize',
@@ -5920,8 +5920,8 @@ const data = {
         Short_Name_FR: 'Belize',
         Short_Name_ES: 'Belice',
         Short_Name_RU: 'Белиз',
-        Short_Name_AR: 'بليز',
-      },
+        Short_Name_AR: 'بليز'
+      }
     },
     {
       type: 'Feature',
@@ -5930,8 +5930,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -85.033750249,
-          12.8400697610001,
-        ],
+          12.8400697610001
+        ]
       },
       properties: {
         ADM0_NAME: 'Nicaragua',
@@ -5958,8 +5958,8 @@ const data = {
         Short_Name_FR: 'Nicaragua',
         Short_Name_ES: 'Nicaragua',
         Short_Name_RU: 'Никарагуа',
-        Short_Name_AR: 'نيكاراغوا',
-      },
+        Short_Name_AR: 'نيكاراغوا'
+      }
     },
     {
       type: 'Feature',
@@ -5968,8 +5968,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -71.882079172,
-          21.8086929190001,
-        ],
+          21.8086929190001
+        ]
       },
       properties: {
         ADM0_NAME: 'Turks and Caicos Islands',
@@ -5996,8 +5996,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -6006,8 +6006,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -63.057956094,
-          18.2242329370001,
-        ],
+          18.2242329370001
+        ]
       },
       properties: {
         ADM0_NAME: 'Anguilla',
@@ -6034,8 +6034,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -6044,8 +6044,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -64.481892015,
-          18.5099570350001,
-        ],
+          18.5099570350001
+        ]
       },
       properties: {
         ADM0_NAME: 'British Virgin Islands',
@@ -6072,8 +6072,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -6082,8 +6082,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -61.2075300889999,
-          13.2020546800001,
-        ],
+          13.2020546800001
+        ]
       },
       properties: {
         ADM0_NAME: 'Saint Vincent and the Grenadines',
@@ -6110,8 +6110,8 @@ const data = {
         Short_Name_FR: 'Saint-Vincent-et-les Grenadines',
         Short_Name_ES: 'San Vicente y las Granadinas',
         Short_Name_RU: 'Сент-Винсент и Гренадины',
-        Short_Name_AR: 'سانت فنسنت وجزر غرينادين',
-      },
+        Short_Name_AR: 'سانت فنسنت وجزر غرينادين'
+      }
     },
     {
       type: 'Feature',
@@ -6120,8 +6120,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -67.6837091749999,
-          12.801902598,
-        ],
+          12.801902598
+        ]
       },
       properties: {
         ADM0_NAME: 'Bonaire, Sint Eustatius and Saba',
@@ -6148,8 +6148,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -6158,8 +6158,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -59.3723460369999,
-          -51.739824397,
-        ],
+          -51.739824397
+        ]
       },
       properties: {
         ADM0_NAME: 'Falkland Islands (Malvinas)',
@@ -6186,8 +6186,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -6196,8 +6196,8 @@ const data = {
         type: 'Point',
         coordinates: [
           25.0887119870001,
-          -28.993213517,
-        ],
+          -28.993213517
+        ]
       },
       properties: {
         ADM0_NAME: 'South Africa',
@@ -6224,8 +6224,8 @@ const data = {
         Short_Name_FR: 'Afrique du Sud',
         Short_Name_ES: 'Sudáfrica',
         Short_Name_RU: 'Южная Африка',
-        Short_Name_AR: 'جنوب أفريقيا',
-      },
+        Short_Name_AR: 'جنوب أفريقيا'
+      }
     },
     {
       type: 'Feature',
@@ -6234,8 +6234,8 @@ const data = {
         type: 'Point',
         coordinates: [
           2.63236594700004,
-          28.1633574140001,
-        ],
+          28.1633574140001
+        ]
       },
       properties: {
         ADM0_NAME: 'Algeria',
@@ -6262,8 +6262,8 @@ const data = {
         Short_Name_FR: 'Algérie',
         Short_Name_ES: 'Argelia',
         Short_Name_RU: 'Алжир',
-        Short_Name_AR: 'الجزائر',
-      },
+        Short_Name_AR: 'الجزائر'
+      }
     },
     {
       type: 'Feature',
@@ -6272,8 +6272,8 @@ const data = {
         type: 'Point',
         coordinates: [
           12.7432535040001,
-          5.68580436000002,
-        ],
+          5.68580436000002
+        ]
       },
       properties: {
         ADM0_NAME: 'Cameroon',
@@ -6300,8 +6300,8 @@ const data = {
         Short_Name_FR: 'Cameroun',
         Short_Name_ES: 'Camerún',
         Short_Name_RU: 'Камерун',
-        Short_Name_AR: 'الكاميرون',
-      },
+        Short_Name_AR: 'الكاميرون'
+      }
     },
     {
       type: 'Feature',
@@ -6310,8 +6310,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -1.73983521099996,
-          12.277937148,
-        ],
+          12.277937148
+        ]
       },
       properties: {
         ADM0_NAME: 'Burkina Faso',
@@ -6338,8 +6338,8 @@ const data = {
         Short_Name_FR: 'Burkina Faso',
         Short_Name_ES: 'Burkina Faso',
         Short_Name_RU: 'Буркина-Фасо',
-        Short_Name_AR: 'بوركينا فاسو',
-      },
+        Short_Name_AR: 'بوركينا فاسو'
+      }
     },
     {
       type: 'Feature',
@@ -6348,8 +6348,8 @@ const data = {
         type: 'Point',
         coordinates: [
           55.538212738,
-          -21.1216294619999,
-        ],
+          -21.1216294619999
+        ]
       },
       properties: {
         ADM0_NAME: 'Réunion',
@@ -6376,8 +6376,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -6408,8 +6408,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -6418,8 +6418,8 @@ const data = {
         type: 'Point',
         coordinates: [
           8.10527725500003,
-          9.59360399500002,
-        ],
+          9.59360399500002
+        ]
       },
       properties: {
         ADM0_NAME: 'Nigeria',
@@ -6446,8 +6446,8 @@ const data = {
         Short_Name_FR: 'Nigéria',
         Short_Name_ES: 'Nigeria',
         Short_Name_RU: 'Нигерия',
-        Short_Name_AR: 'نيجيريا',
-      },
+        Short_Name_AR: 'نيجيريا'
+      }
     },
     {
       type: 'Feature',
@@ -6456,8 +6456,8 @@ const data = {
         type: 'Point',
         coordinates: [
           57.868475995,
-          -20.1700677979999,
-        ],
+          -20.1700677979999
+        ]
       },
       properties: {
         ADM0_NAME: 'Mauritius',
@@ -6484,8 +6484,8 @@ const data = {
         Short_Name_FR: 'Maurice',
         Short_Name_ES: 'Mauricio',
         Short_Name_RU: 'Маврикий',
-        Short_Name_AR: 'موريشيوس',
-      },
+        Short_Name_AR: 'موريشيوس'
+      }
     },
     {
       type: 'Feature',
@@ -6494,8 +6494,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -14.4681770789999,
-          14.3669795380001,
-        ],
+          14.3669795380001
+        ]
       },
       properties: {
         ADM0_NAME: 'Senegal',
@@ -6522,8 +6522,8 @@ const data = {
         Short_Name_FR: 'Sénégal',
         Short_Name_ES: 'Senegal',
         Short_Name_RU: 'Сенегал',
-        Short_Name_AR: 'السنغال',
-      },
+        Short_Name_AR: 'السنغال'
+      }
     },
     {
       type: 'Feature',
@@ -6532,8 +6532,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -1.20704618899993,
-          7.95964382200003,
-        ],
+          7.95964382200003
+        ]
       },
       properties: {
         ADM0_NAME: 'Ghana',
@@ -6560,8 +6560,8 @@ const data = {
         Short_Name_FR: 'Ghana',
         Short_Name_ES: 'Ghana',
         Short_Name_RU: 'Гана',
-        Short_Name_AR: 'غانا',
-      },
+        Short_Name_AR: 'غانا'
+      }
     },
     {
       type: 'Feature',
@@ -6570,8 +6570,8 @@ const data = {
         type: 'Point',
         coordinates: [
           9.39765753500006,
-          17.4263228230001,
-        ],
+          17.4263228230001
+        ]
       },
       properties: {
         ADM0_NAME: 'Niger',
@@ -6598,8 +6598,8 @@ const data = {
         Short_Name_FR: 'Niger',
         Short_Name_ES: 'Níger',
         Short_Name_RU: 'Нигер',
-        Short_Name_AR: 'النيجر',
-      },
+        Short_Name_AR: 'النيجر'
+      }
     },
     {
       type: 'Feature',
@@ -6608,8 +6608,8 @@ const data = {
         type: 'Point',
         coordinates: [
           23.6544653930001,
-          -2.87619975299998,
-        ],
+          -2.87619975299998
+        ]
       },
       properties: {
         ADM0_NAME: 'Democratic Republic of the Congo',
@@ -6636,8 +6636,8 @@ const data = {
         Short_Name_FR: 'République démocratique du Congo',
         Short_Name_ES: 'República Democrática del Congo',
         Short_Name_RU: 'Демократическая Республика Конго',
-        Short_Name_AR: 'جمهورية الكونغو الديمقراطية ',
-      },
+        Short_Name_AR: 'جمهورية الكونغو الديمقراطية '
+      }
     },
     {
       type: 'Feature',
@@ -6646,8 +6646,8 @@ const data = {
         type: 'Point',
         coordinates: [
           45.139261742,
-          -12.8183500609999,
-        ],
+          -12.8183500609999
+        ]
       },
       properties: {
         ADM0_NAME: 'Mayotte',
@@ -6674,8 +6674,8 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
+        Short_Name_AR: null
+      }
     },
     {
       type: 'Feature',
@@ -6684,8 +6684,8 @@ const data = {
         type: 'Point',
         coordinates: [
           37.857864416,
-          0.529780176000031,
-        ],
+          0.529780176000031
+        ]
       },
       properties: {
         ADM0_NAME: 'Kenya',
@@ -6712,8 +6712,8 @@ const data = {
         Short_Name_FR: 'Kenya',
         Short_Name_ES: 'Kenya',
         Short_Name_RU: 'Кения',
-        Short_Name_AR: 'كينيا',
-      },
+        Short_Name_AR: 'كينيا'
+      }
     },
     {
       type: 'Feature',
@@ -6722,8 +6722,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -10.9418254249999,
-          10.438540941,
-        ],
+          10.438540941
+        ]
       },
       properties: {
         ADM0_NAME: 'Guinea',
@@ -6750,8 +6750,8 @@ const data = {
         Short_Name_FR: 'Guinée',
         Short_Name_ES: 'Guinea',
         Short_Name_RU: 'Гвинея',
-        Short_Name_AR: 'غينيا',
-      },
+        Short_Name_AR: 'غينيا'
+      }
     },
     {
       type: 'Feature',
@@ -6760,8 +6760,8 @@ const data = {
         type: 'Point',
         coordinates: [
           29.917205531,
-          -1.99796797799996,
-        ],
+          -1.99796797799996
+        ]
       },
       properties: {
         ADM0_NAME: 'Rwanda',
@@ -6788,8 +6788,8 @@ const data = {
         Short_Name_FR: 'Rwanda',
         Short_Name_ES: 'Rwanda',
         Short_Name_RU: 'Руанда',
-        Short_Name_AR: 'رواندا',
-      },
+        Short_Name_AR: 'رواندا'
+      }
     },
     {
       type: 'Feature',
@@ -6798,8 +6798,8 @@ const data = {
         type: 'Point',
         coordinates: [
           46.7059924820001,
-          -19.373521329,
-        ],
+          -19.373521329
+        ]
       },
       properties: {
         ADM0_NAME: 'Madagascar',
@@ -6826,8 +6826,8 @@ const data = {
         Short_Name_FR: 'Madagascar',
         Short_Name_ES: 'Madagascar',
         Short_Name_RU: 'Мадагаскар',
-        Short_Name_AR: 'مدغشقر',
-      },
+        Short_Name_AR: 'مدغشقر'
+      }
     },
     {
       type: 'Feature',
@@ -6836,8 +6836,8 @@ const data = {
         type: 'Point',
         coordinates: [
           32.386266425,
-          1.28002949000006,
-        ],
+          1.28002949000006
+        ]
       },
       properties: {
         ADM0_NAME: 'Uganda',
@@ -6864,8 +6864,8 @@ const data = {
         Short_Name_FR: 'Ouganda',
         Short_Name_ES: 'Uganda',
         Short_Name_RU: 'Уганда',
-        Short_Name_AR: 'أوغندا',
-      },
+        Short_Name_AR: 'أوغندا'
+      }
     },
     {
       type: 'Feature',
@@ -6874,8 +6874,8 @@ const data = {
         type: 'Point',
         coordinates: [
           15.224282988,
-          -0.839998298999944,
-        ],
+          -0.839998298999944
+        ]
       },
       properties: {
         ADM0_NAME: 'Congo',
@@ -6902,8 +6902,8 @@ const data = {
         Short_Name_FR: 'Congo',
         Short_Name_ES: 'Congo (el)',
         Short_Name_RU: 'Конго',
-        Short_Name_AR: 'الكونغو',
-      },
+        Short_Name_AR: 'الكونغو'
+      }
     },
     {
       type: 'Feature',
@@ -6912,8 +6912,8 @@ const data = {
         type: 'Point',
         coordinates: [
           0.97584596400003,
-          8.53491037400005,
-        ],
+          8.53491037400005
+        ]
       },
       properties: {
         ADM0_NAME: 'Togo',
@@ -6940,8 +6940,8 @@ const data = {
         Short_Name_FR: 'Togo',
         Short_Name_ES: 'Togo (el)',
         Short_Name_RU: 'Того',
-        Short_Name_AR: 'توغو',
-      },
+        Short_Name_AR: 'توغو'
+      }
     },
     {
       type: 'Feature',
@@ -6950,8 +6950,8 @@ const data = {
         type: 'Point',
         coordinates: [
           39.6160189350001,
-          8.62613927100006,
-        ],
+          8.62613927100006
+        ]
       },
       properties: {
         ADM0_NAME: 'Ethiopia',
@@ -6978,8 +6978,8 @@ const data = {
         Short_Name_FR: 'Éthiopie',
         Short_Name_ES: 'Etiopía',
         Short_Name_RU: 'Эфиопия',
-        Short_Name_AR: 'إثيوبيا',
-      },
+        Short_Name_AR: 'إثيوبيا'
+      }
     },
     {
       type: 'Feature',
@@ -6988,8 +6988,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -3.52433671799997,
-          17.350369329,
-        ],
+          17.350369329
+        ]
       },
       properties: {
         ADM0_NAME: 'Mali',
@@ -7016,8 +7016,8 @@ const data = {
         Short_Name_FR: 'Mali',
         Short_Name_ES: 'Malí',
         Short_Name_RU: 'Мали',
-        Short_Name_AR: 'مالي',
-      },
+        Short_Name_AR: 'مالي'
+      }
     },
     {
       type: 'Feature',
@@ -7026,8 +7026,8 @@ const data = {
         type: 'Point',
         coordinates: [
           27.7978489400001,
-          -13.453075312,
-        ],
+          -13.453075312
+        ]
       },
       properties: {
         ADM0_NAME: 'Zambia',
@@ -7054,8 +7054,8 @@ const data = {
         Short_Name_FR: 'Zambie',
         Short_Name_ES: 'Zambia',
         Short_Name_RU: 'Замбия',
-        Short_Name_AR: 'زامبيا',
-      },
+        Short_Name_AR: 'زامبيا'
+      }
     },
     {
       type: 'Feature',
@@ -7064,8 +7064,8 @@ const data = {
         type: 'Point',
         coordinates: [
           38.852925552,
-          15.3588410250001,
-        ],
+          15.3588410250001
+        ]
       },
       properties: {
         ADM0_NAME: 'Eritrea',
@@ -7092,8 +7092,8 @@ const data = {
         Short_Name_FR: 'Érythrée',
         Short_Name_ES: 'Eritrea',
         Short_Name_RU: 'Эритрея',
-        Short_Name_AR: 'إريتريا',
-      },
+        Short_Name_AR: 'إريتريا'
+      }
     },
     {
       type: 'Feature',
@@ -7102,8 +7102,8 @@ const data = {
         type: 'Point',
         coordinates: [
           2.34326270500003,
-          9.64764996800005,
-        ],
+          9.64764996800005
+        ]
       },
       properties: {
         ADM0_NAME: 'Benin',
@@ -7130,8 +7130,8 @@ const data = {
         Short_Name_FR: 'Bénin',
         Short_Name_ES: 'Benin',
         Short_Name_RU: 'Бенин',
-        Short_Name_AR: 'بنن',
-      },
+        Short_Name_AR: 'بنن'
+      }
     },
     {
       type: 'Feature',
@@ -7140,8 +7140,8 @@ const data = {
         type: 'Point',
         coordinates: [
           34.8234035560001,
-          -6.27020075299993,
-        ],
+          -6.27020075299993
+        ]
       },
       properties: {
         ADM0_NAME: 'United Republic of Tanzania',
@@ -7168,8 +7168,8 @@ const data = {
         Short_Name_FR: 'République-Unie de Tanzanie',
         Short_Name_ES: 'República Unida de Tanzanía',
         Short_Name_RU: 'Объединенная Республика Танзания',
-        Short_Name_AR: 'جمهورية تنزانيا المتحدة',
-      },
+        Short_Name_AR: 'جمهورية تنزانيا المتحدة'
+      }
     },
     {
       type: 'Feature',
@@ -7178,8 +7178,8 @@ const data = {
         type: 'Point',
         coordinates: [
           11.797157624,
-          -0.590677967999966,
-        ],
+          -0.590677967999966
+        ]
       },
       properties: {
         ADM0_NAME: 'Gabon',
@@ -7206,8 +7206,8 @@ const data = {
         Short_Name_FR: 'Gabon',
         Short_Name_ES: 'Gabón',
         Short_Name_RU: 'Габон',
-        Short_Name_AR: 'غابون',
-      },
+        Short_Name_AR: 'غابون'
+      }
     },
     {
       type: 'Feature',
@@ -7216,8 +7216,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -14.987484013,
-          12.016198296,
-        ],
+          12.016198296
+        ]
       },
       properties: {
         ADM0_NAME: 'Guinea-Bissau',
@@ -7244,8 +7244,8 @@ const data = {
         Short_Name_FR: 'Guinée-Bissau',
         Short_Name_ES: 'Guinea-Bissau',
         Short_Name_RU: 'Гвинея-Бисау',
-        Short_Name_AR: 'غينيا - بيساو',
-      },
+        Short_Name_AR: 'غينيا - بيساو'
+      }
     },
     {
       type: 'Feature',
@@ -7254,8 +7254,8 @@ const data = {
         type: 'Point',
         coordinates: [
           10.3384962750001,
-          1.71016859900004,
-        ],
+          1.71016859900004
+        ]
       },
       properties: {
         ADM0_NAME: 'Equatorial Guinea',
@@ -7282,8 +7282,8 @@ const data = {
         Short_Name_FR: 'Guinée équatoriale',
         Short_Name_ES: 'Guinea Ecuatorial',
         Short_Name_RU: 'Экваториальная Гвинея',
-        Short_Name_AR: 'غينيا الاستوائية',
-      },
+        Short_Name_AR: 'غينيا الاستوائية'
+      }
     },
     {
       type: 'Feature',
@@ -7292,8 +7292,8 @@ const data = {
         type: 'Point',
         coordinates: [
           17.218450277,
-          -22.133293291,
-        ],
+          -22.133293291
+        ]
       },
       properties: {
         ADM0_NAME: 'Namibia',
@@ -7320,8 +7320,8 @@ const data = {
         Short_Name_FR: 'Namibie',
         Short_Name_ES: 'Namibia',
         Short_Name_RU: 'Намибия',
-        Short_Name_AR: 'ناميبيا',
-      },
+        Short_Name_AR: 'ناميبيا'
+      }
     },
     {
       type: 'Feature',
@@ -7330,8 +7330,8 @@ const data = {
         type: 'Point',
         coordinates: [
           17.543777778,
-          -12.2957307139999,
-        ],
+          -12.2957307139999
+        ]
       },
       properties: {
         ADM0_NAME: 'Angola',
@@ -7358,8 +7358,8 @@ const data = {
         Short_Name_FR: 'Angola',
         Short_Name_ES: 'Angola',
         Short_Name_RU: 'Ангола',
-        Short_Name_AR: 'أنغولا',
-      },
+        Short_Name_AR: 'أنغولا'
+      }
     },
     {
       type: 'Feature',
@@ -7368,8 +7368,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -9.30784656399993,
-          6.44811846300007,
-        ],
+          6.44811846300007
+        ]
       },
       properties: {
         ADM0_NAME: 'Liberia',
@@ -7396,8 +7396,8 @@ const data = {
         Short_Name_FR: 'Libéria',
         Short_Name_ES: 'Liberia',
         Short_Name_RU: 'Либерия',
-        Short_Name_AR: 'ليبريا',
-      },
+        Short_Name_AR: 'ليبريا'
+      }
     },
     {
       type: 'Feature',
@@ -7406,8 +7406,8 @@ const data = {
         type: 'Point',
         coordinates: [
           35.552260533,
-          -17.260193924,
-        ],
+          -17.260193924
+        ]
       },
       properties: {
         ADM0_NAME: 'Mozambique',
@@ -7434,8 +7434,8 @@ const data = {
         Short_Name_FR: 'Mozambique',
         Short_Name_ES: 'Mozambique',
         Short_Name_RU: 'Мозамбик',
-        Short_Name_AR: 'موزامبيق',
-      },
+        Short_Name_AR: 'موزامبيق'
+      }
     },
     {
       type: 'Feature',
@@ -7444,8 +7444,8 @@ const data = {
         type: 'Point',
         coordinates: [
           52.2300590070001,
-          -6.39906405099993,
-        ],
+          -6.39906405099993
+        ]
       },
       properties: {
         ADM0_NAME: 'Seychelles',
@@ -7472,8 +7472,8 @@ const data = {
         Short_Name_FR: 'Seychelles',
         Short_Name_ES: 'Seychelles',
         Short_Name_RU: 'Сейшельские Острова',
-        Short_Name_AR: 'سيشيل',
-      },
+        Short_Name_AR: 'سيشيل'
+      }
     },
     {
       type: 'Feature',
@@ -7482,8 +7482,8 @@ const data = {
         type: 'Point',
         coordinates: [
           20.482782022,
-          6.57145244100008,
-        ],
+          6.57145244100008
+        ]
       },
       properties: {
         ADM0_NAME: 'Central African Republic',
@@ -7510,8 +7510,8 @@ const data = {
         Short_Name_FR: 'République centrafricaine',
         Short_Name_ES: 'República Centroafricana',
         Short_Name_RU: 'Центральноафриканская Республика',
-        Short_Name_AR: 'جمهورية أفريقيا الوسطى',
-      },
+        Short_Name_AR: 'جمهورية أفريقيا الوسطى'
+      }
     },
     {
       type: 'Feature',
@@ -7520,8 +7520,8 @@ const data = {
         type: 'Point',
         coordinates: [
           18.6646033860001,
-          15.361145703,
-        ],
+          15.361145703
+        ]
       },
       properties: {
         ADM0_NAME: 'Chad',
@@ -7548,8 +7548,8 @@ const data = {
         Short_Name_FR: 'Tchad',
         Short_Name_ES: 'Chad (el)',
         Short_Name_RU: 'Чад',
-        Short_Name_AR: 'تشاد',
-      },
+        Short_Name_AR: 'تشاد'
+      }
     },
     {
       type: 'Feature',
@@ -7558,8 +7558,8 @@ const data = {
         type: 'Point',
         coordinates: [
           31.497188798,
-          -26.562116744,
-        ],
+          -26.562116744
+        ]
       },
       properties: {
         ADM0_NAME: 'Eswatini',
@@ -7586,8 +7586,8 @@ const data = {
         Short_Name_FR: 'Eswatini',
         Short_Name_ES: 'Eswatini',
         Short_Name_RU: 'Эсватини',
-        Short_Name_AR: 'إسواتيني',
-      },
+        Short_Name_AR: 'إسواتيني'
+      }
     },
     {
       type: 'Feature',
@@ -7596,8 +7596,8 @@ const data = {
         type: 'Point',
         coordinates: [
           29.871759825,
-          -19.0000057739999,
-        ],
+          -19.0000057739999
+        ]
       },
       properties: {
         ADM0_NAME: 'Zimbabwe',
@@ -7624,8 +7624,8 @@ const data = {
         Short_Name_FR: 'Zimbabwe',
         Short_Name_ES: 'Zimbabwe',
         Short_Name_RU: 'Зимбабве',
-        Short_Name_AR: 'زمبابوي',
-      },
+        Short_Name_AR: 'زمبابوي'
+      }
     },
     {
       type: 'Feature',
@@ -7634,8 +7634,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -10.3322604099999,
-          20.259903606,
-        ],
+          20.259903606
+        ]
       },
       properties: {
         ADM0_NAME: 'Mauritania',
@@ -7662,8 +7662,8 @@ const data = {
         Short_Name_FR: 'Mauritanie',
         Short_Name_ES: 'Mauritania',
         Short_Name_RU: 'Мавритания',
-        Short_Name_AR: 'موريتانيا',
-      },
+        Short_Name_AR: 'موريتانيا'
+      }
     },
     {
       type: 'Feature',
@@ -7672,8 +7672,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -11.792102896,
-          8.56034092400006,
-        ],
+          8.56034092400006
+        ]
       },
       properties: {
         ADM0_NAME: 'Sierra Leone',
@@ -7700,8 +7700,8 @@ const data = {
         Short_Name_FR: 'Sierra Leone',
         Short_Name_ES: 'Sierra Leona',
         Short_Name_RU: 'Сьерра-Леоне',
-        Short_Name_AR: 'سيراليون',
-      },
+        Short_Name_AR: 'سيراليون'
+      }
     },
     {
       type: 'Feature',
@@ -7710,8 +7710,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -23.544999999,
-          14.9280000000001,
-        ],
+          14.9280000000001
+        ]
       },
       properties: {
         ADM0_NAME: 'Cabo Verde',
@@ -7738,8 +7738,8 @@ const data = {
         Short_Name_FR: 'Cabo Verde',
         Short_Name_ES: 'Cabo Verde',
         Short_Name_RU: 'Кабо-Верде',
-        Short_Name_AR: 'كابو فيردي',
-      },
+        Short_Name_AR: 'كابو فيردي'
+      }
     },
     {
       type: 'Feature',
@@ -7748,8 +7748,8 @@ const data = {
         type: 'Point',
         coordinates: [
           23.815077504,
-          -22.182042021,
-        ],
+          -22.182042021
+        ]
       },
       properties: {
         ADM0_NAME: 'Botswana',
@@ -7776,8 +7776,8 @@ const data = {
         Short_Name_FR: 'Botswana',
         Short_Name_ES: 'Botswana',
         Short_Name_RU: 'Ботсвана',
-        Short_Name_AR: 'بوتسوانا',
-      },
+        Short_Name_AR: 'بوتسوانا'
+      }
     },
     {
       type: 'Feature',
@@ -7786,8 +7786,8 @@ const data = {
         type: 'Point',
         coordinates: [
           -15.385619595,
-          13.452944399,
-        ],
+          13.452944399
+        ]
       },
       properties: {
         ADM0_NAME: 'Gambia',
@@ -7814,8 +7814,8 @@ const data = {
         Short_Name_FR: 'Gambie',
         Short_Name_ES: 'Gambia',
         Short_Name_RU: 'Гамбия',
-        Short_Name_AR: 'غامبيا',
-      },
+        Short_Name_AR: 'غامبيا'
+      }
     },
     {
       type: 'Feature',
@@ -7824,8 +7824,8 @@ const data = {
         type: 'Point',
         coordinates: [
           34.3069850380001,
-          -13.21510424,
-        ],
+          -13.21510424
+        ]
       },
       properties: {
         ADM0_NAME: 'Malawi',
@@ -7852,8 +7852,8 @@ const data = {
         Short_Name_FR: 'Malawi',
         Short_Name_ES: 'Malawi',
         Short_Name_RU: 'Малави',
-        Short_Name_AR: 'ملاوي',
-      },
+        Short_Name_AR: 'ملاوي'
+      }
     },
     {
       type: 'Feature',
@@ -7862,8 +7862,8 @@ const data = {
         type: 'Point',
         coordinates: [
           6.71649314900003,
-          0.436446692000061,
-        ],
+          0.436446692000061
+        ]
       },
       properties: {
         ADM0_NAME: 'Sao Tome and Principe',
@@ -7890,8 +7890,8 @@ const data = {
         Short_Name_FR: 'Sao Tomé-et-Principe',
         Short_Name_ES: 'Santo Tomé y Príncipe',
         Short_Name_RU: 'Сан-Томе и Принсипи',
-        Short_Name_AR: 'سان تومي وبرينسيبي',
-      },
+        Short_Name_AR: 'سان تومي وبرينسيبي'
+      }
     },
     {
       type: 'Feature',
@@ -7900,8 +7900,8 @@ const data = {
         type: 'Point',
         coordinates: [
           29.8868213920001,
-          -3.35629711799993,
-        ],
+          -3.35629711799993
+        ]
       },
       properties: {
         ADM0_NAME: 'Burundi',
@@ -7928,8 +7928,8 @@ const data = {
         Short_Name_FR: 'Burundi',
         Short_Name_ES: 'Burundi',
         Short_Name_RU: 'Бурунди',
-        Short_Name_AR: 'بوروندي',
-      },
+        Short_Name_AR: 'بوروندي'
+      }
     },
     {
       type: 'Feature',
@@ -7938,8 +7938,8 @@ const data = {
         type: 'Point',
         coordinates: [
           30.340676547,
-          7.27961187200003,
-        ],
+          7.27961187200003
+        ]
       },
       properties: {
         ADM0_NAME: 'South Sudan',
@@ -7966,8 +7966,8 @@ const data = {
         Short_Name_FR: 'Soudan du Sud',
         Short_Name_ES: ' Sudán del Sur ',
         Short_Name_RU: 'Южный Судан',
-        Short_Name_AR: 'جنوب السودان',
-      },
+        Short_Name_AR: 'جنوب السودان'
+      }
     },
     {
       type: 'Feature',
@@ -7998,10 +7998,10 @@ const data = {
         Short_Name_FR: null,
         Short_Name_ES: null,
         Short_Name_RU: null,
-        Short_Name_AR: null,
-      },
-    },
-  ],
+        Short_Name_AR: null
+      }
+    }
+  ]
 }
 
 export default data

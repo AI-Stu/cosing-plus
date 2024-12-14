@@ -16,7 +16,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     proxyObj[env.VITE_APP_BASE_API_DEV] = {
       target: env.VITE_APP_BASE_URL_DEV,
       changeOrigin: true,
-      rewrite: (path: string) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API_DEV}`), ''),
+      rewrite: (path: string) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API_DEV}`), '')
     }
   }
   return {
@@ -25,57 +25,57 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       alias: [
         {
           find: 'dayjs',
-          replacement: 'dayjs/esm',
+          replacement: 'dayjs/esm'
         },
         {
           find: /^dayjs\/locale/,
-          replacement: 'dayjs/esm/locale',
+          replacement: 'dayjs/esm/locale'
         },
         {
           find: /^dayjs\/plugin/,
-          replacement: 'dayjs/esm/plugin',
+          replacement: 'dayjs/esm/plugin'
         },
         {
           find: 'vue-i18n',
-          replacement: mode === 'development' ? 'vue-i18n/dist/vue-i18n.esm-browser.js' : 'vue-i18n/dist/vue-i18n.esm-bundler.js',
+          replacement: mode === 'development' ? 'vue-i18n/dist/vue-i18n.esm-browser.js' : 'vue-i18n/dist/vue-i18n.esm-bundler.js'
         },
         {
           find: /^ant-design-vue\/es$/,
-          replacement: 'ant-design-vue/es',
+          replacement: 'ant-design-vue/es'
         },
         {
           find: /^ant-design-vue\/dist$/,
-          replacement: 'ant-design-vue/dist',
+          replacement: 'ant-design-vue/dist'
         },
         {
           find: /^ant-design-vue\/lib$/,
-          replacement: 'ant-design-vue/es',
+          replacement: 'ant-design-vue/es'
         },
         {
           find: /^ant-design-vue$/,
-          replacement: 'ant-design-vue/es',
+          replacement: 'ant-design-vue/es'
         },
         {
           find: 'lodash',
-          replacement: 'lodash-es',
+          replacement: 'lodash-es'
         },
         {
           find: '~@',
-          replacement: baseSrc,
+          replacement: baseSrc
         },
         {
           find: '~',
-          replacement: baseSrc,
+          replacement: baseSrc
         },
         {
           find: '@',
-          replacement: baseSrc,
+          replacement: baseSrc
         },
         {
           find: '~#',
-          replacement: resolve(baseSrc, './enums'),
-        },
-      ],
+          replacement: resolve(baseSrc, './enums')
+        }
+      ]
     },
     build: {
       chunkSizeWarningLimit: 4096,
@@ -84,16 +84,16 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         output: {
           manualChunks: {
             vue: ['vue', 'vue-router', 'pinia', 'vue-i18n', '@vueuse/core'],
-            antd: ['ant-design-vue', '@ant-design/icons-vue', 'dayjs'],
+            antd: ['ant-design-vue', '@ant-design/icons-vue', 'dayjs']
             // lodash: ['loadsh-es'],
-          },
-        },
-      },
+          }
+        }
+      }
     },
     server: {
       port: 6678,
       proxy: {
-        ...proxyObj,
+        ...proxyObj
         // [env.VITE_APP_BASE_API]: {
         //   target: env.VITE_APP_BASE_URL,
         // //   如果你是https接口，需要配置这个参数
@@ -101,11 +101,11 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         //   changeOrigin: true,
         //   rewrite: path => path.replace(new RegExp(`^${env.VITE_APP_BASE_API}`), ''),
         // },
-      },
+      }
     },
     test: {
       globals: true,
-      environment: 'jsdom',
-    },
+      environment: 'jsdom'
+    }
   }
 }

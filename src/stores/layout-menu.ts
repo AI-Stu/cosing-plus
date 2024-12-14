@@ -107,6 +107,6 @@ export const useLayoutMenu = defineStore('layout-menu', () => {
     handleOpenKeys,
     changeMenu,
     handleAccordionMode,
-    clear,
+    clear
   }
 })

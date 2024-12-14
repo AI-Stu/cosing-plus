@@ -21,50 +21,50 @@ const list = computed(() => [
     title: '内容区域宽度',
     key: 'contentWidth',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '固定 Header',
     key: 'fixedHeader',
     disabled: props.layout === 'mix',
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '固定侧边菜单',
     key: 'fixSiderbar',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '自动分割菜单',
     key: 'splitMenus',
     disabled: props.layout !== 'mix',
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '缓存功能',
     key: 'keepAlive',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '菜单手风琴模式',
     key: 'accordionMode',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '侧边菜单折叠 左侧',
     key: 'leftCollapsed',
     disabled: props.layout !== 'side',
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '紧凑模式',
     key: 'compactAlgorithm',
     disabled: false,
-    disabledReason: '',
-  },
+    disabledReason: ''
+  }
 ])
 function handleChangeSetting(key: string, value: any) {
   emit('changeSetting', key, value)

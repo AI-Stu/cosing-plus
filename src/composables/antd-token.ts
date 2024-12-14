@@ -9,6 +9,6 @@ export const useAntdToken = createSharedComposable(() => {
   }
   return {
     token,
-    setToken,
+    setToken
   }
 })

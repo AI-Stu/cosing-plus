@@ -3,20 +3,20 @@ import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue'
 
 defineProps({
   gap: {
-    type: Number,
+    type: Number
   },
   subTotal: {
-    type: Number,
+    type: Number
   },
   total: {
-    type: [Number, String],
+    type: [Number, String]
   },
   status: {
-    type: String,
+    type: String
   },
   title: {
-    type: String,
-  },
+    type: String
+  }
 })
 </script>
 

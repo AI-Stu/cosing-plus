@@ -17,12 +17,12 @@ onMounted(() => {
         height: '452px',
         version: 8,
         sources: {},
-        layers: [],
+        layers: []
       },
       center: [110.19382669582967, 50.258134],
       pitch: 0,
-      zoom: 1,
-    }),
+      zoom: 1
+    })
   })
 
   const grid = mapGrid
@@ -38,27 +38,27 @@ onMounted(() => {
           type: 'hexagon',
           size: 800000,
           field: 'capacity',
-          method: 'sum',
-        },
-      ],
-    },
+          method: 'sum'
+        }
+      ]
+    }
   )
     .shape('hexagon')
     .color('#ddd')
     .style({
       coverage: 0.7,
-      opacity: 0.8,
-    },
+      opacity: 0.8
+    }
     )
   scene.addLayer(layer)
   pointLayer = new PointLayer({
-    autoFit: true,
+    autoFit: true
   })
   pointLayer.source(data)
     .shape('circle')
     .size('cum_conf', [0, 17])
     .scale('cum_conf', {
-      type: 'quantile',
+      type: 'quantile'
     })
     .color('cum_conf', [
       '#eff3ff',
@@ -67,15 +67,15 @@ onMounted(() => {
       '#6baed6',
       '#4292c6',
       '#2171b5',
-      '#084594',
+      '#084594'
     ])
     .active({ color: '#0c2c84' })
     .style({
-      opacity: 0.8,
+      opacity: 0.8
     })
 
   pointLayerText = new PointLayer({
-    autoFit: true,
+    autoFit: true
   })
   pointLayerText.source(data)
     .shape('Short_Name_ZH', 'text')
@@ -88,7 +88,7 @@ onMounted(() => {
     .style({
       opacity: 1,
       strokeOpacity: 1,
-      strokeWidth: 0,
+      strokeWidth: 0
     })
 
   scene.addLayer(pointLayer)

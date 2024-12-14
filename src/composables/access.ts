@@ -11,6 +11,6 @@ export function useAccess() {
   }
   return {
     hasAccess,
-    roles,
+    roles
   }
 }

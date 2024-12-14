@@ -44,7 +44,7 @@ watch(() => route.path, () => {
 const { contentWidth } = useLayoutState()
 const contentCls = computed(() => {
   const cls: string[] = [
-    'flex flex-col flex-1',
+    'flex flex-col flex-1'
   ]
   if (contentWidth.value === 'Fluid')
     cls.push('w-full')

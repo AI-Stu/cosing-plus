@@ -4,12 +4,12 @@ import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue'
 defineProps({
   flag: {
     type: String,
-    default: undefined,
+    default: undefined
   },
   children: {
     type: String,
-    default: undefined,
-  },
+    default: undefined
+  }
 })
 </script>
 

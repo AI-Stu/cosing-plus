@@ -56,7 +56,7 @@ export const useMultiTab = defineStore('multi-tab', () => {
       name: route.name as string,
       icon: route.meta.icon,
       affix: route.meta.affix,
-      locale: route.meta.locale,
+      locale: route.meta.locale
     }
     if (!cacheList.value.includes(item?.name as string) && appStore.layoutSetting.keepAlive) {
       if (route.meta.keepAlive && route.name)
@@ -159,6 +159,6 @@ export const useMultiTab = defineStore('multi-tab', () => {
     closeOther,
     refresh,
     switchTab,
-    addItem,
+    addItem
   }
 })

@@ -2,7 +2,7 @@
 import { GithubOutlined } from '@ant-design/icons-vue'
 
 defineOptions({
-  name: 'FooterLinks',
+  name: 'FooterLinks'
 })
 </script>
 

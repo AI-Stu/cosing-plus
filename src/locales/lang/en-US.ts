@@ -2,9 +2,9 @@ import enUS from 'ant-design-vue/es/locale/en_US'
 
 const enUSModules = import.meta.glob([
   '~/locales/lang/**/en-US.ts',
-  '~/pages/**/locales/en-US.ts',
+  '~/pages/**/locales/en-US.ts'
 ], {
-  eager: true,
+  eager: true
 })
 
 const messages = {}
@@ -16,5 +16,5 @@ for (const item in enUSModules) {
 }
 export default {
   ...messages,
-  antd: enUS,
+  antd: enUS
 }

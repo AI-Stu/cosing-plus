@@ -2,10 +2,10 @@
   "extends": "@cosing/tsconfig/node.json",
   "compilerOptions": {
     "composite": true,
-    "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
-  "include": ["vite.config.ts", "plugins/**/*.ts","vitest.config.ts","scripts/**/*.ts"]
+  "include": ["vite.config.ts", "plugins/**/*.ts", "vitest.config.ts", "scripts/**/*.ts"]
 }

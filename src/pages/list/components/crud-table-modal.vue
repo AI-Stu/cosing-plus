@@ -17,7 +17,7 @@ const formRef = ref<FormInstance>()
 
 const formData = ref<CrudTableModel>({
   name: '',
-  value: '',
+  value: ''
 })
 
 const labelCol = { style: { width: '100px' } }
@@ -28,7 +28,7 @@ function open(record?: CrudTableModel) {
   isUpdate.value = !!record?.id
   formData.value = cloneDeep(record) ?? {
     name: '',
-    value: '',
+    value: ''
   }
 }
 
@@ -52,7 +52,7 @@ function handleCancel() {
 }
 
 defineExpose({
-  open,
+  open
 })
 </script>
 

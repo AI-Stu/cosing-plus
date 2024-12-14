@@ -41,7 +41,7 @@ function layoutStateFunc(props: ProLayoutProps, methods: ProLayoutProviderMethod
   const splitState = reactive<{
     selectedKeys: Key[]
   }>({
-    selectedKeys: [],
+    selectedKeys: []
   })
   watch(
     menuData,
@@ -52,8 +52,8 @@ function layoutStateFunc(props: ProLayoutProps, methods: ProLayoutProviderMethod
       })
     },
     {
-      immediate: true,
-    },
+      immediate: true
+    }
   )
   const selectedMenus = computed(() => {
     if (isMobile.value || layout.value !== 'mix' || !splitMenus.value)
@@ -112,8 +112,8 @@ function layoutStateFunc(props: ProLayoutProps, methods: ProLayoutProviderMethod
       }
     },
     {
-      immediate: true,
-    },
+      immediate: true
+    }
   )
   watch(splitMenus, () => {
     if (!splitMenus.value) {
@@ -160,7 +160,7 @@ function layoutStateFunc(props: ProLayoutProps, methods: ProLayoutProviderMethod
     handleMenuSelect,
     handleSplitSelectedKeys,
     menuHeader,
-    ...methods,
+    ...methods
   }
 }
 

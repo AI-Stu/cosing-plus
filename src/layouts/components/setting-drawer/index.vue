@@ -10,7 +10,7 @@ import RegionalSetting from './regional-setting.vue'
 import OtherSetting from './other-setting.vue'
 
 defineOptions({
-  name: 'SettingDrawer',
+  name: 'SettingDrawer'
 })
 const props = withDefaults(
   defineProps<{
@@ -52,9 +52,9 @@ const props = withDefaults(
       { key: 'cyan', color: '#13C2C2' },
       { key: 'green', color: '#52C41A' },
       { key: 'geekblue', color: '#2F54EB' },
-      { key: 'purple', color: '#722ED1' },
-    ],
-  },
+      { key: 'purple', color: '#722ED1' }
+    ]
+  }
 )
 const emit = defineEmits(['update:open', 'settingChange'])
 const { copy } = useClipboard()

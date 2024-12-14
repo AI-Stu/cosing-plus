@@ -3,7 +3,7 @@ import { Radar } from '@antv/g2plot'
 import EditableLinkGroup from '~/pages/dashboard/workplace/editable-link-group.vue'
 
 defineOptions({
-  name: 'Workplace',
+  name: 'Workplace'
 })
 
 const currentUser = {
@@ -13,7 +13,7 @@ const currentUser = {
   email: 'antdesign@alipay.com',
   signature: '海纳百川，有容乃大',
   title: '交互专家',
-  group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+  group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED'
 }
 
 const projectNotice = [
@@ -25,7 +25,7 @@ const projectNotice = [
     updatedAt: '几秒前',
     member: '科学搬砖组',
     href: '',
-    memberLink: '',
+    memberLink: ''
   },
   {
     id: 'xxx2',
@@ -35,7 +35,7 @@ const projectNotice = [
     updatedAt: '6 年前',
     member: '全组都是吴彦祖',
     href: '',
-    memberLink: '',
+    memberLink: ''
   },
   {
     id: 'xxx3',
@@ -45,7 +45,7 @@ const projectNotice = [
     updatedAt: '几秒前',
     member: '中二少女团',
     href: '',
-    memberLink: '',
+    memberLink: ''
   },
   {
     id: 'xxx4',
@@ -55,7 +55,7 @@ const projectNotice = [
     updatedAt: '6 年前',
     member: '程序员日常',
     href: '',
-    memberLink: '',
+    memberLink: ''
   },
   {
     id: 'xxx5',
@@ -65,7 +65,7 @@ const projectNotice = [
     updatedAt: '6 年前',
     member: '高逼格设计天团',
     href: '',
-    memberLink: '',
+    memberLink: ''
   },
   {
     id: 'xxx6',
@@ -75,8 +75,8 @@ const projectNotice = [
     updatedAt: '6 年前',
     member: '骗你来学计算机',
     href: '',
-    memberLink: '',
-  },
+    memberLink: ''
+  }
 ]
 
 const activities = [
@@ -85,105 +85,105 @@ const activities = [
     updatedAt: '几秒前',
     user: {
       name: '曲丽丽',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
     },
     group: {
       name: '高逼格设计天团',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     project: {
       name: '六月迭代',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     template1: '在',
-    template2: '新建项目',
+    template2: '新建项目'
   },
   {
     id: 'trend-2',
     updatedAt: '几秒前',
     user: {
       name: '付小小',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png'
     },
     group: {
       name: '高逼格设计天团',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     project: {
       name: '六月迭代',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     template1: '在',
-    template2: '新建项目',
+    template2: '新建项目'
   },
   {
     id: 'trend-3',
     updatedAt: '几秒前',
     user: {
       name: '林东东',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png'
     },
     group: {
       name: '中二少女团',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     project: {
       name: '六月迭代',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     template1: '在',
-    template2: '新建项目',
+    template2: '新建项目'
   },
   {
     id: 'trend-4',
     updatedAt: '几秒前',
     user: {
       name: '周星星',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png'
     },
     group: {
       name: '5 月日常迭代',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     template1: '将',
-    template2: '更新至已发布状态',
+    template2: '更新至已发布状态'
   },
   {
     id: 'trend-5',
     updatedAt: '几秒前',
     user: {
       name: '朱偏右',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png'
     },
     group: {
       name: '工程效能',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     project: {
       name: '留言',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     template1: '在',
-    template2: '发布了',
+    template2: '发布了'
   },
   {
     id: 'trend-6',
     updatedAt: '几秒前',
     user: {
       name: '乐哥',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png'
     },
     group: {
       name: '程序员日常',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     project: {
       name: '品牌迭代',
-      link: 'http://github.com/',
+      link: 'http://github.com/'
     },
     template1: '在',
-    template2: '新建项目',
-  },
+    template2: '新建项目'
+  }
 ]
 
 const radarContainer = ref()
@@ -191,78 +191,78 @@ const radarData = [
   {
     name: '个人',
     label: '引用',
-    value: 10,
+    value: 10
   },
   {
     name: '个人',
     label: '口碑',
-    value: 8,
+    value: 8
   },
   {
     name: '个人',
     label: '产量',
-    value: 4,
+    value: 4
   },
   {
     name: '个人',
     label: '贡献',
-    value: 5,
+    value: 5
   },
   {
     name: '个人',
     label: '热度',
-    value: 7,
+    value: 7
   },
   {
     name: '团队',
     label: '引用',
-    value: 3,
+    value: 3
   },
   {
     name: '团队',
     label: '口碑',
-    value: 9,
+    value: 9
   },
   {
     name: '团队',
     label: '产量',
-    value: 6,
+    value: 6
   },
   {
     name: '团队',
     label: '贡献',
-    value: 3,
+    value: 3
   },
   {
     name: '团队',
     label: '热度',
-    value: 1,
+    value: 1
   },
   {
     name: '部门',
     label: '引用',
-    value: 4,
+    value: 4
   },
   {
     name: '部门',
     label: '口碑',
-    value: 1,
+    value: 1
   },
   {
     name: '部门',
     label: '产量',
-    value: 6,
+    value: 6
   },
   {
     name: '部门',
     label: '贡献',
-    value: 5,
+    value: 5
   },
   {
     name: '部门',
     label: '热度',
-    value: 7,
-  },
+    value: 7
+  }
 ]
 let radar: Radar
 onMounted(() => {
@@ -272,12 +272,12 @@ onMounted(() => {
     yField: 'value',
     seriesField: 'name',
     point: {
-      size: 4,
+      size: 4
     },
     legend: {
       layout: 'horizontal',
-      position: 'bottom',
-    },
+      position: 'bottom'
+    }
   })
   radar.render()
 })

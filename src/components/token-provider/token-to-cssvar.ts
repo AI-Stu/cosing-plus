@@ -23,7 +23,7 @@ export function registerTokenToCSSVar(token: GlobalToken) {
   if (canUseDom()) {
     updateCSS(
       `:root {${cssList.join('\n')}}`,
-      `${dynamicStyleMark}-dynamic-theme`,
+      `${dynamicStyleMark}-dynamic-theme`
     )
   }
 }

@@ -11,18 +11,18 @@ const data = reactive<DataItem[]>([
   {
     title: t('account.settings.message.title1'),
     desc: t('account.settings.message.desc1'),
-    checked: true,
+    checked: true
   },
   {
     title: t('account.settings.message.title2'),
     desc: t('account.settings.message.desc2'),
-    checked: true,
+    checked: true
   },
   {
     title: t('account.settings.message.title3'),
     desc: t('account.settings.message.desc3'),
-    checked: true,
-  },
+    checked: true
+  }
 ])
 </script>
 

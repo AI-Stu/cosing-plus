@@ -2,7 +2,7 @@
 import type { FormInstance } from 'ant-design-vue'
 
 defineOptions({
-  name: 'BasicForm',
+  name: 'BasicForm'
 })
 
 const formRef = ref<FormInstance>()
@@ -23,7 +23,7 @@ const formState = reactive<Record<string, any>>({
   client: '',
   invites: '',
   weight: 0,
-  target: 1,
+  target: 1
 })
 const { t } = useI18n()
 </script>

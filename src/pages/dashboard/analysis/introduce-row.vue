@@ -8,8 +8,8 @@ import Trend from '~/pages/dashboard/analysis/trend.vue'
 defineProps({
   loading: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 function convertNumber(number: number) {
@@ -22,7 +22,7 @@ const topColResponsiveProps = {
   md: 12,
   lg: 12,
   xl: 6,
-  style: { marginBottom: '24px' },
+  style: { marginBottom: '24px' }
 }
 
 const tinyAreaContainer = ref()
@@ -42,11 +42,11 @@ onMounted(() => {
     smooth: true,
     autoFit: true,
     areaStyle: {
-      fill: 'l(270) 0:#ffffff 0.5:#d4bcf2 1:#975FE4',
+      fill: 'l(270) 0:#ffffff 0.5:#d4bcf2 1:#975FE4'
     },
     line: {
-      color: '#975FE4',
-    },
+      color: '#975FE4'
+    }
   })
 
   tinyArea.value?.render()
@@ -54,7 +54,7 @@ onMounted(() => {
   tinyColumn.value = new TinyColumn(tinyColumnContainer.value, {
     height: 46,
     autoFit: true,
-    data: visitData,
+    data: visitData
   })
   tinyColumn.value?.render()
 
@@ -63,7 +63,7 @@ onMounted(() => {
     autoFit: true,
     percent: 0.78,
     barWidthRatio: 0.2,
-    color: '#13C2C2',
+    color: '#13C2C2'
   })
   progress.value?.render()
 })

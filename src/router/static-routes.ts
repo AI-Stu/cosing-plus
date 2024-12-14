@@ -7,16 +7,16 @@ export default [
     path: '/login',
     component: () => import('~/pages/common/login.vue'),
     meta: {
-      title: '登录',
-    },
+      title: '登录'
+    }
   },
   {
     path: '/401',
     name: 'Error401',
     component: () => import('~/pages/exception/401.vue'),
     meta: {
-      title: '授权已过期',
-    },
+      title: '授权已过期'
+    }
   },
   {
     path: '/common',
@@ -33,18 +33,18 @@ export default [
           {
             path: '/redirect/:path(.*)',
             name: 'RedirectPath',
-            component: () => import('~/pages/common/redirect.vue'),
-          },
-        ],
-      },
+            component: () => import('~/pages/common/redirect.vue')
+          }
+        ]
+      }
 
-    ],
+    ]
   },
   {
     path: '/:pathMatch(.*)',
     meta: {
-      title: '找不到页面',
+      title: '找不到页面'
     },
-    component: () => import('~/pages/exception/error.vue'),
-  },
+    component: () => import('~/pages/exception/error.vue')
+  }
 ] as RouteRecordRaw[]

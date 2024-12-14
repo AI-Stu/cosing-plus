@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineOptions({
-  name: 'BasicProfile',
+  name: 'BasicProfile'
 })
 const { t } = useI18n()
 </script>

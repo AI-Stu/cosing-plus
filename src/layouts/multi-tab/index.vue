@@ -3,7 +3,7 @@ import type { CSSProperties } from 'vue'
 import {
   CloseOutlined,
   MoreOutlined,
-  ReloadOutlined,
+  ReloadOutlined
 } from '@ant-design/icons-vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import { listenerRouteChange, removeRouteListener } from '~@/utils/route-listener'
@@ -13,7 +13,7 @@ const multiTabStore = useMultiTab()
 const { list, activeKey } = storeToRefs(multiTabStore)
 const { layoutSetting } = storeToRefs(useAppStore())
 const {
-  layout,
+  layout
 } = useLayoutState()
 const tabStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {}

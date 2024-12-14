@@ -2,22 +2,22 @@
 const props = defineProps({
   loading: {
     type: Boolean,
-    default: false,
+    default: false
   },
   bordered: {
     type: Boolean,
-    default: false,
+    default: false
   },
   title: {
     type: String,
-    default: '',
+    default: ''
   },
   total: {
-    type: Number,
+    type: Number
   },
   contentHeight: {
-    type: Number,
-  },
+    type: Number
+  }
 })
 </script>
 

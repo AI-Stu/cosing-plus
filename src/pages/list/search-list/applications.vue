@@ -27,19 +27,19 @@ const list = [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
         name: '曲丽丽',
-        id: 'member1',
+        id: 'member1'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
         name: '王昭君',
-        id: 'member2',
+        id: 'member2'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
         name: '董娜娜',
-        id: 'member3',
-      },
-    ],
+        id: 'member3'
+      }
+    ]
   },
   {
     id: 'fake-list-1',
@@ -65,19 +65,19 @@ const list = [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
         name: '曲丽丽',
-        id: 'member1',
+        id: 'member1'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
         name: '王昭君',
-        id: 'member2',
+        id: 'member2'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
         name: '董娜娜',
-        id: 'member3',
-      },
-    ],
+        id: 'member3'
+      }
+    ]
   },
   {
     id: 'fake-list-2',
@@ -103,19 +103,19 @@ const list = [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
         name: '曲丽丽',
-        id: 'member1',
+        id: 'member1'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
         name: '王昭君',
-        id: 'member2',
+        id: 'member2'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
         name: '董娜娜',
-        id: 'member3',
-      },
-    ],
+        id: 'member3'
+      }
+    ]
   },
   {
     id: 'fake-list-3',
@@ -141,19 +141,19 @@ const list = [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
         name: '曲丽丽',
-        id: 'member1',
+        id: 'member1'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
         name: '王昭君',
-        id: 'member2',
+        id: 'member2'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
         name: '董娜娜',
-        id: 'member3',
-      },
-    ],
+        id: 'member3'
+      }
+    ]
   },
   {
     id: 'fake-list-4',
@@ -179,19 +179,19 @@ const list = [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
         name: '曲丽丽',
-        id: 'member1',
+        id: 'member1'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
         name: '王昭君',
-        id: 'member2',
+        id: 'member2'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
         name: '董娜娜',
-        id: 'member3',
-      },
-    ],
+        id: 'member3'
+      }
+    ]
   },
   {
     id: 'fake-list-5',
@@ -217,19 +217,19 @@ const list = [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
         name: '曲丽丽',
-        id: 'member1',
+        id: 'member1'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
         name: '王昭君',
-        id: 'member2',
+        id: 'member2'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
         name: '董娜娜',
-        id: 'member3',
-      },
-    ],
+        id: 'member3'
+      }
+    ]
   },
   {
     id: 'fake-list-6',
@@ -255,19 +255,19 @@ const list = [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
         name: '曲丽丽',
-        id: 'member1',
+        id: 'member1'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
         name: '王昭君',
-        id: 'member2',
+        id: 'member2'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
         name: '董娜娜',
-        id: 'member3',
-      },
-    ],
+        id: 'member3'
+      }
+    ]
   },
   {
     id: 'fake-list-7',
@@ -293,20 +293,20 @@ const list = [
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',
         name: '曲丽丽',
-        id: 'member1',
+        id: 'member1'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png',
         name: '王昭君',
-        id: 'member2',
+        id: 'member2'
       },
       {
         avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png',
         name: '董娜娜',
-        id: 'member3',
-      },
-    ],
-  },
+        id: 'member3'
+      }
+    ]
+  }
 ]
 </script>
 

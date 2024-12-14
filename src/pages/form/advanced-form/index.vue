@@ -3,7 +3,7 @@ import RepositoryForm from './repository-form.vue'
 import TaskForm from './task-form.vue'
 
 defineOptions({
-  name: 'AdvancedForm',
+  name: 'AdvancedForm'
 })
 
 const repositoryFormRef = ref()
@@ -25,27 +25,27 @@ const state = reactive({
       dataIndex: 'name',
       key: 'name',
       width: '20%',
-      scopedSlots: { customRender: 'name' },
+      scopedSlots: { customRender: 'name' }
     },
     {
       title: '工号',
       dataIndex: 'workId',
       key: 'workId',
       width: '20%',
-      scopedSlots: { customRender: 'workId' },
+      scopedSlots: { customRender: 'workId' }
     },
     {
       title: '所属部门',
       dataIndex: 'department',
       key: 'department',
       width: '40%',
-      scopedSlots: { customRender: 'department' },
+      scopedSlots: { customRender: 'department' }
     },
     {
       title: '操作',
       key: 'action',
-      scopedSlots: { customRender: 'operation' },
-    },
+      scopedSlots: { customRender: 'operation' }
+    }
   ],
   data: [
     {
@@ -53,23 +53,23 @@ const state = reactive({
       name: '员工1',
       workId: '001',
       editable: false,
-      department: '行政部',
+      department: '行政部'
     },
     {
       key: '2',
       name: '员工2',
       workId: '002',
       editable: false,
-      department: 'IT部',
+      department: 'IT部'
     },
     {
       key: '3',
       name: '员工3',
       workId: '003',
       editable: false,
-      department: '财务部',
-    },
-  ] as any,
+      department: '财务部'
+    }
+  ] as any
 })
 function handleAdd() {
   const key = state.data.length === 0 ? '1' : (Number.parseInt(state.data[state.data.length - 1].key) + 1).toString()
@@ -79,7 +79,7 @@ function handleAdd() {
     // 如果小于10，前面补00，如001,如果小于100，大于10，前面补0，如010
     workId: Number.parseInt(key) < 10 ? `00${key}` : Number.parseInt(key) < 100 ? `0${key}` : key,
     editable: true,
-    department: ['行政部', 'IT部', '财务部'][Math.floor(Math.random() * 3)],
+    department: ['行政部', 'IT部', '财务部'][Math.floor(Math.random() * 3)]
   }
   state.data.push(newData)
 }

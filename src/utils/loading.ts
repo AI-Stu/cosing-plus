@@ -3,7 +3,7 @@ import { LoadingEnum } from '~#/loading-enum'
 
 const loading = useLoading({
   spin: LoadingEnum.CHASE,
-  minTime: 500,
+  minTime: 500
 })
 
 export class AxiosLoading {

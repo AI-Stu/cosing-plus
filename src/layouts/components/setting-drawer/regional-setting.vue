@@ -22,50 +22,50 @@ const list = computed(() => ([
     title: '动画',
     key: 'animationName',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '水印',
     key: 'watermark',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '顶栏',
     key: 'header',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '页脚',
     key: 'footer',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '菜单',
     key: 'menu',
     disabled: props.layout === 'top',
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '菜单头',
     key: 'menuHeader',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '多页签',
     key: 'multiTab',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: '固定多页签',
     key: 'multiTabFixed',
     disabled: false,
-    disabledReason: '多页签开启后功能正常使用',
-  },
+    disabledReason: '多页签开启后功能正常使用'
+  }
 ]))
 
 function handleChangeSetting(key: string, value: any) {

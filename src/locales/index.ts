@@ -23,12 +23,12 @@ async function createI18nOptions(): Promise<I18nOptions> {
     locale: locale.value,
     fallbackLocale: 'zh-CN',
     messages: {
-      [locale.value]: defaultLocal.default,
+      [locale.value]: defaultLocal.default
     },
     sync: true,
     silentTranslationWarn: true,
     missingWarn: false,
-    silentFallbackWarn: true,
+    silentFallbackWarn: true
   }
 }
 

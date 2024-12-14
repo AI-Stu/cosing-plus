@@ -12,23 +12,23 @@ const items = computed(() => {
     {
       key: '1',
       label: seti18n('1'),
-      title: 'Navigation One',
+      title: 'Navigation One'
     },
     {
       key: '2',
       label: seti18n('2'),
-      title: 'Navigation Two',
+      title: 'Navigation Two'
     },
     {
       key: '3',
       label: seti18n('3'),
-      title: 'Navigation Two',
+      title: 'Navigation Two'
     },
     {
       key: '4',
       label: seti18n('4'),
-      title: 'Navigation Two',
-    },
+      title: 'Navigation Two'
+    }
   ]
 })
 

@@ -9,7 +9,7 @@ const inputRef = ref()
 const state = reactive({
   tags: ['专注', '坚持', '很有想法', '执行力强', '乐观'],
   inputVisible: false,
-  inputValue: '',
+  inputValue: ''
 })
 
 function handleClose(removedTag: string) {
@@ -33,7 +33,7 @@ function handleInputConfirm() {
   Object.assign(state, {
     tags,
     inputVisible: false,
-    inputValue: '',
+    inputValue: ''
   })
 }
 
@@ -45,20 +45,20 @@ interface ITeamDataItem {
 const teamData = ref<ITeamDataItem[]>([
   {
     name: 'Cosing Plus',
-    link: '/logo.svg',
+    link: '/logo.svg'
   },
   {
     name: '学习小组',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png'
   },
   {
     name: '工作小组',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png'
   },
   {
     name: '设计团队',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png',
-  },
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png'
+  }
 ])
 </script>
 

@@ -12,14 +12,14 @@ const list = computed(() => ([
     title: 'weakmode',
     key: 'colorWeak',
     disabled: false,
-    disabledReason: '',
+    disabledReason: ''
   },
   {
     title: 'graymode',
     key: 'colorGray',
     disabled: false,
-    disabledReason: '',
-  },
+    disabledReason: ''
+  }
 ]))
 function handleToggleChange(key: string, value: CheckedType) {
   emit('changeSetting', key, value)

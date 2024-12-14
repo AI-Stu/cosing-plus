@@ -22,29 +22,29 @@ const formState: UnwrapRef<FormState> = reactive({
   region: undefined,
   desc: '',
   address: '',
-  phoneNumber: '',
+  phoneNumber: ''
 })
 const rules: any = computed(() => {
   return {
     name: [
-      { required: true, message: t('account.settings.form-rule-name'), trigger: 'change' },
+      { required: true, message: t('account.settings.form-rule-name'), trigger: 'change' }
     ],
 
     phoneNumber: [
-      { required: true, message: t('account.settings.form-rule-phoneNumber'), trigger: 'change' },
+      { required: true, message: t('account.settings.form-rule-phoneNumber'), trigger: 'change' }
     ],
     address: [
-      { required: true, message: t('account.settings.form-rule-address'), trigger: 'change' },
+      { required: true, message: t('account.settings.form-rule-address'), trigger: 'change' }
     ],
     region: [
-      { required: true, message: t('account.settings.form-rule-region'), trigger: 'change' },
+      { required: true, message: t('account.settings.form-rule-region'), trigger: 'change' }
     ],
     eamil: [
-      { required: true, message: t('account.settings.form-rule-email'), trigger: 'change' },
+      { required: true, message: t('account.settings.form-rule-email'), trigger: 'change' }
     ],
     desc: [
-      { required: true, message: t('account.settings.form-rule-desc'), trigger: 'blur' },
-    ],
+      { required: true, message: t('account.settings.form-rule-desc'), trigger: 'blur' }
+    ]
   }
 })
 

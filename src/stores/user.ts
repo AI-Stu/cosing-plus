@@ -29,7 +29,7 @@ export const useUserStore = defineStore('user', () => {
 
     routerData.value = {
       ...rootRoute,
-      children: generateFlatRoutes(routeData),
+      children: generateFlatRoutes(routeData)
     }
     return routerData.value
   }
@@ -64,6 +64,6 @@ export const useUserStore = defineStore('user', () => {
     menuData,
     generateDynamicRoutes,
     avatar,
-    nickname,
+    nickname
   }
 })

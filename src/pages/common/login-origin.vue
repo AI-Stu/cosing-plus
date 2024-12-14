@@ -18,7 +18,7 @@ const loginModel = reactive({
   mobile: undefined,
   code: undefined,
   type: 'account',
-  remember: true,
+  remember: true
 })
 const { t } = useI18nLocale()
 const formRef = shallowRef()
@@ -35,7 +35,7 @@ const { counter, pause, reset, resume, isActive } = useInterval(1000, {
       if (count === resetCounter)
         pause()
     }
-  },
+  }
 })
 async function getCode() {
   codeLoading.value = true
@@ -63,14 +63,14 @@ async function submit() {
     if (loginModel.type === 'account') {
       params = {
         username: loginModel.username,
-        password: loginModel.password,
+        password: loginModel.password
       } as unknown as LoginParams
     }
     else {
       params = {
         mobile: loginModel.mobile,
         code: loginModel.code,
-        type: 'mobile',
+        type: 'mobile'
       } as unknown as LoginMobileParams
     }
     const { data } = await loginApi(params)
@@ -78,13 +78,13 @@ async function submit() {
     notification.success({
       message: '登录成功',
       description: '欢迎回来！',
-      duration: 3,
+      duration: 3
     })
     // 获取当前是否存在重定向的链接，如果存在就走重定向的地址
     const redirect = getQueryParam('redirect', '/')
     router.push({
       path: redirect,
-      replace: true,
+      replace: true
     })
   }
   catch (e) {

@@ -24,7 +24,7 @@ function getActiveData() {
   for (let i = 0; i < 24; i += 1) {
     activeData.value.push({
       x: `${fixedZero(i)}:00`,
-      y: Math.floor(Math.random() * 200) + i * 50,
+      y: Math.floor(Math.random() * 200) + i * 50
     })
     tinyAreaData.value.push(Math.floor(Math.random() * 200) + i * 50)
   }
@@ -47,7 +47,7 @@ onMounted(() => {
     height: 84,
     data: tinyAreaData.value,
     smooth: true,
-    autoFit: true,
+    autoFit: true
   })
   tinyArea.render()
   loopData()

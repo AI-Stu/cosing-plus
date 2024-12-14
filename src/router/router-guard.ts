@@ -17,8 +17,8 @@ router.beforeEach(async (to, _, next) => {
       next({
         path: loginPath,
         query: {
-          redirect: encodeURIComponent(to.fullPath),
-        },
+          redirect: encodeURIComponent(to.fullPath)
+        }
       })
       return
     }
@@ -33,7 +33,7 @@ router.beforeEach(async (to, _, next) => {
         router.addRoute(currentRoute)
         next({
           ...to,
-          replace: true,
+          replace: true
         })
         return
       }
@@ -41,7 +41,7 @@ router.beforeEach(async (to, _, next) => {
         if (e instanceof AxiosError && e?.response?.status === 401) {
           // 跳转到error页面
           next({
-            path: '/401',
+            path: '/401'
           })
         }
       }
@@ -50,7 +50,7 @@ router.beforeEach(async (to, _, next) => {
       // 如果当前是登录页面就跳转到首页
       if (to.path === loginPath) {
         next({
-          path: '/',
+          path: '/'
         })
         return
       }

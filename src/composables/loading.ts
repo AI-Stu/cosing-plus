@@ -13,7 +13,7 @@ export function useScrollToTop() {
   if (app) {
     setTimeout(() => {
       app.scrollTo({
-        top: 0,
+        top: 0
       })
     }, 300)
   }

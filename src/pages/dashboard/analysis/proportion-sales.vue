@@ -5,8 +5,8 @@ import { Pie } from '@antv/g2plot'
 defineProps({
   loading: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const salesType = ref('all')
@@ -31,15 +31,15 @@ function renderPie(container: any, data: any) {
       type: 'spider',
       formatter: (item) => {
         return `${item.x}: ${item.y.toLocaleString()}`
-      },
+      }
     },
     legend: false,
     interactions: [{ type: 'element-selected' }, { type: 'element-active' }],
     statistic: {
       title: {
-        content: '销售额',
-      },
-    },
+        content: '销售额'
+      }
+    }
   })
   pie.render()
   pies.value.push(pie)
@@ -48,76 +48,76 @@ function renderPie(container: any, data: any) {
 const salesTypeData = [
   {
     x: '家用电器',
-    y: 4544,
+    y: 4544
   },
   {
     x: '食用酒水',
-    y: 3321,
+    y: 3321
   },
   {
     x: '个护健康',
-    y: 3113,
+    y: 3113
   },
   {
     x: '服饰箱包',
-    y: 2341,
+    y: 2341
   },
   {
     x: '母婴产品',
-    y: 1231,
+    y: 1231
   },
   {
     x: '其他',
-    y: 1231,
-  },
+    y: 1231
+  }
 ]
 const salesTypeDataOnline = [
   {
     x: '家用电器',
-    y: 244,
+    y: 244
   },
   {
     x: '食用酒水',
-    y: 321,
+    y: 321
   },
   {
     x: '个护健康',
-    y: 311,
+    y: 311
   },
   {
     x: '服饰箱包',
-    y: 41,
+    y: 41
   },
   {
     x: '母婴产品',
-    y: 121,
+    y: 121
   },
   {
     x: '其他',
-    y: 111,
-  },
+    y: 111
+  }
 ]
 const salesTypeDataOffline = [
   {
     x: '家用电器',
-    y: 99,
+    y: 99
   },
   {
     x: '食用酒水',
-    y: 188,
+    y: 188
   },
   {
     x: '个护健康',
-    y: 344,
+    y: 344
   },
   {
     x: '服饰箱包',
-    y: 255,
+    y: 255
   },
   {
     x: '其他',
-    y: 65,
-  },
+    y: 65
+  }
 ]
 
 onMounted(() => {

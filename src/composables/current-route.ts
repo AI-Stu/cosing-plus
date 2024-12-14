@@ -10,6 +10,6 @@ export function useCurrentRoute() {
   // 通过校验判断是否在menuItem中
   console.log('currentPath', currentPath, pathsKeys)
   return {
-    currentRoute,
+    currentRoute
   }
 }

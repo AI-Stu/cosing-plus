@@ -9,7 +9,7 @@ const prefixCls = shallowRef('ant-pro-global-header')
 const cls = computed(() => ({
   [prefixCls.value]: true,
   [`${prefixCls.value}-layout-${layout.value}`]: !!layout.value,
-  [`${prefixCls.value}-inverted`]: theme.value === 'inverted' && layout.value === 'top',
+  [`${prefixCls.value}-inverted`]: theme.value === 'inverted' && layout.value === 'top'
 }))
 </script>
 

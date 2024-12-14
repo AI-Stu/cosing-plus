@@ -4,28 +4,28 @@ import { PlusOutlined } from '@ant-design/icons-vue'
 const links = [
   {
     title: '操作一',
-    href: '',
+    href: ''
   },
   {
     title: '操作二',
-    href: '',
+    href: ''
   },
   {
     title: '操作三',
-    href: '',
+    href: ''
   },
   {
     title: '操作四',
-    href: '',
+    href: ''
   },
   {
     title: '操作五',
-    href: '',
+    href: ''
   },
   {
     title: '操作六',
-    href: '',
-  },
+    href: ''
+  }
 ]
 </script>
 

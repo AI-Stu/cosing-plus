@@ -19,7 +19,7 @@ export interface RequestConfigExtra {
 const instance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API ?? '/',
   timeout: 60000,
-  headers: { 'Content-Type': ContentTypeEnum.JSON },
+  headers: { 'Content-Type': ContentTypeEnum.JSON }
 })
 const axiosLoading = new AxiosLoading()
 async function requestHandler(config: InternalAxiosRequestConfig & RequestConfigExtra): Promise<InternalAxiosRequestConfig> {
@@ -60,7 +60,7 @@ function errorHandler(error: AxiosError): Promise<any> {
       notification?.error({
         message: '401',
         description: data?.msg || statusText,
-        duration: 3,
+        duration: 3
       })
       /**
        * 这里处理清空用户信息和token的逻辑，后续扩展
@@ -70,8 +70,8 @@ function errorHandler(error: AxiosError): Promise<any> {
         .push({
           path: '/login',
           query: {
-            redirect: router.currentRoute.value.fullPath,
-          },
+            redirect: router.currentRoute.value.fullPath
+          }
         })
         .then(() => {})
     }
@@ -79,21 +79,21 @@ function errorHandler(error: AxiosError): Promise<any> {
       notification?.error({
         message: '403',
         description: data?.msg || statusText,
-        duration: 3,
+        duration: 3
       })
     }
     else if (status === 500) {
       notification?.error({
         message: '500',
         description: data?.msg || statusText,
-        duration: 3,
+        duration: 3
       })
     }
     else {
       notification?.error({
         message: '服务错误',
         description: data?.msg || statusText,
-        duration: 3,
+        duration: 3
       })
     }
   }
@@ -128,7 +128,7 @@ export function useGet< R = any, T = any>(url: string, params?: T, config?: Axio
     url,
     params,
     method: RequestEnum.GET,
-    ...config,
+    ...config
   }
   return instancePromise< R, T >(options)
 }
@@ -138,7 +138,7 @@ export function usePost< R = any, T = any>(url: string, data?: T, config?: Axios
     url,
     data,
     method: RequestEnum.POST,
-    ...config,
+    ...config
   }
   return instancePromise< R, T >(options)
 }
@@ -148,7 +148,7 @@ export function usePut< R = any, T = any>(url: string, data?: T, config?: AxiosR
     url,
     data,
     method: RequestEnum.PUT,
-    ...config,
+    ...config
   }
   return instancePromise<R, T>(options)
 }
@@ -158,7 +158,7 @@ export function useDelete< R = any, T = any>(url: string, data?: T, config?: Axi
     url,
     data,
     method: RequestEnum.DELETE,
-    ...config,
+    ...config
   }
   return instancePromise<R, T>(options)
 }

@@ -42,5 +42,5 @@ export async function deleteApi(id: string | number) {
 export type{
   ConsultTableParams,
   STATUS,
-  ConsultTableModel,
+  ConsultTableModel
 }

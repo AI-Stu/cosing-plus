@@ -18,7 +18,7 @@ const loadingDirective: Directive = {
       text,
       textColor,
       background,
-      spin,
+      spin
     })
     el.instance = instance
     if (bind.value)
@@ -30,7 +30,7 @@ const loadingDirective: Directive = {
       return
     if (bind.value) {
       instance.open(
-        el.getAttribute('loading-full') === 'true' ? document.body : el,
+        el.getAttribute('loading-full') === 'true' ? document.body : el
       )
     }
     else {
@@ -39,7 +39,7 @@ const loadingDirective: Directive = {
   },
   unmounted(el) {
     el?.instance?.close()
-  },
+  }
 }
 
 export function setupLoadingDirective(app: App) {

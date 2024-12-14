@@ -2,7 +2,7 @@
 import { CopyrightCircleOutlined } from '@ant-design/icons-vue'
 
 defineOptions({
-  name: 'GlobalFooter',
+  name: 'GlobalFooter'
 })
 
 defineProps<{

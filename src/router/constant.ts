@@ -8,5 +8,5 @@ export const rootRoute: RouteRecordRaw = {
   name: 'rootPath',
   redirect: ROOT_ROUTE_REDIRECT_PATH,
   component: Layout,
-  children: [],
+  children: []
 }

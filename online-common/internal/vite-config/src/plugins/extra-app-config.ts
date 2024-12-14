@@ -3,7 +3,7 @@ import type { PluginOption } from 'vite'
 import {
   colors,
   generatorContentHash,
-  readPackageJSON,
+  readPackageJSON
 } from '@cosing/node-utils'
 
 import { loadEnv } from '../utils/env'
@@ -13,7 +13,7 @@ interface PluginOptions {
   root: string
 }
 
-const GLOBAL_CONFIG_FILE_NAME = '_app.config.js'
+const GLOB_CONFIG_FILE_NAME = '_app.config.js'
 const VBEN_ADMIN_PRO_APP_CONF = '_VBEN_ADMIN_PRO_APP_CONF_'
 
 /**
@@ -23,7 +23,7 @@ const VBEN_ADMIN_PRO_APP_CONF = '_VBEN_ADMIN_PRO_APP_CONF_'
 
 async function viteExtraAppConfigPlugin({
   isBuild,
-  root,
+  root
 }: PluginOptions): Promise<PluginOption | undefined> {
   let publicPath: string
   let source: string
@@ -42,9 +42,9 @@ async function viteExtraAppConfigPlugin({
     async generateBundle() {
       try {
         this.emitFile({
-          fileName: GLOBAL_CONFIG_FILE_NAME,
+          fileName: GLOB_CONFIG_FILE_NAME,
           source,
-          type: 'asset',
+          type: 'asset'
         })
 
         console.log(colors.cyan(`✨configuration file is build successfully!`))
@@ -52,8 +52,8 @@ async function viteExtraAppConfigPlugin({
       catch (error) {
         console.log(
           colors.red(
-            `configuration file configuration file failed to package:\n${error}`,
-          ),
+            `configuration file configuration file failed to package:\n${error}`
+          )
         )
       }
     },
@@ -61,13 +61,13 @@ async function viteExtraAppConfigPlugin({
     async transformIndexHtml(html) {
       const hash = `v=${version}-${generatorContentHash(source, 8)}`
 
-      const appConfigSrc = `${publicPath}${GLOBAL_CONFIG_FILE_NAME}?${hash}`
+      const appConfigSrc = `${publicPath}${GLOB_CONFIG_FILE_NAME}?${hash}`
 
       return {
         html,
-        tags: [{ attrs: { src: appConfigSrc }, tag: 'script' }],
+        tags: [{ attrs: { src: appConfigSrc }, tag: 'script' }]
       }
-    },
+    }
   }
 }
 

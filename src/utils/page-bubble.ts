@@ -14,7 +14,7 @@ const bubble: {
   ctx: null,
   circles: [],
   animate: true,
-  requestId: null,
+  requestId: null
 }
 
 export const init = function (canvasInstance: HTMLCanvasElement) {
@@ -69,7 +69,7 @@ class Circle {
   constructor() {
     this.pos = {
       x: Math.random() * bubble.width,
-      y: bubble.height + Math.random() * 100,
+      y: bubble.height + Math.random() * 100
     }
     this.alpha = 0.1 + Math.random() * 0.3
     this.scale = 0.1 + Math.random() * 0.3
@@ -87,7 +87,7 @@ class Circle {
         this.scale * 10,
         0,
         2 * Math.PI,
-        false,
+        false
       )
       bubble.ctx!.fillStyle = `rgba(${r},${g},${b},${this.alpha})`
       bubble.ctx!.fill()
@@ -108,5 +108,5 @@ export function removeListeners() {
 
 export default {
   init,
-  removeListeners,
+  removeListeners
 }

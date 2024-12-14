@@ -2,12 +2,12 @@
 defineProps({
   label: {
     type: String,
-    default: '',
+    default: ''
   },
   value: {
     type: String,
-    default: '',
-  },
+    default: ''
+  }
 })
 </script>
 

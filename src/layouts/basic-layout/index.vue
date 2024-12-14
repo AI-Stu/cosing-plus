@@ -9,7 +9,7 @@ import { proLayoutProps } from './typing'
 import { useLayoutProvider } from './context'
 
 defineOptions({
-  name: 'BasicLayout',
+  name: 'BasicLayout'
 })
 const props = defineProps(proLayoutProps)
 const emit = defineEmits(['update:collapsed'])
@@ -25,7 +25,7 @@ function handleCollapsed(collapsed: boolean) {
 
 // 依赖注入所有的配置项，对属性进行控制，减少传值
 const { layout, contentWidth } = useLayoutProvider(props, {
-  handleCollapsed,
+  handleCollapsed
 })
 const contentCls = computed(() => {
   if (contentWidth.value === 'Fixed')

@@ -11,16 +11,16 @@ import VirtualList from '@/components/virtual-list/index.vue'
 const workData = ref([
   {
     title: '我的待办',
-    content: '8个任务',
+    content: '8个任务'
   },
   {
     title: '本周任务平均处理时间',
-    content: '32分钟',
+    content: '32分钟'
   },
   {
     title: '本周完成任务数',
-    content: '24个任务',
-  },
+    content: '24个任务'
+  }
 ])
 
 const radioValue = ref('a')
@@ -37,7 +37,7 @@ const pagination = ref({
   pageSize: 5,
   pageSizeOptions: ['10', '20', '30', '40', '50'],
   showQuickJumper: true,
-  total: 0,
+  total: 0
 })
 
 /*
@@ -63,7 +63,7 @@ function showConfirm(index: number) {
     onOk() {
       dataSource.value.splice(index, 1)
     },
-    class: 'test',
+    class: 'test'
   })
 }
 
@@ -83,7 +83,7 @@ const formState = reactive<FormState>({
   start: '',
   owner: '清风不问烟雨',
   description: '',
-  index: 0,
+  index: 0
 })
 
 const openModalValue = ref(false)
@@ -111,12 +111,12 @@ function countDown() {
   let secondsToGo = 2
   const modal = Modal.success({
     title: '操作成功',
-    content: `本窗口将在${secondsToGo}后自动关闭`,
+    content: `本窗口将在${secondsToGo}后自动关闭`
   })
   const interval = setInterval(() => {
     secondsToGo -= 1
     modal.update({
-      content: `本窗口将在${secondsToGo}后自动关闭`,
+      content: `本窗口将在${secondsToGo}后自动关闭`
     })
   }, 1000)
   setTimeout(() => {
@@ -140,7 +140,7 @@ function handleOk() {
     const newItem = {
       title: formState.title,
       content: formState.description,
-      start: formState.start.format('YYYY-MM-DD HH:mm'),
+      start: formState.start.format('YYYY-MM-DD HH:mm')
     }
     dataSource.value.splice(0, 0, newItem)
   }

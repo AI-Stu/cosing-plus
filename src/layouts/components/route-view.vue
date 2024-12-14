@@ -2,7 +2,7 @@
 import { ParentCompConsumer } from '@/layouts/basic-layout/parent-comp-consumer'
 
 defineOptions({
-  name: 'CustomRouteView',
+  name: 'CustomRouteView'
 })
 
 const appStore = useAppStore()

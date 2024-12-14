@@ -73,11 +73,11 @@ interface ConditionPlugin {
 
 interface CommonPluginOptions {
   /** 是否开启devtools */
-  devtools?: boolean
+  isDevTools?: boolean
   /** 环境变量 */
   env?: Record<string, any>
   /** 是否注入metadata */
-  injectMetadata?: boolean
+  isInjectMetadata?: boolean
   /** 是否构建模式 */
   isBuild?: boolean
   /** 构建模式 */
@@ -160,5 +160,5 @@ export type {
   ImportmapPluginOptions,
   LibraryPluginOptions,
   NitroMockPluginOptions,
-  PrintPluginOptions,
+  PrintPluginOptions
 }

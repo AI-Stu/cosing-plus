@@ -2,7 +2,7 @@
 import { useLayoutState } from '~/layouts/basic-layout/context.ts'
 
 defineOptions({
-  name: 'FooterToolBar',
+  name: 'FooterToolBar'
 })
 const prefixCls = shallowRef('ant-pro-footer-toolbar')
 const { siderWidth: layoutSiderWidth, collapsed, collapsedWidth, isMobile, layout } = useLayoutState()

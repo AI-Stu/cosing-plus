@@ -35,6 +35,6 @@ export function useCompConsumer() {
   }
 
   return {
-    getComp,
+    getComp
   }
 }

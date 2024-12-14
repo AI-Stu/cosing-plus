@@ -6,7 +6,7 @@ interface Prop {
 }
 
 const props = withDefaults(defineProps<Prop>(), {
-  itemHeight: 80,
+  itemHeight: 80
 })
 
 const transformY = ref<number>()

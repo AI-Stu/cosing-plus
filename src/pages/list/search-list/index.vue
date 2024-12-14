@@ -2,7 +2,7 @@
 import SearchListContainer from './components/search-list-container.vue'
 
 defineOptions({
-  name: 'SearchList',
+  name: 'SearchList'
 })
 </script>
 

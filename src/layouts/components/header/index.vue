@@ -13,14 +13,14 @@ const {
   siderWidth,
   menu,
   splitMenus,
-  selectedMenus,
+  selectedMenus
 } = useLayoutState()
 
 const headerStyle = computed<CSSProperties>(() => {
   const defaultStyle: CSSProperties = {
     height: `${headerHeight.value}px`,
     lineHeight: `${headerHeight.value}px`,
-    paddingInline: 0,
+    paddingInline: 0
   }
   if (fixedHeader.value || layout.value === 'mix') {
     defaultStyle.zIndex = 100
@@ -53,7 +53,7 @@ const cls = computed(() => {
 })
 const needFixed = computed(
   () =>
-    fixedHeader.value || (layout.value === 'mix' && (splitMenus.value ? (selectedMenus.value ?? []).length > 0 : true)),
+    fixedHeader.value || (layout.value === 'mix' && (splitMenus.value ? (selectedMenus.value ?? []).length > 0 : true))
 )
 </script>
 

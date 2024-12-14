@@ -5,7 +5,7 @@ import AsyncIcon from './async-icon.vue'
 import type { MenuDataItem } from '~@/layouts/basic-layout/typing'
 
 withDefaults(defineProps<{ item: MenuDataItem, link?: boolean }>(), {
-  link: true,
+  link: true
 })
 function renderTitle(title: VNodeChild | (() => VNodeChild)) {
   if (isFunction(title))

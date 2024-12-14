@@ -6,15 +6,15 @@ import dayjs from 'dayjs'
 defineProps({
   loading: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const rankingListData: { title: string, total: number }[] = []
 for (let i = 0; i < 7; i += 1) {
   rankingListData.push({
     title: `工专路 ${i} 号店`,
-    total: 323234,
+    total: 323234
   })
 }
 
@@ -64,52 +64,52 @@ function convertNumber(number: number) {
 const salesData = [
   {
     x: '1月',
-    y: 809,
+    y: 809
   },
   {
     x: '2月',
-    y: 766,
+    y: 766
   },
   {
     x: '3月',
-    y: 585,
+    y: 585
   },
   {
     x: '4月',
-    y: 763,
+    y: 763
   },
   {
     x: '5月',
-    y: 853,
+    y: 853
   },
   {
     x: '6月',
-    y: 898,
+    y: 898
   },
   {
     x: '7月',
-    y: 1096,
+    y: 1096
   },
   {
     x: '8月',
-    y: 452,
+    y: 452
   },
   {
     x: '9月',
-    y: 244,
+    y: 244
   },
   {
     x: '10月',
-    y: 838,
+    y: 838
   },
   {
     x: '11月',
-    y: 673,
+    y: 673
   },
   {
     x: '12月',
-    y: 431,
-  },
+    y: 431
+  }
 ]
 
 const columnPlotContainer1 = ref()
@@ -128,14 +128,14 @@ function changTab(activeKey: Key) {
         xAxis: {
           label: {
             autoHide: true,
-            autoRotate: false,
-          },
+            autoRotate: false
+          }
         },
         meta: {
           y: {
-            alias: '销售量',
-          },
-        },
+            alias: '销售量'
+          }
+        }
       }).render()
       renderOnce = true
     })
@@ -152,14 +152,14 @@ onMounted(() => {
     xAxis: {
       label: {
         autoHide: true,
-        autoRotate: false,
-      },
+        autoRotate: false
+      }
     },
     meta: {
       y: {
-        alias: '销售量',
-      },
-    },
+        alias: '销售量'
+      }
+    }
   })
   column.value?.render()
 })

@@ -46,6 +46,6 @@ export function useLoading(config: LoadingType = {}) {
 
   return {
     open,
-    close,
+    close
   }
 }

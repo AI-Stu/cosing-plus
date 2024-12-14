@@ -8,28 +8,28 @@ export default defineComponent({
   props: {
     text: {
       type: String,
-      default: '正在加载中...',
+      default: '正在加载中...'
     },
     textColor: {
       type: String,
-      default: '#79bbff',
+      default: '#79bbff'
     },
     background: {
       type: String,
-      default: 'rgba(0, 0, 0, .5)',
+      default: 'rgba(0, 0, 0, .5)'
     },
     modal: {
       type: Boolean,
-      default: true,
+      default: true
     },
     spin: {
       type: String as PropType<LoadingEnum>,
-      default: 'chase',
+      default: 'chase'
     },
     full: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   setup(props) {
     const renderBasicLoading = () => {
@@ -53,7 +53,7 @@ export default defineComponent({
         </div>
       )
     }
-  },
+  }
 })
 </script>
 

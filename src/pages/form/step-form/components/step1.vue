@@ -16,7 +16,7 @@ const formState = reactive<FirstFormState>({
   paymentAccount: '',
   collectAccount: 'test@example.com',
   name: 'Kirk Lin',
-  amount: 1000000,
+  amount: 1000000
 })
 async function nextStep() {
   try {

@@ -13,7 +13,7 @@ const cls = computed(() => {
     [`${prefixCls.value}-item`]: true,
     [`${prefixCls.value}-theme-item`]: props.isDark,
     [`${prefixCls.value}-item-${props.theme}`]: !!props.theme,
-    [`${prefixCls.value}-theme-item-${props.theme}`]: props.isDark,
+    [`${prefixCls.value}-theme-item-${props.theme}`]: props.isDark
   }
 })
 

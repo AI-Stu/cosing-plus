@@ -7,7 +7,7 @@ const { isMobile } = useQueryBreakpoints()
 const result = computed(() => {
   return {
     title: t('result.success.title'),
-    description: t('result.success.description'),
+    description: t('result.success.description')
   }
 })
 </script>

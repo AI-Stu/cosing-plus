@@ -10,24 +10,24 @@ const data = computed<DataItem[]>(() => {
   return [
     {
       title: t('account.settings.security.account-password'),
-      desc: t('account.settings.security.account-password-desc'),
+      desc: t('account.settings.security.account-password-desc')
     },
     {
       title: t('account.settings.security.phone'),
-      desc: t('account.settings.security.phone-desc'),
+      desc: t('account.settings.security.phone-desc')
     },
     {
       title: t('account.settings.security-problem'),
-      desc: t('account.settings.security-problem-desc'),
+      desc: t('account.settings.security-problem-desc')
     },
     {
       title: t('account.settings.security.email'),
-      desc: t('account.settings.security.email-desc'),
+      desc: t('account.settings.security.email-desc')
     },
     {
       title: t('account.settings.security.MFA'),
-      desc: t('account.settings.security.MFA-desc'),
-    },
+      desc: t('account.settings.security.MFA-desc')
+    }
   ]
 })
 </script>

@@ -7,7 +7,7 @@ import RouteView from './components/route-view.vue'
 import { animationNameList } from '~@/config/default-setting'
 
 defineOptions({
-  name: 'ProLayout',
+  name: 'ProLayout'
 })
 const appStore = useAppStore()
 const { layoutSetting } = storeToRefs(appStore)
@@ -32,8 +32,8 @@ const layoutProps = computed(() =>
     'layout',
     'footer',
     'contentWidth',
-    'compactAlgorithm',
-  ]),
+    'compactAlgorithm'
+  ])
 )
 </script>
 

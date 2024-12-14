@@ -13,7 +13,6 @@ export enum STATUS {
   RUNNING = '1',
   ONLINE = '2',
   ERROR = '3',
-
 }
 // 默认情况下我们提供从后端加载的逻辑
 export const DYNAMIC_LOAD_WAY = import.meta.env.VITE_APP_LOAD_ROUTE_WAY ?? DynamicLoadEnum.BACKEND

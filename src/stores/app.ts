@@ -41,9 +41,9 @@ export const useAppStore = defineStore('app', () => {
     algorithm: [antdTheme.defaultAlgorithm],
     token: {
       colorBgContainer: '#fff',
-      colorPrimary: layoutSetting.colorPrimary,
+      colorPrimary: layoutSetting.colorPrimary
     },
-    components: {},
+    components: {}
   })
   const locale = ref<string>(lsLocaleState.value || '')
   const toggleLocale = (locale: string) => {
@@ -84,8 +84,8 @@ export const useAppStore = defineStore('app', () => {
           Menu: {
             colorItemBg: 'rgb(36, 37, 37)',
             colorSubItemBg: 'rgb(36, 37, 37)',
-            menuSubMenuBg: 'rgb(36, 37, 37)',
-          } as any,
+            menuSubMenuBg: 'rgb(36, 37, 37)'
+          } as any
         }
       }
     }
@@ -111,8 +111,8 @@ export const useAppStore = defineStore('app', () => {
         toggleTheme('light')
     },
     {
-      immediate: true,
-    },
+      immediate: true
+    }
   )
 
   // 监听isDark的变化
@@ -195,6 +195,6 @@ export const useAppStore = defineStore('app', () => {
     changeSettingLayout,
     toggleColorPrimary,
     toggleGray,
-    toggleWeak,
+    toggleWeak
   }
 })

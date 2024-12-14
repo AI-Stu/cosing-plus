@@ -101,7 +101,7 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
       onChange(selectedRowKeys: any[], selectedRows: any[]) {
         state.rowSelections.selectedRowKeys = selectedRowKeys
         state.rowSelections.selectedRows = selectedRows
-      },
+      }
     },
     queryOnMounted: true,
     pagination:
@@ -119,7 +119,7 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
           state.pagination!.pageSize = pageSize
           state.pagination!.current = current
           query()
-        },
+        }
       } as TablePaginationProps, _options.pagination),
     expand: false,
     expandChange() {
@@ -129,7 +129,7 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
     },
     afterQuery(data: TablePaginationProps) {
       return data
-    },
+    }
   }, _options))
 
   // 查询方法
@@ -145,7 +145,7 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
         pageSize: state.pagination.pageSize,
         column: state.pagination.column,
         order: state.pagination.order,
-        ...state.queryParams,
+        ...state.queryParams
       })
       if (data) {
         const _data = await state.afterQuery(data)
@@ -184,6 +184,6 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
     query,
     resetQuery,
     initQuery,
-    state,
+    state
   }
 }
