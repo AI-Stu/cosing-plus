@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { HeatmapLayer, Mapbox, PointLayer, Scene } from '@antv/l7'
-import mapGrid from './map-grid.ts'
-import mapData from './map-data.ts'
+import { HeatmapLayer, Mapbox, PointLayer, Scene } from '@antv/l7';
+import mapGrid from './map-grid.ts';
+import mapData from './map-data.ts';
 
-let scene: Scene
-let layer: HeatmapLayer
-let pointLayer: PointLayer
-let pointLayerText: PointLayer
+let scene: Scene;
+let layer: HeatmapLayer;
+let pointLayer: PointLayer;
+let pointLayerText: PointLayer;
 onMounted(() => {
   scene = new Scene({
     id: 'map',
@@ -23,13 +23,13 @@ onMounted(() => {
       pitch: 0,
       zoom: 1
     })
-  })
+  });
 
-  const grid = mapGrid
+  const grid = mapGrid;
 
-  const data = mapData
+  const data = mapData;
 
-  layer = new HeatmapLayer({})
+  layer = new HeatmapLayer({});
   layer.source(
     grid,
     {
@@ -49,11 +49,11 @@ onMounted(() => {
       coverage: 0.7,
       opacity: 0.8
     }
-    )
-  scene.addLayer(layer)
+    );
+  scene.addLayer(layer);
   pointLayer = new PointLayer({
     autoFit: true
-  })
+  });
   pointLayer.source(data)
     .shape('circle')
     .size('cum_conf', [0, 17])
@@ -72,15 +72,15 @@ onMounted(() => {
     .active({ color: '#0c2c84' })
     .style({
       opacity: 0.8
-    })
+    });
 
   pointLayerText = new PointLayer({
     autoFit: true
-  })
+  });
   pointLayerText.source(data)
     .shape('Short_Name_ZH', 'text')
     .filter('cum_conf', (v) => {
-      return v > 2000
+      return v > 2000;
     })
     .size(12)
     .active(true)
@@ -89,18 +89,18 @@ onMounted(() => {
       opacity: 1,
       strokeOpacity: 1,
       strokeWidth: 0
-    })
+    });
 
-  scene.addLayer(pointLayer)
-  scene.addLayer(pointLayerText)
-})
+  scene.addLayer(pointLayer);
+  scene.addLayer(pointLayerText);
+});
 
 onBeforeUnmount(() => {
-  layer.destroy?.()
-  pointLayerText?.destroy?.()
-  pointLayer?.destroy?.()
-  scene.destroy?.()
-})
+  layer.destroy?.();
+  pointLayerText?.destroy?.();
+  pointLayer?.destroy?.();
+  scene.destroy?.();
+});
 </script>
 
 <template>

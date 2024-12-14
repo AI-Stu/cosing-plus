@@ -1,31 +1,31 @@
-import path, { relative } from 'node:path'
-import * as process from 'node:process'
-import type { UserConfig } from 'vite'
+import path, { relative } from 'node:path';
+import * as process from 'node:process';
+import type { UserConfig } from 'vite';
 
-import { findMonorepoRoot } from '@cosing/node-utils'
-import { NodePackageImporter } from 'sass'
-import { defineConfig, loadEnv, mergeConfig } from 'vite'
-import type { DefineApplicationOptions } from '../types'
+import { findMonorepoRoot } from '@cosing/node-utils';
+import { NodePackageImporter } from 'sass';
+import { defineConfig, loadEnv, mergeConfig } from 'vite';
+import type { DefineApplicationOptions } from '../types';
 
-import { defaultImportmapOptions, getDefaultPwaOptions } from '../options'
-import { loadApplicationPlugins } from '../plugins'
-import { loadAndConvertEnv } from '../utils/env'
-import { getCommonConfig } from './common'
+import { defaultImportmapOptions, getDefaultPwaOptions } from '../options';
+import { loadApplicationPlugins } from '../plugins';
+import { loadAndConvertEnv } from '../utils/env';
+import { getCommonConfig } from './common';
 
 /**
  * 定义应用配置
  * @param userConfigPromise
- * @returns
+ * @returns UserConfig
  */
 function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
   return defineConfig(async (config) => {
-    const options = await userConfigPromise?.(config)
-    const { appTitle, base, port, ...envConfig } = await loadAndConvertEnv()
-    const { command, mode } = config
-    const { application = {}, vite = {} } = options || {}
-    const root = process.cwd()
-    const isBuild = command === 'build'
-    const env = loadEnv(mode, root)
+    const options = await userConfigPromise?.(config);
+    const { appTitle, base, port, ...envConfig } = await loadAndConvertEnv();
+    const { command, mode } = config;
+    const { application = {}, vite = {} } = options || {};
+    const root = process.cwd();
+    const isBuild = command === 'build';
+    const env = loadEnv(mode, root);
 
     const plugins = await loadApplicationPlugins({
       archiver: true,
@@ -54,9 +54,9 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
       vxeTableLazyImport: true,
       ...envConfig,
       ...application
-    })
+    });
 
-    const { injectGlobalScss = true } = application
+    const { injectGlobalScss = true } = application;
 
     const applicationConfig: UserConfig = {
       base,
@@ -93,36 +93,36 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
           ]
         }
       }
-    }
+    };
 
     const mergedCommonConfig = mergeConfig(
       await getCommonConfig(),
       applicationConfig
-    )
-    return mergeConfig(mergedCommonConfig, vite)
-  })
+    );
+    return mergeConfig(mergedCommonConfig, vite);
+  });
 }
 
 function createCssOptions(injectGlobalScss = true) {
-  const root = findMonorepoRoot()
+  const root = findMonorepoRoot();
   return {
     preprocessorOptions: injectGlobalScss
       ? {
           scss: {
             additionalData: (content: string, filepath: string) => {
-              const relativePath = relative(root, filepath)
+              const relativePath = relative(root, filepath);
               // apps下的包注入全局样式
               if (relativePath.startsWith(`apps${path.sep}`)) {
-                return `@use "@cosing/styles/global" as *;\n${content}`
+                return `@use "@cosing/styles/global" as *;\n${content}`;
               }
-              return content
+              return content;
             },
             api: 'modern',
             importers: [new NodePackageImporter()]
           }
         }
       : {}
-  }
+  };
 }
 
-export { defineApplicationConfig }
+export { defineApplicationConfig };

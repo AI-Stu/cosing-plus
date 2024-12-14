@@ -1,87 +1,87 @@
 <script lang="ts" setup>
-import type { CSSProperties } from 'vue'
+import type { CSSProperties } from 'vue';
 import {
   CloseOutlined,
   MoreOutlined,
   ReloadOutlined
-} from '@ant-design/icons-vue'
-import type { RouteLocationNormalized } from 'vue-router'
-import { listenerRouteChange, removeRouteListener } from '~@/utils/route-listener'
-import { useLayoutState } from '~/layouts/basic-layout/context'
+} from '@ant-design/icons-vue';
+import type { RouteLocationNormalized } from 'vue-router';
+import { listenerRouteChange, removeRouteListener } from '~@/utils/route-listener';
+import { useLayoutState } from '~/layouts/basic-layout/context';
 
-const multiTabStore = useMultiTab()
-const { list, activeKey } = storeToRefs(multiTabStore)
-const { layoutSetting } = storeToRefs(useAppStore())
+const multiTabStore = useMultiTab();
+const { list, activeKey } = storeToRefs(multiTabStore);
+const { layoutSetting } = storeToRefs(useAppStore());
 const {
   layout
-} = useLayoutState()
+} = useLayoutState();
 const tabStyle = computed<CSSProperties>(() => {
-  const style: CSSProperties = {}
+  const style: CSSProperties = {};
   if (layoutSetting.value.multiTabFixed) {
-    style.position = 'sticky'
-    style.top = `${layoutSetting.value.headerHeight}px`
-    style.zIndex = 3
-    style.right = 0
+    style.position = 'sticky';
+    style.top = `${layoutSetting.value.headerHeight}px`;
+    style.zIndex = 3;
+    style.right = 0;
   }
   // bugfix https://github.com/antdv-pro/antdv-pro/issues/173
   if (layoutSetting.value.header === false || (layout.value !== 'mix' && layoutSetting.value.fixedHeader === false))
-    style.top = '0px'
+    style.top = '0px';
 
-  return style
-})
-const tabsRef = shallowRef()
+  return style;
+});
+const tabsRef = shallowRef();
 
 function handleSwitch({ key }: any, current: string) {
   if (key === 'closeCurrent')
-    multiTabStore.close(activeKey.value)
+    multiTabStore.close(activeKey.value);
   else if (key === 'closeLeft')
-    multiTabStore.closeLeft(current)
+    multiTabStore.closeLeft(current);
   else if (key === 'closeRight')
-    multiTabStore.closeRight(current)
+    multiTabStore.closeRight(current);
   else if (key === 'closeOther')
-    multiTabStore.closeOther(current)
+    multiTabStore.closeOther(current);
   else if (key === 'refresh')
-    multiTabStore.refresh(activeKey.value)
+    multiTabStore.refresh(activeKey.value);
 }
 
 const isCurrentDisabled = computed(() => {
   return (
     list.value.length === 1 || list.value.filter(v => !v.affix).length <= 1
-  )
-})
+  );
+});
 
 function leftDisabled(key: string) {
   // 判断左侧是否还有可关闭的
-  const index = list.value.findIndex(v => v.fullPath === key)
-  return index === 0 || list.value.filter(v => !v.affix).length <= 1
+  const index = list.value.findIndex(v => v.fullPath === key);
+  return index === 0 || list.value.filter(v => !v.affix).length <= 1;
 }
 
 function rightDisabled(key: string) {
   // 判断右侧是否还有可关闭的
-  const index = list.value.findIndex(v => v.fullPath === key)
+  const index = list.value.findIndex(v => v.fullPath === key);
   return (
     index === list.value.length - 1
     || list.value.filter(v => !v.affix).length <= 1
-  )
+  );
 }
 const otherDisabled = computed(() => {
   return (
     list.value.length === 1 || list.value.filter(v => !v.affix).length <= 1
-  )
-})
+  );
+});
 listenerRouteChange((route: RouteLocationNormalized) => {
   if (route.fullPath.startsWith('/redirect'))
-    return
-  const item = list.value.find(item => item.fullPath === route.fullPath)
+    return;
+  const item = list.value.find(item => item.fullPath === route.fullPath);
 
   if (route.fullPath === activeKey.value && !item?.loading)
-    return
-  activeKey.value = route.fullPath
-  multiTabStore.addItem(route)
-}, true)
+    return;
+  activeKey.value = route.fullPath;
+  multiTabStore.addItem(route);
+}, true);
 onUnmounted(() => {
-  removeRouteListener()
-})
+  removeRouteListener();
+});
 </script>
 
 <template>

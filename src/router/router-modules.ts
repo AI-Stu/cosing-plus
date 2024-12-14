@@ -11,7 +11,7 @@ const routerModules = import.meta.glob([
   '!~/pages/**/tests',
   '!~/pages/**/test',
   '!~/pages/common'
-])
+]);
 export const basicRouteMap = {
   // iframe模式下使用
   Iframe: () => import('~/pages/common/iframe.vue'),
@@ -19,32 +19,32 @@ export const basicRouteMap = {
   RouteView: () => import('~/layouts/components/route-view.vue'),
   // 空页面
   ComponentError: () => import('~/pages/exception/component-error.vue')
-}
+};
 
 function checkEager(module: any) {
   if (typeof module === 'object' && 'default' in module)
-    return module.default
+    return module.default;
 
-  return module
+  return module;
 }
 export function getRouterModule(path?: string): any {
   if (!path)
-    return basicRouteMap.ComponentError
+    return basicRouteMap.ComponentError;
   // 判断是否在basicRouteMap中存在
   if (path in basicRouteMap)
-    return (basicRouteMap as any)[path]
+    return (basicRouteMap as any)[path];
 
   // 判断开头是不是/
   if (path.startsWith('/'))
-    path = path.slice(1)
+    path = path.slice(1);
   // 组装数据格式
-  const fullPath = `/src/pages/${path}.vue`
-  const fullPathIndex = `/src/pages/${path}/index.vue`
+  const fullPath = `/src/pages/${path}.vue`;
+  const fullPathIndex = `/src/pages/${path}/index.vue`;
   if (fullPathIndex in routerModules)
-    return checkEager(routerModules[fullPathIndex])
+    return checkEager(routerModules[fullPathIndex]);
 
   // 返回插件信息
-  return checkEager(routerModules[fullPath])
+  return checkEager(routerModules[fullPath]);
 }
 
-export default routerModules
+export default routerModules;

@@ -1,59 +1,59 @@
 <script lang="ts" setup>
-import type { FormInstance } from 'ant-design-vue'
-import { cloneDeep } from 'lodash'
-import type { CrudTableModel } from '~@/api/list/crud-table'
+import type { FormInstance } from 'ant-design-vue';
+import { cloneDeep } from 'lodash';
+import type { CrudTableModel } from '~@/api/list/crud-table';
 
-const emit = defineEmits(['cancel', 'ok'])
+const emit = defineEmits(['cancel', 'ok']);
 
-const isUpdate = ref(false)
+const isUpdate = ref(false);
 
-const visible = ref(false)
+const visible = ref(false);
 
 const title = computed(() => {
-  return isUpdate.value ? '编辑' : '新增'
-})
+  return isUpdate.value ? '编辑' : '新增';
+});
 
-const formRef = ref<FormInstance>()
+const formRef = ref<FormInstance>();
 
 const formData = ref<CrudTableModel>({
   name: '',
   value: ''
-})
+});
 
-const labelCol = { style: { width: '100px' } }
-const wrapperCol = { span: 24 }
+const labelCol = { style: { width: '100px' } };
+const wrapperCol = { span: 24 };
 
 function open(record?: CrudTableModel) {
-  visible.value = true
-  isUpdate.value = !!record?.id
+  visible.value = true;
+  isUpdate.value = !!record?.id;
   formData.value = cloneDeep(record) ?? {
     name: '',
     value: ''
-  }
+  };
 }
 
 async function handleOk() {
   try {
-    await formRef.value?.validate()
+    await formRef.value?.validate();
 
     // 新增或者编辑接口...
 
-    emit('ok')
-    visible.value = false
+    emit('ok');
+    visible.value = false;
   }
   catch (errorInfo) {
-    console.log('Form Validate Failed:', errorInfo)
+    console.log('Form Validate Failed:', errorInfo);
   }
 }
 
 function handleCancel() {
-  formRef.value?.resetFields()
-  emit('cancel')
+  formRef.value?.resetFields();
+  emit('cancel');
 }
 
 defineExpose({
   open
-})
+});
 </script>
 
 <template>

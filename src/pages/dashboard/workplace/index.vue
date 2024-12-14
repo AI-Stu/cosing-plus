@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Radar } from '@antv/g2plot'
-import EditableLinkGroup from '~/pages/dashboard/workplace/editable-link-group.vue'
+import { Radar } from '@antv/g2plot';
+import EditableLinkGroup from '~/pages/dashboard/workplace/editable-link-group.vue';
 
 defineOptions({
   name: 'Workplace'
-})
+});
 
 const currentUser = {
   avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
@@ -14,7 +14,7 @@ const currentUser = {
   signature: '海纳百川，有容乃大',
   title: '交互专家',
   group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED'
-}
+};
 
 const projectNotice = [
   {
@@ -77,7 +77,7 @@ const projectNotice = [
     href: '',
     memberLink: ''
   }
-]
+];
 
 const activities = [
   {
@@ -184,9 +184,9 @@ const activities = [
     template1: '在',
     template2: '新建项目'
   }
-]
+];
 
-const radarContainer = ref()
+const radarContainer = ref();
 const radarData = [
   {
     name: '个人',
@@ -263,8 +263,8 @@ const radarData = [
     label: '热度',
     value: 7
   }
-]
-let radar: Radar
+];
+let radar: Radar;
 onMounted(() => {
   radar = new Radar(radarContainer.value, {
     data: radarData,
@@ -278,13 +278,13 @@ onMounted(() => {
       layout: 'horizontal',
       position: 'bottom'
     }
-  })
-  radar.render()
-})
+  });
+  radar.render();
+});
 
 onBeforeUnmount(() => {
-  radar?.destroy?.()
-})
+  radar?.destroy?.();
+});
 </script>
 
 <template>

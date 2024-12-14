@@ -1,32 +1,32 @@
-import { join } from 'node:path'
-import * as process from 'node:process'
-import fsp from 'node:fs/promises'
-import * as dotenv from 'dotenv'
-import type { ApplicationPluginOptions } from '../types'
+import { join } from 'node:path';
+import * as process from 'node:process';
+import fsp from 'node:fs/promises';
+import * as dotenv from 'dotenv';
+import type { ApplicationPluginOptions } from '../types';
 
-const getBoolean = (value: string | undefined) => value === 'true'
+const getBoolean = (value: string | undefined) => value === 'true';
 
 function getString(value: string | undefined, fallback: string) {
-  return value ?? fallback
+  return value ?? fallback;
 }
 
 function getNumber(value: string | undefined, fallback: number) {
-  return Number(value) || fallback
+  return Number(value) || fallback;
 }
 
 /**
  * 获取当前环境下生效的配置文件名
  */
 function getConfFiles() {
-  const script = process.env.npm_lifecycle_script as string
-  const reg = /--mode ([\d_a-z]+)/
-  const result = reg.exec(script)
+  const script = process.env.npm_lifecycle_script as string;
+  const reg = /--mode ([\d_a-z]+)/;
+  const result = reg.exec(script);
 
   if (result) {
-    const mode = result[1]
-    return ['.env', `.env.${mode}`]
+    const mode = result[1];
+    return ['.env', `.env.${mode}`];
   }
-  return ['.env', '.env.production']
+  return ['.env', '.env.production'];
 }
 
 /**
@@ -38,34 +38,34 @@ async function loadEnv<T = Record<string, string>>(
   match = 'VITE_GLOB_',
   confFiles = getConfFiles()
 ) {
-  let envConfig = {}
+  let envConfig = {};
 
   for (const confFile of confFiles) {
     try {
       const envPath = await fsp.readFile(join(process.cwd(), confFile), {
         encoding: 'utf8'
-      })
-      const env = dotenv.parse(envPath)
-      envConfig = { ...envConfig, ...env }
+      });
+      const env = dotenv.parse(envPath);
+      envConfig = { ...envConfig, ...env };
     }
     catch (error) {
-      console.error(`Error while parsing ${confFile}`, error)
+      console.error(`Error while parsing ${confFile}`, error);
     }
   }
-  const reg = new RegExp(`^(${match})`)
+  const reg = new RegExp(`^(${match})`);
   Object.keys(envConfig).forEach((key) => {
     if (!reg.test(key)) {
-      Reflect.deleteProperty(envConfig, key)
+      Reflect.deleteProperty(envConfig, key);
     }
-  })
-  return envConfig as T
+  });
+  return envConfig as T;
 }
 
 /**
  * 加载并转换.env文件
  * @param match
  * @param confFiles
- * @returns
+ * @returns Promise
  */
 async function loadAndConvertEnv(
   match = 'VITE_',
@@ -77,7 +77,7 @@ async function loadAndConvertEnv(
     port: number
   } & Partial<ApplicationPluginOptions>
   > {
-  const envConfig = await loadEnv(match, confFiles)
+  const envConfig = await loadEnv(match, confFiles);
 
   const {
     VITE_APP_TITLE,
@@ -90,11 +90,11 @@ async function loadAndConvertEnv(
     VITE_PORT,
     VITE_PWA,
     VITE_VISUALIZER
-  } = envConfig
+  } = envConfig;
 
-  const compressTypes = (VITE_COMPRESS ?? '')
+  const compressTypes: ('brotli' | 'gzip')[] = (VITE_COMPRESS ?? '')
     .split(',')
-    .filter(item => item === 'brotli' || item === 'gzip')
+    .filter(item => item === 'brotli' || item === 'gzip') as ('brotli' | 'gzip')[];
 
   return {
     appTitle: getString(VITE_APP_TITLE, 'Vben Admin'),
@@ -108,7 +108,7 @@ async function loadAndConvertEnv(
     port: getNumber(VITE_PORT, 5173),
     pwa: getBoolean(VITE_PWA),
     visualizer: getBoolean(VITE_VISUALIZER)
-  }
+  };
 }
 
-export { loadAndConvertEnv, loadEnv }
+export { loadAndConvertEnv, loadEnv };

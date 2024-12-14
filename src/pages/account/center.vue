@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { ApartmentOutlined, AuditOutlined, HomeOutlined, PlusOutlined } from '@ant-design/icons-vue'
-import { nextTick, reactive, ref } from 'vue'
-import rightContent from './components/right-content.vue'
+import { ApartmentOutlined, AuditOutlined, HomeOutlined, PlusOutlined } from '@ant-design/icons-vue';
+import { nextTick, reactive, ref } from 'vue';
+import rightContent from './components/right-content.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const inputRef = ref()
+const inputRef = ref();
 const state = reactive({
   tags: ['专注', '坚持', '很有想法', '执行力强', '乐观'],
   inputVisible: false,
   inputValue: ''
-})
+});
 
 function handleClose(removedTag: string) {
-  const tags = state.tags.filter(tag => tag !== removedTag)
-  state.tags = tags
+  const tags = state.tags.filter(tag => tag !== removedTag);
+  state.tags = tags;
 }
 
 function showInput() {
-  state.inputVisible = true
+  state.inputVisible = true;
   nextTick(() => {
-    inputRef.value.focus()
-  })
+    inputRef.value.focus();
+  });
 }
 
 function handleInputConfirm() {
-  const inputValue = state.inputValue
-  let tags = state.tags
+  const inputValue = state.inputValue;
+  let tags = state.tags;
   if (inputValue && !tags.includes(inputValue))
-    tags = [...tags, inputValue]
+    tags = [...tags, inputValue];
 
   Object.assign(state, {
     tags,
     inputVisible: false,
     inputValue: ''
-  })
+  });
 }
 
 interface ITeamDataItem {
@@ -59,7 +59,7 @@ const teamData = ref<ITeamDataItem[]>([
     name: '设计团队',
     link: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png'
   }
-])
+]);
 </script>
 
 <template>

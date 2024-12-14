@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
   name: 'CarbonTranslate'
-}
+};
 </script>
 
 <template>

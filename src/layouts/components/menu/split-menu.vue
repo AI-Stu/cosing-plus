@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { omit } from '@v-c/utils'
-import { useLayoutState } from '../../basic-layout/context'
-import SubMenu from './sub-menu.vue'
+import { omit } from '@v-c/utils';
+import { useLayoutState } from '../../basic-layout/context';
+import SubMenu from './sub-menu.vue';
 
-const { splitState, menuData, handleSplitSelectedKeys } = useLayoutState()
+const { splitState, menuData, handleSplitSelectedKeys } = useLayoutState();
 
-const menuDataList = computed(() => menuData.value?.map(v => ({ ...omit(v, ['children']), childrenCount: (v.children ?? []).length })))
+const menuDataList = computed(() => menuData.value?.map(v => ({ ...omit(v, ['children']), childrenCount: (v.children ?? []).length })));
 </script>
 
 <template>

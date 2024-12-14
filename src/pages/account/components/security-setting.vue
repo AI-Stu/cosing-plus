@@ -4,7 +4,7 @@ interface DataItem {
   desc: string
 }
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const data = computed<DataItem[]>(() => {
   return [
@@ -28,8 +28,8 @@ const data = computed<DataItem[]>(() => {
       title: t('account.settings.security.MFA'),
       desc: t('account.settings.security.MFA-desc')
     }
-  ]
-})
+  ];
+});
 </script>
 
 <template>

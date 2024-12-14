@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ParentCompConsumer } from '@/layouts/basic-layout/parent-comp-consumer'
+import { ParentCompConsumer } from '@/layouts/basic-layout/parent-comp-consumer';
 
 defineOptions({
   name: 'CustomRouteView'
-})
+});
 
-const appStore = useAppStore()
-const { layoutSetting } = storeToRefs(appStore)
-const multiTabStore = useMultiTab()
-const { cacheList } = storeToRefs(multiTabStore)
-const { getComp } = useCompConsumer()
+const appStore = useAppStore();
+const { layoutSetting } = storeToRefs(appStore);
+const multiTabStore = useMultiTab();
+const { cacheList } = storeToRefs(multiTabStore);
+const { getComp } = useCompConsumer();
 </script>
 
 <template>

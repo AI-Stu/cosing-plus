@@ -1,6 +1,6 @@
-import type { RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router';
 
-const Layout = () => import('~/layouts/index.vue')
+const Layout = () => import('~/layouts/index.vue');
 
 export default [
   {
@@ -47,4 +47,4 @@ export default [
     },
     component: () => import('~/pages/exception/error.vue')
   }
-] as RouteRecordRaw[]
+] as RouteRecordRaw[];

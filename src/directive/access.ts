@@ -1,10 +1,10 @@
-import type { App, Directive } from 'vue'
+import type { App, Directive } from 'vue';
 
 export const accessDirective: Directive = (el, binding) => {
-  const { hasAccess } = useAccess()
+  const { hasAccess } = useAccess();
   if (!hasAccess(binding.value))
-    el.parentNode?.removeChild(el)
-}
+    el.parentNode?.removeChild(el);
+};
 export function setupAccessDirective(app: App) {
-  app.directive('access', accessDirective)
+  app.directive('access', accessDirective);
 }

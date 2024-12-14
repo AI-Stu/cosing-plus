@@ -7,5 +7,5 @@ export interface UserInfo {
 }
 
 export function getUserInfoApi() {
-  return useGet<UserInfo>('/user/info')
+  return useGet<UserInfo>('/user/info');
 }

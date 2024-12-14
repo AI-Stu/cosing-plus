@@ -1,23 +1,23 @@
 /// <reference types="vitest" />
-import { resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
-import * as process from 'node:process'
-import { loadEnv } from 'vite'
-import type { ConfigEnv, UserConfig } from 'vite'
-import { createVitePlugins } from './plugins'
-import { OUTPUT_DIR } from './plugins/constants'
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import * as process from 'node:process';
+import { loadEnv } from 'vite';
+import type { ConfigEnv, UserConfig } from 'vite';
+import { createVitePlugins } from './plugins';
+import { OUTPUT_DIR } from './plugins/constants';
 
-const baseSrc = fileURLToPath(new URL('./src', import.meta.url))
+const baseSrc = fileURLToPath(new URL('./src', import.meta.url));
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
-  const env = loadEnv(mode, process.cwd())
-  const proxyObj = {}
+  const env = loadEnv(mode, process.cwd());
+  const proxyObj = {};
   if (mode === 'development' && env.VITE_APP_BASE_API_DEV && env.VITE_APP_BASE_URL_DEV) {
     proxyObj[env.VITE_APP_BASE_API_DEV] = {
       target: env.VITE_APP_BASE_URL_DEV,
       changeOrigin: true,
       rewrite: (path: string) => path.replace(new RegExp(`^${env.VITE_APP_BASE_API_DEV}`), '')
-    }
+    };
   }
   return {
     plugins: createVitePlugins(env),
@@ -107,5 +107,5 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       globals: true,
       environment: 'jsdom'
     }
-  }
-}
+  };
+};

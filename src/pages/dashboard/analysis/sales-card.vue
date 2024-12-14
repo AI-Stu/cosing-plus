@@ -1,64 +1,64 @@
 <script setup lang="ts">
-import { Column } from '@antv/g2plot'
-import type { Key } from 'ant-design-vue/es/_util/type'
-import dayjs from 'dayjs'
+import { Column } from '@antv/g2plot';
+import type { Key } from 'ant-design-vue/es/_util/type';
+import dayjs from 'dayjs';
 
 defineProps({
   loading: {
     type: Boolean,
     default: false
   }
-})
+});
 
-const rankingListData: { title: string, total: number }[] = []
+const rankingListData: { title: string, total: number }[] = [];
 for (let i = 0; i < 7; i += 1) {
   rankingListData.push({
     title: `工专路 ${i} 号店`,
     total: 323234
-  })
+  });
 }
 
-const rangePickerValue = ref()
+const rangePickerValue = ref();
 
 function getDateRange(type: string) {
-  const today = new Date()
-  let startDate
-  let endDate
+  const today = new Date();
+  let startDate;
+  let endDate;
   switch (type) {
     case 'day':
-      rangePickerValue.value = [dayjs(new Date(today.getFullYear(), today.getMonth(), today.getDate())), dayjs(new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999))]
-      break
+      rangePickerValue.value = [dayjs(new Date(today.getFullYear(), today.getMonth(), today.getDate())), dayjs(new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999))];
+      break;
     case 'week':
-      startDate = new Date(today.setDate(today.getDate() - today.getDay()))
-      endDate = new Date(today.setDate(today.getDate() + 6))
-      rangePickerValue.value = [dayjs(startDate), dayjs(endDate)]
-      break
+      startDate = new Date(today.setDate(today.getDate() - today.getDay()));
+      endDate = new Date(today.setDate(today.getDate() + 6));
+      rangePickerValue.value = [dayjs(startDate), dayjs(endDate)];
+      break;
     case 'month':
-      startDate = new Date(today.getFullYear(), today.getMonth(), 1)
-      endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0)
-      rangePickerValue.value = [dayjs(startDate), dayjs(endDate)]
-      break
+      startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+      endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      rangePickerValue.value = [dayjs(startDate), dayjs(endDate)];
+      break;
     case 'year':
-      startDate = new Date(today.getFullYear(), 0, 1)
-      endDate = new Date(today.getFullYear(), 11, 31)
-      rangePickerValue.value = [dayjs(startDate), dayjs(endDate)]
-      break
+      startDate = new Date(today.getFullYear(), 0, 1);
+      endDate = new Date(today.getFullYear(), 11, 31);
+      rangePickerValue.value = [dayjs(startDate), dayjs(endDate)];
+      break;
     default:
       // 返回默认值或抛出错误，视情况而定
-      return null
+      return null;
   }
 }
-getDateRange('day')
+getDateRange('day');
 function onClick(e: any) {
   e.target?.parentElement?.querySelectorAll('a').forEach((item: HTMLElement) => {
-    item.classList.remove('currentDate')
-  })
-  e.target?.classList.add('currentDate')
-  getDateRange(e.target.__vnode.key)
+    item.classList.remove('currentDate');
+  });
+  e.target?.classList.add('currentDate');
+  getDateRange(e.target.__vnode.key);
 }
 
 function convertNumber(number: number) {
-  return number.toLocaleString()
+  return number.toLocaleString();
 }
 
 const salesData = [
@@ -110,12 +110,12 @@ const salesData = [
     x: '12月',
     y: 431
   }
-]
+];
 
-const columnPlotContainer1 = ref()
-const columnPlotContainer2 = ref()
+const columnPlotContainer1 = ref();
+const columnPlotContainer2 = ref();
 
-let renderOnce = false
+let renderOnce = false;
 
 function changTab(activeKey: Key) {
   if (activeKey === 'views' && !renderOnce) {
@@ -136,13 +136,13 @@ function changTab(activeKey: Key) {
             alias: '销售量'
           }
         }
-      }).render()
-      renderOnce = true
-    })
+      }).render();
+      renderOnce = true;
+    });
   }
 }
 
-const column = shallowRef<Column>()
+const column = shallowRef<Column>();
 onMounted(() => {
   column.value = new Column(columnPlotContainer1.value, {
     data: salesData,
@@ -160,14 +160,14 @@ onMounted(() => {
         alias: '销售量'
       }
     }
-  })
-  column.value?.render()
-})
+  });
+  column.value?.render();
+});
 
 onBeforeUnmount(() => {
-  column.value?.destroy()
-  column.value = undefined
-})
+  column.value?.destroy();
+  column.value = undefined;
+});
 </script>
 
 <template>

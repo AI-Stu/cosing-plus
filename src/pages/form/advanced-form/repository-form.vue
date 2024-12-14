@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue'
+import type { FormInstance } from 'ant-design-vue';
 
 defineProps({
   showSubmit: {
     type: Boolean,
     default: false
   }
-})
-const formRef = ref<FormInstance>()
+});
+const formRef = ref<FormInstance>();
 async function handleSubmit() {
   try {
-    const values = await formRef.value?.validateFields()
-    return values
+    const values = await formRef.value?.validateFields();
+    return values;
   }
   catch (errorInfo) {
-    console.log('Failed:', errorInfo)
+    console.log('Failed:', errorInfo);
   }
 }
 const formState = reactive<Record<string, any>>({
@@ -24,10 +24,10 @@ const formState = reactive<Record<string, any>>({
   approver: null,
   dateRange: null,
   type: null
-})
+});
 defineExpose({
   handleSubmit
-})
+});
 </script>
 
 <template>

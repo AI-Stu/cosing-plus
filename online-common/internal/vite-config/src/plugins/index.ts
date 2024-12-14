@@ -1,12 +1,12 @@
-import type { PluginOption } from 'vite'
+import type { PluginOption } from 'vite';
 
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import viteVueDevTools from 'vite-plugin-vue-isDevTools'
-import { visualizer as viteVisualizerPlugin } from 'rollup-plugin-visualizer'
-import type { PluginVisualizerOptions } from 'rollup-plugin-visualizer'
-import type { ApplicationPluginOptions, ConditionPlugin } from '../types'
-import { viteMetadataPlugin } from './inject-metadata'
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import viteVueDevTools from 'vite-plugin-vue-isDevTools';
+import { visualizer as viteVisualizerPlugin } from 'rollup-plugin-visualizer';
+import type { PluginVisualizerOptions } from 'rollup-plugin-visualizer';
+import type { ApplicationPluginOptions, ConditionPlugin } from '../types';
+import { viteMetadataPlugin } from './inject-metadata';
 
 /**
  * 过滤符合条件的插件
@@ -14,14 +14,14 @@ import { viteMetadataPlugin } from './inject-metadata'
  * @returns PluginOption[]
  */
 async function filterConditionPlugins(conditionPlugins: ConditionPlugin[]) {
-  const plugins: PluginOption[] = []
+  const plugins: PluginOption[] = [];
   for (const conditionPlugin of conditionPlugins) {
     if (conditionPlugin.condition) {
-      const realPlugins = await conditionPlugin.plugins()
-      plugins.push(...realPlugins)
+      const realPlugins = await conditionPlugin.plugins();
+      plugins.push(...realPlugins);
     }
   }
-  return plugins.flat()
+  return plugins.flat();
 }
 
 /**
@@ -30,7 +30,7 @@ async function filterConditionPlugins(conditionPlugins: ConditionPlugin[]) {
 async function loadCommonPlugins(
   options: ApplicationPluginOptions
 ): Promise<ConditionPlugin[]> {
-  const { isDevTools, isInjectMetadata, isBuild, visualizer } = options
+  const { isDevTools, isInjectMetadata, isBuild, visualizer } = options;
 
   return [
     {
@@ -69,5 +69,5 @@ async function loadCommonPlugins(
           : {})
       } as PluginVisualizerOptions)]
     }
-  ]
+  ];
 }

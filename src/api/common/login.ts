@@ -22,9 +22,9 @@ export function loginApi(params: LoginParams | LoginMobileParams) {
     customDev: true,
     // 是否开启全局请求loading
     loading: true
-  })
+  });
 }
 
 export function logoutApi() {
-  return useGet('/logout')
+  return useGet('/logout');
 }

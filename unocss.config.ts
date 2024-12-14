@@ -6,10 +6,10 @@ import {
   presetUno,
   transformerDirectives,
   transformerVariantGroup
-} from 'unocss'
-import presetChinese from 'unocss-preset-chinese'
-import presetEase from 'unocss-preset-ease'
-import antdUnoTheme from './themes/antd-uno-theme.json'
+} from 'unocss';
+import presetChinese from 'unocss-preset-chinese';
+import presetEase from 'unocss-preset-ease';
+import antdUnoTheme from './themes/antd-uno-theme.json';
 
 export default defineConfig({
   safelist: [
@@ -36,4 +36,4 @@ export default defineConfig({
     ['flex-end', 'flex items-end justify-between']
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()]
-})
+});

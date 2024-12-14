@@ -7,67 +7,67 @@ interface Prop {
 
 const props = withDefaults(defineProps<Prop>(), {
   itemHeight: 80
-})
+});
 
-const transformY = ref<number>()
+const transformY = ref<number>();
 const transformStyle = computed<string>(() => {
-  return `transform: translateY(${transformY.value}px)`
-})
+  return `transform: translateY(${transformY.value}px)`;
+});
 
-const scrollerContainerRef = ref<HTMLDivElement>()
+const scrollerContainerRef = ref<HTMLDivElement>();
 // 容器高度
 const scrollerContainerRefHeight = computed(() => {
-  return scrollerContainerRef.value ? scrollerContainerRef.value.offsetHeight : 0
-})
+  return scrollerContainerRef.value ? scrollerContainerRef.value.offsetHeight : 0;
+});
 
 // 渲染视口的item数量
 const itemCount = computed<number>(() => {
-  return Math.ceil(scrollerContainerRefHeight.value / props.itemHeight) + 1
-})
+  return Math.ceil(scrollerContainerRefHeight.value / props.itemHeight) + 1;
+});
 
 // 最顶端和低端元素在数组中的索引
-const start = ref<number>(0)
+const start = ref<number>(0);
 const end = computed<number>(() => {
-  return start.value + itemCount.value
-})
+  return start.value + itemCount.value;
+});
 
-const Data = ref<any[]>()
+const Data = ref<any[]>();
 
 // 用来撑开容器高度
 const pillarHeight = computed(() => {
   if (Data.value?.length)
-    return props.itemHeight * Data.value?.length
-  return undefined
-})
+    return props.itemHeight * Data.value?.length;
+  return undefined;
+});
 
 const renderData = computed(() => {
-  const _start = Math.max(0, start.value)
-  const _end = Math.min(end.value, Data.value!.length)
-  return Data.value?.slice(_start, _end)
-})
+  const _start = Math.max(0, start.value);
+  const _end = Math.min(end.value, Data.value!.length);
+  return Data.value?.slice(_start, _end);
+});
 
 function init() {
   if (!props.dataSource) {
-    const res = Array.from({ length: 10000 })
+    const res = Array.from({ length: 10000 });
     res.forEach((_, i) => {
-      res[i] = i
-    })
-    Data.value = res
+      res[i] = i;
+    });
+    Data.value = res;
   }
   else {
-    Data.value = props.dataSource
+    Data.value = props.dataSource;
   }
 }
 
 function handleScroll(e: Event) {
-  const scrollTop = (e.target as HTMLDivElement).scrollTop
-  start.value = Math.floor(scrollTop / props.itemHeight)
-  transformY.value = start.value * props.itemHeight
+  const scrollTop = (e.target as HTMLDivElement).scrollTop;
+  start.value = Math.floor(scrollTop / props.itemHeight);
+  transformY.value = start.value * props.itemHeight;
 }
 
 onMounted(() => {
-  init()
-})
+  init();
+});
 </script>
 
 <template>

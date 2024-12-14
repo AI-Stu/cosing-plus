@@ -21,7 +21,8 @@
     { "rule": "comma-dangle", "severity": "error", "fixable": true },
     { "rule": "*-newline", "severity": "off", "fixable": true },
     { "rule": "*quotes", "severity": "off", "fixable": true },
-    { "rule": "*semi", "severity": "off", "fixable": true }
+    { "rule": "*semi", "severity": "off", "fixable": true },
+    { "rule": "semi", "severity": "error", "fixable": true }
   ],
 
   // 为所有支持的语言启用 eslint

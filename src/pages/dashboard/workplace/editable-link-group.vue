@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PlusOutlined } from '@ant-design/icons-vue'
+import { PlusOutlined } from '@ant-design/icons-vue';
 
 const links = [
   {
@@ -26,7 +26,7 @@ const links = [
     title: '操作六',
     href: ''
   }
-]
+];
 </script>
 
 <template>

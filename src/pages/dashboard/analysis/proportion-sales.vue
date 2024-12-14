@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { EllipsisOutlined } from '@ant-design/icons-vue'
-import { Pie } from '@antv/g2plot'
+import { EllipsisOutlined } from '@ant-design/icons-vue';
+import { Pie } from '@antv/g2plot';
 
 defineProps({
   loading: {
     type: Boolean,
     default: false
   }
-})
+});
 
-const salesType = ref('all')
-const pieContainer1 = ref()
-const pieContainer2 = ref()
-const pieContainer3 = ref()
+const salesType = ref('all');
+const pieContainer1 = ref();
+const pieContainer2 = ref();
+const pieContainer3 = ref();
 function handleChangeSalesType(e: any) {
-  salesType.value = e.target.value
+  salesType.value = e.target.value;
 }
 
-const pies = shallowRef<Pie[]>([])
+const pies = shallowRef<Pie[]>([]);
 
 function renderPie(container: any, data: any) {
   const pie = new Pie(container, {
@@ -30,7 +30,7 @@ function renderPie(container: any, data: any) {
     label: {
       type: 'spider',
       formatter: (item) => {
-        return `${item.x}: ${item.y.toLocaleString()}`
+        return `${item.x}: ${item.y.toLocaleString()}`;
       }
     },
     legend: false,
@@ -40,9 +40,9 @@ function renderPie(container: any, data: any) {
         content: '销售额'
       }
     }
-  })
-  pie.render()
-  pies.value.push(pie)
+  });
+  pie.render();
+  pies.value.push(pie);
 }
 
 const salesTypeData = [
@@ -70,7 +70,7 @@ const salesTypeData = [
     x: '其他',
     y: 1231
   }
-]
+];
 const salesTypeDataOnline = [
   {
     x: '家用电器',
@@ -96,7 +96,7 @@ const salesTypeDataOnline = [
     x: '其他',
     y: 111
   }
-]
+];
 const salesTypeDataOffline = [
   {
     x: '家用电器',
@@ -118,20 +118,20 @@ const salesTypeDataOffline = [
     x: '其他',
     y: 65
   }
-]
+];
 
 onMounted(() => {
-  renderPie(pieContainer1.value, salesTypeData)
-  renderPie(pieContainer2.value, salesTypeDataOnline)
-  renderPie(pieContainer3.value, salesTypeDataOffline)
-})
+  renderPie(pieContainer1.value, salesTypeData);
+  renderPie(pieContainer2.value, salesTypeDataOnline);
+  renderPie(pieContainer3.value, salesTypeDataOffline);
+});
 
 onUnmounted(() => {
   pies.value.forEach((pie) => {
-    pie?.destroy?.()
-  })
-  pies.value = []
-})
+    pie?.destroy?.();
+  });
+  pies.value = [];
+});
 </script>
 
 <template>

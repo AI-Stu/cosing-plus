@@ -24,4 +24,4 @@ export default {
   'pages.login.loginWith': '其他登录方式 :',
   'pages.login.registerAccount': '注册账户',
   'pages.login.tips': '欢迎使用本系统'
-}
+};

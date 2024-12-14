@@ -1,49 +1,49 @@
-import type { App, Directive } from 'vue'
-import { useLoading } from '@/composables/base-loading'
-import BaseLoading from '@/components/base-loading/index.vue'
+import type { App, Directive } from 'vue';
+import { useLoading } from '@/composables/base-loading';
+import BaseLoading from '@/components/base-loading/index.vue';
 
 const loadingDirective: Directive = {
   mounted(el, bind) {
-    const { props } = BaseLoading
+    const { props } = BaseLoading;
 
-    const full = el.getAttribute('loading-full')
-    const text = el.getAttribute('loading-text') || props.text.default
+    const full = el.getAttribute('loading-full');
+    const text = el.getAttribute('loading-text') || props.text.default;
     const textColor
-      = el.getAttribute('loading-text-color') || props.textColor.default
+      = el.getAttribute('loading-text-color') || props.textColor.default;
     const background
-      = el.getAttribute('loading-background') || props.background.default
-    const spin = el.getAttribute('loading-spin') || props.spin.default
+      = el.getAttribute('loading-background') || props.background.default;
+    const spin = el.getAttribute('loading-spin') || props.spin.default;
 
     const instance = useLoading({
       text,
       textColor,
       background,
       spin
-    })
-    el.instance = instance
+    });
+    el.instance = instance;
     if (bind.value)
-      instance.open(full ? document.body : el)
+      instance.open(full ? document.body : el);
   },
   updated(el, bind) {
-    const instance = el.instance
+    const instance = el.instance;
     if (!instance)
-      return
+      return;
     if (bind.value) {
       instance.open(
         el.getAttribute('loading-full') === 'true' ? document.body : el
-      )
+      );
     }
     else {
-      instance.close()
+      instance.close();
     }
   },
   unmounted(el) {
-    el?.instance?.close()
+    el?.instance?.close();
   }
-}
+};
 
 export function setupLoadingDirective(app: App) {
-  app.directive('loading', loadingDirective)
+  app.directive('loading', loadingDirective);
 }
 
-export default loadingDirective
+export default loadingDirective;

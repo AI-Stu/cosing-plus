@@ -1,5 +1,5 @@
-import type { ExtractPropTypes, VNodeChild } from 'vue'
-import { arrayType, booleanType, eventType, numberType, stringType } from '@v-c/utils'
+import type { ExtractPropTypes, VNodeChild } from 'vue';
+import { arrayType, booleanType, eventType, numberType, stringType } from '@v-c/utils';
 
 export type CheckedType = boolean | string | number
 export type MenuData = MenuDataItem[]
@@ -65,7 +65,7 @@ const proLayoutEvents = {
   'onUpdate:openKeys': eventType<(val: string[]) => void>(),
   'onUpdate:selectedKeys': eventType<(val: string[]) => void>(),
   'onMenuSelect': eventType<(data: MenuSelectEvent) => void>()
-}
+};
 
 export const proLayoutProps = {
   layout: stringType<LayoutType>('mix'),
@@ -94,6 +94,6 @@ export const proLayoutProps = {
   selectedKeys: arrayType<string[]>(),
   copyright: stringType(),
   ...proLayoutEvents
-}
+};
 
 export type ProLayoutProps = Partial<ExtractPropTypes<typeof proLayoutProps>>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const activeKey = ref()
+const activeKey = ref();
 
 const columns = ref([
   {
@@ -33,7 +33,7 @@ const columns = ref([
     dataIndex: 'info',
     key: 'info'
   }
-])
+]);
 
 const data = [
   {
@@ -60,19 +60,19 @@ const data = [
     time: dayjs().format('YYYY-MM-DD hh:mm'),
     info: '无'
   }
-]
+];
 
 function getI18n(key: any) {
   if (key === 'type')
-    return t('profile.advanced.log-type')
+    return t('profile.advanced.log-type');
   else if (key === 'owner')
-    return t('profile.advanced.log-owner')
+    return t('profile.advanced.log-owner');
   else if (key === 'result')
-    return t('profile.advanced.log-result')
+    return t('profile.advanced.log-result');
   else if (key === 'time')
-    return t('profile.advanced.log-time')
+    return t('profile.advanced.log-time');
   else if (key === 'info')
-    return t('profile.advanced.log-info')
+    return t('profile.advanced.log-info');
 }
 </script>
 

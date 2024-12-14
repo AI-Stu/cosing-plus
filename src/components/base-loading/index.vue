@@ -1,7 +1,7 @@
 <script lang="tsx">
-import type { Component, PropType } from 'vue'
-import type { LoadingEnum } from '~#/loading-enum'
-import { loadingMap } from '~#/loading-enum'
+import type { Component, PropType } from 'vue';
+import type { LoadingEnum } from '~#/loading-enum';
+import { loadingMap } from '~#/loading-enum';
 
 export default defineComponent({
   name: 'BaseLoading',
@@ -33,12 +33,12 @@ export default defineComponent({
   },
   setup(props) {
     const renderBasicLoading = () => {
-      const { spin, textColor } = props
-      return h(loadingMap.get(spin) as Component, { color: textColor } as any)
-    }
+      const { spin, textColor } = props;
+      return h(loadingMap.get(spin) as Component, { color: textColor } as any);
+    };
 
     return () => {
-      const { background, modal, full, text, textColor } = props
+      const { background, modal, full, text, textColor } = props;
       return (
         <div
           style={modal ? { background } : {}}
@@ -51,10 +51,10 @@ export default defineComponent({
             </div>
           </div>
         </div>
-      )
-    }
+      );
+    };
   }
-})
+});
 </script>
 
 <style lang="less" scoped>

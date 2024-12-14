@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue'
+import type { FormInstance } from 'ant-design-vue';
 
-const emit = defineEmits(['nextStep'])
-const formRef = ref<FormInstance>()
-const labelCol = { lg: { span: 5 }, sm: { span: 5 } }
-const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } }
+const emit = defineEmits(['nextStep']);
+const formRef = ref<FormInstance>();
+const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
+const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 
 interface FirstFormState {
   paymentAccount: string
@@ -17,14 +17,14 @@ const formState = reactive<FirstFormState>({
   collectAccount: 'test@example.com',
   name: 'Kirk Lin',
   amount: 1000000
-})
+});
 async function nextStep() {
   try {
-    await formRef.value?.validateFields()
-    emit('nextStep')
+    await formRef.value?.validateFields();
+    emit('nextStep');
   }
   catch (errorInfo) {
-    console.log('Failed:', errorInfo)
+    console.log('Failed:', errorInfo);
   }
 }
 </script>

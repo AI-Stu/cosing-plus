@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { Gauge, Liquid, RingProgress, WordCloud } from '@antv/g2plot'
-import ActiveChart from '~/pages/dashboard/monitor/active-chart.vue'
-import CustomMap from '~/pages/dashboard/monitor/custom-map.vue'
+import { Gauge, Liquid, RingProgress, WordCloud } from '@antv/g2plot';
+import ActiveChart from '~/pages/dashboard/monitor/active-chart.vue';
+import CustomMap from '~/pages/dashboard/monitor/custom-map.vue';
 
 defineOptions({
   name: 'Monitor'
-})
+});
 
 function convertNumber(number: number) {
-  return number.toLocaleString()
+  return number.toLocaleString();
 }
-const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30
+const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
 
 const wordCloudData = [
   {
@@ -513,14 +513,14 @@ const wordCloudData = [
     value: 95,
     type: 0
   }
-]
+];
 
-const gaugeContainer = ref()
-const ringContainer1 = ref()
-const ringContainer2 = ref()
-const ringContainer3 = ref()
-const wordCloudContainer = ref()
-const liquidContainer = ref()
+const gaugeContainer = ref();
+const ringContainer1 = ref();
+const ringContainer2 = ref();
+const ringContainer3 = ref();
+const wordCloudContainer = ref();
+const liquidContainer = ref();
 
 onMounted(() => {
   new Gauge(gaugeContainer.value, {
@@ -533,7 +533,7 @@ onMounted(() => {
     axis: {
       label: {
         formatter(v) {
-          return Number(v) * 100
+          return Number(v) * 100;
         }
       },
       subTickLine: {
@@ -548,7 +548,7 @@ onMounted(() => {
         }
       }
     }
-  }).render()
+  }).render();
 
   new RingProgress(ringContainer1.value, {
     height: 128,
@@ -556,7 +556,7 @@ onMounted(() => {
     percent: 0.28,
     innerRadius: 0.8,
     color: ['#fab120', '#E8EDF3']
-  }).render()
+  }).render();
 
   new RingProgress(ringContainer2.value, {
     height: 128,
@@ -564,7 +564,7 @@ onMounted(() => {
     percent: 0.22,
     innerRadius: 0.8,
     color: ['#5DDECF', '#E8EDF3']
-  }).render()
+  }).render();
 
   new RingProgress(ringContainer3.value, {
     height: 128,
@@ -572,7 +572,7 @@ onMounted(() => {
     percent: 0.32,
     innerRadius: 0.8,
     color: ['#2FC25B', '#E8EDF3']
-  }).render()
+  }).render();
 
   new WordCloud(wordCloudContainer.value, {
     data: wordCloudData,
@@ -593,7 +593,7 @@ onMounted(() => {
         }
       }
     }
-  }).render()
+  }).render();
 
   new Liquid(liquidContainer.value, {
     height: 161,
@@ -612,8 +612,8 @@ onMounted(() => {
     wave: {
       length: 128
     }
-  }).render()
-})
+  }).render();
+});
 </script>
 
 <template>

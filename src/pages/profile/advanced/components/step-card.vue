@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { DingdingOutlined } from '@ant-design/icons-vue'
-import dayjs from 'dayjs'
+import { DingdingOutlined } from '@ant-design/icons-vue';
+import dayjs from 'dayjs';
 
-const { isMobile } = useQueryBreakpoints()
+const { isMobile } = useQueryBreakpoints();
 
-const { t } = useI18n()
+const { t } = useI18n();
 </script>
 
 <template>

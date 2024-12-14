@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { CloseOutlined, CopyOutlined, NotificationOutlined, SettingOutlined } from '@ant-design/icons-vue'
-import { useClipboard } from '@v-c/utils'
-import type { ContentWidth, LayoutType, ThemeType } from '../../basic-layout/typing'
-import Body from './body.vue'
-import BlockCheckbox from './block-checkbox.vue'
-import ThemeColor from './theme-color.vue'
-import LayoutSetting from './layout-setting.vue'
-import RegionalSetting from './regional-setting.vue'
-import OtherSetting from './other-setting.vue'
+import { CloseOutlined, CopyOutlined, NotificationOutlined, SettingOutlined } from '@ant-design/icons-vue';
+import { useClipboard } from '@v-c/utils';
+import type { ContentWidth, LayoutType, ThemeType } from '../../basic-layout/typing';
+import Body from './body.vue';
+import BlockCheckbox from './block-checkbox.vue';
+import ThemeColor from './theme-color.vue';
+import LayoutSetting from './layout-setting.vue';
+import RegionalSetting from './regional-setting.vue';
+import OtherSetting from './other-setting.vue';
 
 defineOptions({
   name: 'SettingDrawer'
-})
+});
 const props = withDefaults(
   defineProps<{
     open?: boolean
@@ -55,35 +55,35 @@ const props = withDefaults(
       { key: 'purple', color: '#722ED1' }
     ]
   }
-)
-const emit = defineEmits(['update:open', 'settingChange'])
-const { copy } = useClipboard()
-const prefixCls = shallowRef('ant-pro-drawer-setting')
-const { message } = useGlobalConfig()
+);
+const emit = defineEmits(['update:open', 'settingChange']);
+const { copy } = useClipboard();
+const prefixCls = shallowRef('ant-pro-drawer-setting');
+const { message } = useGlobalConfig();
 function copySetting() {
-  copy(JSON.stringify(props.layoutSetting ?? {}))
-  message?.success(props?.t?.('app.setting.copyinfo', '拷贝成功，请到 config/default-settings.js 中替换默认配置'))
+  copy(JSON.stringify(props.layoutSetting ?? {}));
+  message?.success(props?.t?.('app.setting.copyinfo', '拷贝成功，请到 config/default-settings.js 中替换默认配置'));
 }
 function handleVisible(open: boolean) {
-  emit('update:open', open)
+  emit('update:open', open);
 }
 
 function changeTheme(theme: ThemeType) {
-  emit('settingChange', 'theme', theme)
+  emit('settingChange', 'theme', theme);
 }
 
 function changeColor(color: string) {
-  emit('settingChange', 'colorPrimary', color)
+  emit('settingChange', 'colorPrimary', color);
 }
 
 function changeLayout(layout: string) {
-  emit('settingChange', 'layout', layout)
+  emit('settingChange', 'layout', layout);
 }
 function changeSettingLayout(key: string, value: any) {
-  emit('settingChange', key, value)
+  emit('settingChange', key, value);
 }
 
-const { token } = useAntdToken()
+const { token } = useAntdToken();
 </script>
 
 <template>

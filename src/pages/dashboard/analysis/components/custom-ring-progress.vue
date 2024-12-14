@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { RingProgress } from '@antv/g2plot'
+import { RingProgress } from '@antv/g2plot';
 
 const props = defineProps({
   percent: {
     type: Number,
     default: 0
   }
-})
-const container = ref()
+});
+const container = ref();
 
 onMounted(() => {
   new RingProgress(container.value, {
@@ -20,8 +20,8 @@ onMounted(() => {
     statistic: {
       content: false
     }
-  }).render()
-})
+  }).render();
+});
 </script>
 
 <template>

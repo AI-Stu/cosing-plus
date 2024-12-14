@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { SelectValue } from 'ant-design-vue/es/select'
-import type { CheckedType, LayoutType } from '../../basic-layout/typing'
+import type { SelectValue } from 'ant-design-vue/es/select';
+import type { CheckedType, LayoutType } from '../../basic-layout/typing';
 
 const props = defineProps<{
   layout?: LayoutType
@@ -14,9 +14,9 @@ const props = defineProps<{
   animationName?: string
   animationNameList?: any[]
   t?: (key: string, ...args: any[]) => string
-}>()
+}>();
 
-const emit = defineEmits(['changeSetting'])
+const emit = defineEmits(['changeSetting']);
 const list = computed(() => ([
   {
     title: '动画',
@@ -66,10 +66,10 @@ const list = computed(() => ([
     disabled: false,
     disabledReason: '多页签开启后功能正常使用'
   }
-]))
+]));
 
 function handleChangeSetting(key: string, value: any) {
-  emit('changeSetting', key, value)
+  emit('changeSetting', key, value);
 }
 </script>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { SelectValue } from 'ant-design-vue/es/select'
-import type { CheckedType, ContentWidth, LayoutType } from '../../basic-layout/typing'
+import type { SelectValue } from 'ant-design-vue/es/select';
+import type { CheckedType, ContentWidth, LayoutType } from '../../basic-layout/typing';
 
 const props = defineProps<{
   contentWidth?: ContentWidth
@@ -13,9 +13,9 @@ const props = defineProps<{
   leftCollapsed?: boolean
   compactAlgorithm?: boolean
   t?: (key: string, ...args: any[]) => string
-}>()
+}>();
 
-const emit = defineEmits(['changeSetting'])
+const emit = defineEmits(['changeSetting']);
 const list = computed(() => [
   {
     title: '内容区域宽度',
@@ -65,9 +65,9 @@ const list = computed(() => [
     disabled: false,
     disabledReason: ''
   }
-])
+]);
 function handleChangeSetting(key: string, value: any) {
-  emit('changeSetting', key, value)
+  emit('changeSetting', key, value);
 }
 </script>
 

@@ -8,5 +8,5 @@ interface Tree {
  */
 export function deepFind(pred: (o: any) => boolean) {
   return ([x, ...xs] = [] as Tree[]): Tree | undefined =>
-    x && (pred(x) ? x : deepFind(pred)(x.children) as Tree | undefined || deepFind(pred)(xs) as Tree | undefined)
+    x && (pred(x) ? x : deepFind(pred)(x.children) as Tree | undefined || deepFind(pred)(xs) as Tree | undefined);
 }

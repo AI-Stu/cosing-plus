@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { EllipsisOutlined, InfoCircleOutlined } from '@ant-design/icons-vue'
-import { TinyArea } from '@antv/g2plot'
-import NumberInfo from '~/pages/dashboard/analysis/number-info.vue'
-import Trend from '~/pages/dashboard/analysis/trend.vue'
+import { EllipsisOutlined, InfoCircleOutlined } from '@ant-design/icons-vue';
+import { TinyArea } from '@antv/g2plot';
+import NumberInfo from '~/pages/dashboard/analysis/number-info.vue';
+import Trend from '~/pages/dashboard/analysis/trend.vue';
 
 defineProps({
   loading: {
     type: Boolean,
     default: false
   }
-})
+});
 
 const columns: Record<string, any>[] = [
   {
@@ -34,7 +34,7 @@ const columns: Record<string, any>[] = [
     key: 'range',
     sorter: (a: { range: number }, b: { range: number }) => a.range - b.range
   }
-]
+];
 
 const searchData = [
   {
@@ -387,12 +387,12 @@ const searchData = [
     range: 47,
     status: 1
   }
-]
+];
 
-const visitData2 = [1, 6, 4, 8, 3, 7, 2]
+const visitData2 = [1, 6, 4, 8, 3, 7, 2];
 
-const tinyAreaContainer1 = ref()
-const tinyAreaContainer2 = ref()
+const tinyAreaContainer1 = ref();
+const tinyAreaContainer2 = ref();
 
 onMounted(() => {
   new TinyArea(tinyAreaContainer1.value, {
@@ -400,15 +400,15 @@ onMounted(() => {
     data: visitData2,
     smooth: true,
     autoFit: true
-  }).render()
+  }).render();
 
   new TinyArea(tinyAreaContainer2.value, {
     height: 45,
     data: visitData2,
     smooth: true,
     autoFit: true
-  }).render()
-})
+  }).render();
+});
 </script>
 
 <template>

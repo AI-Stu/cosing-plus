@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons-vue'
-import dayjs from 'dayjs'
-import Category from './components/category.vue'
+import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons-vue';
+import dayjs from 'dayjs';
+import Category from './components/category.vue';
 
 const list = [
   {
@@ -194,9 +194,9 @@ const list = [
       }
     ]
   }
-]
+];
 function formatTimer(timer: number | string) {
-  return dayjs(timer).format('YYYY-MM-DD HH:mm:ss')
+  return dayjs(timer).format('YYYY-MM-DD HH:mm:ss');
 }
 </script>
 

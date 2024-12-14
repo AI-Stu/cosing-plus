@@ -1,5 +1,5 @@
-import antfu from '@antfu/eslint-config'
-import globals from 'globals'
+import antfu from '@antfu/eslint-config';
+import globals from 'globals';
 // import autoImport from './.eslintrc-auto-import.js'
 export default antfu(
   // 针对antfu配置的配置选项
@@ -15,13 +15,18 @@ export default antfu(
       'types/components.d.ts',
       'public',
       'tsconfig.*.json',
-      'tsconfig.json'
+      'tsconfig.json',
+      'node_modules',
+      'dist',
+      '.gitbub'
     ]
   },
   // ESLint扁平化配置，
   {
     rules: {
       'no-console': 'off',
+      'semi': ['error', 'always'], // 强制使用分号
+      'style/semi': 'off', // 强制使用分号
       'style/quote-props': 'off',
       'unused-imports/no-unused-vars': 'off',
       'ts/no-unused-expressions': 'off',
@@ -36,4 +41,4 @@ export default antfu(
       'style/comma-dangle': 'off' // 禁止最后一个元素后面加逗号
     }
   }
-)
+);

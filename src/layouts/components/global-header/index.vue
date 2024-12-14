@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
-import { useLayoutState } from '../../basic-layout/context'
-import GlobalHeaderLogo from './global-header-logo.vue'
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
+import { useLayoutState } from '../../basic-layout/context';
+import GlobalHeaderLogo from './global-header-logo.vue';
 
 const { layout, isMobile, handleMobileCollapsed, theme, menuHeader, collapsed, handleCollapsed, leftCollapsed }
-    = useLayoutState()
-const prefixCls = shallowRef('ant-pro-global-header')
+    = useLayoutState();
+const prefixCls = shallowRef('ant-pro-global-header');
 const cls = computed(() => ({
   [prefixCls.value]: true,
   [`${prefixCls.value}-layout-${layout.value}`]: !!layout.value,
   [`${prefixCls.value}-inverted`]: theme.value === 'inverted' && layout.value === 'top'
-}))
+}));
 </script>
 
 <template>

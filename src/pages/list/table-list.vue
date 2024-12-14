@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { Modal } from 'ant-design-vue'
-import { ColumnHeightOutlined, DownOutlined, PlusOutlined, ReloadOutlined, SettingOutlined, UpOutlined } from '@ant-design/icons-vue'
-import type { MenuProps, PaginationProps, TableProps } from 'ant-design-vue'
-import type { ConsultTableModel, ConsultTableParams } from '~@/api/list/table-list'
-import { deleteApi, getListApi } from '~@/api/list/table-list'
+import { Modal } from 'ant-design-vue';
+import { ColumnHeightOutlined, DownOutlined, PlusOutlined, ReloadOutlined, SettingOutlined, UpOutlined } from '@ant-design/icons-vue';
+import type { MenuProps, PaginationProps, TableProps } from 'ant-design-vue';
+import type { ConsultTableModel, ConsultTableParams } from '~@/api/list/table-list';
+import { deleteApi, getListApi } from '~@/api/list/table-list';
 
 const statusMap = {
   0: '关闭',
   1: '运行中',
   2: '上线',
   3: '错误'
-}
-const message = useMessage()
+};
+const message = useMessage();
 const columns = shallowRef([
   {
     title: '#',
@@ -44,8 +44,8 @@ const columns = shallowRef([
     dataIndex: 'action',
     width: 200
   }
-])
-const loading = shallowRef(false)
+]);
+const loading = shallowRef(false);
 const pagination = reactive<PaginationProps>({
   pageSize: 10,
   pageSizeOptions: ['10', '20', '30', '40'],
@@ -55,21 +55,21 @@ const pagination = reactive<PaginationProps>({
   showQuickJumper: true,
   showTotal: total => `总数据位：${total}`,
   onChange(current, pageSize) {
-    pagination.pageSize = pageSize
-    pagination.current = current
-    init()
+    pagination.pageSize = pageSize;
+    pagination.current = current;
+    init();
   }
-})
-const dataSource = shallowRef<ConsultTableModel[]>([])
+});
+const dataSource = shallowRef<ConsultTableModel[]>([]);
 const formModel = reactive<ConsultTableParams>({
   name: undefined,
   callNo: undefined,
   desc: undefined,
   status: undefined,
   updatedAt: undefined
-})
+});
 
-const tableSize = ref<string[]>(['large'])
+const tableSize = ref<string[]>(['large']);
 const sizeItems = ref<MenuProps['items']>([
   {
     key: 'large',
@@ -86,8 +86,8 @@ const sizeItems = ref<MenuProps['items']>([
     label: '紧凑',
     title: '紧凑'
   }
-])
-const open = ref(false)
+]);
+const open = ref(false);
 const options = computed(() => {
   return columns.value.map((item) => {
     if (item.dataIndex === 'action') {
@@ -95,52 +95,52 @@ const options = computed(() => {
         label: item.title,
         value: item.dataIndex,
         disabled: true
-      }
+      };
     }
     return {
       label: item.title,
       value: item.dataIndex
-    }
-  })
-})
-const dropdownVisible = ref(false)
-const getCheckList = computed(() => columns.value.map(item => item.dataIndex))
+    };
+  });
+});
+const dropdownVisible = ref(false);
+const getCheckList = computed(() => columns.value.map(item => item.dataIndex));
 const state = reactive({
   indeterminate: false,
   checkAll: true,
   checkList: getCheckList.value
-})
+});
 
 async function init() {
   if (loading.value)
-    return
-  loading.value = true
+    return;
+  loading.value = true;
   try {
     const { data } = await getListApi({
       ...formModel,
       current: pagination.current,
       pageSize: pagination.pageSize
-    })
-    dataSource.value = data ?? []
+    });
+    dataSource.value = data ?? [];
   }
   catch (e) {
-    console.log(e)
+    console.log(e);
   }
   finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 
 async function onSearch() {
-  pagination.current = 1
-  await init()
+  pagination.current = 1;
+  await init();
 }
 
 async function onReset() {
   // 清空所有参数重新请求
-  formModel.name = undefined
-  formModel.desc = undefined
-  await init()
+  formModel.name = undefined;
+  formModel.desc = undefined;
+  await init();
 }
 
 /**
@@ -149,18 +149,18 @@ async function onReset() {
  *
  */
 async function handleDelete(record: ConsultTableModel) {
-  const close = message.loading('删除中......')
+  const close = message.loading('删除中......');
   try {
-    const res = await deleteApi(record!.id)
+    const res = await deleteApi(record!.id);
     if (res.code === 200)
-      await init()
-    message.success('删除成功')
+      await init();
+    message.success('删除成功');
   }
   catch (e) {
-    console.log(e)
+    console.log(e);
   }
   finally {
-    close()
+    close();
   }
 }
 
@@ -169,9 +169,9 @@ async function handleDelete(record: ConsultTableModel) {
  *
  */
 function handleOk() {
-  open.value = false
-  Modal.destroyAll()
-  onSearch()
+  open.value = false;
+  Modal.destroyAll();
+  onSearch();
 }
 
 /**
@@ -179,8 +179,8 @@ function handleOk() {
  *
  */
 const handleSizeChange: MenuProps['onClick'] = (e) => {
-  tableSize.value[0] = e.key as string
-}
+  tableSize.value[0] = e.key as string;
+};
 
 /**
  * 过滤
@@ -190,14 +190,14 @@ function filterAction(value: string[]) {
   return columns.value.filter((item) => {
     if (value.includes(item.dataIndex)) {
       // 为true时，循环遍历的值会暴露出去
-      return true
+      return true;
     }
-    return false
-  })
+    return false;
+  });
 }
 
 // 备份columns
-const filterColumns = ref(filterAction(getCheckList.value))
+const filterColumns = ref(filterAction(getCheckList.value));
 
 /**
  * 全选/反选事件
@@ -208,25 +208,25 @@ function handleCheckAllChange(e: any) {
   Object.assign(state, {
     checkList: e.target.checked ? getCheckList.value : [],
     indeterminate: true
-  })
-  filterColumns.value = e.target.checked ? filterAction(getCheckList.value) : filterColumns.value.filter(item => item.dataIndex === 'action')
+  });
+  filterColumns.value = e.target.checked ? filterAction(getCheckList.value) : filterColumns.value.filter(item => item.dataIndex === 'action');
 }
 
 watch(
   () => state.checkList,
   (val) => {
-    state.indeterminate = !!val.length && val.length < getCheckList.value.length
-    state.checkAll = val.length === getCheckList.value.length
+    state.indeterminate = !!val.length && val.length < getCheckList.value.length;
+    state.checkAll = val.length === getCheckList.value.length;
   }
-)
+);
 
 /**
  * 重置事件
  *
  */
 function handleResetChange() {
-  state.checkList = getCheckList.value
-  filterColumns.value = filterAction(getCheckList.value)
+  state.checkList = getCheckList.value;
+  filterColumns.value = filterAction(getCheckList.value);
 }
 
 /**
@@ -234,15 +234,15 @@ function handleResetChange() {
  *
  */
 function handleCheckChange(value: any) {
-  const filterValue = filterAction(value)
-  filterColumns.value = filterValue
+  const filterValue = filterAction(value);
+  filterColumns.value = filterValue;
 }
 
 onMounted(() => {
-  init()
-})
+  init();
+});
 
-const expand = ref(false)
+const expand = ref(false);
 </script>
 
 <template>

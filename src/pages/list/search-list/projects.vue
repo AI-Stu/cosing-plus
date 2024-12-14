@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Category from './components/category.vue'
+import Category from './components/category.vue';
 
 const list = [
   {
@@ -306,7 +306,7 @@ const list = [
       }
     ]
   }
-]
+];
 </script>
 
 <template>

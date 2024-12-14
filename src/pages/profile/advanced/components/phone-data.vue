@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t } = useI18n();
 
 interface PhoneItem {
   name: string
@@ -33,11 +33,11 @@ const phoneDate = ref<PhoneItem[]>([
     spentTime: '80min',
     date: '2022-6-20 9:50'
   }
-])
+]);
 
 function removeItem(item: PhoneItem) {
-  const index = phoneDate.value.indexOf(item)
-  phoneDate.value.splice(index, 1)
+  const index = phoneDate.value.indexOf(item);
+  phoneDate.value.splice(index, 1);
 }
 </script>
 

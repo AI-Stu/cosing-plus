@@ -1,4 +1,4 @@
-import { Buffer } from 'node:buffer'
+import { Buffer } from 'node:buffer';
 
 const menuData = [
   {
@@ -10,7 +10,7 @@ const menuData = [
     path: '/dashboard/analysis',
     name: 'DashboardAnalysis',
     keepAlive: true,
-    locale: 'menu.dashboard.analysis',
+    locale: 'menu.dashboard.analysis'
   },
   {
     id: 1,
@@ -21,7 +21,7 @@ const menuData = [
     redirect: '/dashboard/analysis',
     path: '/dashboard',
     name: 'Dashboard',
-    locale: 'menu.dashboard',
+    locale: 'menu.dashboard'
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const menuData = [
     redirect: '/form/basic',
     path: '/form',
     name: 'Form',
-    locale: 'menu.form',
+    locale: 'menu.form'
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ const menuData = [
     redirect: '/link/iframe',
     path: '/link',
     name: 'Link',
-    locale: 'menu.link',
+    locale: 'menu.link'
 
   },
   {
@@ -55,7 +55,7 @@ const menuData = [
     path: '/link/iframe',
     name: 'LinkIframe',
     keepAlive: true,
-    locale: 'menu.link.iframe',
+    locale: 'menu.link.iframe'
   },
   {
     id: 7,
@@ -66,7 +66,7 @@ const menuData = [
     path: '/link/antdv',
     name: 'LinkAntdv',
     keepAlive: true,
-    locale: 'menu.link.antdv',
+    locale: 'menu.link.antdv'
   },
   {
     id: 8,
@@ -74,7 +74,7 @@ const menuData = [
     path: 'https://www.baidu.com',
     name: 'LinkExternal',
     title: '跳转百度',
-    locale: 'menu.link.external',
+    locale: 'menu.link.external'
   },
   {
     id: 9,
@@ -85,7 +85,7 @@ const menuData = [
     path: '/menu',
     redirect: '/menu/menu1',
     name: 'Menu',
-    locale: 'menu.menu',
+    locale: 'menu.menu'
   },
   {
     id: 10,
@@ -95,7 +95,7 @@ const menuData = [
     path: '/menu/menu1',
     name: 'MenuMenu11',
     keepAlive: true,
-    locale: 'menu.menu.menu1',
+    locale: 'menu.menu.menu1'
   },
   {
     id: 11,
@@ -104,7 +104,7 @@ const menuData = [
     component: '/menu/menu2',
     path: '/menu/menu2',
     keepAlive: true,
-    locale: 'menu.menu.menu2',
+    locale: 'menu.menu.menu2'
   },
   {
     id: 12,
@@ -113,7 +113,7 @@ const menuData = [
     redirect: '/menu/menu3/menu1',
     title: '菜单1-1',
     component: 'RouteView',
-    locale: 'menu.menu.menu3',
+    locale: 'menu.menu.menu3'
   },
   {
     id: 13,
@@ -122,7 +122,7 @@ const menuData = [
     component: '/menu/menu-1-1/menu1',
     title: '菜单1-1-1',
     keepAlive: true,
-    locale: 'menu.menu3.menu1',
+    locale: 'menu.menu3.menu1'
   },
   {
     id: 14,
@@ -131,7 +131,7 @@ const menuData = [
     component: '/menu/menu-1-1/menu2',
     title: '菜单1-1-2',
     keepAlive: true,
-    locale: 'menu.menu3.menu2',
+    locale: 'menu.menu3.menu2'
   },
   {
     id: 15,
@@ -142,7 +142,7 @@ const menuData = [
     name: 'Access',
     parentId: null,
     icon: 'ClusterOutlined',
-    locale: 'menu.access',
+    locale: 'menu.access'
   },
   {
     id: 16,
@@ -151,7 +151,7 @@ const menuData = [
     title: '通用权限',
     name: 'AccessCommon',
     component: '/access/common',
-    locale: 'menu.access.common',
+    locale: 'menu.access.common'
   },
   {
     id: 17,
@@ -160,7 +160,7 @@ const menuData = [
     title: '普通用户',
     name: 'AccessUser',
     component: '/access/user',
-    locale: 'menu.access.user',
+    locale: 'menu.access.user'
   },
   {
     id: 19,
@@ -171,7 +171,7 @@ const menuData = [
     redirect: '/exception/403',
     path: '/exception',
     name: 'Exception',
-    locale: 'menu.exception',
+    locale: 'menu.exception'
   },
   {
     id: 20,
@@ -180,7 +180,7 @@ const menuData = [
     title: '403',
     name: '403',
     component: '/exception/403',
-    locale: 'menu.exception.not-permission',
+    locale: 'menu.exception.not-permission'
   },
   {
     id: 21,
@@ -189,7 +189,7 @@ const menuData = [
     title: '404',
     name: '404',
     component: '/exception/404',
-    locale: 'menu.exception.not-find',
+    locale: 'menu.exception.not-find'
   },
   {
     id: 22,
@@ -198,7 +198,7 @@ const menuData = [
     title: '500',
     name: '500',
     component: '/exception/500',
-    locale: 'menu.exception.server-error',
+    locale: 'menu.exception.server-error'
   },
   {
     id: 23,
@@ -209,7 +209,7 @@ const menuData = [
     redirect: '/result/success',
     path: '/result',
     name: 'Result',
-    locale: 'menu.result',
+    locale: 'menu.result'
   },
   {
     id: 24,
@@ -218,7 +218,7 @@ const menuData = [
     title: '成功页',
     name: 'ResultSuccess',
     component: '/result/success',
-    locale: 'menu.result.success',
+    locale: 'menu.result.success'
   },
   {
     id: 25,
@@ -227,7 +227,7 @@ const menuData = [
     title: '失败页',
     name: 'ResultFail',
     component: '/result/fail',
-    locale: 'menu.result.fail',
+    locale: 'menu.result.fail'
   },
   {
     id: 26,
@@ -238,7 +238,7 @@ const menuData = [
     redirect: '/list/card-list',
     path: '/list',
     name: 'List',
-    locale: 'menu.list',
+    locale: 'menu.list'
   },
   {
     id: 27,
@@ -247,7 +247,7 @@ const menuData = [
     title: '卡片列表',
     name: 'ListCard',
     component: '/list/card-list',
-    locale: 'menu.list.card-list',
+    locale: 'menu.list.card-list'
   },
   {
     id: 28,
@@ -258,7 +258,7 @@ const menuData = [
     redirect: '/profile/basic',
     path: '/profile',
     name: 'Profile',
-    locale: 'menu.profile',
+    locale: 'menu.profile'
   },
   {
     id: 29,
@@ -267,7 +267,7 @@ const menuData = [
     title: '基础详情页',
     name: 'ProfileBasic',
     component: '/profile/basic/index',
-    locale: 'menu.profile.basic',
+    locale: 'menu.profile.basic'
   },
   {
     id: 30,
@@ -276,7 +276,7 @@ const menuData = [
     title: '搜索列表',
     name: 'SearchList',
     component: '/list/search-list',
-    locale: 'menu.list.search-list',
+    locale: 'menu.list.search-list'
   },
   {
     id: 31,
@@ -285,7 +285,7 @@ const menuData = [
     title: '搜索列表（文章）',
     name: 'SearchListArticles',
     component: '/list/search-list/articles',
-    locale: 'menu.list.search-list.articles',
+    locale: 'menu.list.search-list.articles'
   },
   {
     id: 32,
@@ -294,7 +294,7 @@ const menuData = [
     title: '搜索列表（项目）',
     name: 'SearchListProjects',
     component: '/list/search-list/projects',
-    locale: 'menu.list.search-list.projects',
+    locale: 'menu.list.search-list.projects'
   },
   {
     id: 33,
@@ -303,7 +303,7 @@ const menuData = [
     title: '搜索列表（应用）',
     name: 'SearchListApplications',
     component: '/list/search-list/applications',
-    locale: 'menu.list.search-list.applications',
+    locale: 'menu.list.search-list.applications'
   },
   {
     id: 34,
@@ -312,7 +312,7 @@ const menuData = [
     title: '标准列表',
     name: 'BasicCard',
     component: '/list/basic-list',
-    locale: 'menu.list.basic-list',
+    locale: 'menu.list.basic-list'
   },
   {
     id: 35,
@@ -321,7 +321,7 @@ const menuData = [
     title: '高级详细页',
     name: 'ProfileAdvanced',
     component: '/profile/advanced/index',
-    locale: 'menu.profile.advanced',
+    locale: 'menu.profile.advanced'
   },
   {
     id: 4,
@@ -331,7 +331,7 @@ const menuData = [
     path: '/form/basic-form',
     name: 'FormBasic',
     keepAlive: false,
-    locale: 'menu.form.basic-form',
+    locale: 'menu.form.basic-form'
   },
   {
     id: 36,
@@ -342,7 +342,7 @@ const menuData = [
     redirect: '/account/center',
     path: '/account',
     name: 'Account',
-    locale: 'menu.account',
+    locale: 'menu.account'
   },
   {
     id: 37,
@@ -351,7 +351,7 @@ const menuData = [
     title: '个人中心',
     name: 'AccountCenter',
     component: '/account/center',
-    locale: 'menu.account.center',
+    locale: 'menu.account.center'
   },
   {
     id: 38,
@@ -360,7 +360,7 @@ const menuData = [
     title: '个人设置',
     name: 'AccountSettings',
     component: '/account/settings',
-    locale: 'menu.account.settings',
+    locale: 'menu.account.settings'
   },
   {
     id: 39,
@@ -370,7 +370,7 @@ const menuData = [
     path: '/form/step-form',
     name: 'FormStep',
     keepAlive: false,
-    locale: 'menu.form.step-form',
+    locale: 'menu.form.step-form'
   },
   {
     id: 40,
@@ -380,7 +380,7 @@ const menuData = [
     path: '/form/advanced-form',
     name: 'FormAdvanced',
     keepAlive: false,
-    locale: 'menu.form.advanced-form',
+    locale: 'menu.form.advanced-form'
   },
   {
     id: 41,
@@ -389,7 +389,7 @@ const menuData = [
     title: '查询表格',
     name: 'ConsultTable',
     component: '/list/table-list',
-    locale: 'menu.list.consult-table',
+    locale: 'menu.list.consult-table'
   },
   {
     id: 42,
@@ -399,7 +399,7 @@ const menuData = [
     path: '/dashboard/monitor',
     name: 'DashboardMonitor',
     keepAlive: true,
-    locale: 'menu.dashboard.monitor',
+    locale: 'menu.dashboard.monitor'
   },
   {
     id: 43,
@@ -409,7 +409,7 @@ const menuData = [
     path: '/dashboard/workplace',
     name: 'DashboardWorkplace',
     keepAlive: true,
-    locale: 'menu.dashboard.workplace',
+    locale: 'menu.dashboard.workplace'
   },
   {
     id: 44,
@@ -418,7 +418,7 @@ const menuData = [
     title: '增删改查表格',
     name: 'CrudTable',
     component: '/list/crud-table',
-    locale: 'menu.list.crud-table',
+    locale: 'menu.list.crud-table'
   },
   {
     id: 45,
@@ -427,7 +427,7 @@ const menuData = [
     redirect: '/menu/menu4/menu1',
     title: '菜单2-1',
     component: 'RouteView',
-    locale: 'menu.menu.menu4',
+    locale: 'menu.menu.menu4'
   },
   {
     id: 46,
@@ -436,7 +436,7 @@ const menuData = [
     component: '/menu/menu-2-1/menu1',
     title: '菜单2-1-1',
     keepAlive: true,
-    locale: 'menu.menu4.menu1',
+    locale: 'menu.menu4.menu1'
   },
   {
     id: 47,
@@ -445,9 +445,9 @@ const menuData = [
     component: '/menu/menu-2-1/menu2',
     title: '菜单2-1-2',
     keepAlive: true,
-    locale: 'menu.menu4.menu2',
-  },
-]
+    locale: 'menu.menu4.menu2'
+  }
+];
 
 export const accessMenuData = [
   {
@@ -457,17 +457,17 @@ export const accessMenuData = [
     title: '管理员',
     name: 'AccessAdmin',
     component: '/access/admin',
-    locale: 'menu.access.admin',
-  },
+    locale: 'menu.access.admin'
+  }
 
-]
+];
 
 export default eventHandler((event) => {
-  const token = getHeader(event, 'Authorization')
-  const username = Buffer.from(token as any, 'base64').toString('utf-8')
+  const token = getHeader(event, 'Authorization');
+  const username = Buffer.from(token as any, 'base64').toString('utf-8');
   return {
     code: 200,
     msg: '获取成功',
-    data: [...menuData, ...(username === 'admin' ? accessMenuData : [])],
-  }
-})
+    data: [...menuData, ...(username === 'admin' ? accessMenuData : [])]
+  };
+});

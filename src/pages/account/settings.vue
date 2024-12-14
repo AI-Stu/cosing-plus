@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import basicSetting from './components/basic-setting.vue'
-import securitySetting from './components/security-setting.vue'
-import accountSetting from './components/account-setting.vue'
-import messageSetting from './components/message-setting.vue'
+import basicSetting from './components/basic-setting.vue';
+import securitySetting from './components/security-setting.vue';
+import accountSetting from './components/account-setting.vue';
+import messageSetting from './components/message-setting.vue';
 
-const { t } = useI18n()
-const selectedKeys = ref(['1'])
+const { t } = useI18n();
+const selectedKeys = ref(['1']);
 
 const items = computed(() => {
   return [
@@ -29,19 +29,19 @@ const items = computed(() => {
       label: seti18n('4'),
       title: 'Navigation Two'
     }
-  ]
-})
+  ];
+});
 
 function seti18n(key: string) {
   switch (key) {
     case '1':
-      return t('account.settings.basic-setting')
+      return t('account.settings.basic-setting');
     case '2':
-      return t('account.settings.security-setting')
+      return t('account.settings.security-setting');
     case '3':
-      return t('account.settings.account-setting')
+      return t('account.settings.account-setting');
     case '4':
-      return t('account.settings.message-setting')
+      return t('account.settings.message-setting');
   }
 }
 </script>

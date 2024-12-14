@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { EditOutlined, EllipsisOutlined, SettingOutlined, ShareAltOutlined } from '@ant-design/icons-vue'
-import Category from './components/category.vue'
+import { EditOutlined, EllipsisOutlined, SettingOutlined, ShareAltOutlined } from '@ant-design/icons-vue';
+import Category from './components/category.vue';
 
 const list = [
   {
@@ -307,7 +307,7 @@ const list = [
       }
     ]
   }
-]
+];
 </script>
 
 <template>

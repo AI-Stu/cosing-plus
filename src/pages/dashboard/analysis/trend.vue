@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue'
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue';
 
 defineProps({
   flag: {
@@ -10,7 +10,7 @@ defineProps({
     type: String,
     default: undefined
   }
-})
+});
 </script>
 
 <template>

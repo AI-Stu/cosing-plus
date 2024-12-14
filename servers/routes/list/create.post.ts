@@ -1,8 +1,8 @@
 export default eventHandler(async (event) => {
-  const body = await readBody(event)
-  console.log(body)
+  const body = await readBody(event);
+  console.log(body);
   return {
     code: 200,
-    msg: '创建成功',
-  }
-})
+    msg: '创建成功'
+  };
+});

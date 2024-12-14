@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Modal } from 'ant-design-vue'
-import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
-import { createVNode } from 'vue'
-import dayjs from 'dayjs'
-import { getListApi } from '~@/api/list/basic-list'
-import VirtualList from '@/components/virtual-list/index.vue'
+import { Modal } from 'ant-design-vue';
+import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
+import { createVNode } from 'vue';
+import dayjs from 'dayjs';
+import { getListApi } from '~@/api/list/basic-list';
+import VirtualList from '@/components/virtual-list/index.vue';
 
 // import VirtualListItem from '@/components/virtual-list-item/index.vue'
 
@@ -21,33 +21,33 @@ const workData = ref([
     title: '本周完成任务数',
     content: '24个任务'
   }
-])
+]);
 
-const radioValue = ref('a')
+const radioValue = ref('a');
 
-const searchValue = ref()
+const searchValue = ref();
 
 function onSearch(value: string) {
-  console.log('use value', value)
+  console.log('use value', value);
 }
 
-const dataSource = ref<any[]>([])
+const dataSource = ref<any[]>([]);
 
 const pagination = ref({
   pageSize: 5,
   pageSizeOptions: ['10', '20', '30', '40', '50'],
   showQuickJumper: true,
   total: 0
-})
+});
 
 /*
   获取数据
 */
 async function getList() {
-  const data = await getListApi()
-  dataSource.value = data.data ?? []
-  pagination.value.total = data.data?.length ?? 0
-  console.log(dataSource.value)
+  const data = await getListApi();
+  dataSource.value = data.data ?? [];
+  pagination.value.total = data.data?.length ?? 0;
+  console.log(dataSource.value);
 }
 
 /*
@@ -61,10 +61,10 @@ function showConfirm(index: number) {
     cancelText: '取消',
     okText: '确认',
     onOk() {
-      dataSource.value.splice(index, 1)
+      dataSource.value.splice(index, 1);
     },
     class: 'test'
-  })
+  });
 }
 
 /*
@@ -84,45 +84,45 @@ const formState = reactive<FormState>({
   owner: '清风不问烟雨',
   description: '',
   index: 0
-})
+});
 
-const openModalValue = ref(false)
+const openModalValue = ref(false);
 
-const isAdd = ref<boolean>(false)
+const isAdd = ref<boolean>(false);
 
 // 打开对话框
 function openModal(item: any, charge?: boolean) {
   if (charge) {
-    isAdd.value = true
-    openModalValue.value = true
+    isAdd.value = true;
+    openModalValue.value = true;
   }
   else {
-    isAdd.value = false
-    openModalValue.value = true
-    formState.title = item.title
-    formState.description = item.content
-    formState.start = dayjs(item.start)
-    formState.index = dataSource.value.indexOf(item)
+    isAdd.value = false;
+    openModalValue.value = true;
+    formState.title = item.title;
+    formState.description = item.content;
+    formState.start = dayjs(item.start);
+    formState.index = dataSource.value.indexOf(item);
   }
 }
 
 // 操作成功后操作
 function countDown() {
-  let secondsToGo = 2
+  let secondsToGo = 2;
   const modal = Modal.success({
     title: '操作成功',
     content: `本窗口将在${secondsToGo}后自动关闭`
-  })
+  });
   const interval = setInterval(() => {
-    secondsToGo -= 1
+    secondsToGo -= 1;
     modal.update({
       content: `本窗口将在${secondsToGo}后自动关闭`
-    })
-  }, 1000)
+    });
+  }, 1000);
   setTimeout(() => {
-    clearInterval(interval)
-    modal.destroy()
-  }, secondsToGo * 1000)
+    clearInterval(interval);
+    modal.destroy();
+  }, secondsToGo * 1000);
 }
 
 // 确定 处理编辑或添加
@@ -130,48 +130,48 @@ function handleOk() {
   for (const item in formState) {
     if (item !== 'index') {
       if ((!(formState as any)[item]))
-        return
+        return;
     }
   }
 
-  const currentIndex = formState.index as number
+  const currentIndex = formState.index as number;
 
   if (isAdd.value) {
     const newItem = {
       title: formState.title,
       content: formState.description,
       start: formState.start.format('YYYY-MM-DD HH:mm')
-    }
-    dataSource.value.splice(0, 0, newItem)
+    };
+    dataSource.value.splice(0, 0, newItem);
   }
   else {
     for (const item in formState) {
       if (item === 'start')
-        dataSource.value[currentIndex][item] = formState.start.format('YYYY-MM-DD HH:mm')
+        dataSource.value[currentIndex][item] = formState.start.format('YYYY-MM-DD HH:mm');
       else
-        dataSource.value[currentIndex][item] = (formState as any)[item]
+        dataSource.value[currentIndex][item] = (formState as any)[item];
     }
   }
 
-  openModalValue.value = false
+  openModalValue.value = false;
 
-  cancelModal()
+  cancelModal();
 
-  countDown()
+  countDown();
 }
 
 // 关闭对话框后操作
 function cancelModal() {
-  console.log('cancel')
-  formState.description = ''
-  formState.owner = '清风不问烟雨'
-  formState.start = ''
-  formState.title = ''
+  console.log('cancel');
+  formState.description = '';
+  formState.owner = '清风不问烟雨';
+  formState.start = '';
+  formState.title = '';
 }
 
 onMounted(() => {
-  getList()
-})
+  getList();
+});
 </script>
 
 <template>

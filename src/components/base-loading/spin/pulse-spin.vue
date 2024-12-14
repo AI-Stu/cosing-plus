@@ -4,7 +4,7 @@ defineProps({
     type: String,
     default: '#3ff9dc'
   }
-})
+});
 </script>
 
 <template>

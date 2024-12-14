@@ -1,7 +1,7 @@
-import type { PluginVisualizerOptions } from 'rollup-plugin-visualizer'
-import type { ConfigEnv, PluginOption, UserConfig } from 'vite'
-import type { PluginOptions } from 'vite-plugin-dts'
-import type { Options as PwaPluginOptions } from 'vite-plugin-pwa'
+import type { PluginVisualizerOptions } from 'rollup-plugin-visualizer';
+import type { ConfigEnv, PluginOption, UserConfig } from 'vite';
+import type { PluginOptions } from 'vite-plugin-dts';
+import type { Options as PwaPluginOptions } from 'vite-plugin-pwa';
 
 interface IImportMap {
   imports?: Record<string, string>
@@ -161,4 +161,4 @@ export type {
   LibraryPluginOptions,
   NitroMockPluginOptions,
   PrintPluginOptions
-}
+};

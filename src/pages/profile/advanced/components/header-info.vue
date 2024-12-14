@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const command = ref('a')
-const activeKey = ref()
-const { t } = useI18n()
+const command = ref('a');
+const activeKey = ref();
+const { t } = useI18n();
 </script>
 
 <template>

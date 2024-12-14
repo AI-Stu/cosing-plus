@@ -7,9 +7,9 @@ interface IDataItem {
 
 defineProps<{
   dataSource: IDataItem[]
-}>()
+}>();
 
-const { t } = useI18n()
+const { t } = useI18n();
 </script>
 
 <template>

@@ -1,5 +1,5 @@
-import type { message, notification } from 'ant-design-vue'
-import type { ModalFunc } from 'ant-design-vue/es/modal/Modal'
+import type { message, notification } from 'ant-design-vue';
+import type { ModalFunc } from 'ant-design-vue/es/modal/Modal';
 
 interface GlobalConfigIntl {
   message?: Omit<typeof message, 'useMessage'>
@@ -12,25 +12,25 @@ interface GlobalConfigIntl {
   }
   notification?: Omit<typeof notification, 'useNotification'>
 }
-const globalConfig = reactive<GlobalConfigIntl>({})
+const globalConfig = reactive<GlobalConfigIntl>({});
 
 export function useGlobalConfig() {
-  return globalConfig
+  return globalConfig;
 }
 export function useSetGlobalConfig(config: GlobalConfigIntl) {
-  globalConfig.message = config.message
-  globalConfig.modal = config.modal
-  globalConfig.notification = config.notification
+  globalConfig.message = config.message;
+  globalConfig.modal = config.modal;
+  globalConfig.notification = config.notification;
 }
 
 export function useMessage() {
-  return globalConfig.message!
+  return globalConfig.message!;
 }
 
 export function useModal() {
-  return globalConfig.modal!
+  return globalConfig.modal!;
 }
 
 export function useNotification() {
-  return globalConfig.notification!
+  return globalConfig.notification!;
 }

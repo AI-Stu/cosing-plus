@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { isFunction } from '@v-c/utils'
-import type { VNodeChild } from 'vue'
-import { useLayoutMenuInject } from './context.ts'
-import { useLayoutState } from '~/layouts/basic-layout/context'
+import { isFunction } from '@v-c/utils';
+import type { VNodeChild } from 'vue';
+import { useLayoutMenuInject } from './context.ts';
+import { useLayoutState } from '~/layouts/basic-layout/context';
 
 defineProps<{
   title?: string
-}>()
+}>();
 defineSlots<{
   default: (props: any) => any
   title: (props: any) => any
@@ -14,51 +14,51 @@ defineSlots<{
   extraContent: (props: any) => any
   extra: (props: any) => any
   footer: (props: any) => any
-}>()
-const { layoutMenu: layoutMenuStore, appStore } = useLayoutMenuInject()
-const { layoutSetting } = (storeToRefs as any)(appStore)
-const { menuDataMap } = (storeToRefs as any)(layoutMenuStore)
-const route = useRoute()
+}>();
+const { layoutMenu: layoutMenuStore, appStore } = useLayoutMenuInject();
+const { layoutSetting } = (storeToRefs as any)(appStore);
+const { menuDataMap } = (storeToRefs as any)(layoutMenuStore);
+const route = useRoute();
 function getCurrentItem() {
-  const key: string = route.meta?.originPath ?? route.path
+  const key: string = route.meta?.originPath ?? route.path;
   if (key && menuDataMap.value.has(key))
-    return menuDataMap.value.get(key)
-  return {} as any
+    return menuDataMap.value.get(key);
+  return {} as any;
 }
-const currentItem = shallowRef(getCurrentItem())
+const currentItem = shallowRef(getCurrentItem());
 onBeforeMount(() => {
-  currentItem.value = getCurrentItem()
-})
+  currentItem.value = getCurrentItem();
+});
 
-let timer: ReturnType<typeof setTimeout> | undefined
+let timer: ReturnType<typeof setTimeout> | undefined;
 watch(() => route.path, () => {
   if (timer) {
-    clearTimeout(timer)
-    timer = undefined
+    clearTimeout(timer);
+    timer = undefined;
   }
   timer = setTimeout(() => {
-    currentItem.value = getCurrentItem()
-  }, 300)
-})
+    currentItem.value = getCurrentItem();
+  }, 300);
+});
 
-const { contentWidth } = useLayoutState()
+const { contentWidth } = useLayoutState();
 const contentCls = computed(() => {
   const cls: string[] = [
     'flex flex-col flex-1'
-  ]
+  ];
   if (contentWidth.value === 'Fluid')
-    cls.push('w-full')
+    cls.push('w-full');
 
   else if (contentWidth.value === 'Fixed')
-    cls.push(...['max-w-1200px w-1200px', 'mx-auto'])
+    cls.push(...['max-w-1200px w-1200px', 'mx-auto']);
 
-  return cls
-})
+  return cls;
+});
 function renderTitle(title: VNodeChild | (() => VNodeChild)) {
   if (isFunction(title))
-    return title()
+    return title();
 
-  return title
+  return title;
 }
 </script>
 

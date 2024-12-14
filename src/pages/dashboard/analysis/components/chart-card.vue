@@ -18,7 +18,7 @@ const props = defineProps({
   contentHeight: {
     type: Number
   }
-})
+});
 </script>
 
 <template>

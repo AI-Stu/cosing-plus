@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Line } from '@antv/g2plot'
+import { Line } from '@antv/g2plot';
 
 const props = defineProps({
   offlineChartData: {
     type: Array
   }
-})
+});
 
-const container = ref()
+const container = ref();
 
 onMounted(() => {
   new Line(container.value, {
@@ -26,8 +26,8 @@ onMounted(() => {
       start: 0.1,
       end: 0.5
     }
-  }).render()
-})
+  }).render();
+});
 </script>
 
 <template>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons-vue'
+import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons-vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 const result = computed(() => {
   return {
     title: t('result.fail.error.title'),
     description: t('result.fail.error.description')
-  }
-})
+  };
+});
 </script>
 
 <template>

@@ -5,7 +5,7 @@ interface DataItem {
   checked: boolean
 }
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const data = reactive<DataItem[]>([
   {
@@ -23,7 +23,7 @@ const data = reactive<DataItem[]>([
     desc: t('account.settings.message.desc3'),
     checked: true
   }
-])
+]);
 </script>
 
 <template>

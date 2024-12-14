@@ -1,3 +1,3 @@
 export default eventHandler(() => {
-  return { nitro: 'Hello Cosing Plus' }
-})
+  return { nitro: 'Hello Cosing Plus' };
+});

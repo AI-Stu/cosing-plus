@@ -1,46 +1,46 @@
 <script setup lang="ts">
-import { TinyArea } from '@antv/g2plot'
+import { TinyArea } from '@antv/g2plot';
 
 interface activeDataItemType {
   x: string
   y: number
 }
 
-const activeData = ref<activeDataItemType[]>([])
+const activeData = ref<activeDataItemType[]>([]);
 
-const tinyAreaData = ref<number[]>([])
+const tinyAreaData = ref<number[]>([]);
 
-let tinyArea: TinyArea | undefined
-let requestRef: any
-let timer: any
+let tinyArea: TinyArea | undefined;
+let requestRef: any;
+let timer: any;
 
 function fixedZero(val: number) {
-  return val < 10 ? `0${val}` : val
+  return val < 10 ? `0${val}` : val;
 }
 
 function getActiveData() {
-  activeData.value = []
-  tinyAreaData.value = []
+  activeData.value = [];
+  tinyAreaData.value = [];
   for (let i = 0; i < 24; i += 1) {
     activeData.value.push({
       x: `${fixedZero(i)}:00`,
       y: Math.floor(Math.random() * 200) + i * 50
-    })
-    tinyAreaData.value.push(Math.floor(Math.random() * 200) + i * 50)
+    });
+    tinyAreaData.value.push(Math.floor(Math.random() * 200) + i * 50);
   }
-  tinyArea?.changeData(tinyAreaData.value)
+  tinyArea?.changeData(tinyAreaData.value);
 }
 
 function loopData() {
   requestRef = requestAnimationFrame(() => {
     timer = window.setTimeout(() => {
-      getActiveData()
-      loopData()
-    }, 1000)
-  })
+      getActiveData();
+      loopData();
+    }, 1000);
+  });
 }
 
-const tinyAreaContainer = ref()
+const tinyAreaContainer = ref();
 
 onMounted(() => {
   tinyArea = new TinyArea(tinyAreaContainer.value, {
@@ -48,20 +48,20 @@ onMounted(() => {
     data: tinyAreaData.value,
     smooth: true,
     autoFit: true
-  })
-  tinyArea.render()
-  loopData()
-  getActiveData()
-})
+  });
+  tinyArea.render();
+  loopData();
+  getActiveData();
+});
 
 onBeforeUnmount(() => {
-  clearTimeout(timer)
+  clearTimeout(timer);
   if (requestRef)
-    cancelAnimationFrame(requestRef)
+    cancelAnimationFrame(requestRef);
 
-  tinyArea?.destroy()
-  tinyArea = undefined
-})
+  tinyArea?.destroy();
+  tinyArea = undefined;
+});
 </script>
 
 <template>

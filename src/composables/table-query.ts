@@ -1,6 +1,6 @@
-import type { PaginationProps } from 'ant-design-vue'
-import type { TableRowSelection } from 'ant-design-vue/es/table/interface'
-import { assign } from 'lodash'
+import type { PaginationProps } from 'ant-design-vue';
+import type { TableRowSelection } from 'ant-design-vue/es/table/interface';
+import { assign } from 'lodash';
 
 /**
  * 表格分页扩展类型
@@ -99,8 +99,8 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
       selectedRowKeys: [],
       selectedRows: [],
       onChange(selectedRowKeys: any[], selectedRows: any[]) {
-        state.rowSelections.selectedRowKeys = selectedRowKeys
-        state.rowSelections.selectedRows = selectedRows
+        state.rowSelections.selectedRowKeys = selectedRowKeys;
+        state.rowSelections.selectedRows = selectedRows;
       }
     },
     queryOnMounted: true,
@@ -116,74 +116,74 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
         showQuickJumper: true,
         showTotal: total => `总数据位：${total}`,
         onChange(current, pageSize) {
-          state.pagination!.pageSize = pageSize
-          state.pagination!.current = current
-          query()
+          state.pagination!.pageSize = pageSize;
+          state.pagination!.current = current;
+          query();
         }
       } as TablePaginationProps, _options.pagination),
     expand: false,
     expandChange() {
-      state.expand = !state.expand
+      state.expand = !state.expand;
     },
     beforeQuery() {
     },
     afterQuery(data: TablePaginationProps) {
-      return data
+      return data;
     }
-  }, _options))
+  }, _options));
 
   // 查询方法
   async function query() {
     if (state.loading)
-      return
-    state.loading = true
+      return;
+    state.loading = true;
 
     try {
-      await state.beforeQuery()
+      await state.beforeQuery();
       const { data } = await state.queryApi({
         current: state.pagination.current,
         pageSize: state.pagination.pageSize,
         column: state.pagination.column,
         order: state.pagination.order,
         ...state.queryParams
-      })
+      });
       if (data) {
-        const _data = await state.afterQuery(data)
-        state.dataSource = _data.records ?? []
-        state.pagination.total = _data.total ?? 0
+        const _data = await state.afterQuery(data);
+        state.dataSource = _data.records ?? [];
+        state.pagination.total = _data.total ?? 0;
       }
     }
     catch (e) {
-      throw new Error(`Query Failed: ${e}`)
+      throw new Error(`Query Failed: ${e}`);
     }
     finally {
-      state.loading = false
+      state.loading = false;
     }
   }
 
   // 重置方法
   function resetQuery() {
-    state.pagination.current = 1
-    state.queryParams = {}
-    query()
+    state.pagination.current = 1;
+    state.queryParams = {};
+    query();
   }
 
   // 初始化查询
   function initQuery() {
-    state.pagination.current = 1
-    query()
+    state.pagination.current = 1;
+    query();
   }
 
   onMounted(() => {
     if (!state.queryOnMounted)
-      return
-    query()
-  })
+      return;
+    query();
+  });
 
   return {
     query,
     resetQuery,
     initQuery,
     state
-  }
+  };
 }

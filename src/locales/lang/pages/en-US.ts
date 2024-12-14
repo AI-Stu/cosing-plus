@@ -199,4 +199,4 @@ export default {
   'account.settings.message.desc1': 'Messages from other users will be notified in the form of an internal message',
   'account.settings.message.desc2': 'Messages from other System will be notified in the form of an internal message',
   'account.settings.message.desc3': 'Messages from other task will be notified in the form of an internal message'
-}
+};

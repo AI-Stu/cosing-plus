@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const emit = defineEmits(['finish'])
-const router = useRouter()
+const emit = defineEmits(['finish']);
+const router = useRouter();
 function finish() {
-  emit('finish')
+  emit('finish');
 }
 function toOrderList() {
-  router.push('/profile/advanced')
+  router.push('/profile/advanced');
 }
 </script>
 

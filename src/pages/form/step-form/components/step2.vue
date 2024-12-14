@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue'
+import type { FormInstance } from 'ant-design-vue';
 
-const emit = defineEmits(['prevStep', 'nextStep'])
-const formRef = ref<FormInstance>()
-const labelCol = { lg: { span: 5 }, sm: { span: 5 } }
-const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } }
+const emit = defineEmits(['prevStep', 'nextStep']);
+const formRef = ref<FormInstance>();
+const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
+const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 
 const formState = reactive({
   paymentPassword: '123456'
-})
+});
 function nextStep() {
   formRef.value?.validateFields().then(() => {
-    emit('nextStep')
-  })
+    emit('nextStep');
+  });
 }
 
 function prevStep() {
-  emit('prevStep')
+  emit('prevStep');
 }
 </script>
 

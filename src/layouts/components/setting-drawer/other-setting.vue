@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { CheckedType } from '~@/layouts/basic-layout/typing'
+import type { CheckedType } from '~@/layouts/basic-layout/typing';
 
 const props = defineProps<{
   colorWeak?: boolean
   colorGray?: boolean
   t?: (key: string, ...args: any[]) => string
-}>()
-const emit = defineEmits(['changeSetting'])
+}>();
+const emit = defineEmits(['changeSetting']);
 const list = computed(() => ([
   {
     title: 'weakmode',
@@ -20,12 +20,12 @@ const list = computed(() => ([
     disabled: false,
     disabledReason: ''
   }
-]))
+]));
 function handleToggleChange(key: string, value: CheckedType) {
-  emit('changeSetting', key, value)
+  emit('changeSetting', key, value);
 }
 function isToggleChecked(key: string) {
-  return Reflect.get(props, key)
+  return Reflect.get(props, key);
 }
 </script>
 

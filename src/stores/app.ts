@@ -1,8 +1,8 @@
-import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context'
-import { theme as antdTheme } from 'ant-design-vue/es'
-import type { ContentWidth, LayoutType, ThemeType } from '~@/layouts/basic-layout/typing'
-import type { AnimationNameValueType } from '~@/config/default-setting'
-import defaultSetting from '~@/config/default-setting'
+import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context';
+import { theme as antdTheme } from 'ant-design-vue/es';
+import type { ContentWidth, LayoutType, ThemeType } from '~@/layouts/basic-layout/typing';
+import type { AnimationNameValueType } from '~@/config/default-setting';
+import defaultSetting from '~@/config/default-setting';
 
 export interface LayoutSetting {
   title?: string
@@ -35,8 +35,8 @@ export interface LayoutSetting {
 }
 
 export const useAppStore = defineStore('app', () => {
-  const { darkAlgorithm, compactAlgorithm, defaultAlgorithm } = antdTheme
-  const layoutSetting = reactive<LayoutSetting>(defaultSetting)
+  const { darkAlgorithm, compactAlgorithm, defaultAlgorithm } = antdTheme;
+  const layoutSetting = reactive<LayoutSetting>(defaultSetting);
   const themeConfig = reactive<ThemeConfig>({
     algorithm: [antdTheme.defaultAlgorithm],
     token: {
@@ -44,40 +44,40 @@ export const useAppStore = defineStore('app', () => {
       colorPrimary: layoutSetting.colorPrimary
     },
     components: {}
-  })
-  const locale = ref<string>(lsLocaleState.value || '')
+  });
+  const locale = ref<string>(lsLocaleState.value || '');
   const toggleLocale = (locale: string) => {
-    lsLocaleState.value = locale
-  }
+    lsLocaleState.value = locale;
+  };
   const toggleCompact = (isCompact = true) => {
     // 判断是否存在compactAlgorithm
     if (Array.isArray(themeConfig.algorithm)) {
-      const index = themeConfig.algorithm.findIndex((item: any) => item === compactAlgorithm)
+      const index = themeConfig.algorithm.findIndex((item: any) => item === compactAlgorithm);
       if (index >= 0 && isCompact) {
-        return
+        return;
       }
     }
-    layoutSetting.compactAlgorithm = isCompact
-    const algorithm = layoutSetting.theme === 'dark' ? [darkAlgorithm] : [defaultAlgorithm]
-    isCompact && algorithm.push(compactAlgorithm)
-    themeConfig.algorithm = algorithm
-  }
+    layoutSetting.compactAlgorithm = isCompact;
+    const algorithm = layoutSetting.theme === 'dark' ? [darkAlgorithm] : [defaultAlgorithm];
+    isCompact && algorithm.push(compactAlgorithm);
+    themeConfig.algorithm = algorithm;
+  };
   const toggleTheme = (theme: ThemeType) => {
-    toggleCompact(layoutSetting.compactAlgorithm)
+    toggleCompact(layoutSetting.compactAlgorithm);
     if (layoutSetting.theme === theme)
-      return
-    layoutSetting.theme = theme
+      return;
+    layoutSetting.theme = theme;
     if (theme === 'light' || theme === 'inverted') {
       if (themeConfig.token)
-        themeConfig.token.colorBgContainer = '#fff'
+        themeConfig.token.colorBgContainer = '#fff';
       if (themeConfig.components?.Menu)
-        delete themeConfig.components.Menu
-      toggleDark(false)
+        delete themeConfig.components.Menu;
+      toggleDark(false);
     }
     else if (theme === 'dark') {
-      toggleDark(true)
+      toggleDark(true);
       if (themeConfig.token)
-        themeConfig.token.colorBgContainer = 'rgb(36, 37, 37)'
+        themeConfig.token.colorBgContainer = 'rgb(36, 37, 37)';
       if (themeConfig.components) {
         themeConfig.components = {
           ...themeConfig.components,
@@ -86,103 +86,103 @@ export const useAppStore = defineStore('app', () => {
             colorSubItemBg: 'rgb(36, 37, 37)',
             menuSubMenuBg: 'rgb(36, 37, 37)'
           } as any
-        }
+        };
       }
     }
-  }
+  };
 
   const toggleDrawerVisible = (visible: boolean) => {
-    layoutSetting.drawerVisible = visible
-  }
+    layoutSetting.drawerVisible = visible;
+  };
 
   const toggleColorPrimary = (color: string) => {
-    layoutSetting.colorPrimary = color
+    layoutSetting.colorPrimary = color;
     if (themeConfig.token)
-      themeConfig.token.colorPrimary = color
-  }
+      themeConfig.token.colorPrimary = color;
+  };
 
   // 监听isDark的变化
   watch(
     isDark,
     () => {
       if (isDark.value)
-        toggleTheme('dark')
+        toggleTheme('dark');
       else
-        toggleTheme('light')
+        toggleTheme('light');
     },
     {
       immediate: true
     }
-  )
+  );
 
   // 监听isDark的变化
   watch(preferredLanguages, () => {
-    toggleLocale(preferredLanguages.value[0] || '')
-  })
+    toggleLocale(preferredLanguages.value[0] || '');
+  });
 
   const toggleCollapsed = (collapsed: boolean) => {
-    layoutSetting.collapsed = collapsed
-  }
+    layoutSetting.collapsed = collapsed;
+  };
 
   function toggleGray(isGray = true) {
-    layoutSetting.colorGray = isGray
-    const dom = document.querySelector('body')
+    layoutSetting.colorGray = isGray;
+    const dom = document.querySelector('body');
     if (dom) {
       if (isGray) {
-        toggleWeak(false)
-        dom.style.filter = 'grayscale(100%)'
+        toggleWeak(false);
+        dom.style.filter = 'grayscale(100%)';
       }
-      else { dom.style.filter = '' }
+      else { dom.style.filter = ''; }
     }
   }
   if (layoutSetting.colorGray)
-    toggleGray(true)
+    toggleGray(true);
 
   function toggleWeak(isWeak = true) {
-    layoutSetting.colorWeak = isWeak
-    const dom = document.querySelector('body')
+    layoutSetting.colorWeak = isWeak;
+    const dom = document.querySelector('body');
     if (dom) {
       if (isWeak) {
-        toggleGray(false)
-        dom.style.filter = 'invert(80%)'
+        toggleGray(false);
+        dom.style.filter = 'invert(80%)';
       }
-      else { dom.style.filter = '' }
+      else { dom.style.filter = ''; }
     }
   }
   if (layoutSetting.colorWeak)
-    toggleWeak(true)
+    toggleWeak(true);
 
   const toggleLayout = (layout: LayoutType) => {
     if (layoutSetting.theme === 'inverted' && layout === 'mix')
-      layoutSetting.theme = 'light'
+      layoutSetting.theme = 'light';
 
     if (layout !== 'mix')
-      layoutSetting.splitMenus = false
-    else layoutSetting.leftCollapsed = true
+      layoutSetting.splitMenus = false;
+    else layoutSetting.leftCollapsed = true;
 
     if (layout === 'top')
-      layoutSetting.contentWidth = 'Fixed'
-    else layoutSetting.contentWidth = 'Fluid'
+      layoutSetting.contentWidth = 'Fixed';
+    else layoutSetting.contentWidth = 'Fluid';
 
-    layoutSetting.layout = layout
-  }
+    layoutSetting.layout = layout;
+  };
 
   const changeSettingLayout = (key: keyof LayoutSetting, value: any) => {
     if (key === 'theme')
-      toggleTheme(value as ThemeType)
+      toggleTheme(value as ThemeType);
     else if (key === 'colorPrimary')
-      toggleColorPrimary(value)
+      toggleColorPrimary(value);
     else if (key === 'layout')
-      toggleLayout(value as LayoutType)
+      toggleLayout(value as LayoutType);
     else if (key === 'compactAlgorithm')
-      toggleCompact(value)
+      toggleCompact(value);
     else if (key === 'colorWeak')
-      toggleWeak(value)
+      toggleWeak(value);
     else if (key === 'colorGray')
-      toggleGray(value)
+      toggleGray(value);
     else if (key in layoutSetting)
-      (layoutSetting as any)[key] = value
-  }
+      (layoutSetting as any)[key] = value;
+  };
 
   return {
     layoutSetting,
@@ -196,5 +196,5 @@ export const useAppStore = defineStore('app', () => {
     toggleColorPrimary,
     toggleGray,
     toggleWeak
-  }
-})
+  };
+});

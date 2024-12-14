@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { UnwrapRef } from 'vue'
-import { UploadOutlined } from '@ant-design/icons-vue'
+import type { UnwrapRef } from 'vue';
+import { UploadOutlined } from '@ant-design/icons-vue';
 
 interface FormState {
   eamil: string
@@ -11,11 +11,11 @@ interface FormState {
   desc: string
 }
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const formRef = ref()
-const labelCol = { span: 0 }
-const wrapperCol = { span: 13 }
+const formRef = ref();
+const labelCol = { span: 0 };
+const wrapperCol = { span: 13 };
 const formState: UnwrapRef<FormState> = reactive({
   eamil: 'AntdvPro@abc.com',
   name: 'AntdvPro',
@@ -23,7 +23,7 @@ const formState: UnwrapRef<FormState> = reactive({
   desc: '',
   address: '',
   phoneNumber: ''
-})
+});
 const rules: any = computed(() => {
   return {
     name: [
@@ -45,22 +45,22 @@ const rules: any = computed(() => {
     desc: [
       { required: true, message: t('account.settings.form-rule-desc'), trigger: 'blur' }
     ]
-  }
-})
+  };
+});
 
 function onSubmit() {
   formRef.value
     .validate()
     .then(() => {
-      console.log('values', formState, toRaw(formState))
+      console.log('values', formState, toRaw(formState));
     })
     .catch((error: any) => {
-      console.log('error', error)
-    })
+      console.log('error', error);
+    });
 }
 
 function handleChange() {
-  console.log('change')
+  console.log('change');
 }
 </script>
 

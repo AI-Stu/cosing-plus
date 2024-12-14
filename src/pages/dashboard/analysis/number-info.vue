@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue'
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue';
 
 defineProps({
   gap: {
@@ -17,7 +17,7 @@ defineProps({
   title: {
     type: String
   }
-})
+});
 </script>
 
 <template>

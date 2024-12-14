@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { AccessEnum } from '~/utils/constant'
+import type { AccessEnum } from '~/utils/constant';
 
 defineProps<{
   access: string | number | (string | number)[] | AccessEnum
-}>()
-const { hasAccess } = useAccess()
+}>();
+const { hasAccess } = useAccess();
 </script>
 
 <template>

@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { LogoutOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons-vue'
+import { LogoutOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons-vue';
 
-const message = useMessage()
-const userStore = useUserStore()
-const multiTabStore = useMultiTab()
-const layoutMenuStore = useLayoutMenu()
-const router = useRouter()
-const { avatar, nickname } = storeToRefs(userStore)
+const message = useMessage();
+const userStore = useUserStore();
+const multiTabStore = useMultiTab();
+const layoutMenuStore = useLayoutMenu();
+const router = useRouter();
+const { avatar, nickname } = storeToRefs(userStore);
 async function handleClick({ key }: any) {
   if (key === 'logout') {
-    const hide = message.loading('退出登录...', 0)
+    const hide = message.loading('退出登录...', 0);
     try {
-      await userStore.logout()
+      await userStore.logout();
     }
     finally {
-      hide()
-      message.success('退出登录成功', 3)
+      hide();
+      message.success('退出登录成功', 3);
       router.push({
         path: '/login'
       }).then(() => {
-        multiTabStore.clear()
-        layoutMenuStore.clear()
-      })
+        multiTabStore.clear();
+        layoutMenuStore.clear();
+      });
     }
   }
 }

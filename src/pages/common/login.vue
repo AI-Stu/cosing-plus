@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { AlipayCircleFilled, LockOutlined, MobileOutlined, TaobaoCircleFilled, UserOutlined, WeiboCircleFilled } from '@ant-design/icons-vue'
-import { delayTimer } from '@v-c/utils'
-import { AxiosError } from 'axios'
-import GlobalLayoutFooter from '~/layouts/components/global-footer/index.vue'
-import { loginApi } from '~/api/common/login'
-import { getQueryParam } from '~/utils/tools'
-import type { LoginMobileParams, LoginParams } from '~@/api/common/login'
-import pageBubble from '@/utils/page-bubble'
+import { AlipayCircleFilled, LockOutlined, MobileOutlined, TaobaoCircleFilled, UserOutlined, WeiboCircleFilled } from '@ant-design/icons-vue';
+import { delayTimer } from '@v-c/utils';
+import { AxiosError } from 'axios';
+import GlobalLayoutFooter from '~/layouts/components/global-footer/index.vue';
+import { loginApi } from '~/api/common/login';
+import { getQueryParam } from '~/utils/tools';
+import type { LoginMobileParams, LoginParams } from '~@/api/common/login';
+import pageBubble from '@/utils/page-bubble';
 
-const message = useMessage()
-const notification = useNotification()
-const appStore = useAppStore()
-const { layoutSetting } = storeToRefs(appStore)
-const router = useRouter()
-const token = useAuthorization()
+const message = useMessage();
+const notification = useNotification();
+const appStore = useAppStore();
+const { layoutSetting } = storeToRefs(appStore);
+const router = useRouter();
+const token = useAuthorization();
 const loginModel = reactive({
   username: undefined,
   password: undefined,
@@ -21,88 +21,88 @@ const loginModel = reactive({
   code: undefined,
   type: 'account',
   remember: true
-})
-const { t } = useI18nLocale()
-const formRef = shallowRef()
-const codeLoading = shallowRef(false)
-const resetCounter = 60
-const submitLoading = shallowRef(false)
-const errorAlert = shallowRef(false)
-const bubbleCanvas = ref<HTMLCanvasElement>()
+});
+const { t } = useI18nLocale();
+const formRef = shallowRef();
+const codeLoading = shallowRef(false);
+const resetCounter = 60;
+const submitLoading = shallowRef(false);
+const errorAlert = shallowRef(false);
+const bubbleCanvas = ref<HTMLCanvasElement>();
 const { counter, pause, reset, resume, isActive } = useInterval(1000, {
   controls: true,
   immediate: false,
   callback(count) {
     if (count) {
       if (count === resetCounter)
-        pause()
+        pause();
     }
   }
-})
+});
 async function getCode() {
-  codeLoading.value = true
+  codeLoading.value = true;
   try {
-    await formRef.value.validate(['mobile'])
+    await formRef.value.validate(['mobile']);
     setTimeout(() => {
-      reset()
-      resume()
-      codeLoading.value = false
-      message.success('验证码是：123456')
-    }, 3000)
+      reset();
+      resume();
+      codeLoading.value = false;
+      message.success('验证码是：123456');
+    }, 3000);
   }
   catch (error) {
-    codeLoading.value = false
+    codeLoading.value = false;
   }
 }
 
 async function submit() {
-  submitLoading.value = true
+  submitLoading.value = true;
   try {
-    await formRef.value?.validate()
-    let params: LoginParams | LoginMobileParams
+    await formRef.value?.validate();
+    let params: LoginParams | LoginMobileParams;
 
     if (loginModel.type === 'account') {
       params = {
         username: loginModel.username,
         password: loginModel.password
-      } as unknown as LoginParams
+      } as unknown as LoginParams;
     }
     else {
       params = {
         mobile: loginModel.mobile,
         code: loginModel.code,
         type: 'mobile'
-      } as unknown as LoginMobileParams
+      } as unknown as LoginMobileParams;
     }
-    const { data } = await loginApi(params)
-    token.value = data?.token
+    const { data } = await loginApi(params);
+    token.value = data?.token;
     notification.success({
       message: '登录成功',
       description: '欢迎回来！',
       duration: 3
-    })
+    });
     // 获取当前是否存在重定向的链接，如果存在就走重定向的地址
-    const redirect = getQueryParam('redirect', '/')
+    const redirect = getQueryParam('redirect', '/');
     router.push({
       path: redirect,
       replace: true
-    })
+    });
   }
   catch (e) {
     if (e instanceof AxiosError)
-      errorAlert.value = true
+      errorAlert.value = true;
 
-    submitLoading.value = false
+    submitLoading.value = false;
   }
 }
 onMounted(async () => {
-  await delayTimer(300)
-  pageBubble.init(unref(bubbleCanvas)!)
-})
+  await delayTimer(300);
+  pageBubble.init(unref(bubbleCanvas)!);
+});
 
 onBeforeUnmount(() => {
-  pageBubble.removeListeners()
-})
+  pageBubble.removeListeners();
+});
 </script>
 
 <template>

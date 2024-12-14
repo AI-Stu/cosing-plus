@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { CheckOutlined } from '@ant-design/icons-vue'
+import { CheckOutlined } from '@ant-design/icons-vue';
 
 defineProps<{
   colorList: ({ key: string, color: string })[]
   color?: string
   onChange?: (color: string) => void
   t?: (key: string, ...args: any[]) => string
-}>()
+}>();
 
-const prefixCls = shallowRef('ant-pro-drawer-setting-theme-color')
+const prefixCls = shallowRef('ant-pro-drawer-setting-theme-color');
 </script>
 
 <template>

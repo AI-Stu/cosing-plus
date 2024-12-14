@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import NumberInfo from '~/pages/dashboard/analysis/number-info.vue'
-import CustomRingProgress from '~/pages/dashboard/analysis/components/custom-ring-progress.vue'
-import CustomLine from '~/pages/dashboard/analysis/components/custom-line.vue'
+import NumberInfo from '~/pages/dashboard/analysis/number-info.vue';
+import CustomRingProgress from '~/pages/dashboard/analysis/components/custom-ring-progress.vue';
+import CustomLine from '~/pages/dashboard/analysis/components/custom-line.vue';
 
 defineProps({
   loading: {
     type: Boolean,
     default: false
   }
-})
+});
 
-const activeKey = ref()
+const activeKey = ref();
 function handleTabChange() {
 
 }
@@ -56,7 +56,7 @@ const offlineData = [
     name: 'Stores 9',
     cvr: 0.6
   }
-]
+];
 const offlineChartData = [
   {
     date: '03:26',
@@ -258,7 +258,7 @@ const offlineChartData = [
     type: '支付笔数',
     value: 23
   }
-]
+];
 </script>
 
 <template>

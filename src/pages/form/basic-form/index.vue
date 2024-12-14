@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue'
+import type { FormInstance } from 'ant-design-vue';
 
 defineOptions({
   name: 'BasicForm'
-})
+});
 
-const formRef = ref<FormInstance>()
+const formRef = ref<FormInstance>();
 async function handleSubmit() {
   try {
-    const values = await formRef.value?.validateFields()
-    console.log('Success:', values)
+    const values = await formRef.value?.validateFields();
+    console.log('Success:', values);
   }
   catch (errorInfo) {
-    console.log('Failed:', errorInfo)
+    console.log('Failed:', errorInfo);
   }
 }
 const formState = reactive<Record<string, any>>({
@@ -24,8 +24,8 @@ const formState = reactive<Record<string, any>>({
   invites: '',
   weight: 0,
   target: 1
-})
-const { t } = useI18n()
+});
+const { t } = useI18n();
 </script>
 
 <template>

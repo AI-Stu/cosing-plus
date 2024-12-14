@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const route = useRoute()
-const url = computed(() => route?.meta?.url)
-const loading = ref(true)
+const route = useRoute();
+const url = computed(() => route?.meta?.url);
+const loading = ref(true);
 function finishLoading() {
-  loading.value = false
+  loading.value = false;
 }
 </script>
 

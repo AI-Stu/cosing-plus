@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useLayoutMenuProvide } from '~/components/page-container/context'
+import { useLayoutMenuProvide } from '~/components/page-container/context';
 
-const appStore = useAppStore()
-const { theme } = storeToRefs(appStore)
-const { antd } = useI18nLocale()
-const layoutMenu = useLayoutMenu()
-useLayoutMenuProvide(layoutMenu, appStore)
+const appStore = useAppStore();
+const { theme } = storeToRefs(appStore);
+const { antd } = useI18nLocale();
+const layoutMenu = useLayoutMenu();
+useLayoutMenuProvide(layoutMenu, appStore);
 </script>
 
 <template>

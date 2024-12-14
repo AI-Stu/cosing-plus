@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useLayoutState } from '../../basic-layout/context'
-import SubMenu from './sub-menu.vue'
+import { useLayoutState } from '../../basic-layout/context';
+import SubMenu from './sub-menu.vue';
 
-const { theme, collapsed, layout, isMobile, selectedMenus, selectedKeys, openKeys, handleOpenKeys, handleSelectedKeys, handleMenuSelect } = useLayoutState()
+const { theme, collapsed, layout, isMobile, selectedMenus, selectedKeys, openKeys, handleOpenKeys, handleSelectedKeys, handleMenuSelect } = useLayoutState();
 const menuTheme = computed(() => {
   if (theme.value === 'inverted')
-    return 'dark'
-  return theme.value
-})
+    return 'dark';
+  return theme.value;
+});
 </script>
 
 <template>

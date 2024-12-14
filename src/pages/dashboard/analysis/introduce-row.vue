@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { InfoCircleOutlined } from '@ant-design/icons-vue'
-import { Progress, TinyArea, TinyColumn } from '@antv/g2plot'
-import ChartCard from '~/pages/dashboard/analysis/components/chart-card.vue'
-import Field from '~/pages/dashboard/analysis/components/field.vue'
-import Trend from '~/pages/dashboard/analysis/trend.vue'
+import { InfoCircleOutlined } from '@ant-design/icons-vue';
+import { Progress, TinyArea, TinyColumn } from '@antv/g2plot';
+import ChartCard from '~/pages/dashboard/analysis/components/chart-card.vue';
+import Field from '~/pages/dashboard/analysis/components/field.vue';
+import Trend from '~/pages/dashboard/analysis/trend.vue';
 
 defineProps({
   loading: {
     type: Boolean,
     default: false
   }
-})
+});
 
 function convertNumber(number: number) {
-  return number.toLocaleString()
+  return number.toLocaleString();
 }
 
 const topColResponsiveProps = {
@@ -23,17 +23,17 @@ const topColResponsiveProps = {
   lg: 12,
   xl: 6,
   style: { marginBottom: '24px' }
-}
+};
 
-const tinyAreaContainer = ref()
-const tinyColumnContainer = ref()
-const progressContainer = ref()
+const tinyAreaContainer = ref();
+const tinyColumnContainer = ref();
+const progressContainer = ref();
 
-const visitData = [7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5]
+const visitData = [7, 5, 4, 2, 4, 7, 5, 6, 5, 9, 6, 3, 1, 5, 3, 6, 5];
 
-const tinyArea = shallowRef()
-const tinyColumn = shallowRef()
-const progress = shallowRef()
+const tinyArea = shallowRef();
+const tinyColumn = shallowRef();
+const progress = shallowRef();
 
 onMounted(() => {
   tinyArea.value = new TinyArea(tinyAreaContainer.value, {
@@ -47,16 +47,16 @@ onMounted(() => {
     line: {
       color: '#975FE4'
     }
-  })
+  });
 
-  tinyArea.value?.render()
+  tinyArea.value?.render();
 
   tinyColumn.value = new TinyColumn(tinyColumnContainer.value, {
     height: 46,
     autoFit: true,
     data: visitData
-  })
-  tinyColumn.value?.render()
+  });
+  tinyColumn.value?.render();
 
   progress.value = new Progress(progressContainer.value, {
     height: 46,
@@ -64,18 +64,18 @@ onMounted(() => {
     percent: 0.78,
     barWidthRatio: 0.2,
     color: '#13C2C2'
-  })
-  progress.value?.render()
-})
+  });
+  progress.value?.render();
+});
 
 onBeforeUnmount(() => {
-  tinyArea.value?.destroy()
-  tinyArea.value = undefined
-  tinyColumn.value?.destroy()
-  tinyColumn.value = undefined
-  progress.value?.destroy()
-  progress.value = undefined
-})
+  tinyArea.value?.destroy();
+  tinyArea.value = undefined;
+  tinyColumn.value?.destroy();
+  tinyColumn.value = undefined;
+  progress.value?.destroy();
+  progress.value = undefined;
+});
 </script>
 
 <template>

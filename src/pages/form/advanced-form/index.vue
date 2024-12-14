@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import RepositoryForm from './repository-form.vue'
-import TaskForm from './task-form.vue'
+import RepositoryForm from './repository-form.vue';
+import TaskForm from './task-form.vue';
 
 defineOptions({
   name: 'AdvancedForm'
-})
+});
 
-const repositoryFormRef = ref()
-const taskFormRef = ref()
+const repositoryFormRef = ref();
+const taskFormRef = ref();
 async function handleSubmit() {
   try {
-    await taskFormRef.value?.handleSubmit()
-    await repositoryFormRef.value?.handleSubmit()
+    await taskFormRef.value?.handleSubmit();
+    await repositoryFormRef.value?.handleSubmit();
   }
   catch (errorInfo) {
-    console.log('Failed:', errorInfo)
+    console.log('Failed:', errorInfo);
   }
 }
 
@@ -70,9 +70,9 @@ const state = reactive({
       department: '财务部'
     }
   ] as any
-})
+});
 function handleAdd() {
-  const key = state.data.length === 0 ? '1' : (Number.parseInt(state.data[state.data.length - 1].key) + 1).toString()
+  const key = state.data.length === 0 ? '1' : (Number.parseInt(state.data[state.data.length - 1].key) + 1).toString();
   const newData = {
     key,
     name: `员工${key}`,
@@ -80,11 +80,11 @@ function handleAdd() {
     workId: Number.parseInt(key) < 10 ? `00${key}` : Number.parseInt(key) < 100 ? `0${key}` : key,
     editable: true,
     department: ['行政部', 'IT部', '财务部'][Math.floor(Math.random() * 3)]
-  }
-  state.data.push(newData)
+  };
+  state.data.push(newData);
 }
 function remove(key: string) {
-  state.data = state.data.filter((item: any) => item.key !== key)
+  state.data = state.data.filter((item: any) => item.key !== key);
 }
 </script>
 

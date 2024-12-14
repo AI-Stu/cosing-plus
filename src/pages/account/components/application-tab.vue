@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { DownloadOutlined, EditOutlined, EllipsisOutlined, ShareAltOutlined } from '@ant-design/icons-vue'
+import { DownloadOutlined, EditOutlined, EllipsisOutlined, ShareAltOutlined } from '@ant-design/icons-vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 </script>
 
 <template>
