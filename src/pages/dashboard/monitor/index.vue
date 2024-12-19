@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Gauge, Liquid, RingProgress, WordCloud } from '@antv/g2plot';
-import ActiveChart from '~/pages/dashboard/monitor/active-chart.vue';
-import CustomMap from '~/pages/dashboard/monitor/custom-map.vue';
+import ActiveChart from '@/pages/dashboard/monitor/active-chart.vue';
+import CustomMap from '@/pages/dashboard/monitor/custom-map.vue';
 
 defineOptions({
   name: 'Monitor'

@@ -9,6 +9,12 @@ import { defineLibraryConfig } from './library';
 export * from './application';
 export * from './library';
 
+/**
+ * 定义配置
+ * @param userConfigPromise
+ * @param type
+ * @returns UserConfig
+ */
 function defineConfig(
   userConfigPromise?: DefineConfig,
   type: 'application' | 'auto' | 'library' = 'auto'
@@ -22,9 +28,11 @@ function defineConfig(
   }
 
   switch (projectType) {
+    // 应用模式
     case 'application': {
       return defineApplicationConfig(userConfigPromise);
     }
+    // 库模式
     case 'library': {
       return defineLibraryConfig(userConfigPromise);
     }

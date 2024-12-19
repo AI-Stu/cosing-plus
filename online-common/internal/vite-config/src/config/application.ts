@@ -1,13 +1,12 @@
 import path, { relative } from 'node:path';
 import * as process from 'node:process';
-import type { UserConfig } from 'vite';
+import type { CSSOptions, UserConfig } from 'vite';
 
 import { findMonorepoRoot } from '@cosing/node-utils';
-import { NodePackageImporter } from 'sass';
 import { defineConfig, loadEnv, mergeConfig } from 'vite';
+import type { Options as PwaPluginOptions } from 'vite-plugin-pwa';
 import type { DefineApplicationOptions } from '../types';
 
-import { defaultImportmapOptions, getDefaultPwaOptions } from '../options';
 import { loadApplicationPlugins } from '../plugins';
 import { loadAndConvertEnv } from '../utils/env';
 import { getCommonConfig } from './common';
@@ -28,19 +27,16 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
     const env = loadEnv(mode, root);
 
     const plugins = await loadApplicationPlugins({
-      archiver: true,
-      archiverPluginOptions: {},
       compress: false,
       compressTypes: ['brotli', 'gzip'],
-      isDevTools: true,
+      devTools: true,
       env,
       extraAppConfig: true,
       html: true,
       i18n: true,
-      importmapOptions: defaultImportmapOptions,
       injectAppLoading: true,
-      isInjectMetadata: true,
-      isBuild,
+      injectMetadata: true,
+      build: isBuild,
       license: true,
       mode,
       nitroMock: !isBuild,
@@ -50,8 +46,7 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
         'Vben Admin Docs': 'https://doc.vben.pro'
       },
       pwa: true,
-      pwaOptions: getDefaultPwaOptions(appTitle),
-      vxeTableLazyImport: true,
+      pwaOptions: getDefaultPwaOptions(appTitle, isBuild),
       ...envConfig,
       ...application
     });
@@ -68,7 +63,7 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
             entryFileNames: 'jse/index-[name]-[hash].js'
           }
         },
-        target: 'es2015'
+        target: 'es2020'
       },
       css: createCssOptions(injectGlobalScss),
       esbuild: {
@@ -88,7 +83,7 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
           // 预热文件
           clientFiles: [
             './index.html',
-            './src/bootstrap.ts',
+            './src/main.ts',
             './src/{views,layouts,router,store,api,adapter}/*'
           ]
         }
@@ -103,7 +98,12 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
   });
 }
 
-function createCssOptions(injectGlobalScss = true) {
+/**
+ * 创建css配置
+ * @param injectGlobalScss
+ * @returns CSSOptions
+ */
+function createCssOptions(injectGlobalScss = true): CSSOptions {
   const root = findMonorepoRoot();
   return {
     preprocessorOptions: injectGlobalScss
@@ -122,6 +122,28 @@ function createCssOptions(injectGlobalScss = true) {
           }
         }
       : {}
+  };
+}
+
+function getDefaultPwaOptions(name: string, isBuild: boolean): Partial<PwaPluginOptions> {
+  return {
+    manifest: {
+      description: 'Cosing Plus是一个基于Vue3、Vite5、ant-design-vue4、Pinia、UnoCSS和Typescript的一整套企业级中后台前端/设计解决方案。',
+      icons: [
+        {
+          sizes: '192x192',
+          src: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/pwa-icon-192.png',
+          type: 'image/png'
+        },
+        {
+          sizes: '512x512',
+          src: 'https://unpkg.com/@vbenjs/static-source@0.1.7/source/pwa-icon-512.png',
+          type: 'image/png'
+        }
+      ],
+      name: `${name}${!isBuild ? ' dev' : ''}`,
+      short_name: `${name}${!isBuild ? ' dev' : ''}`
+    }
   };
 }
 

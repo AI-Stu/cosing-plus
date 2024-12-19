@@ -2,7 +2,7 @@
 import { isFunction } from '@v-c/utils';
 import type { VNodeChild } from 'vue';
 import { useLayoutMenuInject } from './context.ts';
-import { useLayoutState } from '~/layouts/basic-layout/context';
+import { useLayoutState } from '@/layouts/basic-layout/context';
 
 defineProps<{
   title?: string

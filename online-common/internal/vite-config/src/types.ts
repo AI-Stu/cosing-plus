@@ -1,14 +1,10 @@
 import type { PluginVisualizerOptions } from 'rollup-plugin-visualizer';
+import type { Options as PluginAutoImportOptions } from 'unplugin-auto-import/types';
+import type { Options as PluginComponentsOptions } from 'unplugin-vue-components/types';
 import type { ConfigEnv, PluginOption, UserConfig } from 'vite';
 import type { PluginOptions } from 'vite-plugin-dts';
 import type { Options as PwaPluginOptions } from 'vite-plugin-pwa';
 
-interface IImportMap {
-  imports?: Record<string, string>
-  scopes?: {
-    [scope: string]: Record<string, string>
-  }
-}
 interface PrintPluginOptions {
   /**
    * 打印的数据
@@ -47,21 +43,6 @@ interface ArchiverPluginOptions {
 }
 
 /**
- * importmap 插件配置
- */
-interface ImportmapPluginOptions {
-  /**
-   * CDN 供应商
-   * @default jspm.io
-   */
-  defaultProvider?: 'esm.sh' | 'jspm.io'
-  /** importmap 配置 */
-  importmap?: Array<{ name: string, range?: string }>
-  /** 手动配置importmap */
-  inputMap?: IImportMap
-}
-
-/**
  * 用于判断是否需要加载插件
  */
 interface ConditionPlugin {
@@ -73,24 +54,24 @@ interface ConditionPlugin {
 
 interface CommonPluginOptions {
   /** 是否开启devtools */
-  isDevTools?: boolean
+  devTools?: boolean
   /** 环境变量 */
   env?: Record<string, any>
   /** 是否注入metadata */
-  isInjectMetadata?: boolean
+  injectMetadata?: boolean
   /** 是否构建模式 */
-  isBuild?: boolean
+  build?: boolean
   /** 构建模式 */
   mode?: string
+  /** 开启自动引入 */
+  autoImport?: boolean
+  autoImportOptions?: PluginAutoImportOptions
   /** 开启依赖分析 */
-  visualizer?: boolean | PluginVisualizerOptions
+  visualizer?: boolean
+  visualizerOptions?: PluginVisualizerOptions
 }
 
 interface ApplicationPluginOptions extends CommonPluginOptions {
-  /** 开启后，会在打包dist同级生成dist.zip */
-  archiver?: boolean
-  /** 压缩归档插件配置 */
-  archiverPluginOptions?: ArchiverPluginOptions
   /** 开启 gzip|brotli 压缩 */
   compress?: boolean
   /** 压缩类型 */
@@ -101,10 +82,6 @@ interface ApplicationPluginOptions extends CommonPluginOptions {
   html?: boolean
   /** 是否开启i18n */
   i18n?: boolean
-  /** 是否开启 importmap CDN  */
-  importmap?: boolean
-  /** importmap 插件配置 */
-  importmapOptions?: ImportmapPluginOptions
   /** 是否注入app loading */
   injectAppLoading?: boolean
   /** 是否注入全局scss */
@@ -123,8 +100,9 @@ interface ApplicationPluginOptions extends CommonPluginOptions {
   pwa?: boolean
   /** pwa 插件配置 */
   pwaOptions?: Partial<PwaPluginOptions>
-  /** 是否开启vxe-table懒加载 */
-  vxeTableLazyImport?: boolean
+  /** 自动导入组件 */
+  components?: boolean
+  componentsOptions?: PluginComponentsOptions
 }
 
 interface LibraryPluginOptions extends CommonPluginOptions {
@@ -156,8 +134,6 @@ export type {
   DefineApplicationOptions,
   DefineConfig,
   DefineLibraryOptions,
-  IImportMap,
-  ImportmapPluginOptions,
   LibraryPluginOptions,
   NitroMockPluginOptions,
   PrintPluginOptions

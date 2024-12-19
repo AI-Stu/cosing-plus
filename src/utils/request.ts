@@ -1,9 +1,9 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import { AxiosLoading } from './loading';
-import { STORAGE_AUTHORIZE_KEY, useAuthorization } from '~/composables/authorization';
+import { STORAGE_AUTHORIZE_KEY, useAuthorization } from '@/composables/authorization';
 import { ContentTypeEnum, RequestEnum } from '~#/http-enum';
-import router from '~/router';
+import router from '@/router';
 
 export interface ResponseBody<T = any> {
   code: number

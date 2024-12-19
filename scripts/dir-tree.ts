@@ -18,6 +18,6 @@ function genObj(children: any[]) {
 
 const obj = genObj(children);
 
-const md = treeify.asTree(obj, true, null);
+const md = treeify.asTree(obj, true, false);
 
 console.log(md);

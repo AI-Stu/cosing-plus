@@ -1,4 +1,4 @@
-import type { STATUS } from '~@/utils/constant';
+import type { STATUS } from '@/utils/constant';
 
 interface ConsultTableModel {
   id: number

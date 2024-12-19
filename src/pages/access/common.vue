@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AccessEnum } from '~@/utils/constant';
+import { AccessEnum } from '@/utils/constant';
 
 const { hasAccess, roles } = useAccess();
 </script>

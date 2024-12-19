@@ -1,11 +1,11 @@
-import { logoutApi } from '~@/api/common/login';
-import { getRouteMenusApi } from '~@/api/common/menu';
-import type { UserInfo } from '~@/api/common/user';
-import { getUserInfoApi } from '~@/api/common/user';
-import type { MenuData } from '~@/layouts/basic-layout/typing';
-import { rootRoute } from '~@/router/constant';
-import { generateFlatRoutes, generateRoutes, generateTreeRoutes } from '~@/router/generate-route';
-import { DYNAMIC_LOAD_WAY, DynamicLoadEnum } from '~@/utils/constant';
+import { logoutApi } from '@/api/common/login';
+import { getRouteMenusApi } from '@/api/common/menu';
+import type { UserInfo } from '@/api/common/user';
+import { getUserInfoApi } from '@/api/common/user';
+import type { MenuData } from '@/layouts/basic-layout/typing';
+import { rootRoute } from '@/router/constant';
+import { generateFlatRoutes, generateRoutes, generateTreeRoutes } from '@/router/generate-route';
+import { DYNAMIC_LOAD_WAY, DynamicLoadEnum } from '@/utils/constant';
 
 export const useUserStore = defineStore('user', () => {
   const routerData = shallowRef();

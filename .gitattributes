@@ -1,10 +1,10 @@
 # This file is inspired by https://github.com/alexkaratarakis/gitattributes
 #
-# Auto detect text files and perform LF normalization
+# 自动检测文本文件并执行 LF 归一化
 * text=auto
 
-# The above will handle all files NOT found below
-# These files are text and should be normalized (Convert crlf => lf)
+# 上面将处理下面未找到的所有文件
+# 这些文件是文本，应该标准化（Convert crlf => lf）
 
 # Source code
 *.coffee          text
@@ -43,19 +43,19 @@
 *.fish            text eol=lf
 *.sh              text eol=lf
 *.zsh             text eol=lf
-# These are explicitly windows files and should use crlf
+# 这些是明确的 Windows 文件，应该使用 crlf
 *.bat             text eol=crlf
 *.cmd             text eol=crlf
 *.ps1             text eol=crlf
 
-# Serialisation
+# 序列化
 *.json            text
 *.toml            text
 *.xml             text
 *.yaml            text
 *.yml             text
 
-# Documents
+# 文件
 *.bibtex          text diff=bibtex
 *.doc             diff=astextplain
 *.DOC             diff=astextplain
@@ -94,7 +94,7 @@ readme            text
 *README*          text
 TODO              text
 
-# Graphics
+# 图片
 *.ai              binary
 *.bmp             binary
 *.eps             binary
@@ -111,8 +111,8 @@ TODO              text
 *.png             binary
 *.psb             binary
 *.psd             binary
-# SVG treated as an asset (binary) by default. If you want to treat it as text,
-# comment-out the following line and uncomment the line after.
+# 默认情况下，SVG 被视为资产（二进制）。如果你想将其视为文本，
+# 注释掉以下行并取消注释后面的行。
 *.svg             binary
 #*.svg            text
 *.svgz            binary
@@ -121,13 +121,13 @@ TODO              text
 *.wbmp            binary
 *.webp            binary
 
-# These files are binary and should be left untouched
-# (binary is a macro for -text -diff)
+# 这些文件是二进制文件，应保持不变
+# （binary 是 -text -diff 的宏）
 *.class           binary
 *.jar             binary
 *.war             binary
 
-## LINTERS
+# LINTERS
 .csslintrc        text
 .eslintrc         text
 .jscsrc           text

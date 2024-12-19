@@ -48,6 +48,7 @@
     "@antfu/eslint-config": "catalog:",
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
+    "@cosing/vite-config": "workspace:*",
     "@mistjs/cli": "catalog:",
     "@mistjs/vite-plugin-preload": "catalog:",
     "@types/fs-extra": "catalog:",
@@ -90,7 +91,9 @@
     "vitest": "catalog:",
     "vue-tsc": "catalog:"
   },
-  "overrides": { "eslint": "^9.14.0" },
+  "overrides": {
+    "eslint": "^9.14.0"
+  },
   "lint-staged": {
     "**/*.{vue,ts,js,jsx,tsx}": "eslint src --fix"
   }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useLayoutState } from '~/layouts/basic-layout/context.ts';
+import { useLayoutState } from '@/layouts/basic-layout/context.ts';
 
 defineOptions({
   name: 'FooterToolBar'

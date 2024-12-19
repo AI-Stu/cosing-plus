@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import { basicRouteMap } from './router-modules';
-import { AccessEnum } from '~@/utils/constant';
+import { AccessEnum } from '@/utils/constant';
 
 export default [
   {
@@ -16,7 +16,7 @@ export default [
       {
         path: '/dashboard/analysis',
         name: 'DashboardAnalysis',
-        component: () => import('~/pages/dashboard/analysis/index.vue'),
+        component: () => import('@/pages/dashboard/analysis/index.vue'),
         meta: {
           title: '分析页'
         }
@@ -24,7 +24,7 @@ export default [
       {
         path: '/dashboard/monitor',
         name: 'DashboardMonitor',
-        component: () => import('~/pages/dashboard/monitor/index.vue'),
+        component: () => import('@/pages/dashboard/monitor/index.vue'),
         meta: {
           title: '监控页'
         }
@@ -32,7 +32,7 @@ export default [
       {
         path: '/dashboard/workplace',
         name: 'DashboardWorkplace',
-        component: () => import('~/pages/dashboard/workplace/index.vue'),
+        component: () => import('@/pages/dashboard/workplace/index.vue'),
         meta: {
           title: '监控页'
         }
@@ -52,7 +52,7 @@ export default [
       {
         path: '/form/basic-form',
         name: 'FormBasic',
-        component: () => import('~/pages/form/basic-form/index.vue'),
+        component: () => import('@/pages/form/basic-form/index.vue'),
         meta: {
           title: '基础表单',
           locale: 'menu.form.basic-form'
@@ -61,7 +61,7 @@ export default [
       {
         path: '/form/step-form',
         name: 'FormStep',
-        component: () => import('~/pages/form/step-form/index.vue'),
+        component: () => import('@/pages/form/step-form/index.vue'),
         meta: {
           title: '分步表单',
           locale: 'menu.form.step-form'
@@ -70,7 +70,7 @@ export default [
       {
         path: '/form/advanced-form',
         name: 'FormAdvanced',
-        component: () => import('~/pages/form/advanced-form/index.vue'),
+        component: () => import('@/pages/form/advanced-form/index.vue'),
         meta: {
           title: '高级表单',
           locale: 'menu.form.advanced-form'
@@ -129,7 +129,7 @@ export default [
       {
         path: '/menu/menu1',
         name: 'MenuMenu11',
-        component: () => import('~/pages/menu/menu1.vue'),
+        component: () => import('@/pages/menu/menu1.vue'),
         meta: {
           title: '菜单1'
         }
@@ -137,7 +137,7 @@ export default [
       {
         path: '/menu/menu2',
         name: 'MenuMenu12',
-        component: () => import('~/pages/menu/menu2.vue'),
+        component: () => import('@/pages/menu/menu2.vue'),
         meta: {
           title: '菜单2'
         }
@@ -153,7 +153,7 @@ export default [
           {
             path: '/menu/menu3/menu1',
             name: 'MenuMenu111',
-            component: () => import('~/pages/menu/menu-1-1/menu1.vue'),
+            component: () => import('@/pages/menu/menu-1-1/menu1.vue'),
             meta: {
               title: '菜单1-1-1'
             }
@@ -161,7 +161,7 @@ export default [
           {
             path: '/menu/menu3/menu2',
             name: 'MenuMenu112',
-            component: () => import('~/pages/menu/menu-1-1/menu2.vue'),
+            component: () => import('@/pages/menu/menu-1-1/menu2.vue'),
             meta: {
               title: '菜单1-1-2'
             }
@@ -179,7 +179,7 @@ export default [
           {
             path: '/menu/menu4/menu1',
             name: 'MenuMenu211',
-            component: () => import('~/pages/menu/menu-2-1/menu1.vue'),
+            component: () => import('@/pages/menu/menu-2-1/menu1.vue'),
             meta: {
               title: '菜单2-1-1'
             }
@@ -187,7 +187,7 @@ export default [
           {
             path: '/menu/menu4/menu2',
             name: 'MenuMenu212',
-            component: () => import('~/pages/menu/menu-2-1/menu2.vue'),
+            component: () => import('@/pages/menu/menu-2-1/menu2.vue'),
             meta: {
               title: '菜单2-1-2'
             }
@@ -210,7 +210,7 @@ export default [
       {
         path: '/profile/basic',
         name: 'ProfileBasic',
-        component: () => import('~/pages/profile/basic/index.vue'),
+        component: () => import('@/pages/profile/basic/index.vue'),
         meta: {
           title: 'menu.profile.basic',
           locale: 'menu.profile.basic'
@@ -230,7 +230,7 @@ export default [
       {
         path: '/access/common',
         name: 'AccessCommon',
-        component: () => import('~/pages/access/common.vue'),
+        component: () => import('@/pages/access/common.vue'),
         meta: {
           title: '通用权限'
         }
@@ -238,7 +238,7 @@ export default [
       {
         path: '/access/user',
         name: 'AccessUser',
-        component: () => import('~/pages/access/user.vue'),
+        component: () => import('@/pages/access/user.vue'),
         meta: {
           title: '普通用户',
           access: [AccessEnum.USER, AccessEnum.ADMIN]
@@ -247,7 +247,7 @@ export default [
       {
         path: '/access/admin',
         name: 'AccessAdmin',
-        component: () => import('~/pages/access/admin.vue'),
+        component: () => import('@/pages/access/admin.vue'),
         meta: {
           title: '管理员',
           access: [AccessEnum.ADMIN]
@@ -268,7 +268,7 @@ export default [
       {
         path: '/exception/403',
         name: 'Exception403',
-        component: () => import('~/pages/exception/403.vue'),
+        component: () => import('@/pages/exception/403.vue'),
         meta: {
           title: '403',
           locale: 'menu.exception.not-permission'
@@ -277,7 +277,7 @@ export default [
       {
         path: '/exception/404',
         name: 'Exception404',
-        component: () => import('~/pages/exception/404.vue'),
+        component: () => import('@/pages/exception/404.vue'),
         meta: {
           title: '404',
           locale: 'menu.exception.not-find'
@@ -286,7 +286,7 @@ export default [
       {
         path: '/exception/500',
         name: 'Exception500',
-        component: () => import('~/pages/exception/500.vue'),
+        component: () => import('@/pages/exception/500.vue'),
         meta: {
           title: '500',
           locale: 'menu.exception.server-error'
@@ -309,7 +309,7 @@ export default [
       {
         path: '/result/success',
         name: 'ResultSuccess',
-        component: () => import('~/pages/result/success.vue'),
+        component: () => import('@/pages/result/success.vue'),
         meta: {
           title: '成功页',
           locale: 'menu.result.success'
@@ -318,7 +318,7 @@ export default [
       {
         path: '/result/fail',
         name: 'ResultFail',
-        component: () => import('~/pages/result/fail.vue'),
+        component: () => import('@/pages/result/fail.vue'),
         meta: {
           title: '失败页',
           locale: 'menu.result.fail'
@@ -340,7 +340,7 @@ export default [
       {
         path: '/list/card-list',
         name: 'CardList',
-        component: () => import('~/pages/list/card-list.vue'),
+        component: () => import('@/pages/list/card-list.vue'),
         meta: {
           title: '卡片列表',
           locale: 'menu.list.card-list'
@@ -349,7 +349,7 @@ export default [
       {
         path: '/list/table-list',
         name: 'ConsultTable',
-        component: () => import('~/pages/list/table-list.vue'),
+        component: () => import('@/pages/list/table-list.vue'),
         meta: {
           title: '查询表格',
           locale: 'menu.list.consult-table'
@@ -358,7 +358,7 @@ export default [
       {
         path: '/list/crud-table',
         name: 'CrudTable',
-        component: () => import('~/pages/list/crud-table.vue'),
+        component: () => import('@/pages/list/crud-table.vue'),
         meta: {
           title: '增删改查表格',
           locale: 'menu.list.crud-table'
@@ -367,7 +367,7 @@ export default [
       {
         path: '/list/basic-list',
         name: 'BasicList',
-        component: () => import('~/pages/list/basic-list.vue'),
+        component: () => import('@/pages/list/basic-list.vue'),
         meta: {
           title: '标准列表',
           locale: 'menu.list.basic-list'
@@ -376,7 +376,7 @@ export default [
       {
         path: '/list/search-list',
         name: 'SearchList',
-        component: () => import('~/pages/list/search-list/index.vue'),
+        component: () => import('@/pages/list/search-list/index.vue'),
         meta: {
           title: '搜索列表',
           locale: 'menu.list.search-list'
@@ -386,7 +386,7 @@ export default [
           {
             path: '/list/search-list/articles',
             name: 'SearchListArticles',
-            component: () => import('~/pages/list/search-list/articles.vue'),
+            component: () => import('@/pages/list/search-list/articles.vue'),
             meta: {
               title: '搜索列表（文章）',
               locale: 'menu.list.search-list.articles'
@@ -395,7 +395,7 @@ export default [
           {
             path: '/list/search-list/projects',
             name: 'SearchListProjects',
-            component: () => import('~/pages/list/search-list/projects.vue'),
+            component: () => import('@/pages/list/search-list/projects.vue'),
             meta: {
               title: '搜索列表（项目）',
               locale: 'menu.list.search-list.projects'
@@ -404,7 +404,7 @@ export default [
           {
             path: '/list/search-list/applications',
             name: 'SearchListApplications',
-            component: () => import('~/pages/list/search-list/applications.vue'),
+            component: () => import('@/pages/list/search-list/applications.vue'),
             meta: {
               title: '搜索列表（应用）',
               locale: 'menu.list.search-list.applications'
@@ -428,7 +428,7 @@ export default [
       {
         path: '/account/center',
         name: 'AccountCenter',
-        component: () => import('~/pages/account/center.vue'),
+        component: () => import('@/pages/account/center.vue'),
         meta: {
           title: '个人主页',
           locale: 'menu.account.center'
@@ -437,7 +437,7 @@ export default [
       {
         path: '/account/settings',
         name: 'AccountSettings',
-        component: () => import('~/pages/account/settings.vue'),
+        component: () => import('@/pages/account/settings.vue'),
         meta: {
           title: '个人设置',
           locale: 'menu.account.settings'
@@ -446,7 +446,7 @@ export default [
       {
         path: '/account/settings/:id',
         name: 'AccountSettings1',
-        component: () => import('~/pages/account/settings.vue'),
+        component: () => import('@/pages/account/settings.vue'),
         meta: {
           title: '个人设置1',
           locale: 'menu.account.settings',

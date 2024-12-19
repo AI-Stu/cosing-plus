@@ -7,8 +7,8 @@ defineOptions({
 </script>
 
 <template>
-  <a decoration-none href="https://antdv-pro.com" target="_blank">Cosing Plus</a>
-  <a decoration-none href="https://github.com/antdv-pro/antdv-admin-pro" target="_blank">
+  <a decoration-none href="#">Cosing Plus</a>
+  <a decoration-none href="https://github.com/AI-Stu/cosing-plus" target="_blank">
     <GithubOutlined />
   </a>
   <a decoration-none href="https://antdv.com" target="_blank">Ant Design Vue</a>

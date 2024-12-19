@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { PlusOutlined } from '@ant-design/icons-vue';
 import CrudTableModal from './components/crud-table-modal.vue';
-import type { CrudTableModel } from '~@/api/list/crud-table';
-import { deleteApi, getListApi } from '~@/api/list/crud-table';
-import { useTableQuery } from '~@/composables/table-query';
+import type { CrudTableModel } from '@/api/list/crud-table';
+import { deleteApi, getListApi } from '@/api/list/crud-table';
+import { useTableQuery } from '@/composables/table-query';
 
 const message = useMessage();
 
@@ -142,8 +142,8 @@ function handleEdit(record: CrudTableModel) {
 
 <style lang="less" scoped>
 .system-crud-wrapper{
-    .ant-form-item{
-      margin: 0;
-    }
+  .ant-form-item{
+    margin: 0;
   }
+}
 </style>

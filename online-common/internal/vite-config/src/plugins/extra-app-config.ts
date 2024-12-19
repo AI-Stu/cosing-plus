@@ -17,10 +17,10 @@ const GLOB_CONFIG_FILE_NAME = '_app.config.js';
 const VBEN_ADMIN_PRO_APP_CONF = '_VBEN_ADMIN_PRO_APP_CONF_';
 
 /**
- * 用于将配置文件抽离出来并注入到项目中
- * @returns
+ * 自定义插件
+ * @description 用于将配置文件抽离出来并注入到项目中
+ * @returns Promise
  */
-
 async function viteExtraAppConfigPlugin({
   isBuild,
   root
@@ -47,12 +47,12 @@ async function viteExtraAppConfigPlugin({
           type: 'asset'
         });
 
-        console.log(colors.cyan(`✨configuration file is build successfully!`));
+        console.log(colors.cyan(`✨配置文件构建成功!`));
       }
       catch (error) {
         console.log(
           colors.red(
-            `configuration file configuration file failed to package:\n${error}`
+            `配置文件 配置文件打包失败:\n${error}`
           )
         );
       }
@@ -60,9 +60,7 @@ async function viteExtraAppConfigPlugin({
     name: 'vite:extra-app-config',
     async transformIndexHtml(html) {
       const hash = `v=${version}-${generatorContentHash(source, 8)}`;
-
       const appConfigSrc = `${publicPath}${GLOB_CONFIG_FILE_NAME}?${hash}`;
-
       return {
         html,
         tags: [{ attrs: { src: appConfigSrc }, tag: 'script' }]

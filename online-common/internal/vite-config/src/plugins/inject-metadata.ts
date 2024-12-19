@@ -66,7 +66,9 @@ async function resolveMonorepoDependencies() {
 }
 
 /**
- * 用于注入项目信息
+ * 自定义插件
+ * @description 用于注入项目信息
+ * @returns Promise
  */
 async function viteMetadataPlugin(root = process.cwd()): Promise<PluginOption | undefined> {
   const { author, description, homepage, license, version } = await readPackageJSON(root);

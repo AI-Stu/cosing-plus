@@ -20,15 +20,23 @@
     "stub": "pnpm unbuild --stub"
   },
   "dependencies": {
-    "vite-plugin-pwa": "catalog:"
+    "vite-plugin-pwa": "catalog:",
+    "vite-plugin-vue-devtools": "catalog:"
   },
   "devDependencies": {
     "@cosing/node-utils": "workspace:*",
+    "@intlify/unplugin-vue-i18n": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vitejs/plugin-vue-jsx": "catalog:",
+    "antdv-component-resolver": "catalog:",
     "dotenv": "catalog:",
     "rollup-plugin-visualizer": "catalog:",
     "unbuild": "catalog:",
+    "unplugin-auto-import": "catalog:",
+    "unplugin-vue-components": "catalog:",
     "vite": "catalog:",
-    "vite-plugin-dts": "catalog:"
-
+    "vite-plugin-compression": "catalog:",
+    "vite-plugin-dts": "catalog:",
+    "vite-plugin-html": "catalog:"
   }
 }

@@ -1,5 +1,5 @@
 import { toArray } from '@v-c/utils';
-import type { AccessEnum } from '~@/utils/constant';
+import type { AccessEnum } from '@/utils/constant';
 
 export function useAccess() {
   const userStore = useUserStore();

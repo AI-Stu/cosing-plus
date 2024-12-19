@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Radar } from '@antv/g2plot';
-import EditableLinkGroup from '~/pages/dashboard/workplace/editable-link-group.vue';
+import EditableLinkGroup from '@/pages/dashboard/workplace/editable-link-group.vue';
 
 defineOptions({
   name: 'Workplace'

@@ -60,14 +60,6 @@ export default ({ mode }: ConfigEnv): UserConfig => {
           replacement: 'lodash-es'
         },
         {
-          find: '~@',
-          replacement: baseSrc
-        },
-        {
-          find: '~',
-          replacement: baseSrc
-        },
-        {
           find: '@',
           replacement: baseSrc
         },

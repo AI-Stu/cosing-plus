@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { FormInstance } from 'ant-design-vue';
 import { cloneDeep } from 'lodash';
-import type { CrudTableModel } from '~@/api/list/crud-table';
+import type { CrudTableModel } from '@/api/list/crud-table';
 
 const emit = defineEmits(['cancel', 'ok']);
 

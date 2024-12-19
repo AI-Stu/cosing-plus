@@ -1,5 +1,5 @@
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
-import router from '~@/router';
+import router from '@/router';
 
 const allowList = ['/login', '/404', '/403'];
 

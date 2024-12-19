@@ -6,8 +6,8 @@ import {
   ReloadOutlined
 } from '@ant-design/icons-vue';
 import type { RouteLocationNormalized } from 'vue-router';
-import { listenerRouteChange, removeRouteListener } from '~@/utils/route-listener';
-import { useLayoutState } from '~/layouts/basic-layout/context';
+import { listenerRouteChange, removeRouteListener } from '@/utils/route-listener';
+import { useLayoutState } from '@/layouts/basic-layout/context';
 
 const multiTabStore = useMultiTab();
 const { list, activeKey } = storeToRefs(multiTabStore);
@@ -191,6 +191,5 @@ onUnmounted(() => {
   .ant-tabs-nav-operations {
     display: none !important;
   }
-
 }
 </style>

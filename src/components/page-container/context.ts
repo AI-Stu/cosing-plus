@@ -1,4 +1,4 @@
-import type { useAppStore } from '~/stores/app.ts';
+import type { useAppStore } from '@/stores/app.ts';
 
 export const LayoutMenuKey = Symbol('LayoutMenu');
 export function useLayoutMenuProvide(layoutMenu: ReturnType<typeof useLayoutMenu>, appStore: ReturnType<typeof useAppStore>) {

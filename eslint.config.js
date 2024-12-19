@@ -18,7 +18,8 @@ export default antfu(
       'tsconfig.json',
       'node_modules',
       'dist',
-      '.gitbub'
+      '**/.gitbub',
+      '**/.nitro'
     ]
   },
   // ESLint扁平化配置，

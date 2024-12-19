@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { AlipayCircleFilled, LockOutlined, MobileOutlined, TaobaoCircleFilled, UserOutlined, WeiboCircleFilled } from '@ant-design/icons-vue';
+import {
+  AlipayCircleFilled,
+  DingtalkCircleFilled,
+  LockOutlined,
+  MobileOutlined,
+  UserOutlined
+} from '@ant-design/icons-vue';
 import { delayTimer } from '@v-c/utils';
 import { AxiosError } from 'axios';
-import GlobalLayoutFooter from '~/layouts/components/global-footer/index.vue';
-import { loginApi } from '~/api/common/login';
-import { getQueryParam } from '~/utils/tools';
-import type { LoginMobileParams, LoginParams } from '~@/api/common/login';
+import GlobalLayoutFooter from '@/layouts/components/global-footer/index.vue';
+import { loginApi } from '@/api/common/login';
+import { getQueryParam } from '@/utils/tools';
+import type { LoginMobileParams, LoginParams } from '@/api/common/login';
 import pageBubble from '@/utils/page-bubble';
 
 const message = useMessage();
@@ -248,9 +254,10 @@ onBeforeUnmount(() => {
               <span class="text-slate-500">{{ t('pages.login.loginWith') }}</span>
             </a-divider>
             <div class="ant-pro-form-login-other">
+              <DingtalkCircleFilled class="icon" />
               <AlipayCircleFilled class="icon" />
-              <TaobaoCircleFilled class="icon" />
-              <WeiboCircleFilled class="icon" />
+              <!-- <TaobaoCircleFilled class="icon" /> -->
+              <!-- <WeiboCircleFilled class="icon" /> -->
             </div>
           </div>
         </div>
@@ -258,7 +265,9 @@ onBeforeUnmount(() => {
     </div>
     <div py-24px px-50px fixed bottom-0 z-11 w-screen :data-theme="layoutSetting.theme" text-14px>
       <GlobalLayoutFooter
-        :copyright="layoutSetting.copyright" icp="鲁ICP备2023021414号-2"
+        :copyright="layoutSetting.copyright"
+        icp="鄂ICP备2024050242号-1"
+        record="鄂公网安备42011502001698号"
       >
         <template #renderFooterLinks>
           <footer-links />

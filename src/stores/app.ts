@@ -1,8 +1,8 @@
 import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context';
 import { theme as antdTheme } from 'ant-design-vue/es';
-import type { ContentWidth, LayoutType, ThemeType } from '~@/layouts/basic-layout/typing';
-import type { AnimationNameValueType } from '~@/config/default-setting';
-import defaultSetting from '~@/config/default-setting';
+import type { ContentWidth, LayoutType, ThemeType } from '@/layouts/basic-layout/typing';
+import type { AnimationNameValueType } from '@/config/default-setting';
+import defaultSetting from '@/config/default-setting';
 
 export interface LayoutSetting {
   title?: string

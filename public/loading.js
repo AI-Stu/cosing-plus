@@ -10,6 +10,11 @@
   if (div && div.innerHTML === '') {
     div.innerHTML = `
       <style>
+
+        :root{
+          --loading-spinner-size: 4.5rem;
+        }
+
         html,
         body,
         #loading-app {
@@ -29,6 +34,7 @@
         }
 
         .loading-title {
+          margin-top: 2rem;
           font-size: 1.1rem;
         }
 
@@ -38,147 +44,163 @@
           color: #888;
         }
 
-        .page-loading-warp {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 26px;
-        }
-        .ant-spin {
-          position: absolute;
-          display: none;
-          -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-          color: rgba(0, 0, 0, 0.65);
-          color: #1890ff;
-          font-size: 14px;
-          font-variant: tabular-nums;
-          line-height: 1.5;
-          text-align: center;
-          list-style: none;
-          opacity: 0;
-          -webkit-transition: -webkit-transform 0.3s
-            cubic-bezier(0.78, 0.14, 0.15, 0.86);
-          transition: -webkit-transform 0.3s
-            cubic-bezier(0.78, 0.14, 0.15, 0.86);
-          transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-          transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
-            -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-          -webkit-font-feature-settings: "tnum";
-          font-feature-settings: "tnum";
-        }
-
-        .ant-spin-spinning {
-          position: static;
-          display: inline-block;
-          opacity: 1;
-        }
-
-        .ant-spin-dot {
+        .breeding-rhombus-spinner {
+          height: var(--loading-spinner-size);
+          width: var(--loading-spinner-size);
           position: relative;
-          display: inline-block;
-          width: 20px;
-          height: 20px;
-          font-size: 20px;
-        }
-
-        .ant-spin-dot-item {
-          position: absolute;
-          display: block;
-          width: 9px;
-          height: 9px;
-          background-color: #1890ff;
-          border-radius: 100%;
-          -webkit-transform: scale(0.75);
-          -ms-transform: scale(0.75);
-          transform: scale(0.75);
-          -webkit-transform-origin: 50% 50%;
-          -ms-transform-origin: 50% 50%;
-          transform-origin: 50% 50%;
-          opacity: 0.3;
-          -webkit-animation: ant-spin-move 1s infinite linear alternate;
-          animation: ant-spin-move 1s infinite linear alternate;
-        }
-
-        .ant-spin-dot-item:nth-child(1) {
-          top: 0;
-          left: 0;
-        }
-
-        .ant-spin-dot-item:nth-child(2) {
-          top: 0;
-          right: 0;
-          -webkit-animation-delay: 0.4s;
-          animation-delay: 0.4s;
-        }
-
-        .ant-spin-dot-item:nth-child(3) {
-          right: 0;
-          bottom: 0;
-          -webkit-animation-delay: 0.8s;
-          animation-delay: 0.8s;
-        }
-
-        .ant-spin-dot-item:nth-child(4) {
-          bottom: 0;
-          left: 0;
-          -webkit-animation-delay: 1.2s;
-          animation-delay: 1.2s;
-        }
-
-        .ant-spin-dot-spin {
-          -webkit-transform: rotate(45deg);
-          -ms-transform: rotate(45deg);
           transform: rotate(45deg);
-          -webkit-animation: ant-rotate 1.2s infinite linear;
-          animation: ant-rotate 1.2s infinite linear;
+        }
+        .breeding{
+          position: relative;
         }
 
-        .ant-spin-lg .ant-spin-dot {
-          width: 32px;
-          height: 32px;
-          font-size: 32px;
+        .breeding::before {
+          position: absolute;
+          top: calc(var(--loading-spinner-size) + 0.6rem);
+          left: 0;
+          width: var(--loading-spinner-size);
+          height: 5px;
+          content: '';
+          background: #007fff80;
+          border-radius: 50%;
+          animation: shadow-ani 2s linear infinite;
+          transform: rotate(45deg);
         }
 
-        .ant-spin-lg .ant-spin-dot i {
-          width: 14px;
-          height: 14px;
+        .breeding-rhombus-spinner, .breeding-rhombus-spinner * {
+          box-sizing: border-box;
         }
 
-        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-          .ant-spin-blur {
-            background: #fff;
-            opacity: 0.5;
+        .breeding-rhombus-spinner .rhombus {
+          height: calc(var(--loading-spinner-size) / 8);
+          width: calc(var(--loading-spinner-size) / 8);
+          animation-duration: 2000ms;
+          top: calc(var(--loading-spinner-size) / 2.3077);
+          left: calc(var(--loading-spinner-size) / 2.3077);
+          background-color: var(--primary, #007fff);
+          position: absolute;
+          animation-iteration-count: infinite;
+        }
+
+        .breeding-rhombus-spinner .rhombus:nth-child(2n+0) {
+          margin-right: 0;
+        }
+
+        .breeding-rhombus-spinner .rhombus.child-1 {
+          animation-name: breeding-rhombus-spinner-animation-child-1;
+          animation-delay: calc(100ms * 1);
+        }
+
+        .breeding-rhombus-spinner .rhombus.child-2 {
+          animation-name: breeding-rhombus-spinner-animation-child-2;
+          animation-delay: calc(100ms * 2);
+        }
+
+        .breeding-rhombus-spinner .rhombus.child-3 {
+          animation-name: breeding-rhombus-spinner-animation-child-3;
+          animation-delay: calc(100ms * 3);
+        }
+
+        .breeding-rhombus-spinner .rhombus.child-4 {
+          animation-name: breeding-rhombus-spinner-animation-child-4;
+          animation-delay: calc(100ms * 4);
+        }
+
+        .breeding-rhombus-spinner .rhombus.child-5 {
+          animation-name: breeding-rhombus-spinner-animation-child-5;
+          animation-delay: calc(100ms * 5);
+        }
+
+        .breeding-rhombus-spinner .rhombus.child-6 {
+          animation-name: breeding-rhombus-spinner-animation-child-6;
+          animation-delay: calc(100ms * 6);
+        }
+
+        .breeding-rhombus-spinner .rhombus.child-7 {
+          animation-name: breeding-rhombus-spinner-animation-child-7;
+          animation-delay: calc(100ms * 7);
+        }
+
+        .breeding-rhombus-spinner .rhombus.child-8 {
+          animation-name: breeding-rhombus-spinner-animation-child-8;
+          animation-delay: calc(100ms * 8);
+        }
+
+        .breeding-rhombus-spinner .rhombus.big {
+          height: calc(var(--loading-spinner-size) / 3);
+          width: calc(var(--loading-spinner-size) / 3);
+          top: calc(var(--loading-spinner-size) / 3);
+          left: calc(var(--loading-spinner-size) / 3);
+          background-color: var(--primary, #007fff);
+          animation: breeding-rhombus-spinner-animation-child-big 2s infinite;
+          animation-delay: 0.5s;
+        }
+
+        @keyframes shadow-ani {
+          0%,
+          100% {
+            transform: scale(0.3, 1);
+          }
+
+          50% {
+            transform: scale(1, 1);
           }
         }
 
-        @-webkit-keyframes ant-spin-move {
-          to {
-            opacity: 1;
+        @keyframes breeding-rhombus-spinner-animation-child-1 {
+          50% {
+            transform: translate(-250%, -250%);
           }
         }
 
-        @keyframes ant-spin-move {
-          to {
-            opacity: 1;
+        @keyframes breeding-rhombus-spinner-animation-child-2 {
+          50% {
+            transform: translate(0, -250%);
           }
         }
 
-        @-webkit-keyframes ant-rotate {
-          to {
-            -webkit-transform: rotate(405deg);
-            transform: rotate(405deg);
+        @keyframes breeding-rhombus-spinner-animation-child-3 {
+          50% {
+            transform: translate(250%, -250%);
           }
         }
 
-        @keyframes ant-rotate {
-          to {
-            -webkit-transform: rotate(405deg);
-            transform: rotate(405deg);
+        @keyframes breeding-rhombus-spinner-animation-child-4 {
+          50% {
+            transform: translate(250%, 0);
           }
         }
+
+        @keyframes breeding-rhombus-spinner-animation-child-5 {
+          50% {
+            transform: translate(250%, 250%);
+          }
+        }
+
+        @keyframes breeding-rhombus-spinner-animation-child-6 {
+          50% {
+            transform: translate(0, 250%);
+          }
+        }
+
+        @keyframes breeding-rhombus-spinner-animation-child-7 {
+          50% {
+            transform: translate(-250%, 250%);
+          }
+        }
+
+        @keyframes breeding-rhombus-spinner-animation-child-8 {
+          50% {
+            transform: translate(-250%, 0);
+          }
+        }
+
+        @keyframes breeding-rhombus-spinner-animation-child-big {
+          50% {
+            transform: scale(0.5);
+          }
+        }
+
       </style>
 
       <div style="
@@ -189,14 +211,17 @@
         height: 100%;
         min-height: 362px;
       ">
-        <div class="page-loading-warp">
-          <div class="ant-spin ant-spin-lg ant-spin-spinning">
-            <span class="ant-spin-dot ant-spin-dot-spin">
-              <i class="ant-spin-dot-item"></i>
-              <i class="ant-spin-dot-item"></i>
-              <i class="ant-spin-dot-item"></i>
-              <i class="ant-spin-dot-item"></i>
-            </span>
+        <div class="breeding">
+          <div class="breeding-rhombus-spinner">
+            <div class="rhombus child-1"></div>
+            <div class="rhombus child-2"></div>
+            <div class="rhombus child-3"></div>
+            <div class="rhombus child-4"></div>
+            <div class="rhombus child-5"></div>
+            <div class="rhombus child-6"></div>
+            <div class="rhombus child-7"></div>
+            <div class="rhombus child-8"></div>
+            <div class="rhombus big"></div>
           </div>
         </div>
         <div class="loading-title">
