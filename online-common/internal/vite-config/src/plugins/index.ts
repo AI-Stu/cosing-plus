@@ -1,4 +1,5 @@
 import * as process from 'node:process';
+import { resolve } from 'node:path';
 import type { PluginOption } from 'vite';
 
 import vue from '@vitejs/plugin-vue';
@@ -11,15 +12,16 @@ import viteDtsPlugin from 'vite-plugin-dts';
 import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin as viteHtmlPlugin } from 'vite-plugin-html';
 import viteCompressPlugin from 'vite-plugin-compression';
+import viteUnocssPlugin from 'unocss/vite';
 import viteAutoImportPlugin from 'unplugin-auto-import/vite';
 import viteComponentsPlugin from 'unplugin-vue-components/vite';
+// import viteGenerateConfigPlugin from 'unplugin-config/vite';
 import AntdvResolver from 'antdv-component-resolver';
 
 import type { ApplicationPluginOptions, ConditionPlugin, LibraryPluginOptions } from '../types';
-import { viteMetadataPlugin } from './inject-metadata';
+import { viteBuildInfoPlugin } from './build-info';
 import { viteInjectAppLoadingPlugin } from './app-loading';
 import { viteExtraAppConfigPlugin } from './extra-app-config';
-import { vitePrintPlugin } from './print';
 
 /**
  * 过滤符合条件的插件
@@ -45,12 +47,11 @@ async function loadCommonPlugins(
 ): Promise<ConditionPlugin[]> {
   const {
     devTools,
-    injectMetadata,
+    buildInfo,
+    buildInfoOptions,
     build,
     autoImport,
-    autoImportOptions,
-    visualizer,
-    visualizerOptions
+    visualizer
   } = options;
 
   return [
@@ -66,17 +67,18 @@ async function loadCommonPlugins(
         vueJsx()
       ]
     },
-    // 注入metadata
     {
-      condition: injectMetadata,
-      plugins: async () => [await viteMetadataPlugin()]
+      condition: buildInfo,
+      plugins: () => [
+        viteBuildInfoPlugin(buildInfoOptions || {})
+      ]
     },
     // 自动引入
     {
       condition: autoImport,
       plugins: () => [viteAutoImportPlugin({
         dts: 'types/auto-imports.d.ts',
-        ...autoImportOptions
+        imports: []
       })]
     },
     // 【仅开发环境】 vue调试工具
@@ -90,8 +92,7 @@ async function loadCommonPlugins(
       plugins: () => [<PluginOption>viteVisualizerPlugin({
         filename: './node_modules/.cache/visualizer/stats.html',
         gzipSize: true,
-        open: true,
-        ...visualizerOptions
+        open: true
       } as PluginVisualizerOptions)]
     }
   ];
@@ -135,12 +136,10 @@ async function loadApplicationPlugins(
     license,
     nitroMock,
     nitroMockOptions,
-    print,
-    printInfoMap,
     pwa,
     pwaOptions,
     components,
-    componentsOptions,
+    unocss,
     ...commonOptions
   } = options;
 
@@ -154,17 +153,12 @@ async function loadApplicationPlugins(
       plugins: async () => {
         return [
           viteVueI18nPlugin({
-            compositionOnly: true,
-            fullInstall: true,
-            runtimeOnly: true
+            include: resolve(process.cwd(), './src/locales/**')
+            // compositionOnly: true,
+            // fullInstall: true,
+            // runtimeOnly: true
           })
         ];
-      }
-    },
-    {
-      condition: print,
-      plugins: async () => {
-        return [await vitePrintPlugin({ infoMap: printInfoMap })];
       }
     },
     // {
@@ -204,13 +198,12 @@ async function loadApplicationPlugins(
         viteComponentsPlugin({
           resolvers: [AntdvResolver()],
           dts: 'types/components.d.ts',
-          dirs: ['src/components'],
-          ...componentsOptions
+          dirs: ['src/components']
         })
       ]
     },
     {
-      condition: build && !!compress,
+      condition: build && compress,
       plugins: () => {
         const compressPlugins: PluginOption[] = [];
         if (compressTypes?.includes('brotli')) {
@@ -244,6 +237,12 @@ async function loadApplicationPlugins(
       condition: build && extraAppConfig,
       plugins: async () => [
         await viteExtraAppConfigPlugin({ isBuild: true, root: process.cwd() })
+      ]
+    },
+    {
+      condition: unocss,
+      plugins: async () => [
+        viteUnocssPlugin()
       ]
     }
   ]);

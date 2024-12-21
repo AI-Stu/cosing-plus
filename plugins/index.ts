@@ -8,7 +8,6 @@ import VitePluginPreloadAll from '@mistjs/vite-plugin-preload';
 import Unocss from 'unocss/vite';
 import AntdvResolver from 'antdv-component-resolver';
 import { GLOB_CONFIG_FILE_NAME, OUTPUT_DIR } from './constants';
-import { viteBuildInfo } from './vite-build-info';
 
 export function createVitePlugins(env: Record<string, string>) {
   const vitePluginList: (PluginOption | PluginOption[])[] = [
@@ -43,8 +42,9 @@ export function createVitePlugins(env: Record<string, string>) {
         prefix: 'VITE_GLOB_'
       }
     }),
-    Unocss(),
-    viteBuildInfo(env.VITE_APP_NAME)
+    Unocss({
+      configFile: 'unocss.config.ts'
+    })
   ];
   return vitePluginList;
 }

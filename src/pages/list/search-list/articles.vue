@@ -244,7 +244,7 @@ function formatTimer(timer: number | string) {
                 <span c-text-tertiary>
                   发布在
                 </span>
-                <a href="https://antdv-pro.com" c-primary hover="c-primary-hover">https://antdv-pro.com</a>
+                <a href="https://cosing-plus.com" c-primary hover="c-primary-hover">https://cosing-plus.com</a>
                 <span c-text-tertiary>
                   {{ formatTimer(item.updatedAt) }}
                 </span>

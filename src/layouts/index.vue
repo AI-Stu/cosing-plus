@@ -57,13 +57,12 @@ const layoutProps = computed(() =>
     @update:collapsed="appStore.toggleCollapsed"
   >
     <template #headerActions>
-      <UserAvatar />
       <SelectLang />
-      <GithubLink />
+      <!-- <GithubLink /> -->
       <template v-if="!isMobile">
-        <GiteeLink />
         <DocLink />
       </template>
+      <UserAvatar />
     </template>
     <template #contentPrefix>
       <MultiTab v-if="layoutSetting.multiTab" />

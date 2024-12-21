@@ -64,7 +64,11 @@ function renderTitle(title: VNodeChild | (() => VNodeChild)) {
 
 <template>
   <div class="ant-pro-page-container">
-    <div class="bg-[var(--bg-color)]" :class="layoutSetting.multiTab ? 'pb-16px' : 'py-16px'" px-24px mb-24px mx--24px mt--24px>
+    <div
+      class="bg-[var(--bg-color)]"
+      :class="layoutSetting.multiTab ? 'pb-16px' : 'py-16px'"
+      px-24px mb-24px mx--24px mt--24px
+    >
       <a-breadcrumb v-if="!currentItem.hideInBreadcrumb">
         <template v-if="currentItem.matched?.length">
           <a-breadcrumb-item v-for="item in currentItem.matched" :key="item.path">
@@ -78,7 +82,9 @@ function renderTitle(title: VNodeChild | (() => VNodeChild)) {
       <div flex mt-8px justify-between>
         <div flex items-center my-4px of-hidden>
           <slot name="title">
-            <span text-20px line-height-32px mr-12px mb-0 truncate font-600>{{ renderTitle(title ?? currentItem.title) }}</span>
+            <span text-20px line-height-32px mr-12px mb-0 truncate font-600>
+              {{ renderTitle(title ?? currentItem.title) }}
+            </span>
           </slot>
         </div>
         <div>

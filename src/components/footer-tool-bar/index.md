@@ -10,6 +10,6 @@
 
 ```html
 <footer-tool-bar right="扩展信息提示">
-    <a-button type="primary" @click="validate" :loading="loading">提交</a-button>
+  <a-button type="primary" @click="validate" :loading="loading">提交</a-button>
 </footer-tool-bar>
 ```

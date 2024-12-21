@@ -48,6 +48,7 @@
     "@antfu/eslint-config": "catalog:",
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
+    "@cosing/lint": "workspace:*",
     "@cosing/vite-config": "workspace:*",
     "@mistjs/cli": "catalog:",
     "@mistjs/vite-plugin-preload": "catalog:",

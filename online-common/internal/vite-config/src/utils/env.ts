@@ -81,7 +81,6 @@ async function loadAndConvertEnv(
 
   const {
     VITE_APP_TITLE,
-    VITE_ARCHIVER,
     VITE_BASE,
     VITE_COMPRESS,
     VITE_DEVTOOLS,
@@ -92,13 +91,12 @@ async function loadAndConvertEnv(
     VITE_VISUALIZER
   } = envConfig;
 
-  const compressTypes: ('brotli' | 'gzip')[] = (VITE_COMPRESS ?? '')
+  const compressTypes: ('brotli' | 'gzip')[] = (VITE_COMPRESS ?? 'gzip')
     .split(',')
     .filter(item => item === 'brotli' || item === 'gzip') as ('brotli' | 'gzip')[];
 
   return {
-    appTitle: getString(VITE_APP_TITLE, 'Vben Admin'),
-    archiver: getBoolean(VITE_ARCHIVER),
+    appTitle: getString(VITE_APP_TITLE, 'Cosing Plus'),
     base: getString(VITE_BASE, '/'),
     compress: compressTypes.length > 0,
     compressTypes,

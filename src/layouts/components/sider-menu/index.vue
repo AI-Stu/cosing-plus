@@ -32,7 +32,7 @@ const siderStyle = computed<CSSProperties>(() => {
     overflow: 'hidden'
   };
 
-  // bugfix https://github.com/antdv-pro/antdv-pro/issues/173
+  // bugfix https://github.com/AI-Stu/cosing-plus/issues/173
   if (layout.value === 'mix' && header.value === false)
     style.paddingTop = '0px';
 

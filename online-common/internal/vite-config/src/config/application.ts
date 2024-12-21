@@ -1,8 +1,7 @@
-import path, { relative } from 'node:path';
 import * as process from 'node:process';
-import type { CSSOptions, UserConfig } from 'vite';
+import type { UserConfig } from 'vite';
 
-import { findMonorepoRoot } from '@cosing/node-utils';
+// import { findMonorepoRoot } from '@cosing/node-utils';
 import { defineConfig, loadEnv, mergeConfig } from 'vite';
 import type { Options as PwaPluginOptions } from 'vite-plugin-pwa';
 import type { DefineApplicationOptions } from '../types';
@@ -27,13 +26,14 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
     const env = loadEnv(mode, root);
 
     const plugins = await loadApplicationPlugins({
-      compress: false,
-      compressTypes: ['brotli', 'gzip'],
+      components: true,
+      compress: true,
+      compressTypes: ['gzip'],
       devTools: true,
       env,
       extraAppConfig: true,
       html: true,
-      i18n: true,
+      i18n: false,
       injectAppLoading: true,
       injectMetadata: true,
       build: isBuild,
@@ -41,12 +41,20 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
       mode,
       nitroMock: !isBuild,
       nitroMockOptions: {},
-      print: !isBuild,
-      printInfoMap: {
-        'Vben Admin Docs': 'https://doc.vben.pro'
+      unocss: true,
+      buildInfo: true,
+      buildInfoOptions: {
+        configureServerOptions: {
+          'Cosing Plus Docs': 'https://doc.vben.pro',
+          '风格配置': './src/config/default-setting.ts'
+        },
+        buildStartOptions: {
+          name: 'Cosing Plus'
+        }
       },
       pwa: true,
       pwaOptions: getDefaultPwaOptions(appTitle, isBuild),
+      autoImport: true,
       ...envConfig,
       ...application
     });
@@ -65,7 +73,7 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
         },
         target: 'es2020'
       },
-      css: createCssOptions(injectGlobalScss),
+      // css: createCssOptions(injectGlobalScss),
       esbuild: {
         drop: isBuild
           ? [
@@ -103,27 +111,27 @@ function defineApplicationConfig(userConfigPromise?: DefineApplicationOptions) {
  * @param injectGlobalScss
  * @returns CSSOptions
  */
-function createCssOptions(injectGlobalScss = true): CSSOptions {
-  const root = findMonorepoRoot();
-  return {
-    preprocessorOptions: injectGlobalScss
-      ? {
-          scss: {
-            additionalData: (content: string, filepath: string) => {
-              const relativePath = relative(root, filepath);
-              // apps下的包注入全局样式
-              if (relativePath.startsWith(`apps${path.sep}`)) {
-                return `@use "@cosing/styles/global" as *;\n${content}`;
-              }
-              return content;
-            },
-            api: 'modern',
-            importers: [new NodePackageImporter()]
-          }
-        }
-      : {}
-  };
-}
+// function createCssOptions(injectGlobalScss = true): CSSOptions {
+//   const root = findMonorepoRoot();
+//   return {
+//     preprocessorOptions: injectGlobalScss
+//       ? {
+//           scss: {
+//             additionalData: (content: string, filepath: string) => {
+//               const relativePath = relative(root, filepath);
+//               // apps下的包注入全局样式
+//               if (relativePath.startsWith(`apps${path.sep}`)) {
+//                 return `@use "@cosing/styles/global" as *;\n${content}`;
+//               }
+//               return content;
+//             },
+//             api: 'modern',
+//             importers: [new NodePackageImporter()]
+//           }
+//         }
+//       : {}
+//   };
+// }
 
 function getDefaultPwaOptions(name: string, isBuild: boolean): Partial<PwaPluginOptions> {
   return {

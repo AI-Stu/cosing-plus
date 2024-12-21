@@ -41,7 +41,7 @@ async function viteLicensePlugin(
           * Contact: ann.vben@gmail.com
         */`.trim();
 
-        for (const [, fileContent] of Object.entries(bundle)) {
+        for (const [, fileContent] of Object.entries(bundle) as [string, OutputChunk][]) {
           if (fileContent.type === 'chunk' && fileContent.isEntry) {
             const chunkContent = fileContent as OutputChunk;
             // 插入版权信息

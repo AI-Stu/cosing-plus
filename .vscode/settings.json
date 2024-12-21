@@ -3,6 +3,9 @@
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
+  // 启用 ESlint 平面配置支持
+  "eslint.useFlatConfig": true,
+
   // 自动修复
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
@@ -88,7 +91,9 @@
     "eslint.config.mjs": ".eslintignore,.prettierignore,.stylelintignore,.commitlintrc.*,.prettierrc.*,stylelint.config.*,.lintstagedrc.mjs,cspell.json",
     "tailwind.config.mjs": "postcss.*"
   },
+  "stylelint.configOverrides": {
 
-  // 启用 ESlint 平面配置支持
-  "eslint.useFlatConfig": true
+  },
+  "stylelint.packageManager": "pnpm"
+
 }

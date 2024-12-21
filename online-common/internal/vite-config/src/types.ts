@@ -1,15 +1,11 @@
-import type { PluginVisualizerOptions } from 'rollup-plugin-visualizer';
-import type { Options as PluginAutoImportOptions } from 'unplugin-auto-import/types';
-import type { Options as PluginComponentsOptions } from 'unplugin-vue-components/types';
 import type { ConfigEnv, PluginOption, UserConfig } from 'vite';
 import type { PluginOptions } from 'vite-plugin-dts';
 import type { Options as PwaPluginOptions } from 'vite-plugin-pwa';
 
-interface PrintPluginOptions {
-  /**
-   * 打印的数据
-   */
-  infoMap?: Record<string, string | undefined>
+/** 打印的数据 */
+interface BuildInfPluginOptions {
+  configureServerOptions?: Record<string, string | undefined>
+  buildStartOptions?: Record<string, string | undefined>
 }
 
 interface NitroMockPluginOptions {
@@ -53,6 +49,10 @@ interface ConditionPlugin {
 }
 
 interface CommonPluginOptions {
+  /** 开启 自定义控制台信息提示 */
+  buildInfo?: boolean
+  /** 自定义控制台信息提示 */
+  buildInfoOptions?: BuildInfPluginOptions
   /** 是否开启devtools */
   devTools?: boolean
   /** 环境变量 */
@@ -65,13 +65,12 @@ interface CommonPluginOptions {
   mode?: string
   /** 开启自动引入 */
   autoImport?: boolean
-  autoImportOptions?: PluginAutoImportOptions
   /** 开启依赖分析 */
   visualizer?: boolean
-  visualizerOptions?: PluginVisualizerOptions
 }
 
 interface ApplicationPluginOptions extends CommonPluginOptions {
+
   /** 开启 gzip|brotli 压缩 */
   compress?: boolean
   /** 压缩类型 */
@@ -92,17 +91,14 @@ interface ApplicationPluginOptions extends CommonPluginOptions {
   nitroMock?: boolean
   /** nitro mock 插件配置 */
   nitroMockOptions?: NitroMockPluginOptions
-  /** 开启控制台自定义打印 */
-  print?: boolean
-  /** 打印插件配置 */
-  printInfoMap?: PrintPluginOptions['infoMap']
   /** 是否开启pwa */
   pwa?: boolean
   /** pwa 插件配置 */
   pwaOptions?: Partial<PwaPluginOptions>
   /** 自动导入组件 */
   components?: boolean
-  componentsOptions?: PluginComponentsOptions
+  /** unocss */
+  unocss?: boolean
 }
 
 interface LibraryPluginOptions extends CommonPluginOptions {
@@ -136,5 +132,5 @@ export type {
   DefineLibraryOptions,
   LibraryPluginOptions,
   NitroMockPluginOptions,
-  PrintPluginOptions
+  BuildInfPluginOptions
 };

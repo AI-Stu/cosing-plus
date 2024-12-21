@@ -29,7 +29,11 @@ async function handleClick({ key }: any) {
 
 <template>
   <a-dropdown>
-    <span hover="bg-[var(--hover-color)]" flex items-center h-48px px-12px cursor-pointer class="transition-all-300">
+    <span
+      hover="bg-[var(--hover-color)]"
+      flex items-center h-48px px-12px cursor-pointer
+      class="transition-all-300"
+    >
       <a-avatar :src="avatar" mr-8px size="small" />
       <span class="anticon">{{ nickname }}</span>
     </span>

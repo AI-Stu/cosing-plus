@@ -1,4 +1,4 @@
 export * from './config';
-export * from './options';
 export * from './plugins';
+export * from './types';
 export { loadAndConvertEnv } from './utils/env';

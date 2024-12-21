@@ -47,7 +47,8 @@ async function viteExtraAppConfigPlugin({
           type: 'asset'
         });
 
-        console.log(colors.cyan(`✨配置文件构建成功!`));
+        console.log(`\n`);
+        console.log(colors.cyan(`✨ 配置文件构建成功!`));
       }
       catch (error) {
         console.log(
