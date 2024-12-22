@@ -1,17 +1,16 @@
-// import { eslintConfig } from '@cosing/lint';
+// import { eslintConfig } from '@cosing/lint-config';
 
 // export default eslintConfig();
 
 import antfu from '@antfu/eslint-config';
 import globals from 'globals';
-// import autoImport from './.eslintrc-auto-import.js'
+
 export default antfu(
   // 针对antfu配置的配置选项
   {
     typescript: true,
     vue: true,
     languageOptions: {
-      // globals: autoImport?.globals,
       globals: globals.browser
     },
     ignores: [
