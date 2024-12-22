@@ -1,24 +1,28 @@
 {
   "folders": [
     {
+      "name": "app",
+      "path": "."
+    },
+    {
       "name": "@cosing/eslint-config",
-      "path": "online-common/internal/lint-configs/eslint-config",
+      "path": "online-common/internal/lint-configs/eslint-config"
     },
     {
       "name": "@cosing/stylelint-config",
-      "path": "online-common/internal/lint-configs/stylelint-config",
+      "path": "online-common/internal/lint-configs/stylelint-config"
     },
     {
       "name": "@cosing/node-utils",
-      "path": "online-common/internal/node-utils",
+      "path": "online-common/internal/node-utils"
     },
     {
       "name": "@cosing/tsconfig",
-      "path": "online-common/internal/tsconfig",
+      "path": "online-common/internal/tsconfig"
     },
     {
       "name": "@cosing/vite-config",
-      "path": "online-common/internal/vite-config",
-    },
-  ],
+      "path": "online-common/internal/vite-config"
+    }
+  ]
 }
