@@ -1,107 +1,3 @@
-<script setup lang="ts">
-import {
-  AlipayCircleFilled,
-  DingtalkCircleFilled,
-  LockOutlined,
-  MobileOutlined,
-  UserOutlined
-} from '@ant-design/icons-vue';
-import { AxiosError } from 'axios';
-import GlobalLayoutFooter from '@/layouts/components/global-footer/index.vue';
-import { loginApi } from '@/api/common/login';
-import { getQueryParam } from '@/utils/tools';
-import type { LoginMobileParams, LoginParams } from '@/api/common/login';
-
-const message = useMessage();
-const notification = useNotification();
-const appStore = useAppStore();
-const { layoutSetting } = storeToRefs(appStore);
-const router = useRouter();
-const token = useAuthorization();
-const loginModel = reactive({
-  username: undefined,
-  password: undefined,
-  mobile: undefined,
-  code: undefined,
-  type: 'account',
-  remember: true
-});
-const { t } = useI18nLocale();
-const formRef = shallowRef();
-const codeLoading = shallowRef(false);
-const resetCounter = 60;
-const submitLoading = shallowRef(false);
-const errorAlert = shallowRef(false);
-
-const { counter, pause, reset, resume, isActive } = useInterval(1000, {
-  controls: true,
-  immediate: false,
-  callback(count) {
-    if (count) {
-      if (count === resetCounter)
-        pause();
-    }
-  }
-});
-async function getCode() {
-  codeLoading.value = true;
-  try {
-    await formRef.value.validate(['mobile']);
-    setTimeout(() => {
-      reset();
-      resume();
-      codeLoading.value = false;
-      message.success('验证码是：123456');
-    }, 3000);
-  }
-  catch (error) {
-    // TODO
-    codeLoading.value = false;
-  }
-}
-
-async function submit() {
-  submitLoading.value = true;
-  try {
-    await formRef.value?.validate();
-    let params: LoginParams | LoginMobileParams;
-
-    if (loginModel.type === 'account') {
-      params = {
-        username: loginModel.username,
-        password: loginModel.password
-      } as unknown as LoginParams;
-    }
-    else {
-      params = {
-        mobile: loginModel.mobile,
-        code: loginModel.code,
-        type: 'mobile'
-      } as unknown as LoginMobileParams;
-    }
-    const { data } = await loginApi(params);
-    token.value = data?.token;
-    notification.success({
-      message: '登录成功',
-      description: '欢迎回来！',
-      duration: 3
-    });
-    // 获取当前是否存在重定向的链接，如果存在就走重定向的地址
-    const redirect = getQueryParam('redirect', '/');
-    router.push({
-      path: redirect,
-      replace: true
-    });
-  }
-  catch (e) {
-    if (e instanceof AxiosError)
-      errorAlert.value = true;
-
-    submitLoading.value = false;
-  }
-}
-</script>
-
 <template>
   <div class="login-container">
     <div class="login-lang" flex="~" items-center justify-end gap-2 px-24px>
@@ -222,6 +118,110 @@ async function submit() {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import {
+  AlipayCircleFilled,
+  DingtalkCircleFilled,
+  LockOutlined,
+  MobileOutlined,
+  UserOutlined
+} from '@ant-design/icons-vue';
+import { AxiosError } from 'axios';
+import GlobalLayoutFooter from '@/layouts/components/global-footer/index.vue';
+import { loginApi } from '@/api/common/login';
+import { getQueryParam } from '@/utils/tools';
+import type { LoginMobileParams, LoginParams } from '@/api/common/login';
+
+const message = useMessage();
+const notification = useNotification();
+const appStore = useAppStore();
+const { layoutSetting } = storeToRefs(appStore);
+const router = useRouter();
+const token = useAuthorization();
+const loginModel = reactive({
+  username: undefined,
+  password: undefined,
+  mobile: undefined,
+  code: undefined,
+  type: 'account',
+  remember: true
+});
+const { t } = useI18nLocale();
+const formRef = shallowRef();
+const codeLoading = shallowRef(false);
+const resetCounter = 60;
+const submitLoading = shallowRef(false);
+const errorAlert = shallowRef(false);
+
+const { counter, pause, reset, resume, isActive } = useInterval(1000, {
+  controls: true,
+  immediate: false,
+  callback(count) {
+    if (count) {
+      if (count === resetCounter)
+        pause();
+    }
+  }
+});
+async function getCode() {
+  codeLoading.value = true;
+  try {
+    await formRef.value.validate(['mobile']);
+    setTimeout(() => {
+      reset();
+      resume();
+      codeLoading.value = false;
+      message.success('验证码是：123456');
+    }, 3000);
+  }
+  catch (error) {
+    // TODO
+    codeLoading.value = false;
+  }
+}
+
+async function submit() {
+  submitLoading.value = true;
+  try {
+    await formRef.value?.validate();
+    let params: LoginParams | LoginMobileParams;
+
+    if (loginModel.type === 'account') {
+      params = {
+        username: loginModel.username,
+        password: loginModel.password
+      } as unknown as LoginParams;
+    }
+    else {
+      params = {
+        mobile: loginModel.mobile,
+        code: loginModel.code,
+        type: 'mobile'
+      } as unknown as LoginMobileParams;
+    }
+    const { data } = await loginApi(params);
+    token.value = data?.token;
+    notification.success({
+      message: '登录成功',
+      description: '欢迎回来！',
+      duration: 3
+    });
+    // 获取当前是否存在重定向的链接，如果存在就走重定向的地址
+    const redirect = getQueryParam('redirect', '/');
+    router.push({
+      path: redirect,
+      replace: true
+    });
+  }
+  catch (e) {
+    if (e instanceof AxiosError)
+      errorAlert.value = true;
+
+    submitLoading.value = false;
+  }
+}
+</script>
 
 <style lang="less" scoped>
 .login-container{

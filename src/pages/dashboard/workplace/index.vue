@@ -1,3 +1,155 @@
+<template>
+  <page-container>
+    <template #content>
+      <div class="pageHeaderContent">
+        <div class="avatar">
+          <a-avatar size="large" :src="currentUser.avatar" />
+        </div>
+        <div class="content">
+          <div class="contentTitle">
+            早安，
+            {{ currentUser.name }}
+            ，祝你开心每一天！
+          </div>
+          <div>
+            {{ currentUser.title }} |{{ currentUser.group }}
+          </div>
+        </div>
+      </div>
+    </template>
+    <template #extraContent>
+      <div class="extraContent">
+        <div class="statItem">
+          <a-statistic title="项目数" :value="56" />
+        </div>
+        <div class="statItem">
+          <a-statistic title="团队内排名" :value="8" suffix="/ 24" />
+        </div>
+        <div class="statItem">
+          <a-statistic title="项目访问" :value="2223" />
+        </div>
+      </div>
+    </template>
+
+    <a-row :gutter="24">
+      <a-col :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
+        <a-card
+          class="projectList"
+          :style="{ marginBottom: '24px' }"
+          title="进行中的项目"
+          :bordered="false"
+          :loading="false"
+          :body-style="{ padding: 0 }"
+        >
+          <template #extra>
+            <router-link to="/">
+              全部项目
+            </router-link>
+          </template>
+          <a-card-grid v-for="item in projectNotice" :key="item.id" class="projectGrid">
+            <a-card :body-style="{ padding: 0 }" style="box-shadow: none" :bordered="false">
+              <a-card-meta
+                :description="item.description"
+                class="w-full"
+              >
+                <template #title>
+                  <div class="cardTitle">
+                    <a-avatar size="small" :src="item.logo" />
+                    <router-link :to="item.href">
+                      {{ item.title }}
+                    </router-link>
+                  </div>
+                </template>
+              </a-card-meta>
+              <div class="projectItemContent">
+                <router-link :to="item.memberLink">
+                  {{ item.member || '' }}
+                </router-link>
+                <span class="datetime" ml-2 :title="item.updatedAt">
+                  {{ item.updatedAt }}
+                </span>
+              </div>
+            </a-card>
+          </a-card-grid>
+        </a-card>
+        <a-card
+          :body-style="{ padding: 0 }"
+          :bordered="false"
+          class="activeCard"
+          title="动态"
+          :loading="false"
+        >
+          <a-list
+            :data-source="activities"
+            class="activitiesList"
+          >
+            <template #renderItem="{ item }">
+              <a-list-item :key="item.id">
+                <a-list-item-meta>
+                  <template #title>
+                    <span>
+                      <a class="username">{{ item.user.name }}</a>&nbsp;
+                      <span class="event">
+                        <span>{{ item.template1 }}</span>&nbsp;
+                        <a href=""> {{ item?.group?.name }} </a>&nbsp;
+                        <span>{{ item.template2 }}</span>&nbsp;
+                        <a href=""> {{ item?.project?.name }} </a>
+                      </span>
+                    </span>
+                  </template>
+                  <template #avatar>
+                    <a-avatar :src="item.user.avatar" />
+                  </template>
+                  <template #description>
+                    <span class="datetime" :title="item.updatedAt">
+                      {{ item.updatedAt }}
+                    </span>
+                  </template>
+                </a-list-item-meta>
+              </a-list-item>
+            </template>
+          </a-list>
+        </a-card>
+      </a-col>
+      <a-col :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
+        <a-card
+          :style="{ marginBottom: '24px' }"
+          title="快速开始 / 便捷导航"
+          :bordered="false"
+          :body-style="{ padding: 0 }"
+        >
+          <EditableLinkGroup />
+        </a-card>
+        <a-card
+          :style="{ marginBottom: '24px' }"
+          :bordered="false"
+          title="XX 指数"
+        >
+          <div class="chart">
+            <div ref="radarContainer" />
+          </div>
+        </a-card>
+        <a-card
+          :body-style="{ paddingTop: '12px', paddingBottom: '12px' }"
+          :bordered="false"
+          title="团队"
+        >
+          <div class="members">
+            <a-row :gutter="48">
+              <a-col v-for="item in projectNotice" :key="`members-item-${item.id}`" :span="12">
+                <router-link :to="item.href">
+                  <a-avatar :src="item.logo" size="small" />
+                  <span class="member">{{ item.member }}</span>
+                </router-link>
+              </a-col>
+            </a-row>
+          </div>
+        </a-card>
+      </a-col>
+    </a-row>
+  </page-container>
+</template>
+
 <script setup lang="ts">
 import { Radar } from '@antv/g2plot';
 import EditableLinkGroup from '@/pages/dashboard/workplace/editable-link-group.vue';
@@ -286,158 +438,6 @@ onBeforeUnmount(() => {
   radar?.destroy?.();
 });
 </script>
-
-<template>
-  <page-container>
-    <template #content>
-      <div class="pageHeaderContent">
-        <div class="avatar">
-          <a-avatar size="large" :src="currentUser.avatar" />
-        </div>
-        <div class="content">
-          <div class="contentTitle">
-            早安，
-            {{ currentUser.name }}
-            ，祝你开心每一天！
-          </div>
-          <div>
-            {{ currentUser.title }} |{{ currentUser.group }}
-          </div>
-        </div>
-      </div>
-    </template>
-    <template #extraContent>
-      <div class="extraContent">
-        <div class="statItem">
-          <a-statistic title="项目数" :value="56" />
-        </div>
-        <div class="statItem">
-          <a-statistic title="团队内排名" :value="8" suffix="/ 24" />
-        </div>
-        <div class="statItem">
-          <a-statistic title="项目访问" :value="2223" />
-        </div>
-      </div>
-    </template>
-
-    <a-row :gutter="24">
-      <a-col :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
-        <a-card
-          class="projectList"
-          :style="{ marginBottom: '24px' }"
-          title="进行中的项目"
-          :bordered="false"
-          :loading="false"
-          :body-style="{ padding: 0 }"
-        >
-          <template #extra>
-            <router-link to="/">
-              全部项目
-            </router-link>
-          </template>
-          <a-card-grid v-for="item in projectNotice" :key="item.id" class="projectGrid">
-            <a-card :body-style="{ padding: 0 }" style="box-shadow: none" :bordered="false">
-              <a-card-meta
-                :description="item.description"
-                class="w-full"
-              >
-                <template #title>
-                  <div class="cardTitle">
-                    <a-avatar size="small" :src="item.logo" />
-                    <router-link :to="item.href">
-                      {{ item.title }}
-                    </router-link>
-                  </div>
-                </template>
-              </a-card-meta>
-              <div class="projectItemContent">
-                <router-link :to="item.memberLink">
-                  {{ item.member || '' }}
-                </router-link>
-                <span class="datetime" ml-2 :title="item.updatedAt">
-                  {{ item.updatedAt }}
-                </span>
-              </div>
-            </a-card>
-          </a-card-grid>
-        </a-card>
-        <a-card
-          :body-style="{ padding: 0 }"
-          :bordered="false"
-          class="activeCard"
-          title="动态"
-          :loading="false"
-        >
-          <a-list
-            :data-source="activities"
-            class="activitiesList"
-          >
-            <template #renderItem="{ item }">
-              <a-list-item :key="item.id">
-                <a-list-item-meta>
-                  <template #title>
-                    <span>
-                      <a class="username">{{ item.user.name }}</a>&nbsp;
-                      <span class="event">
-                        <span>{{ item.template1 }}</span>&nbsp;
-                        <a href=""> {{ item?.group?.name }} </a>&nbsp;
-                        <span>{{ item.template2 }}</span>&nbsp;
-                        <a href=""> {{ item?.project?.name }} </a>
-                      </span>
-                    </span>
-                  </template>
-                  <template #avatar>
-                    <a-avatar :src="item.user.avatar" />
-                  </template>
-                  <template #description>
-                    <span class="datetime" :title="item.updatedAt">
-                      {{ item.updatedAt }}
-                    </span>
-                  </template>
-                </a-list-item-meta>
-              </a-list-item>
-            </template>
-          </a-list>
-        </a-card>
-      </a-col>
-      <a-col :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
-        <a-card
-          :style="{ marginBottom: '24px' }"
-          title="快速开始 / 便捷导航"
-          :bordered="false"
-          :body-style="{ padding: 0 }"
-        >
-          <EditableLinkGroup />
-        </a-card>
-        <a-card
-          :style="{ marginBottom: '24px' }"
-          :bordered="false"
-          title="XX 指数"
-        >
-          <div class="chart">
-            <div ref="radarContainer" />
-          </div>
-        </a-card>
-        <a-card
-          :body-style="{ paddingTop: '12px', paddingBottom: '12px' }"
-          :bordered="false"
-          title="团队"
-        >
-          <div class="members">
-            <a-row :gutter="48">
-              <a-col v-for="item in projectNotice" :key="`members-item-${item.id}`" :span="12">
-                <router-link :to="item.href">
-                  <a-avatar :src="item.logo" size="small" />
-                  <span class="member">{{ item.member }}</span>
-                </router-link>
-              </a-col>
-            </a-row>
-          </div>
-        </a-card>
-      </a-col>
-    </a-row>
-  </page-container>
-</template>
 
 <style scoped lang="less">
 .textOverflow() {

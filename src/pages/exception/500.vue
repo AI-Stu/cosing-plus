@@ -1,12 +1,3 @@
-<script setup lang="ts">
-const router = useRouter();
-function back() {
-  router.replace({
-    path: '/'
-  });
-}
-</script>
-
 <template>
   <a-result status="500" title="500" sub-title="Sorry, the server is reporting an error.">
     <template #extra>
@@ -16,3 +7,12 @@ function back() {
     </template>
   </a-result>
 </template>
+
+<script setup lang="ts">
+const router = useRouter();
+function back() {
+  router.replace({
+    path: '/'
+  });
+}
+</script>

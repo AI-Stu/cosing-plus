@@ -1,3 +1,10 @@
+<template>
+  <div class="field">
+    <span class="label">{{ label }}</span>
+    <span class="number">{{ value }}</span>
+  </div>
+</template>
+
 <script setup lang="ts">
 defineProps({
   label: {
@@ -10,13 +17,6 @@ defineProps({
   }
 });
 </script>
-
-<template>
-  <div class="field">
-    <span class="label">{{ label }}</span>
-    <span class="number">{{ value }}</span>
-  </div>
-</template>
 
 <style scoped lang="less">
 .field {

@@ -1,34 +1,3 @@
-<script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue';
-
-const emit = defineEmits(['nextStep']);
-const formRef = ref<FormInstance>();
-const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
-const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
-
-interface FirstFormState {
-  paymentAccount: string
-  collectAccount: string
-  name: string
-  amount: number | undefined
-}
-const formState = reactive<FirstFormState>({
-  paymentAccount: '',
-  collectAccount: 'test@example.com',
-  name: 'Kirk Lin',
-  amount: 1000000
-});
-async function nextStep() {
-  try {
-    await formRef.value?.validateFields();
-    emit('nextStep');
-  }
-  catch (errorInfo) {
-    console.log('Failed:', errorInfo);
-  }
-}
-</script>
-
 <template>
   <div>
     <a-form
@@ -90,6 +59,37 @@ async function nextStep() {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import type { FormInstance } from 'ant-design-vue';
+
+const emit = defineEmits(['nextStep']);
+const formRef = ref<FormInstance>();
+const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
+const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
+
+interface FirstFormState {
+  paymentAccount: string
+  collectAccount: string
+  name: string
+  amount: number | undefined
+}
+const formState = reactive<FirstFormState>({
+  paymentAccount: '',
+  collectAccount: 'test@example.com',
+  name: 'Kirk Lin',
+  amount: 1000000
+});
+async function nextStep() {
+  try {
+    await formRef.value?.validateFields();
+    emit('nextStep');
+  }
+  catch (errorInfo) {
+    console.log('Failed:', errorInfo);
+  }
+}
+</script>
 
 <style lang="less" scoped>
 .step-form-style-desc {

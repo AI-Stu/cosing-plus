@@ -1,3 +1,7 @@
+<template>
+  <component :is="Comp" v-if="icon" />
+</template>
+
 <script setup lang="ts">
 import * as icons from '@ant-design/icons-vue';
 import { isFunction } from '@v-c/utils';
@@ -18,7 +22,3 @@ const Comp = computed(() => {
   return undefined;
 });
 </script>
-
-<template>
-  <component :is="Comp" v-if="icon" />
-</template>

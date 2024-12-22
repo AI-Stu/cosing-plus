@@ -1,12 +1,3 @@
-<script lang="ts" setup>
-defineProps({
-  color: {
-    type: String,
-    default: '#3ff9dc'
-  }
-});
-</script>
-
 <template>
   <div class="rect-wrapper">
     <div class="rect-item rect1" />
@@ -16,6 +7,15 @@ defineProps({
     <div class="rect-item rect5" />
   </div>
 </template>
+
+<script lang="ts" setup>
+defineProps({
+  color: {
+    type: String,
+    default: '#3ff9dc'
+  }
+});
+</script>
 
 <style lang="less" scoped>
 .rect-item {

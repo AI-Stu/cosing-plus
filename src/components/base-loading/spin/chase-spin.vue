@@ -1,12 +1,3 @@
-<script lang="ts" setup>
-defineProps({
-  color: {
-    type: String,
-    default: '#3ff9dc'
-  }
-});
-</script>
-
 <template>
   <div class="chase-wrapper">
     <div class="chase-item" />
@@ -17,6 +8,15 @@ defineProps({
     <div class="chase-item" />
   </div>
 </template>
+
+<script lang="ts" setup>
+defineProps({
+  color: {
+    type: String,
+    default: '#3ff9dc'
+  }
+});
+</script>
 
 <style lang="less" scoped>
 .chase-wrapper {

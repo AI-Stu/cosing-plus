@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import { GithubOutlined } from '@ant-design/icons-vue';
-</script>
-
 <template>
   <a
     href="https://github.com/AI-Stu/cosing-plus"
@@ -14,5 +10,9 @@ import { GithubOutlined } from '@ant-design/icons-vue';
     <GithubOutlined />
   </a>
 </template>
+
+<script setup lang="ts">
+import { GithubOutlined } from '@ant-design/icons-vue';
+</script>
 
 <style scoped lang="less"></style>

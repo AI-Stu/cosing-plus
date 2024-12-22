@@ -1,3 +1,7 @@
+<template>
+  <div ref="container" />
+</template>
+
 <script setup lang="ts">
 import { RingProgress } from '@antv/g2plot';
 
@@ -23,10 +27,6 @@ onMounted(() => {
   }).render();
 });
 </script>
-
-<template>
-  <div ref="container" />
-</template>
 
 <style scoped lang="less">
 

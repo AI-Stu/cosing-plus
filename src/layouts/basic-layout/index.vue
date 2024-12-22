@@ -1,41 +1,3 @@
-<script setup lang="ts">
-import Header from '../components/header/index.vue';
-import SiderMenu from '../components/sider-menu/index.vue';
-import DrawerMenu from '../components/drawer-menu/index.vue';
-import Menu from '../components/menu/index.vue';
-import SplitMenu from '../components/menu/split-menu.vue';
-import GlobalFooter from '../components/global-footer/index.vue';
-import { proLayoutProps } from './typing';
-import { useLayoutProvider } from './context';
-
-defineOptions({
-  name: 'BasicLayout'
-});
-const props = defineProps(proLayoutProps);
-const emit = defineEmits(['update:collapsed']);
-
-/**
- * 处理展开收起的事件参数
- * @param collapsed 展开收起的事件参数
- */
-function handleCollapsed(collapsed: boolean) {
-  emit('update:collapsed', collapsed);
-  props?.onCollapsed?.(collapsed);
-}
-
-// 依赖注入所有的配置项，对属性进行控制，减少传值
-const { layout, contentWidth } = useLayoutProvider(props, {
-  handleCollapsed
-});
-const contentCls = computed(() => {
-  if (contentWidth.value === 'Fixed')
-    return 'ant-pro-basicLayout-content-fixed';
-
-  else
-    return '';
-});
-</script>
-
 <template>
   <div class="ant-pro-basicLayout" :data-theme="theme">
     <a-layout>
@@ -77,6 +39,44 @@ const contentCls = computed(() => {
     <DrawerMenu v-if="menu" />
   </div>
 </template>
+
+<script setup lang="ts">
+import Header from '../components/header/index.vue';
+import SiderMenu from '../components/sider-menu/index.vue';
+import DrawerMenu from '../components/drawer-menu/index.vue';
+import Menu from '../components/menu/index.vue';
+import SplitMenu from '../components/menu/split-menu.vue';
+import GlobalFooter from '../components/global-footer/index.vue';
+import { proLayoutProps } from './typing';
+import { useLayoutProvider } from './context';
+
+defineOptions({
+  name: 'BasicLayout'
+});
+const props = defineProps(proLayoutProps);
+const emit = defineEmits(['update:collapsed']);
+
+/**
+ * 处理展开收起的事件参数
+ * @param collapsed 展开收起的事件参数
+ */
+function handleCollapsed(collapsed: boolean) {
+  emit('update:collapsed', collapsed);
+  props?.onCollapsed?.(collapsed);
+}
+
+// 依赖注入所有的配置项，对属性进行控制，减少传值
+const { layout, contentWidth } = useLayoutProvider(props, {
+  handleCollapsed
+});
+const contentCls = computed(() => {
+  if (contentWidth.value === 'Fixed')
+    return 'ant-pro-basicLayout-content-fixed';
+
+  else
+    return '';
+});
+</script>
 
 <style lang="less">
 @import './index.less';

@@ -1,3 +1,24 @@
+<template>
+  <a-card>
+    <a-row :gutter="24">
+      <a-col :span="4" style="padding-left: 0;">
+        <a-menu
+          v-model:selected-keys="selectedKeys"
+          style="width: 250px"
+          mode="inline"
+          :items="items"
+        />
+      </a-col>
+      <a-col :span="20">
+        <basicSetting v-if="selectedKeys[0] === '1'" />
+        <securitySetting v-if="selectedKeys[0] === '2'" />
+        <accountSetting v-if="selectedKeys[0] === '3'" />
+        <messageSetting v-if="selectedKeys[0] === '4'" />
+      </a-col>
+    </a-row>
+  </a-card>
+</template>
+
 <script setup lang="ts">
 import basicSetting from './components/basic-setting.vue';
 import securitySetting from './components/security-setting.vue';
@@ -45,27 +66,6 @@ function seti18n(key: string) {
   }
 }
 </script>
-
-<template>
-  <a-card>
-    <a-row :gutter="24">
-      <a-col :span="4" style="padding-left: 0;">
-        <a-menu
-          v-model:selected-keys="selectedKeys"
-          style="width: 250px"
-          mode="inline"
-          :items="items"
-        />
-      </a-col>
-      <a-col :span="20">
-        <basicSetting v-if="selectedKeys[0] === '1'" />
-        <securitySetting v-if="selectedKeys[0] === '2'" />
-        <accountSetting v-if="selectedKeys[0] === '3'" />
-        <messageSetting v-if="selectedKeys[0] === '4'" />
-      </a-col>
-    </a-row>
-  </a-card>
-</template>
 
 <style scoped lang="less">
 

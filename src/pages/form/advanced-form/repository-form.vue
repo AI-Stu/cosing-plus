@@ -1,35 +1,3 @@
-<script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue';
-
-defineProps({
-  showSubmit: {
-    type: Boolean,
-    default: false
-  }
-});
-const formRef = ref<FormInstance>();
-async function handleSubmit() {
-  try {
-    const values = await formRef.value?.validateFields();
-    return values;
-  }
-  catch (errorInfo) {
-    console.log('Failed:', errorInfo);
-  }
-}
-const formState = reactive<Record<string, any>>({
-  name: null,
-  url: null,
-  owner: null,
-  approver: null,
-  dateRange: null,
-  type: null
-});
-defineExpose({
-  handleSubmit
-});
-</script>
-
 <template>
   <a-form ref="formRef" :model="formState" @submit="handleSubmit">
     <a-row class="form-row" :gutter="16">
@@ -133,6 +101,38 @@ defineExpose({
     </a-form-item>
   </a-form>
 </template>
+
+<script setup lang="ts">
+import type { FormInstance } from 'ant-design-vue';
+
+defineProps({
+  showSubmit: {
+    type: Boolean,
+    default: false
+  }
+});
+const formRef = ref<FormInstance>();
+async function handleSubmit() {
+  try {
+    const values = await formRef.value?.validateFields();
+    return values;
+  }
+  catch (errorInfo) {
+    console.log('Failed:', errorInfo);
+  }
+}
+const formState = reactive<Record<string, any>>({
+  name: null,
+  url: null,
+  owner: null,
+  approver: null,
+  dateRange: null,
+  type: null
+});
+defineExpose({
+  handleSubmit
+});
+</script>
 
 <style scoped>
 

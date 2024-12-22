@@ -1,25 +1,3 @@
-<script setup lang="ts">
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue';
-
-defineProps({
-  gap: {
-    type: Number
-  },
-  subTotal: {
-    type: Number
-  },
-  total: {
-    type: [Number, String]
-  },
-  status: {
-    type: String
-  },
-  title: {
-    type: String
-  }
-});
-</script>
-
 <template>
   <div class="numberInfo">
     <div class="numberInfoTitle" :title="title">
@@ -42,6 +20,28 @@ defineProps({
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue';
+
+defineProps({
+  gap: {
+    type: Number
+  },
+  subTotal: {
+    type: Number
+  },
+  total: {
+    type: [Number, String]
+  },
+  status: {
+    type: String
+  },
+  title: {
+    type: String
+  }
+});
+</script>
 
 <style scoped lang="less">
 .numberInfo {

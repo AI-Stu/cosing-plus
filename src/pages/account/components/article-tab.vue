@@ -1,17 +1,3 @@
-<script setup lang="ts">
-interface IDataItem {
-  title: string
-  tags: string[]
-  content: string
-}
-
-defineProps<{
-  dataSource: IDataItem[]
-}>();
-
-const { t } = useI18n();
-</script>
-
 <template>
   <a-list item-layout="horizontal" :data-source="dataSource">
     <template #renderItem="{ item }">
@@ -55,3 +41,17 @@ const { t } = useI18n();
     </template>
   </a-list>
 </template>
+
+<script setup lang="ts">
+interface IDataItem {
+  title: string
+  tags: string[]
+  content: string
+}
+
+defineProps<{
+  dataSource: IDataItem[]
+}>();
+
+const { t } = useI18n();
+</script>

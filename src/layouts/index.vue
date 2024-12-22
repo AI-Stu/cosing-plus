@@ -1,42 +1,3 @@
-<script setup lang="ts">
-import { pick } from '@v-c/utils';
-import BasicLayout from './basic-layout/index.vue';
-import SettingDrawer from './components/setting-drawer/index.vue';
-import MultiTab from './multi-tab/index.vue';
-import RouteView from './components/route-view.vue';
-import { animationNameList } from '@/config/default-setting';
-
-defineOptions({
-  name: 'ProLayout'
-});
-const appStore = useAppStore();
-const { layoutSetting } = storeToRefs(appStore);
-const userStore = useUserStore();
-const layoutMenu = useLayoutMenu();
-const { t } = useI18nLocale();
-const { selectedKeys, openKeys } = storeToRefs(layoutMenu);
-const { isMobile, isPad } = useQueryBreakpoints();
-watch(isPad, (val) => {
-  if (val)
-    appStore.toggleCollapsed(true);
-  else appStore.toggleCollapsed(false);
-});
-const layoutProps = computed(() =>
-  pick(appStore.layoutSetting, [
-    'fixedHeader',
-    'fixedSider',
-    'splitMenus',
-    'menuHeader',
-    'header',
-    'menu',
-    'layout',
-    'footer',
-    'contentWidth',
-    'compactAlgorithm'
-  ])
-);
-</script>
-
 <template>
   <BasicLayout
     :collapsed="layoutSetting.collapsed"
@@ -95,5 +56,44 @@ const layoutProps = computed(() =>
     @setting-change="appStore.changeSettingLayout"
   />
 </template>
+
+<script setup lang="ts">
+import { pick } from '@v-c/utils';
+import BasicLayout from './basic-layout/index.vue';
+import SettingDrawer from './components/setting-drawer/index.vue';
+import MultiTab from './multi-tab/index.vue';
+import RouteView from './components/route-view.vue';
+import { animationNameList } from '@/config/default-setting';
+
+defineOptions({
+  name: 'ProLayout'
+});
+const appStore = useAppStore();
+const { layoutSetting } = storeToRefs(appStore);
+const userStore = useUserStore();
+const layoutMenu = useLayoutMenu();
+const { t } = useI18nLocale();
+const { selectedKeys, openKeys } = storeToRefs(layoutMenu);
+const { isMobile, isPad } = useQueryBreakpoints();
+watch(isPad, (val) => {
+  if (val)
+    appStore.toggleCollapsed(true);
+  else appStore.toggleCollapsed(false);
+});
+const layoutProps = computed(() =>
+  pick(appStore.layoutSetting, [
+    'fixedHeader',
+    'fixedSider',
+    'splitMenus',
+    'menuHeader',
+    'header',
+    'menu',
+    'layout',
+    'footer',
+    'contentWidth',
+    'compactAlgorithm'
+  ])
+);
+</script>
 
 <style scoped></style>

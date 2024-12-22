@@ -1,3 +1,16 @@
+<template>
+  <div
+    :title="children"
+    class="trendItem"
+  >
+    <slot />
+    <span :class="flag">
+      <CaretUpOutlined v-if="flag === 'up'" />
+      <CaretDownOutlined v-else />
+    </span>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons-vue';
 
@@ -12,19 +25,6 @@ defineProps({
   }
 });
 </script>
-
-<template>
-  <div
-    :title="children"
-    class="trendItem"
-  >
-    <slot />
-    <span :class="flag">
-      <CaretUpOutlined v-if="flag === 'up'" />
-      <CaretDownOutlined v-else />
-    </span>
-  </div>
-</template>
 
 <style scoped lang="less">
 .trendItem {

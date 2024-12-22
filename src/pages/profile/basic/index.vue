@@ -1,10 +1,3 @@
-<script setup lang="ts">
-defineOptions({
-  name: 'BasicProfile'
-});
-const { t } = useI18n();
-</script>
-
 <template>
   <page-container>
     <a-card :bordered="false">
@@ -73,6 +66,13 @@ const { t } = useI18n();
     </a-card>
   </page-container>
 </template>
+
+<script setup lang="ts">
+defineOptions({
+  name: 'BasicProfile'
+});
+const { t } = useI18n();
+</script>
 
 <style lang="less" scoped>
 .title {

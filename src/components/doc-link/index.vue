@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import { ReadOutlined } from '@ant-design/icons-vue';
-</script>
-
 <template>
   <a
     href="https://docs.cosing-plus.com/"
@@ -14,5 +10,9 @@ import { ReadOutlined } from '@ant-design/icons-vue';
     <ReadOutlined />
   </a>
 </template>
+
+<script setup lang="ts">
+import { ReadOutlined } from '@ant-design/icons-vue';
+</script>
 
 <style scoped lang="less"></style>

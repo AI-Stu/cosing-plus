@@ -1,67 +1,3 @@
-<script setup lang="ts">
-import { ApartmentOutlined, AuditOutlined, HomeOutlined, PlusOutlined } from '@ant-design/icons-vue';
-import { nextTick, reactive, ref } from 'vue';
-import rightContent from './components/right-content.vue';
-
-const { t } = useI18n();
-
-const inputRef = ref();
-const state = reactive({
-  tags: ['专注', '坚持', '很有想法', '执行力强', '乐观'],
-  inputVisible: false,
-  inputValue: ''
-});
-
-function handleClose(removedTag: string) {
-  const tags = state.tags.filter(tag => tag !== removedTag);
-  state.tags = tags;
-}
-
-function showInput() {
-  state.inputVisible = true;
-  nextTick(() => {
-    inputRef.value.focus();
-  });
-}
-
-function handleInputConfirm() {
-  const inputValue = state.inputValue;
-  let tags = state.tags;
-  if (inputValue && !tags.includes(inputValue))
-    tags = [...tags, inputValue];
-
-  Object.assign(state, {
-    tags,
-    inputVisible: false,
-    inputValue: ''
-  });
-}
-
-interface ITeamDataItem {
-  name: string
-  link: string
-}
-
-const teamData = ref<ITeamDataItem[]>([
-  {
-    name: 'Cosing Plus',
-    link: '/logo.svg'
-  },
-  {
-    name: '学习小组',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png'
-  },
-  {
-    name: '工作小组',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png'
-  },
-  {
-    name: '设计团队',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png'
-  }
-]);
-</script>
-
 <template>
   <div class="gutter-example">
     <a-row :gutter="24">
@@ -156,6 +92,70 @@ const teamData = ref<ITeamDataItem[]>([
     </a-row>
   </div>
 </template>
+
+<script setup lang="ts">
+import { ApartmentOutlined, AuditOutlined, HomeOutlined, PlusOutlined } from '@ant-design/icons-vue';
+import { nextTick, reactive, ref } from 'vue';
+import rightContent from './components/right-content.vue';
+
+const { t } = useI18n();
+
+const inputRef = ref();
+const state = reactive({
+  tags: ['专注', '坚持', '很有想法', '执行力强', '乐观'],
+  inputVisible: false,
+  inputValue: ''
+});
+
+function handleClose(removedTag: string) {
+  const tags = state.tags.filter(tag => tag !== removedTag);
+  state.tags = tags;
+}
+
+function showInput() {
+  state.inputVisible = true;
+  nextTick(() => {
+    inputRef.value.focus();
+  });
+}
+
+function handleInputConfirm() {
+  const inputValue = state.inputValue;
+  let tags = state.tags;
+  if (inputValue && !tags.includes(inputValue))
+    tags = [...tags, inputValue];
+
+  Object.assign(state, {
+    tags,
+    inputVisible: false,
+    inputValue: ''
+  });
+}
+
+interface ITeamDataItem {
+  name: string
+  link: string
+}
+
+const teamData = ref<ITeamDataItem[]>([
+  {
+    name: 'Cosing Plus',
+    link: '/logo.svg'
+  },
+  {
+    name: '学习小组',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png'
+  },
+  {
+    name: '工作小组',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png'
+  },
+  {
+    name: '设计团队',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png'
+  }
+]);
+</script>
 
 <style scoped lang="less">
 

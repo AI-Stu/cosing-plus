@@ -1,15 +1,3 @@
-<script setup lang="ts">
-import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons-vue';
-
-const { t } = useI18n();
-const result = computed(() => {
-  return {
-    title: t('result.fail.error.title'),
-    description: t('result.fail.error.description')
-  };
-});
-</script>
-
 <template>
   <a-card :bordered="false">
     <a-result status="error" :title="result.title" :sub-title="result.description">
@@ -36,3 +24,15 @@ const result = computed(() => {
     </a-result>
   </a-card>
 </template>
+
+<script setup lang="ts">
+import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons-vue';
+
+const { t } = useI18n();
+const result = computed(() => {
+  return {
+    title: t('result.fail.error.title'),
+    description: t('result.fail.error.description')
+  };
+});
+</script>

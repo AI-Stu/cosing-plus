@@ -1,10 +1,3 @@
-<script setup lang="ts">
-const { locale, setLocale } = useI18nLocale();
-function handleClick({ key }: any) {
-  setLocale(key);
-}
-</script>
-
 <template>
   <a-dropdown>
     <span
@@ -37,3 +30,10 @@ function handleClick({ key }: any) {
     </template>
   </a-dropdown>
 </template>
+
+<script setup lang="ts">
+const { locale, setLocale } = useI18nLocale();
+function handleClick({ key }: any) {
+  setLocale(key);
+}
+</script>

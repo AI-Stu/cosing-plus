@@ -1,12 +1,3 @@
-<script lang="ts" setup>
-const route = useRoute();
-const router = useRouter();
-const activeKey = computed(() => route.path);
-function handleChangePage(key: any) {
-  router.push(key);
-}
-</script>
-
 <template>
   <page-container class="search-list-container">
     <template #content>
@@ -30,6 +21,15 @@ function handleChangePage(key: any) {
     <slot />
   </page-container>
 </template>
+
+<script lang="ts" setup>
+const route = useRoute();
+const router = useRouter();
+const activeKey = computed(() => route.path);
+function handleChangePage(key: any) {
+  router.push(key);
+}
+</script>
 
 <style lang="less">
 .search-list-container{

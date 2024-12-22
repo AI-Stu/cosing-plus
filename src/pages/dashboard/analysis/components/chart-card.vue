@@ -1,26 +1,3 @@
-<script setup lang="ts">
-const props = defineProps({
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  bordered: {
-    type: Boolean,
-    default: false
-  },
-  title: {
-    type: String,
-    default: ''
-  },
-  total: {
-    type: Number
-  },
-  contentHeight: {
-    type: Number
-  }
-});
-</script>
-
 <template>
   <a-card :bind="props" :body-style="{ padding: '20px 24px 8px 24px' }">
     <div class="chartCard">
@@ -48,6 +25,29 @@ const props = defineProps({
     </div>
   </a-card>
 </template>
+
+<script setup lang="ts">
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  bordered: {
+    type: Boolean,
+    default: false
+  },
+  title: {
+    type: String,
+    default: ''
+  },
+  total: {
+    type: Number
+  },
+  contentHeight: {
+    type: Number
+  }
+});
+</script>
 
 <style scoped lang="less">
 .chartCard {

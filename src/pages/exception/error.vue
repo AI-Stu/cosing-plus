@@ -1,12 +1,3 @@
-<script setup lang="ts">
-const router = useRouter();
-function back() {
-  router.replace({
-    path: '/'
-  });
-}
-</script>
-
 <template>
   <a-result status="404" title="404" sub-title="对不起，当前访问的页面不存在！">
     <template #extra>
@@ -16,3 +7,12 @@ function back() {
     </template>
   </a-result>
 </template>
+
+<script setup lang="ts">
+const router = useRouter();
+function back() {
+  router.replace({
+    path: '/'
+  });
+}
+</script>

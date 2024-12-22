@@ -1,3 +1,11 @@
+<template>
+  <div class="pulse-wrapper">
+    <div class="pulse-item one" />
+    <div class="pulse-item two" />
+    <div class="pulse-item three" />
+  </div>
+</template>
+
 <script lang="ts" setup>
 defineProps({
   color: {
@@ -6,14 +14,6 @@ defineProps({
   }
 });
 </script>
-
-<template>
-  <div class="pulse-wrapper">
-    <div class="pulse-item one" />
-    <div class="pulse-item two" />
-    <div class="pulse-item three" />
-  </div>
-</template>
 
 <style lang="less" scoped>
 .pulse-item {

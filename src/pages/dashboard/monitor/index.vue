@@ -1,3 +1,83 @@
+<template>
+  <page-container>
+    <a-row :gutter="24">
+      <a-col :xl="18" :lg="24" :md="24" :sm="24" :xs="24" :style="{ marginBottom: '24px' }">
+        <a-card title="活动实时交易情况" :bordered="false">
+          <a-row>
+            <a-col :md="6" :sm="12" :xs="24">
+              <a-statistic
+                title="今日交易总额"
+                suffix="元"
+                :value="convertNumber(124543233)"
+              />
+            </a-col>
+            <a-col :md="6" :sm="12" :xs="24">
+              <a-statistic title="销售目标完成率" value="92%" />
+            </a-col>
+            <a-col :md="6" :sm="12" :xs="24">
+              <a-statistic-countdown title="活动剩余时间" :value="deadline" format="HH:mm:ss:SSS" />
+            </a-col>
+            <a-col :md="6" :sm="12" :xs="24">
+              <a-statistic title="每秒交易总额" suffix="元" :value="convertNumber(234)" />
+            </a-col>
+          </a-row>
+          <div class="mapChart">
+            <CustomMap />
+          </div>
+        </a-card>
+      </a-col>
+      <a-col :xl="6" :lg="24" :md="24" :sm="24" :xs="24">
+        <a-card title="活动情况预测" :style="{ marginBottom: '24px' }" :bordered="false">
+          <ActiveChart />
+        </a-card>
+        <a-card
+          title="券核效率"
+          :style="{ marginBottom: 24 }"
+          :body-style="{ textAlign: 'center' }"
+          :bordered="false"
+        >
+          <div ref="gaugeContainer" />
+        </a-card>
+      </a-col>
+    </a-row>
+    <a-row :gutter="24">
+      <a-col :xl="12" :lg="24" :sm="24" :xs="24" :style="{ marginBottom: '24px' }">
+        <a-card title="各品类占比" :bordered="false" class="pieCard">
+          <a-row :style="{ padding: '16px 0' }">
+            <a-col :span="8">
+              <div ref="ringContainer1" />
+            </a-col>
+            <a-col :span="8">
+              <div ref="ringContainer2" />
+            </a-col>
+            <a-col :span="8">
+              <div ref="ringContainer3" />
+            </a-col>
+          </a-row>
+        </a-card>
+      </a-col>
+      <a-col :xl="6" :lg="12" :sm="24" :xs="24" :style="{ marginBottom: 24 }">
+        <a-card
+          title="热门搜索"
+          :bordered="false"
+          :body-style="{ overflow: 'hidden' }"
+        >
+          <div ref="wordCloudContainer" />
+        </a-card>
+      </a-col>
+      <a-col :xl="6" :lg="12" :sm="24" :xs="24" :style="{ marginBottom: 24 }">
+        <a-card
+          title="资源剩余"
+          :body-style="{ textAlign: 'center', fontSize: 0 }"
+          :bordered="false"
+        >
+          <div ref="liquidContainer" />
+        </a-card>
+      </a-col>
+    </a-row>
+  </page-container>
+</template>
+
 <script setup lang="ts">
 import { Gauge, Liquid, RingProgress, WordCloud } from '@antv/g2plot';
 import ActiveChart from '@/pages/dashboard/monitor/active-chart.vue';
@@ -615,86 +695,6 @@ onMounted(() => {
   }).render();
 });
 </script>
-
-<template>
-  <page-container>
-    <a-row :gutter="24">
-      <a-col :xl="18" :lg="24" :md="24" :sm="24" :xs="24" :style="{ marginBottom: '24px' }">
-        <a-card title="活动实时交易情况" :bordered="false">
-          <a-row>
-            <a-col :md="6" :sm="12" :xs="24">
-              <a-statistic
-                title="今日交易总额"
-                suffix="元"
-                :value="convertNumber(124543233)"
-              />
-            </a-col>
-            <a-col :md="6" :sm="12" :xs="24">
-              <a-statistic title="销售目标完成率" value="92%" />
-            </a-col>
-            <a-col :md="6" :sm="12" :xs="24">
-              <a-statistic-countdown title="活动剩余时间" :value="deadline" format="HH:mm:ss:SSS" />
-            </a-col>
-            <a-col :md="6" :sm="12" :xs="24">
-              <a-statistic title="每秒交易总额" suffix="元" :value="convertNumber(234)" />
-            </a-col>
-          </a-row>
-          <div class="mapChart">
-            <CustomMap />
-          </div>
-        </a-card>
-      </a-col>
-      <a-col :xl="6" :lg="24" :md="24" :sm="24" :xs="24">
-        <a-card title="活动情况预测" :style="{ marginBottom: '24px' }" :bordered="false">
-          <ActiveChart />
-        </a-card>
-        <a-card
-          title="券核效率"
-          :style="{ marginBottom: 24 }"
-          :body-style="{ textAlign: 'center' }"
-          :bordered="false"
-        >
-          <div ref="gaugeContainer" />
-        </a-card>
-      </a-col>
-    </a-row>
-    <a-row :gutter="24">
-      <a-col :xl="12" :lg="24" :sm="24" :xs="24" :style="{ marginBottom: '24px' }">
-        <a-card title="各品类占比" :bordered="false" class="pieCard">
-          <a-row :style="{ padding: '16px 0' }">
-            <a-col :span="8">
-              <div ref="ringContainer1" />
-            </a-col>
-            <a-col :span="8">
-              <div ref="ringContainer2" />
-            </a-col>
-            <a-col :span="8">
-              <div ref="ringContainer3" />
-            </a-col>
-          </a-row>
-        </a-card>
-      </a-col>
-      <a-col :xl="6" :lg="12" :sm="24" :xs="24" :style="{ marginBottom: 24 }">
-        <a-card
-          title="热门搜索"
-          :bordered="false"
-          :body-style="{ overflow: 'hidden' }"
-        >
-          <div ref="wordCloudContainer" />
-        </a-card>
-      </a-col>
-      <a-col :xl="6" :lg="12" :sm="24" :xs="24" :style="{ marginBottom: 24 }">
-        <a-card
-          title="资源剩余"
-          :body-style="{ textAlign: 'center', fontSize: 0 }"
-          :bordered="false"
-        >
-          <div ref="liquidContainer" />
-        </a-card>
-      </a-col>
-    </a-row>
-  </page-container>
-</template>
 
 <style scoped lang="less">
 .mapChart {

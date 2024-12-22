@@ -1,3 +1,92 @@
+<template>
+  <a-card :loading="loading" :bordered="false" :body-style="{ padding: 0 }">
+    <div class="salesCard">
+      <a-tabs
+        size="large"
+        :tab-bar-style="{ marginBottom: '24px' }"
+        @change="changTab"
+      >
+        <template #rightExtra>
+          <div class="salesExtraWrap">
+            <div class="salesExtra">
+              <a key="day" class="currentDate" @click="onClick">今日</a>
+              <a key="week" @click="onClick">本周</a>
+              <a key="month" @click="onClick">本月</a>
+              <a key="year" @click="onClick">本年</a>
+            </div>
+            <a-range-picker
+              :value="rangePickerValue"
+              :style="{ width: '256px' }"
+            />
+          </div>
+        </template>
+        <a-tab-pane key="sales" tab="销售额">
+          <a-row>
+            <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
+              <div class="salesBar">
+                <div ref="columnPlotContainer1" />
+              </div>
+            </a-col>
+            <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+              <div class="salesRank">
+                <h4 class="rankingTitle">
+                  门店销售额排名
+                </h4>
+                <ul class="rankingList">
+                  <li v-for="(item, index) in rankingListData" :key="index">
+                    <span
+                      :class="`rankingItemNumber ${index < 3 ? 'active' : ''}`"
+                    >
+                      {{ index + 1 }}
+                    </span>
+                    <span class="rankingItemTitle" :title="item.title">
+                      {{ item.title }}
+                    </span>
+                    <span class="rankingItemValue">
+                      {{ convertNumber(item.total) }}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </a-col>
+          </a-row>
+        </a-tab-pane>
+        <a-tab-pane key="views" tab="访问量">
+          <a-row>
+            <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
+              <div class="salesBar">
+                <div ref="columnPlotContainer2" />
+              </div>
+            </a-col>
+            <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+              <div class="salesRank">
+                <h4 class="rankingTitle">
+                  门店访问量排名
+                </h4>
+                <ul class="rankingList">
+                  <li v-for="(item, index) in rankingListData" :key="index">
+                    <span
+                      :class="`rankingItemNumber ${index < 3 ? 'active' : ''}`"
+                    >
+                      {{ index + 1 }}
+                    </span>
+                    <span class="rankingItemTitle" :title="item.title">
+                      {{ item.title }}
+                    </span>
+                    <span class="rankingItemValue">
+                      {{ convertNumber(item.total) }}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </a-col>
+          </a-row>
+        </a-tab-pane>
+      </a-tabs>
+    </div>
+  </a-card>
+</template>
+
 <script setup lang="ts">
 import { Column } from '@antv/g2plot';
 import type { Key } from 'ant-design-vue/es/_util/type';
@@ -169,95 +258,6 @@ onBeforeUnmount(() => {
   column.value = undefined;
 });
 </script>
-
-<template>
-  <a-card :loading="loading" :bordered="false" :body-style="{ padding: 0 }">
-    <div class="salesCard">
-      <a-tabs
-        size="large"
-        :tab-bar-style="{ marginBottom: '24px' }"
-        @change="changTab"
-      >
-        <template #rightExtra>
-          <div class="salesExtraWrap">
-            <div class="salesExtra">
-              <a key="day" class="currentDate" @click="onClick">今日</a>
-              <a key="week" @click="onClick">本周</a>
-              <a key="month" @click="onClick">本月</a>
-              <a key="year" @click="onClick">本年</a>
-            </div>
-            <a-range-picker
-              :value="rangePickerValue"
-              :style="{ width: '256px' }"
-            />
-          </div>
-        </template>
-        <a-tab-pane key="sales" tab="销售额">
-          <a-row>
-            <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-              <div class="salesBar">
-                <div ref="columnPlotContainer1" />
-              </div>
-            </a-col>
-            <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-              <div class="salesRank">
-                <h4 class="rankingTitle">
-                  门店销售额排名
-                </h4>
-                <ul class="rankingList">
-                  <li v-for="(item, index) in rankingListData" :key="index">
-                    <span
-                      :class="`rankingItemNumber ${index < 3 ? 'active' : ''}`"
-                    >
-                      {{ index + 1 }}
-                    </span>
-                    <span class="rankingItemTitle" :title="item.title">
-                      {{ item.title }}
-                    </span>
-                    <span class="rankingItemValue">
-                      {{ convertNumber(item.total) }}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </a-col>
-          </a-row>
-        </a-tab-pane>
-        <a-tab-pane key="views" tab="访问量">
-          <a-row>
-            <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-              <div class="salesBar">
-                <div ref="columnPlotContainer2" />
-              </div>
-            </a-col>
-            <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-              <div class="salesRank">
-                <h4 class="rankingTitle">
-                  门店访问量排名
-                </h4>
-                <ul class="rankingList">
-                  <li v-for="(item, index) in rankingListData" :key="index">
-                    <span
-                      :class="`rankingItemNumber ${index < 3 ? 'active' : ''}`"
-                    >
-                      {{ index + 1 }}
-                    </span>
-                    <span class="rankingItemTitle" :title="item.title">
-                      {{ item.title }}
-                    </span>
-                    <span class="rankingItemValue">
-                      {{ convertNumber(item.total) }}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </a-col>
-          </a-row>
-        </a-tab-pane>
-      </a-tabs>
-    </div>
-  </a-card>
-</template>
 
 <style scoped lang="less">
 .rankingList {

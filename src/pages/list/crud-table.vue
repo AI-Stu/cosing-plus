@@ -1,72 +1,3 @@
-<script setup lang="ts">
-import { PlusOutlined } from '@ant-design/icons-vue';
-import CrudTableModal from './components/crud-table-modal.vue';
-import type { CrudTableModel } from '@/api/list/crud-table';
-import { deleteApi, getListApi } from '@/api/list/crud-table';
-import { useTableQuery } from '@/composables/table-query';
-
-const message = useMessage();
-
-const columns = shallowRef([
-  {
-    title: '名',
-    dataIndex: 'name'
-  },
-  {
-    title: '值',
-    dataIndex: 'value'
-  },
-  {
-    title: '描述',
-    dataIndex: 'remark'
-  },
-  {
-    title: '操作',
-    dataIndex: 'action'
-  }
-]);
-
-const { state, initQuery, resetQuery, query } = useTableQuery({
-  queryApi: getListApi,
-  queryParams: {
-    name: undefined,
-    value: undefined,
-    remark: undefined
-  },
-  afterQuery: (res) => {
-    console.log(res);
-    return res;
-  }
-});
-
-const crudTableModal = ref<InstanceType<typeof CrudTableModal>>();
-
-async function handleDelete(record: CrudTableModel) {
-  if (!record.id)
-    return message.error('id 不能为空');
-  try {
-    const res = await deleteApi(record.id);
-    if (res.code === 200)
-      await query();
-    message.success('删除成功');
-  }
-  catch (e) {
-    console.log(e);
-  }
-  finally {
-    close();
-  }
-}
-
-function handleAdd() {
-  crudTableModal.value?.open();
-}
-
-function handleEdit(record: CrudTableModel) {
-  crudTableModal.value?.open(record);
-}
-</script>
-
 <template>
   <page-container>
     <a-card mb-4>
@@ -139,6 +70,75 @@ function handleEdit(record: CrudTableModel) {
     <CrudTableModal ref="crudTableModal" />
   </page-container>
 </template>
+
+<script setup lang="ts">
+import { PlusOutlined } from '@ant-design/icons-vue';
+import CrudTableModal from './components/crud-table-modal.vue';
+import type { CrudTableModel } from '@/api/list/crud-table';
+import { deleteApi, getListApi } from '@/api/list/crud-table';
+import { useTableQuery } from '@/composables/table-query';
+
+const message = useMessage();
+
+const columns = shallowRef([
+  {
+    title: '名',
+    dataIndex: 'name'
+  },
+  {
+    title: '值',
+    dataIndex: 'value'
+  },
+  {
+    title: '描述',
+    dataIndex: 'remark'
+  },
+  {
+    title: '操作',
+    dataIndex: 'action'
+  }
+]);
+
+const { state, initQuery, resetQuery, query } = useTableQuery({
+  queryApi: getListApi,
+  queryParams: {
+    name: undefined,
+    value: undefined,
+    remark: undefined
+  },
+  afterQuery: (res) => {
+    console.log(res);
+    return res;
+  }
+});
+
+const crudTableModal = ref<InstanceType<typeof CrudTableModal>>();
+
+async function handleDelete(record: CrudTableModel) {
+  if (!record.id)
+    return message.error('id 不能为空');
+  try {
+    const res = await deleteApi(record.id);
+    if (res.code === 200)
+      await query();
+    message.success('删除成功');
+  }
+  catch (e) {
+    console.log(e);
+  }
+  finally {
+    close();
+  }
+}
+
+function handleAdd() {
+  crudTableModal.value?.open();
+}
+
+function handleEdit(record: CrudTableModel) {
+  crudTableModal.value?.open(record);
+}
+</script>
 
 <style lang="less" scoped>
 .system-crud-wrapper{

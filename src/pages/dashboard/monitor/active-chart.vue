@@ -1,3 +1,29 @@
+<template>
+  <div class="activeChart">
+    <a-statistic title="目标评估" value="有望达到预期" />
+    <div :style="{ marginTop: '32px' }">
+      <div ref="tinyAreaContainer" />
+    </div>
+    <div>
+      <div class="activeChartGrid">
+        <p>{{ ([...activeData].sort()[activeData.length - 1]?.y || 0) + 200 }} 亿元</p>
+        <p>{{ [...activeData].sort()[Math.floor(activeData.length / 2)]?.y }} 亿元</p>
+      </div>
+      <div class="dashedLine">
+        <div class="line" />
+      </div>
+      <div class="dashedLine">
+        <div class="line" />
+      </div>
+    </div>
+    <div class="activeChartLegend">
+      <span>00:00</span>
+      <span>{{ activeData[Math.floor(activeData.length / 2)]?.x }}</span>
+      <span>{{ activeData[activeData.length - 1]?.x }}</span>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { TinyArea } from '@antv/g2plot';
 
@@ -63,32 +89,6 @@ onBeforeUnmount(() => {
   tinyArea = undefined;
 });
 </script>
-
-<template>
-  <div class="activeChart">
-    <a-statistic title="目标评估" value="有望达到预期" />
-    <div :style="{ marginTop: '32px' }">
-      <div ref="tinyAreaContainer" />
-    </div>
-    <div>
-      <div class="activeChartGrid">
-        <p>{{ ([...activeData].sort()[activeData.length - 1]?.y || 0) + 200 }} 亿元</p>
-        <p>{{ [...activeData].sort()[Math.floor(activeData.length / 2)]?.y }} 亿元</p>
-      </div>
-      <div class="dashedLine">
-        <div class="line" />
-      </div>
-      <div class="dashedLine">
-        <div class="line" />
-      </div>
-    </div>
-    <div class="activeChartLegend">
-      <span>00:00</span>
-      <span>{{ activeData[Math.floor(activeData.length / 2)]?.x }}</span>
-      <span>{{ activeData[activeData.length - 1]?.x }}</span>
-    </div>
-  </div>
-</template>
 
 <style scoped lang="less">
 .activeChart {

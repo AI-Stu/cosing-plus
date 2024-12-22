@@ -1,3 +1,51 @@
+<template>
+  <page-container>
+    <template #content>
+      高级表单常见于一次性输入和提交大批量数据的场景。
+    </template>
+    <a-space size="large" direction="vertical" :style="{ width: '100%' }">
+      <a-card class="card" title="仓库管理" :bordered="false">
+        <RepositoryForm ref="repositoryFormRef" :show-submit="false" />
+      </a-card>
+      <a-card class="card" title="任务管理" :bordered="false">
+        <TaskForm ref="taskFormRef" :show-submit="false" />
+      </a-card>
+      <a-card>
+        <a-table
+          :columns="state.columns"
+          :data-source="state.data"
+          :pagination="false"
+        >
+          <template #bodyCell="scope">
+            <template v-if="scope?.column?.key === 'action'">
+              <a-popconfirm
+                v-if="state.data.length"
+                title="Sure to delete?"
+                @confirm="remove(scope?.record?.key)"
+              >
+                <a>Delete</a>
+              </a-popconfirm>
+            </template>
+          </template>
+        </a-table>
+        <a-button style="width: 100%; margin-top: 16px; margin-bottom: 8px" type="dashed" @click="handleAdd">
+          新增成员
+        </a-button>
+      </a-card>
+    </a-space>
+    <FooterToolBar>
+      <template #left>
+        测试
+      </template>
+      <template #right>
+        <a-button type="primary" @click="handleSubmit">
+          提交
+        </a-button>
+      </template>
+    </FooterToolBar>
+  </page-container>
+</template>
+
 <script setup lang="ts">
 import RepositoryForm from './repository-form.vue';
 import TaskForm from './task-form.vue';
@@ -87,51 +135,3 @@ function remove(key: string) {
   state.data = state.data.filter((item: any) => item.key !== key);
 }
 </script>
-
-<template>
-  <page-container>
-    <template #content>
-      高级表单常见于一次性输入和提交大批量数据的场景。
-    </template>
-    <a-space size="large" direction="vertical" :style="{ width: '100%' }">
-      <a-card class="card" title="仓库管理" :bordered="false">
-        <RepositoryForm ref="repositoryFormRef" :show-submit="false" />
-      </a-card>
-      <a-card class="card" title="任务管理" :bordered="false">
-        <TaskForm ref="taskFormRef" :show-submit="false" />
-      </a-card>
-      <a-card>
-        <a-table
-          :columns="state.columns"
-          :data-source="state.data"
-          :pagination="false"
-        >
-          <template #bodyCell="scope">
-            <template v-if="scope?.column?.key === 'action'">
-              <a-popconfirm
-                v-if="state.data.length"
-                title="Sure to delete?"
-                @confirm="remove(scope?.record?.key)"
-              >
-                <a>Delete</a>
-              </a-popconfirm>
-            </template>
-          </template>
-        </a-table>
-        <a-button style="width: 100%; margin-top: 16px; margin-bottom: 8px" type="dashed" @click="handleAdd">
-          新增成员
-        </a-button>
-      </a-card>
-    </a-space>
-    <FooterToolBar>
-      <template #left>
-        测试
-      </template>
-      <template #right>
-        <a-button type="primary" @click="handleSubmit">
-          提交
-        </a-button>
-      </template>
-    </FooterToolBar>
-  </page-container>
-</template>

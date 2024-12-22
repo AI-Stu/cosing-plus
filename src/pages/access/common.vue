@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import { AccessEnum } from '@/utils/constant';
-
-const { hasAccess, roles } = useAccess();
-</script>
-
 <template>
   <div class="flex flex-col gap-2">
     <div>
@@ -44,3 +38,9 @@ const { hasAccess, roles } = useAccess();
     </a-space>
   </div>
 </template>
+
+<script setup lang="ts">
+import { AccessEnum } from '@/utils/constant';
+
+const { hasAccess, roles } = useAccess();
+</script>

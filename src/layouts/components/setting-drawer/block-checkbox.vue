@@ -1,3 +1,14 @@
+<template>
+  <a-tooltip>
+    <template #title>
+      {{ theme ? t?.(`app.setting.pagestyle.${theme}`) : '' }}
+    </template>
+    <div :class="cls">
+      <CheckOutlined v-show="checked" :style="{ color: token?.colorPrimary }" :class="`${prefixCls}-selectIcon`" />
+    </div>
+  </a-tooltip>
+</template>
+
 <script setup lang="ts">
 import { CheckOutlined } from '@ant-design/icons-vue';
 
@@ -19,14 +30,3 @@ const cls = computed(() => {
 
 const { token } = useAntdToken();
 </script>
-
-<template>
-  <a-tooltip>
-    <template #title>
-      {{ theme ? t?.(`app.setting.pagestyle.${theme}`) : '' }}
-    </template>
-    <div :class="cls">
-      <CheckOutlined v-show="checked" :style="{ color: token?.colorPrimary }" :class="`${prefixCls}-selectIcon`" />
-    </div>
-  </a-tooltip>
-</template>

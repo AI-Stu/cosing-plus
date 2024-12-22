@@ -1,14 +1,3 @@
-<script setup lang="ts">
-const emit = defineEmits(['finish']);
-const router = useRouter();
-function finish() {
-  emit('finish');
-}
-function toOrderList() {
-  router.push('/profile/advanced');
-}
-</script>
-
 <template>
   <div>
     <a-form>
@@ -59,6 +48,17 @@ function toOrderList() {
     </a-form>
   </div>
 </template>
+
+<script setup lang="ts">
+const emit = defineEmits(['finish']);
+const router = useRouter();
+function finish() {
+  emit('finish');
+}
+function toOrderList() {
+  router.push('/profile/advanced');
+}
+</script>
 
 <style lang="less" scoped>
   .information {

@@ -1,3 +1,7 @@
+<template>
+  <slot />
+</template>
+
 <script setup lang="ts">
 import { App, theme } from 'ant-design-vue';
 import { registerTokenToCSSVar } from './token-to-cssvar';
@@ -19,7 +23,3 @@ watchEffect(() => {
   registerTokenToCSSVar(token.value);
 });
 </script>
-
-<template>
-  <slot />
-</template>

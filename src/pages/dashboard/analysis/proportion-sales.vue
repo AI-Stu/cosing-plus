@@ -1,3 +1,48 @@
+<template>
+  <a-card
+    :loading="loading"
+    class="salesCard"
+    :bordered="false"
+    title="销售额类别占比"
+    :style="{
+      height: '100%',
+    }"
+  >
+    <template #extra>
+      <div class="salesCardExtra">
+        <a-dropdown placement="bottomRight">
+          <template #overlay>
+            <a-menu>
+              <a-menu-item>操作一</a-menu-item>
+              <a-menu-item>操作二</a-menu-item>
+            </a-menu>
+          </template>
+          <EllipsisOutlined />
+        </a-dropdown>
+        <div class="salesTypeRadio">
+          <a-radio-group :value="salesType" @change="handleChangeSalesType">
+            <a-radio-button value="all">
+              全部渠道
+            </a-radio-button>
+            <a-radio-button value="online">
+              线上
+            </a-radio-button>
+            <a-radio-button value="stores">
+              门店
+            </a-radio-button>
+          </a-radio-group>
+        </div>
+      </div>
+    </template>
+    <div>
+      <a-typography-text>销售额</a-typography-text>
+      <div v-show="salesType === 'all'" ref="pieContainer1" />
+      <div v-show="salesType === 'online'" ref="pieContainer2" />
+      <div v-show="salesType === 'stores'" ref="pieContainer3" />
+    </div>
+  </a-card>
+</template>
+
 <script setup lang="ts">
 import { EllipsisOutlined } from '@ant-design/icons-vue';
 import { Pie } from '@antv/g2plot';
@@ -133,51 +178,6 @@ onUnmounted(() => {
   pies.value = [];
 });
 </script>
-
-<template>
-  <a-card
-    :loading="loading"
-    class="salesCard"
-    :bordered="false"
-    title="销售额类别占比"
-    :style="{
-      height: '100%',
-    }"
-  >
-    <template #extra>
-      <div class="salesCardExtra">
-        <a-dropdown placement="bottomRight">
-          <template #overlay>
-            <a-menu>
-              <a-menu-item>操作一</a-menu-item>
-              <a-menu-item>操作二</a-menu-item>
-            </a-menu>
-          </template>
-          <EllipsisOutlined />
-        </a-dropdown>
-        <div class="salesTypeRadio">
-          <a-radio-group :value="salesType" @change="handleChangeSalesType">
-            <a-radio-button value="all">
-              全部渠道
-            </a-radio-button>
-            <a-radio-button value="online">
-              线上
-            </a-radio-button>
-            <a-radio-button value="stores">
-              门店
-            </a-radio-button>
-          </a-radio-group>
-        </div>
-      </div>
-    </template>
-    <div>
-      <a-typography-text>销售额</a-typography-text>
-      <div v-show="salesType === 'all'" ref="pieContainer1" />
-      <div v-show="salesType === 'online'" ref="pieContainer2" />
-      <div v-show="salesType === 'stores'" ref="pieContainer3" />
-    </div>
-  </a-card>
-</template>
 
 <style scoped lang="less">
 .salesCardExtra {

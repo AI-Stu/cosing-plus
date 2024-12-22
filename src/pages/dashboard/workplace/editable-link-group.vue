@@ -1,3 +1,14 @@
+<template>
+  <div class="linkGroup">
+    <router-link v-for="(item, index) in links" :key="index" :to="item.href">
+      {{ item.title }}
+    </router-link>
+    <a-button size="small" type="primary" ghost>
+      <PlusOutlined /> 添加
+    </a-button>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { PlusOutlined } from '@ant-design/icons-vue';
 
@@ -28,17 +39,6 @@ const links = [
   }
 ];
 </script>
-
-<template>
-  <div class="linkGroup">
-    <router-link v-for="(item, index) in links" :key="index" :to="item.href">
-      {{ item.title }}
-    </router-link>
-    <a-button size="small" type="primary" ghost>
-      <PlusOutlined /> 添加
-    </a-button>
-  </div>
-</template>
 
 <style scoped lang="less">
 .linkGroup {

@@ -1,91 +1,3 @@
-<script setup lang="ts">
-import { CloseOutlined, CopyOutlined, NotificationOutlined, SettingOutlined } from '@ant-design/icons-vue';
-import { useClipboard } from '@v-c/utils';
-import type { ContentWidth, LayoutType, ThemeType } from '../../basic-layout/typing';
-import Body from './body.vue';
-import BlockCheckbox from './block-checkbox.vue';
-import ThemeColor from './theme-color.vue';
-import LayoutSetting from './layout-setting.vue';
-import RegionalSetting from './regional-setting.vue';
-import OtherSetting from './other-setting.vue';
-
-defineOptions({
-  name: 'SettingDrawer'
-});
-const props = withDefaults(
-  defineProps<{
-    open?: boolean
-    theme?: ThemeType
-    colorPrimary?: string
-    colorList?: { key: string, color: string }[]
-    layout?: LayoutType
-    contentWidth?: ContentWidth
-    fixedHeader?: boolean
-    fixedSider?: boolean
-    splitMenus?: boolean
-    keepAlive?: boolean
-    accordionMode?: boolean
-    leftCollapsed?: boolean
-    watermark?: boolean
-    header?: boolean
-    footer?: boolean
-    menu?: boolean
-    menuHeader?: boolean
-    colorWeak?: boolean
-    colorGray?: boolean
-    multiTab?: boolean
-    multiTabFixed?: boolean
-    compactAlgorithm?: boolean
-    animationName?: string
-    animationNameList?: any[]
-    layoutSetting?: Record<string, any>
-    t?: (key: string, ...args: any[]) => string
-  }>(),
-  {
-    theme: 'light',
-    colorList: () => [
-      { key: 'techBlue', color: '#1677FF' },
-      { key: 'daybreak', color: '#1890ff' },
-      { key: 'dust', color: '#F5222D' },
-      { key: 'volcano', color: '#FA541C' },
-      { key: 'sunset', color: '#FAAD14' },
-      { key: 'cyan', color: '#13C2C2' },
-      { key: 'green', color: '#52C41A' },
-      { key: 'geekblue', color: '#2F54EB' },
-      { key: 'purple', color: '#722ED1' }
-    ]
-  }
-);
-const emit = defineEmits(['update:open', 'settingChange']);
-const { copy } = useClipboard();
-const prefixCls = shallowRef('ant-pro-drawer-setting');
-const { message } = useGlobalConfig();
-function copySetting() {
-  copy(JSON.stringify(props.layoutSetting ?? {}));
-  message?.success(props?.t?.('app.setting.copyinfo', '拷贝成功，请到 config/default-settings.js 中替换默认配置'));
-}
-function handleVisible(open: boolean) {
-  emit('update:open', open);
-}
-
-function changeTheme(theme: ThemeType) {
-  emit('settingChange', 'theme', theme);
-}
-
-function changeColor(color: string) {
-  emit('settingChange', 'colorPrimary', color);
-}
-
-function changeLayout(layout: string) {
-  emit('settingChange', 'layout', layout);
-}
-function changeSettingLayout(key: string, value: any) {
-  emit('settingChange', key, value);
-}
-
-const { token } = useAntdToken();
-</script>
-
 <template>
   <div
     :class="`${prefixCls}-handle`"
@@ -246,6 +158,94 @@ const { token } = useAntdToken();
     </div>
   </a-drawer>
 </template>
+
+<script setup lang="ts">
+import { CloseOutlined, CopyOutlined, NotificationOutlined, SettingOutlined } from '@ant-design/icons-vue';
+import { useClipboard } from '@v-c/utils';
+import type { ContentWidth, LayoutType, ThemeType } from '../../basic-layout/typing';
+import Body from './body.vue';
+import BlockCheckbox from './block-checkbox.vue';
+import ThemeColor from './theme-color.vue';
+import LayoutSetting from './layout-setting.vue';
+import RegionalSetting from './regional-setting.vue';
+import OtherSetting from './other-setting.vue';
+
+defineOptions({
+  name: 'SettingDrawer'
+});
+const props = withDefaults(
+  defineProps<{
+    open?: boolean
+    theme?: ThemeType
+    colorPrimary?: string
+    colorList?: { key: string, color: string }[]
+    layout?: LayoutType
+    contentWidth?: ContentWidth
+    fixedHeader?: boolean
+    fixedSider?: boolean
+    splitMenus?: boolean
+    keepAlive?: boolean
+    accordionMode?: boolean
+    leftCollapsed?: boolean
+    watermark?: boolean
+    header?: boolean
+    footer?: boolean
+    menu?: boolean
+    menuHeader?: boolean
+    colorWeak?: boolean
+    colorGray?: boolean
+    multiTab?: boolean
+    multiTabFixed?: boolean
+    compactAlgorithm?: boolean
+    animationName?: string
+    animationNameList?: any[]
+    layoutSetting?: Record<string, any>
+    t?: (key: string, ...args: any[]) => string
+  }>(),
+  {
+    theme: 'light',
+    colorList: () => [
+      { key: 'techBlue', color: '#1677FF' },
+      { key: 'daybreak', color: '#1890ff' },
+      { key: 'dust', color: '#F5222D' },
+      { key: 'volcano', color: '#FA541C' },
+      { key: 'sunset', color: '#FAAD14' },
+      { key: 'cyan', color: '#13C2C2' },
+      { key: 'green', color: '#52C41A' },
+      { key: 'geekblue', color: '#2F54EB' },
+      { key: 'purple', color: '#722ED1' }
+    ]
+  }
+);
+const emit = defineEmits(['update:open', 'settingChange']);
+const { copy } = useClipboard();
+const prefixCls = shallowRef('ant-pro-drawer-setting');
+const { message } = useGlobalConfig();
+function copySetting() {
+  copy(JSON.stringify(props.layoutSetting ?? {}));
+  message?.success(props?.t?.('app.setting.copyinfo', '拷贝成功，请到 config/default-settings.js 中替换默认配置'));
+}
+function handleVisible(open: boolean) {
+  emit('update:open', open);
+}
+
+function changeTheme(theme: ThemeType) {
+  emit('settingChange', 'theme', theme);
+}
+
+function changeColor(color: string) {
+  emit('settingChange', 'colorPrimary', color);
+}
+
+function changeLayout(layout: string) {
+  emit('settingChange', 'layout', layout);
+}
+function changeSettingLayout(key: string, value: any) {
+  emit('settingChange', key, value);
+}
+
+const { token } = useAntdToken();
+</script>
 
 <style lang="less">
 @import './index.less';

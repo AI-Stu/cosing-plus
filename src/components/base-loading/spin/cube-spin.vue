@@ -1,12 +1,3 @@
-<script lang="ts" setup>
-defineProps({
-  color: {
-    type: String,
-    default: '#3ff9dc'
-  }
-});
-</script>
-
 <template>
   <div class="cube-wrapper">
     <div class="cube cube1" />
@@ -20,6 +11,15 @@ defineProps({
     <div class="cube cube9" />
   </div>
 </template>
+
+<script lang="ts" setup>
+defineProps({
+  color: {
+    type: String,
+    default: '#3ff9dc'
+  }
+});
+</script>
 
 <style lang="less" scoped>
 .cube-wrapper {

@@ -1,12 +1,3 @@
-<script setup lang="ts">
-const router = useRouter();
-function login() {
-  router.replace({
-    path: '/login'
-  });
-}
-</script>
-
 <template>
   <a-result status="404" title="401" sub-title="登录已过期，请重新登陆">
     <template #extra>
@@ -16,3 +7,12 @@ function login() {
     </template>
   </a-result>
 </template>
+
+<script setup lang="ts">
+const router = useRouter();
+function login() {
+  router.replace({
+    path: '/login'
+  });
+}
+</script>

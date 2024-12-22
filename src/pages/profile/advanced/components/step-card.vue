@@ -1,12 +1,3 @@
-<script setup lang="ts">
-import { DingdingOutlined } from '@ant-design/icons-vue';
-import dayjs from 'dayjs';
-
-const { isMobile } = useQueryBreakpoints();
-
-const { t } = useI18n();
-</script>
-
 <template>
   <a-card :title="t('profile.advanced.step-title')" :bordered="false">
     <a-steps :current="1" :direction="isMobile && 'horizontal' || 'horizontal'" progress-dot>
@@ -49,6 +40,15 @@ const { t } = useI18n();
     </a-steps>
   </a-card>
 </template>
+
+<script setup lang="ts">
+import { DingdingOutlined } from '@ant-design/icons-vue';
+import dayjs from 'dayjs';
+
+const { isMobile } = useQueryBreakpoints();
+
+const { t } = useI18n();
+</script>
 
 <style scoped lang="less">
 

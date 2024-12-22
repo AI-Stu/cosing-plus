@@ -1,25 +1,3 @@
-<script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue';
-
-const emit = defineEmits(['prevStep', 'nextStep']);
-const formRef = ref<FormInstance>();
-const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
-const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
-
-const formState = reactive({
-  paymentPassword: '123456'
-});
-function nextStep() {
-  formRef.value?.validateFields().then(() => {
-    emit('nextStep');
-  });
-}
-
-function prevStep() {
-  emit('prevStep');
-}
-</script>
-
 <template>
   <div>
     <a-form ref="formRef" :model="formState" style="max-width: 500px; margin: 40px auto 0;">
@@ -86,6 +64,28 @@ function prevStep() {
     </a-form>
   </div>
 </template>
+
+<script setup lang="ts">
+import type { FormInstance } from 'ant-design-vue';
+
+const emit = defineEmits(['prevStep', 'nextStep']);
+const formRef = ref<FormInstance>();
+const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
+const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
+
+const formState = reactive({
+  paymentPassword: '123456'
+});
+function nextStep() {
+  formRef.value?.validateFields().then(() => {
+    emit('nextStep');
+  });
+}
+
+function prevStep() {
+  emit('prevStep');
+}
+</script>
 
 <style lang="less" scoped>
   .stepFormText {

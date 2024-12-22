@@ -1,3 +1,7 @@
+<template>
+  <div class="plane-wrapper" />
+</template>
+
 <script lang="ts" setup>
 defineProps({
   color: {
@@ -6,10 +10,6 @@ defineProps({
   }
 });
 </script>
-
-<template>
-  <div class="plane-wrapper" />
-</template>
 
 <style lang="less" scoped>
 .plane-wrapper {

@@ -1,17 +1,3 @@
-<script setup lang="ts">
-import { DingdingOutlined } from '@ant-design/icons-vue';
-
-const { t } = useI18n();
-const { isMobile } = useQueryBreakpoints();
-
-const result = computed(() => {
-  return {
-    title: t('result.success.title'),
-    description: t('result.success.description')
-  };
-});
-</script>
-
 <template>
   <a-card :bordered="false">
     <a-result status="success" :title="result.title" :sub-title="result.description">
@@ -80,3 +66,17 @@ const result = computed(() => {
     </a-result>
   </a-card>
 </template>
+
+<script setup lang="ts">
+import { DingdingOutlined } from '@ant-design/icons-vue';
+
+const { t } = useI18n();
+const { isMobile } = useQueryBreakpoints();
+
+const result = computed(() => {
+  return {
+    title: t('result.success.title'),
+    description: t('result.success.description')
+  };
+});
+</script>

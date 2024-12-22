@@ -1,3 +1,9 @@
+<template>
+  <div>
+    <h1>Redirecting...</h1>
+  </div>
+</template>
+
 <script setup lang="ts">
 const route = useRoute();
 const router = useRouter();
@@ -7,9 +13,3 @@ if (path)
   router.replace(path);
 else router.replace('/');
 </script>
-
-<template>
-  <div>
-    <h1>Redirecting...</h1>
-  </div>
-</template>

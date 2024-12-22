@@ -1,9 +1,3 @@
-<script setup lang="ts">
-const command = ref('a');
-const activeKey = ref();
-const { t } = useI18n();
-</script>
-
 <template>
   <a-row>
     <a-col :span="19">
@@ -80,6 +74,12 @@ const { t } = useI18n();
     <a-tab-pane key="2" :tab="t('profile.advanced.tab2')" force-render />
   </a-tabs>
 </template>
+
+<script setup lang="ts">
+const command = ref('a');
+const activeKey = ref();
+const { t } = useI18n();
+</script>
 
 <style scoped lang="less">
 :deep(.ant-btn) {

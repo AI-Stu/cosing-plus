@@ -1,3 +1,87 @@
+<template>
+  <a-card
+    :loading="loading"
+    :bordered="false"
+    title="线上热门搜索"
+    :style="{ height: '100%' }"
+  >
+    <template #extra>
+      <span class="iconGroup">
+        <a-dropdown placement="bottomRight">
+          <template #overlay>
+            <a-menu>
+              <a-menu-item>操作一</a-menu-item>
+              <a-menu-item>操作二</a-menu-item>
+            </a-menu>
+          </template>
+          <EllipsisOutlined />
+        </a-dropdown>
+      </span>
+    </template>
+    <a-row :gutter="68">
+      <a-col :sm="12" :xs="24" :style="{ marginBottom: '24px' }">
+        <NumberInfo
+          :gap="8"
+          :total="12321"
+          status="up"
+          :sub-total="17.1"
+        >
+          <template #subTitle>
+            <span>
+              人均搜索次数
+              <Tooltip title="指标说明">
+                <InfoCircleOutlined :style="{ marginLeft: '8px' }" />
+              </Tooltip>
+            </span>
+          </template>
+        </NumberInfo>
+        <div ref="tinyAreaContainer1" />
+      </a-col>
+      <a-col :sm="12" :xs="24" :style="{ marginBottom: '24px' }">
+        <NumberInfo
+          :gap="8"
+          :total="2.7"
+          status="down"
+          :sub-total="26.2"
+        >
+          <template #subTitle>
+            <span>
+              搜索用户数
+              <Tooltip title="指标说明">
+                <InfoCircleOutlined :style="{ marginLeft: '8px' }" />
+              </Tooltip>
+            </span>
+          </template>
+        </NumberInfo>
+        <div ref="tinyAreaContainer2" />
+      </a-col>
+    </a-row>
+    <a-table
+      :row-key="(record:any) => record.index"
+      size="small"
+      :columns="columns"
+      :data-source="searchData"
+      :pagination="{
+        style: { marginBottom: 0 },
+        pageSize: 5,
+      }"
+    >
+      <template #bodyCell="scope">
+        <template v-if="scope?.column?.key === 'keyword'">
+          <a>
+            {{ scope?.record?.keyword }}
+          </a>
+        </template>
+        <template v-else-if="scope?.column?.key === 'range'">
+          <Trend :flag="scope?.record?.status === 1 ? 'down' : 'up'">
+            <span :style="{ marginRight: '4px' }">{{ scope?.record?.range }}%</span>
+          </Trend>
+        </template>
+      </template>
+    </a-table>
+  </a-card>
+</template>
+
 <script setup lang="ts">
 import { EllipsisOutlined, InfoCircleOutlined } from '@ant-design/icons-vue';
 import { TinyArea } from '@antv/g2plot';
@@ -410,90 +494,6 @@ onMounted(() => {
   }).render();
 });
 </script>
-
-<template>
-  <a-card
-    :loading="loading"
-    :bordered="false"
-    title="线上热门搜索"
-    :style="{ height: '100%' }"
-  >
-    <template #extra>
-      <span class="iconGroup">
-        <a-dropdown placement="bottomRight">
-          <template #overlay>
-            <a-menu>
-              <a-menu-item>操作一</a-menu-item>
-              <a-menu-item>操作二</a-menu-item>
-            </a-menu>
-          </template>
-          <EllipsisOutlined />
-        </a-dropdown>
-      </span>
-    </template>
-    <a-row :gutter="68">
-      <a-col :sm="12" :xs="24" :style="{ marginBottom: '24px' }">
-        <NumberInfo
-          :gap="8"
-          :total="12321"
-          status="up"
-          :sub-total="17.1"
-        >
-          <template #subTitle>
-            <span>
-              人均搜索次数
-              <Tooltip title="指标说明">
-                <InfoCircleOutlined :style="{ marginLeft: '8px' }" />
-              </Tooltip>
-            </span>
-          </template>
-        </NumberInfo>
-        <div ref="tinyAreaContainer1" />
-      </a-col>
-      <a-col :sm="12" :xs="24" :style="{ marginBottom: '24px' }">
-        <NumberInfo
-          :gap="8"
-          :total="2.7"
-          status="down"
-          :sub-total="26.2"
-        >
-          <template #subTitle>
-            <span>
-              搜索用户数
-              <Tooltip title="指标说明">
-                <InfoCircleOutlined :style="{ marginLeft: '8px' }" />
-              </Tooltip>
-            </span>
-          </template>
-        </NumberInfo>
-        <div ref="tinyAreaContainer2" />
-      </a-col>
-    </a-row>
-    <a-table
-      :row-key="(record:any) => record.index"
-      size="small"
-      :columns="columns"
-      :data-source="searchData"
-      :pagination="{
-        style: { marginBottom: 0 },
-        pageSize: 5,
-      }"
-    >
-      <template #bodyCell="scope">
-        <template v-if="scope?.column?.key === 'keyword'">
-          <a>
-            {{ scope?.record?.keyword }}
-          </a>
-        </template>
-        <template v-else-if="scope?.column?.key === 'range'">
-          <Trend :flag="scope?.record?.status === 1 ? 'down' : 'up'">
-            <span :style="{ marginRight: '4px' }">{{ scope?.record?.range }}%</span>
-          </Trend>
-        </template>
-      </template>
-    </a-table>
-  </a-card>
-</template>
 
 <style scoped lang="less">
 .iconGroup {

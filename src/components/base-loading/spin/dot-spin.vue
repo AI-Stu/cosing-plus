@@ -1,8 +1,8 @@
-<script lang="ts" setup></script>
-
 <template>
   <div class="dots-loader" />
 </template>
+
+<script lang="ts" setup></script>
 
 <style lang="less" scoped>
 .dots-loader:not(:required) {

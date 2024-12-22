@@ -1,8 +1,8 @@
-<script lang="ts" setup></script>
-
 <template>
   <div class="preloader-wrapper" />
 </template>
+
+<script lang="ts" setup></script>
 
 <style lang="less" scoped>
 .preloader-wrapper {

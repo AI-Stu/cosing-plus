@@ -1,3 +1,23 @@
+<template>
+  <a-card class="my-6">
+    <a-tabs v-model:active-key="activeKey">
+      <a-tab-pane key="1" :tab="t('profile.advanced.log')">
+        <a-table :data-source="data" :columns="columns">
+          <template #headerCell="scope">
+            {{ getI18n(scope?.column?.key) }}
+          </template>
+        </a-table>
+      </a-tab-pane>
+      <a-tab-pane key="2" :tab="t('profile.advanced.log1')">
+        <a-table :data-source="data" :columns="columns" />
+      </a-tab-pane>
+      <a-tab-pane key="3" :tab="t('profile.advanced.log2')">
+        <a-table :data-source="data" :columns="columns" />
+      </a-tab-pane>
+    </a-tabs>
+  </a-card>
+</template>
+
 <script setup lang="ts">
 import dayjs from 'dayjs';
 
@@ -75,23 +95,3 @@ function getI18n(key: any) {
     return t('profile.advanced.log-info');
 }
 </script>
-
-<template>
-  <a-card class="my-6">
-    <a-tabs v-model:active-key="activeKey">
-      <a-tab-pane key="1" :tab="t('profile.advanced.log')">
-        <a-table :data-source="data" :columns="columns">
-          <template #headerCell="scope">
-            {{ getI18n(scope?.column?.key) }}
-          </template>
-        </a-table>
-      </a-tab-pane>
-      <a-tab-pane key="2" :tab="t('profile.advanced.log1')">
-        <a-table :data-source="data" :columns="columns" />
-      </a-tab-pane>
-      <a-tab-pane key="3" :tab="t('profile.advanced.log2')">
-        <a-table :data-source="data" :columns="columns" />
-      </a-tab-pane>
-    </a-tabs>
-  </a-card>
-</template>

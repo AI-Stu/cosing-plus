@@ -1,12 +1,3 @@
-<script setup lang="ts">
-const route = useRoute();
-const url = computed(() => route?.meta?.url);
-const loading = ref(true);
-function finishLoading() {
-  loading.value = false;
-}
-</script>
-
 <template>
   <div
     class="bg-[var(--bg-color)] ant-pro-iframe-wrap"
@@ -21,6 +12,15 @@ function finishLoading() {
     </a-spin>
   </div>
 </template>
+
+<script setup lang="ts">
+const route = useRoute();
+const url = computed(() => route?.meta?.url);
+const loading = ref(true);
+function finishLoading() {
+  loading.value = false;
+}
+</script>
 
 <style>
 .ant-pro-iframe-wrap{

@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import dayjs from 'dayjs';
-
-const { t } = useI18n();
-</script>
-
 <template>
   <a-card :bordered="false" class="my-6">
     <a-descriptions :title="t('profile.basic.customerInfoTitle')">
@@ -81,6 +75,12 @@ const { t } = useI18n();
     </a-card>
   </a-card>
 </template>
+
+<script setup lang="ts">
+import dayjs from 'dayjs';
+
+const { t } = useI18n();
+</script>
 
 <style scoped lang="less">
 

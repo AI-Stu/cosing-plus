@@ -1,69 +1,3 @@
-<script setup lang="ts">
-import type { UnwrapRef } from 'vue';
-import { UploadOutlined } from '@ant-design/icons-vue';
-
-interface FormState {
-  eamil: string
-  name: string
-  phoneNumber: string
-  region: string | undefined
-  address: string
-  desc: string
-}
-
-const { t } = useI18n();
-
-const formRef = ref();
-const labelCol = { span: 0 };
-const wrapperCol = { span: 13 };
-const formState: UnwrapRef<FormState> = reactive({
-  eamil: 'AntdvPro@abc.com',
-  name: 'AntdvPro',
-  region: undefined,
-  desc: '',
-  address: '',
-  phoneNumber: ''
-});
-const rules: any = computed(() => {
-  return {
-    name: [
-      { required: true, message: t('account.settings.form-rule-name'), trigger: 'change' }
-    ],
-
-    phoneNumber: [
-      { required: true, message: t('account.settings.form-rule-phoneNumber'), trigger: 'change' }
-    ],
-    address: [
-      { required: true, message: t('account.settings.form-rule-address'), trigger: 'change' }
-    ],
-    region: [
-      { required: true, message: t('account.settings.form-rule-region'), trigger: 'change' }
-    ],
-    eamil: [
-      { required: true, message: t('account.settings.form-rule-email'), trigger: 'change' }
-    ],
-    desc: [
-      { required: true, message: t('account.settings.form-rule-desc'), trigger: 'blur' }
-    ]
-  };
-});
-
-function onSubmit() {
-  formRef.value
-    .validate()
-    .then(() => {
-      console.log('values', formState, toRaw(formState));
-    })
-    .catch((error: any) => {
-      console.log('error', error);
-    });
-}
-
-function handleChange() {
-  console.log('change');
-}
-</script>
-
 <template>
   <a-card :title="t('account.settings.basic-setting')" :bordered="false">
     <a-row>
@@ -129,3 +63,69 @@ function handleChange() {
     </a-row>
   </a-card>
 </template>
+
+<script setup lang="ts">
+import type { UnwrapRef } from 'vue';
+import { UploadOutlined } from '@ant-design/icons-vue';
+
+interface FormState {
+  eamil: string
+  name: string
+  phoneNumber: string
+  region: string | undefined
+  address: string
+  desc: string
+}
+
+const { t } = useI18n();
+
+const formRef = ref();
+const labelCol = { span: 0 };
+const wrapperCol = { span: 13 };
+const formState: UnwrapRef<FormState> = reactive({
+  eamil: 'AntdvPro@abc.com',
+  name: 'AntdvPro',
+  region: undefined,
+  desc: '',
+  address: '',
+  phoneNumber: ''
+});
+const rules: any = computed(() => {
+  return {
+    name: [
+      { required: true, message: t('account.settings.form-rule-name'), trigger: 'change' }
+    ],
+
+    phoneNumber: [
+      { required: true, message: t('account.settings.form-rule-phoneNumber'), trigger: 'change' }
+    ],
+    address: [
+      { required: true, message: t('account.settings.form-rule-address'), trigger: 'change' }
+    ],
+    region: [
+      { required: true, message: t('account.settings.form-rule-region'), trigger: 'change' }
+    ],
+    eamil: [
+      { required: true, message: t('account.settings.form-rule-email'), trigger: 'change' }
+    ],
+    desc: [
+      { required: true, message: t('account.settings.form-rule-desc'), trigger: 'blur' }
+    ]
+  };
+});
+
+function onSubmit() {
+  formRef.value
+    .validate()
+    .then(() => {
+      console.log('values', formState, toRaw(formState));
+    })
+    .catch((error: any) => {
+      console.log('error', error);
+    });
+}
+
+function handleChange() {
+  console.log('change');
+}
+</script>

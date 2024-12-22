@@ -1,33 +1,3 @@
-<script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue';
-
-defineOptions({
-  name: 'BasicForm'
-});
-
-const formRef = ref<FormInstance>();
-async function handleSubmit() {
-  try {
-    const values = await formRef.value?.validateFields();
-    console.log('Success:', values);
-  }
-  catch (errorInfo) {
-    console.log('Failed:', errorInfo);
-  }
-}
-const formState = reactive<Record<string, any>>({
-  name: null,
-  buildTime: [],
-  goal: '',
-  standard: '',
-  client: '',
-  invites: '',
-  weight: 0,
-  target: 1
-});
-const { t } = useI18n();
-</script>
-
 <template>
   <page-container>
     <a-card :body-style="{ padding: '24px 32px' }" :bordered="false">
@@ -162,3 +132,33 @@ const { t } = useI18n();
     </a-card>
   </page-container>
 </template>
+
+<script setup lang="ts">
+import type { FormInstance } from 'ant-design-vue';
+
+defineOptions({
+  name: 'BasicForm'
+});
+
+const formRef = ref<FormInstance>();
+async function handleSubmit() {
+  try {
+    const values = await formRef.value?.validateFields();
+    console.log('Success:', values);
+  }
+  catch (errorInfo) {
+    console.log('Failed:', errorInfo);
+  }
+}
+const formState = reactive<Record<string, any>>({
+  name: null,
+  buildTime: [],
+  goal: '',
+  standard: '',
+  client: '',
+  invites: '',
+  weight: 0,
+  target: 1
+});
+const { t } = useI18n();
+</script>

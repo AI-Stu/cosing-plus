@@ -1,3 +1,36 @@
+<template>
+  <a-card :bordered="false">
+    <a-form>
+      <a-form-item label="所属类目">
+        <div class="flex flex-wrap gap-2">
+          <a-tag
+            v-for="item in list"
+            :key="item.key"
+            cursor-pointer
+            :color="activeList.includes(item.key) ? '#108ee9' : ''"
+            @click="handleClick(item)"
+          >
+            {{ item.name }}
+          </a-tag>
+        </div>
+      </a-form-item>
+      <a-divider dashed />
+      <a-form-item label="其他选项">
+        <a-form-item-rest>
+          <div class="flex gap-4 category-other-item">
+            <a-form-item label="作者">
+              <a-select placeholder="不限" style="width: 100px" :options="authorList" />
+            </a-form-item>
+            <a-form-item label="好评度">
+              <a-select placeholder="不限" style="width: 100px" :options="praiseList" />
+            </a-form-item>
+          </div>
+        </a-form-item-rest>
+      </a-form-item>
+    </a-form>
+  </a-card>
+</template>
+
 <script setup lang="ts">
 const number = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
 
@@ -68,39 +101,6 @@ const praiseList = shallowRef([
   }
 ]);
 </script>
-
-<template>
-  <a-card :bordered="false">
-    <a-form>
-      <a-form-item label="所属类目">
-        <div class="flex flex-wrap gap-2">
-          <a-tag
-            v-for="item in list"
-            :key="item.key"
-            cursor-pointer
-            :color="activeList.includes(item.key) ? '#108ee9' : ''"
-            @click="handleClick(item)"
-          >
-            {{ item.name }}
-          </a-tag>
-        </div>
-      </a-form-item>
-      <a-divider dashed />
-      <a-form-item label="其他选项">
-        <a-form-item-rest>
-          <div class="flex gap-4 category-other-item">
-            <a-form-item label="作者">
-              <a-select placeholder="不限" style="width: 100px" :options="authorList" />
-            </a-form-item>
-            <a-form-item label="好评度">
-              <a-select placeholder="不限" style="width: 100px" :options="praiseList" />
-            </a-form-item>
-          </div>
-        </a-form-item-rest>
-      </a-form-item>
-    </a-form>
-  </a-card>
-</template>
 
 <style lang="less">
 .category-other-item{

@@ -1,13 +1,3 @@
-<script setup lang="ts">
-import { omit } from '@v-c/utils';
-import { useLayoutState } from '../../basic-layout/context';
-import SubMenu from './sub-menu.vue';
-
-const { splitState, menuData, handleSplitSelectedKeys } = useLayoutState();
-
-const menuDataList = computed(() => menuData.value?.map(v => ({ ...omit(v, ['children']), childrenCount: (v.children ?? []).length })));
-</script>
-
 <template>
   <a-menu
     mode="horizontal"
@@ -23,6 +13,16 @@ const menuDataList = computed(() => menuData.value?.map(v => ({ ...omit(v, ['chi
     </template>
   </a-menu>
 </template>
+
+<script setup lang="ts">
+import { omit } from '@v-c/utils';
+import { useLayoutState } from '../../basic-layout/context';
+import SubMenu from './sub-menu.vue';
+
+const { splitState, menuData, handleSplitSelectedKeys } = useLayoutState();
+
+const menuDataList = computed(() => menuData.value?.map(v => ({ ...omit(v, ['children']), childrenCount: (v.children ?? []).length })));
+</script>
 
 <style lang="less">
 .ant-pro-sider-menu-header{

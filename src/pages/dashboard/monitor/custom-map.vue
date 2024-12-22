@@ -1,3 +1,7 @@
+<template>
+  <div id="map" />
+</template>
+
 <script setup lang="ts">
 import { HeatmapLayer, Mapbox, PointLayer, Scene } from '@antv/l7';
 import mapGrid from './map-grid.ts';
@@ -102,10 +106,6 @@ onBeforeUnmount(() => {
   scene.destroy?.();
 });
 </script>
-
-<template>
-  <div id="map" />
-</template>
 
 <style scoped lang="less">
  #map{

@@ -1,42 +1,3 @@
-<script setup lang="ts">
-const content = '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。';
-
-const data = ref([
-  {
-    title: 'Aipay',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png'
-  },
-  {
-    title: 'Ant Design Vue',
-    link: 'https://www.antdv.com/assets/logo.1ef800a8.svg'
-  },
-  {
-    title: 'Vue',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png'
-  },
-  {
-    title: 'Vite',
-    link: 'https://cn.vitejs.dev/logo.svg'
-  },
-  {
-    title: 'React',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png'
-  },
-  {
-    title: 'Cosing Plus',
-    link: '/logo.svg'
-  },
-  {
-    title: 'Webpack',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png'
-  },
-  {
-    title: 'Angular',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png'
-  }
-]);
-</script>
-
 <template>
   <page-container>
     <div class="mt-2">
@@ -80,6 +41,45 @@ const data = ref([
     </div>
   </page-container>
 </template>
+
+<script setup lang="ts">
+const content = '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。';
+
+const data = ref([
+  {
+    title: 'Aipay',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png'
+  },
+  {
+    title: 'Ant Design Vue',
+    link: 'https://www.antdv.com/assets/logo.1ef800a8.svg'
+  },
+  {
+    title: 'Vue',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png'
+  },
+  {
+    title: 'Vite',
+    link: 'https://cn.vitejs.dev/logo.svg'
+  },
+  {
+    title: 'React',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png'
+  },
+  {
+    title: 'Cosing Plus',
+    link: '/logo.svg'
+  },
+  {
+    title: 'Webpack',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png'
+  },
+  {
+    title: 'Angular',
+    link: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png'
+  }
+]);
+</script>
 
 <style scoped>
 .overflow {

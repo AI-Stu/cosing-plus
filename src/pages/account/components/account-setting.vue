@@ -1,31 +1,3 @@
-<script setup lang="ts">
-import { AlipayOutlined, DingdingOutlined, TaobaoOutlined } from '@ant-design/icons-vue';
-
-interface DataItem {
-  title: string
-  avatar: string
-}
-
-const { t } = useI18n();
-
-const data = computed<DataItem[]>(() => {
-  return [
-    {
-      title: t('account.settings.account.taobao'),
-      avatar: 'TaobaoOutlined'
-    },
-    {
-      title: t('account.settings.account.alipay'),
-      avatar: 'AlipayOutlined'
-    },
-    {
-      title: t('account.settings.account.dingding'),
-      avatar: 'DingdingOutlined'
-    }
-  ];
-});
-</script>
-
 <template>
   <a-card :title="t('account.settings.account-setting')" :bordered="false">
     <a-list item-layout="horizontal" :data-source="data">
@@ -53,6 +25,34 @@ const data = computed<DataItem[]>(() => {
     </a-list>
   </a-card>
 </template>
+
+<script setup lang="ts">
+import { AlipayOutlined, DingdingOutlined, TaobaoOutlined } from '@ant-design/icons-vue';
+
+interface DataItem {
+  title: string
+  avatar: string
+}
+
+const { t } = useI18n();
+
+const data = computed<DataItem[]>(() => {
+  return [
+    {
+      title: t('account.settings.account.taobao'),
+      avatar: 'TaobaoOutlined'
+    },
+    {
+      title: t('account.settings.account.alipay'),
+      avatar: 'AlipayOutlined'
+    },
+    {
+      title: t('account.settings.account.dingding'),
+      avatar: 'DingdingOutlined'
+    }
+  ];
+});
+</script>
 
 <style scoped lang="less">
 :deep(.ant-card-body) {

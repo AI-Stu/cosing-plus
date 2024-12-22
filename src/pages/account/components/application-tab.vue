@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import { DownloadOutlined, EditOutlined, EllipsisOutlined, ShareAltOutlined } from '@ant-design/icons-vue';
-
-const { t } = useI18n();
-</script>
-
 <template>
   <a-row>
     <a-col v-for="(_, index) in 10" :key="index" :span="12" class="mb-6">
@@ -51,3 +45,9 @@ const { t } = useI18n();
     </a-col>
   </a-row>
 </template>
+
+<script setup lang="ts">
+import { DownloadOutlined, EditOutlined, EllipsisOutlined, ShareAltOutlined } from '@ant-design/icons-vue';
+
+const { t } = useI18n();
+</script>

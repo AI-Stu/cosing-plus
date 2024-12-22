@@ -1,3 +1,37 @@
+<template>
+  <a-card :title="t('profile.advanced.call-log')">
+    <a-list
+      item-layout="horizontal"
+      :data-source="phoneDate"
+    >
+      <template #renderItem="{ item }">
+        <a-list-item>
+          <template #actions>
+            <div>
+              <span>{{ t('profile.advanced.call-spent') }}</span>
+              <span>{{ item.spentTime }}</span>
+            </div>
+            <div class="px-10">
+              <span>{{ t('profile.advanced.call-date') }}</span>
+              <span>{{ item.date }}</span>
+            </div>
+            <a-button danger type="link" @click="removeItem(item)">
+              {{ t('profile.advanced.remove') }}
+            </a-button>
+          </template>
+          <a-list-item-meta
+            :description="item.phone"
+          >
+            <template #title>
+              <a>{{ item.name }}</a>
+            </template>
+          </a-list-item-meta>
+        </a-list-item>
+      </template>
+    </a-list>
+  </a-card>
+</template>
+
 <script setup lang="ts">
 const { t } = useI18n();
 
@@ -40,40 +74,6 @@ function removeItem(item: PhoneItem) {
   phoneDate.value.splice(index, 1);
 }
 </script>
-
-<template>
-  <a-card :title="t('profile.advanced.call-log')">
-    <a-list
-      item-layout="horizontal"
-      :data-source="phoneDate"
-    >
-      <template #renderItem="{ item }">
-        <a-list-item>
-          <template #actions>
-            <div>
-              <span>{{ t('profile.advanced.call-spent') }}</span>
-              <span>{{ item.spentTime }}</span>
-            </div>
-            <div class="px-10">
-              <span>{{ t('profile.advanced.call-date') }}</span>
-              <span>{{ item.date }}</span>
-            </div>
-            <a-button danger type="link" @click="removeItem(item)">
-              {{ t('profile.advanced.remove') }}
-            </a-button>
-          </template>
-          <a-list-item-meta
-            :description="item.phone"
-          >
-            <template #title>
-              <a>{{ item.name }}</a>
-            </template>
-          </a-list-item-meta>
-        </a-list-item>
-      </template>
-    </a-list>
-  </a-card>
-</template>
 
 <style scoped lang="less">
 

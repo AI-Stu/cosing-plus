@@ -1,76 +1,3 @@
-<script setup lang="ts">
-import type { SelectValue } from 'ant-design-vue/es/select';
-import type { CheckedType, ContentWidth, LayoutType } from '../../basic-layout/typing';
-
-const props = defineProps<{
-  contentWidth?: ContentWidth
-  layout?: LayoutType
-  fixedHeader?: boolean
-  fixedSider?: boolean
-  splitMenus?: boolean
-  keepAlive?: boolean
-  accordionMode?: boolean
-  leftCollapsed?: boolean
-  compactAlgorithm?: boolean
-  t?: (key: string, ...args: any[]) => string
-}>();
-
-const emit = defineEmits(['changeSetting']);
-const list = computed(() => [
-  {
-    title: '内容区域宽度',
-    key: 'contentWidth',
-    disabled: false,
-    disabledReason: ''
-  },
-  {
-    title: '固定 Header',
-    key: 'fixedHeader',
-    disabled: props.layout === 'mix',
-    disabledReason: ''
-  },
-  {
-    title: '固定侧边菜单',
-    key: 'fixSiderbar',
-    disabled: false,
-    disabledReason: ''
-  },
-  {
-    title: '自动分割菜单',
-    key: 'splitMenus',
-    disabled: props.layout !== 'mix',
-    disabledReason: ''
-  },
-  {
-    title: '缓存功能',
-    key: 'keepAlive',
-    disabled: false,
-    disabledReason: ''
-  },
-  {
-    title: '菜单手风琴模式',
-    key: 'accordionMode',
-    disabled: false,
-    disabledReason: ''
-  },
-  {
-    title: '侧边菜单折叠 左侧',
-    key: 'leftCollapsed',
-    disabled: props.layout !== 'side',
-    disabledReason: ''
-  },
-  {
-    title: '紧凑模式',
-    key: 'compactAlgorithm',
-    disabled: false,
-    disabledReason: ''
-  }
-]);
-function handleChangeSetting(key: string, value: any) {
-  emit('changeSetting', key, value);
-}
-</script>
-
 <template>
   <a-list :data-source="list" :split="false">
     <template #renderItem="{ item }">
@@ -157,3 +84,76 @@ function handleChangeSetting(key: string, value: any) {
     </template>
   </a-list>
 </template>
+
+<script setup lang="ts">
+import type { SelectValue } from 'ant-design-vue/es/select';
+import type { CheckedType, ContentWidth, LayoutType } from '../../basic-layout/typing';
+
+const props = defineProps<{
+  contentWidth?: ContentWidth
+  layout?: LayoutType
+  fixedHeader?: boolean
+  fixedSider?: boolean
+  splitMenus?: boolean
+  keepAlive?: boolean
+  accordionMode?: boolean
+  leftCollapsed?: boolean
+  compactAlgorithm?: boolean
+  t?: (key: string, ...args: any[]) => string
+}>();
+
+const emit = defineEmits(['changeSetting']);
+const list = computed(() => [
+  {
+    title: '内容区域宽度',
+    key: 'contentWidth',
+    disabled: false,
+    disabledReason: ''
+  },
+  {
+    title: '固定 Header',
+    key: 'fixedHeader',
+    disabled: props.layout === 'mix',
+    disabledReason: ''
+  },
+  {
+    title: '固定侧边菜单',
+    key: 'fixSiderbar',
+    disabled: false,
+    disabledReason: ''
+  },
+  {
+    title: '自动分割菜单',
+    key: 'splitMenus',
+    disabled: props.layout !== 'mix',
+    disabledReason: ''
+  },
+  {
+    title: '缓存功能',
+    key: 'keepAlive',
+    disabled: false,
+    disabledReason: ''
+  },
+  {
+    title: '菜单手风琴模式',
+    key: 'accordionMode',
+    disabled: false,
+    disabledReason: ''
+  },
+  {
+    title: '侧边菜单折叠 左侧',
+    key: 'leftCollapsed',
+    disabled: props.layout !== 'side',
+    disabledReason: ''
+  },
+  {
+    title: '紧凑模式',
+    key: 'compactAlgorithm',
+    disabled: false,
+    disabledReason: ''
+  }
+]);
+function handleChangeSetting(key: string, value: any) {
+  emit('changeSetting', key, value);
+}
+</script>

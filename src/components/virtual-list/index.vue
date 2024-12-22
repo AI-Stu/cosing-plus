@@ -1,3 +1,16 @@
+<template>
+  <div v-if="Data" class="list-container">
+    <div ref="scrollerContainerRef" class="scroller-container scrollbar" @scroll="handleScroll">
+      <div class="pillar" :style="{ height: `${pillarHeight}px` }" />
+      <div class="list" :style="transformStyle">
+        <div v-for="(item, index) in renderData" :key="index" class="item" :style="{ height: `${itemHeight}px` }">
+          <slot name="renderItem" :item="item" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 interface Prop {
   // 列表每一项的高度
@@ -69,19 +82,6 @@ onMounted(() => {
   init();
 });
 </script>
-
-<template>
-  <div v-if="Data" class="list-container">
-    <div ref="scrollerContainerRef" class="scroller-container scrollbar" @scroll="handleScroll">
-      <div class="pillar" :style="{ height: `${pillarHeight}px` }" />
-      <div class="list" :style="transformStyle">
-        <div v-for="(item, index) in renderData" :key="index" class="item" :style="{ height: `${itemHeight}px` }">
-          <slot name="renderItem" :item="item" />
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
 
 <style scoped lang="less">
 .scrollbar {
