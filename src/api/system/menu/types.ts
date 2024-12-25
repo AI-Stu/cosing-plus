@@ -1,3 +1,4 @@
+import type { RouteRecordRaw } from 'vue-router';
 import type { MenuTypeEnum } from '@/enums/MenuTypeEnum';
 
 /**
@@ -67,3 +68,5 @@ export interface MenuForm {
   query?: string
   perms?: string
 }
+
+export type { RouteRecordRaw };
