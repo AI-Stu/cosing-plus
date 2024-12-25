@@ -1,9 +1,12 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import { AxiosLoading } from './loading';
-import { STORAGE_AUTHORIZE_KEY, useAuthorization } from '@/composables/authorization';
+import { decryptBase64, decryptWithAes, encryptBase64, encryptWithAes, generateAesKey } from '@/composables/crypto';
+import { decrypt, encrypt } from '@/composables/jsencrypt';
+import { STORAGE_AUTHORIZE_KEY, useAuthorization, useSessionRequest } from '@/composables/authorization';
 import { ContentTypeEnum, RequestEnum } from '~#/http-enum';
 import router from '@/router';
+import { ErrorCodeEnum, HttpStatusEnum } from '@/enums/resp-enum';
 
 export interface ResponseBody<T = any> {
   code: number
@@ -11,115 +14,180 @@ export interface ResponseBody<T = any> {
   msg: string
 }
 
+/**  请求配置  */
 export interface RequestConfigExtra<T = any> {
-  token?: boolean
-  customDev?: boolean
-  loading?: boolean
-  extraData?: T
+  token?: boolean // 设置为false的时候不会携带token
+  customDev?: boolean // 是否开启自定义接口
+  loading?: boolean // 是否开启全局请求loading
+  repeatSubmit?: boolean // 是否开启防止重复提交
+  encrypt?: boolean // 是否开启参数加密
+  extraData?: T // 额外参数
 }
-const instance: AxiosInstance = axios.create({
+const { VITE_APP_CLIENT_ID, VITE_APP_ENCRYPT, PROD } = import.meta.env;
+const encryptHeader = 'encrypt-key';
+const requestConfigExtra = {
+  token: true,
+  customDev: false,
+  loading: false,
+  repeatSubmit: true,
+  encrypt: true
+};
+const service: AxiosInstance = axios.create({
   baseURL: '',
   timeout: 60000,
-  headers: { 'Content-Type': ContentTypeEnum.JSON }
-});
-const axiosLoading = new AxiosLoading();
-async function requestHandler(config: InternalAxiosRequestConfig & RequestConfigExtra): Promise<InternalAxiosRequestConfig> {
-  // 处理请求前的url
-  if (
-    import.meta.env.DEV
-      && import.meta.env.VITE_APP_BASE_API_DEV
-      && import.meta.env.VITE_APP_BASE_URL_DEV
-      && config.customDev
-  ) {
-    //  替换url的请求前缀baseUrl
-    config.baseURL = import.meta.env.VITE_APP_BASE_API_DEV;
+  headers: {
+    'Content-Type': ContentTypeEnum.JSON,
+    'clientid': VITE_APP_CLIENT_ID
   }
-  const token = useAuthorization();
+});
 
-  if (token.value && config.token !== false)
-    config.headers.set(STORAGE_AUTHORIZE_KEY, token.value);
+const axiosLoading = new AxiosLoading(); // 全局请求loading
+
+/**
+ * 处理请求
+ * @param config
+ * @returns Promise
+ */
+async function requestHandler(config: InternalAxiosRequestConfig & RequestConfigExtra): Promise<InternalAxiosRequestConfig> {
+  config = {
+    ...requestConfigExtra,
+    ...config
+  };
+  const token = useAuthorization();
+  const sessionRequest = useSessionRequest();
+
+  // 携带token
+  if (token.value && config.token)
+    config.headers.set(STORAGE_AUTHORIZE_KEY, `Bearer ${token.value}`);
+
+  // 开启参数加密
+  if (VITE_APP_ENCRYPT && config.encrypt && PROD) {
+    if ([RequestEnum.POST, RequestEnum.PUT].includes(config.method as RequestEnum)) {
+      const aesKey = generateAesKey(); // 生成一个 AES 密钥
+      config.headers.set(encryptHeader, encrypt(encryptBase64(aesKey)));
+      config.data = typeof config.data === 'object'
+        ? encryptWithAes(JSON.stringify(config.data), aesKey)
+        : encryptWithAes(config.data, aesKey);
+    }
+  }
+
+  // 重复提交
+  if (config.repeatSubmit && [RequestEnum.POST, RequestEnum.PUT].includes(config.method as RequestEnum)) {
+    const requestObj = {
+      url: config.url,
+      data: typeof config.data === 'object' ? JSON.stringify(config.data) : config.data,
+      time: new Date().getTime()
+    };
+    sessionRequest.value = requestObj;
+  }
+
+  // FormData数据去请求头Content-Type
+  if (config.data instanceof FormData) {
+    delete config.headers['Content-Type'];
+  }
 
   // 增加多语言的配置
   const { locale } = useI18nLocale();
   config.headers.set('Accept-Language', locale.value ?? 'zh-CN');
+
+  // 开启全局loading
   if (config.loading)
     axiosLoading.addLoading();
   return config;
 }
 
+/**
+ * 处理响应
+ * @param response
+ * @returns ResponseBody<any> | AxiosResponse<any> | Promise<any> | any
+ */
 function responseHandler(response: any): ResponseBody<any> | AxiosResponse<any> | Promise<any> | any {
-  return response.data;
-}
-
-function errorHandler(error: AxiosError): Promise<any> {
-  const token = useAuthorization();
   const notification = useNotification();
+  const token = useAuthorization();
+  const { config, headers, request } = response;
+  let { data } = response;
 
-  if (error.response) {
-    const { data, status, statusText } = error.response as AxiosResponse<ResponseBody>;
-    if (status === 401) {
-      notification?.error({
-        message: '401',
-        description: data?.msg || statusText,
-        duration: 3
-      });
-      /**
-       * 这里处理清空用户信息和token的逻辑，后续扩展
-       */
-      token.value = null;
-      router
-        .push({
-          path: '/login',
-          query: {
-            redirect: router.currentRoute.value.fullPath
-          }
-        })
-        .then(() => {});
-    }
-    else if (status === 403) {
-      notification?.error({
-        message: '403',
-        description: data?.msg || statusText,
-        duration: 3
-      });
-    }
-    else if (status === 500) {
-      notification?.error({
-        message: '500',
-        description: data?.msg || statusText,
-        duration: 3
-      });
-    }
-    else {
-      notification?.error({
-        message: '服务错误',
-        description: data?.msg || statusText,
-        duration: 3
-      });
+  if (VITE_APP_ENCRYPT && PROD && config.encrypt) {
+    // 加密后的 AES 秘钥
+    const keyStr = headers[encryptHeader];
+    // 加密
+    if (keyStr) {
+      // 请求体 AES 解密
+      const base64Str = decrypt(keyStr);
+      // base64 解码 得到请求头的 AES 秘钥
+      const aesKey = decryptBase64(base64Str.toString());
+      // aesKey 解码 data
+      const decryptData = decryptWithAes(data, aesKey);
+      // 将结果 (得到的是 JSON 字符串) 转为 JSON
+      data = JSON.parse(decryptData);
     }
   }
+
+  // 未设置状态码则默认成功状态
+  const code = data.code || HttpStatusEnum.SUCCESS;
+  // 获取错误信息
+  const msg = ErrorCodeEnum[code] || data.msg || ErrorCodeEnum.DEFAULT;
+  // 二进制数据则直接返回
+  if (request.responseType === 'blob' || request.responseType === 'arraybuffer') {
+    return data;
+  }
+
+  // 请求成功
+  if (code === HttpStatusEnum.SUCCESS) {
+    return Promise.resolve(data);
+  }
+
+  // 请求异常
+  notification?.error({
+    message: code,
+    description: msg,
+    duration: 3
+  });
+  if (code === HttpStatusEnum.UNAUTHORIZED) {
+    /**
+     * 这里处理清空用户信息和token的逻辑，后续扩展
+     */
+    token.value = null;
+    router.push({
+      path: '/login',
+      query: {
+        redirect: router.currentRoute.value.fullPath
+      }
+    }).then(() => {});
+  }
+  return Promise.reject(data);
+}
+
+/**
+ * 处理错误
+ * @param error
+ * @returns Promise
+ */
+function errorHandler(error: AxiosError): Promise<any> {
   return Promise.reject(error);
 }
+
+service.interceptors.request.use(requestHandler);
+
+service.interceptors.response.use(responseHandler, errorHandler);
+
+export default service;
+
 interface AxiosOptions<T> {
   url: string
   params?: T
   data?: T
 }
-instance.interceptors.request.use(requestHandler);
-
-instance.interceptors.response.use(responseHandler, errorHandler);
-
-export default instance;
 
 /**
  * 实例化请求
  * @param options
  * @returns Promise
  */
-function instancePromise<R = any, T = any>(options: AxiosOptions<T> & RequestConfigExtra): Promise<ResponseBody<R>> {
+function servicePromise<R = any, T = any>(options: AxiosOptions<T> & RequestConfigExtra): Promise<ResponseBody<R>> {
   const { loading } = options;
   return new Promise((resolve, reject) => {
-    instance.request(options).then((res) => {
+    service.request(options).then((res) => {
       resolve(res as any);
     }).catch((e: Error | AxiosError) => {
       reject(e);
@@ -149,7 +217,7 @@ export function useGet< R = any, T = any>(
     method: RequestEnum.GET,
     ...config
   };
-  return instancePromise< R, T >(options);
+  return servicePromise< R, T >(options);
 }
 
 /**
@@ -170,7 +238,7 @@ export function usePost< R = any, T = any>(
     method: RequestEnum.POST,
     ...config
   };
-  return instancePromise< R, T >(options);
+  return servicePromise< R, T >(options);
 }
 
 /**
@@ -191,7 +259,7 @@ export function usePut< R = any, T = any>(
     method: RequestEnum.PUT,
     ...config
   };
-  return instancePromise<R, T>(options);
+  return servicePromise<R, T>(options);
 }
 
 /**
@@ -212,5 +280,5 @@ export function useDelete< R = any, T = any>(
     method: RequestEnum.DELETE,
     ...config
   };
-  return instancePromise<R, T>(options);
+  return servicePromise<R, T>(options);
 }

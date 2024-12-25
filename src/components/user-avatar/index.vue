@@ -5,7 +5,7 @@
       flex items-center h-48px px-12px cursor-pointer
       class="transition-all-300"
     >
-      <a-avatar :src="avatar" mr-8px size="small" />
+      <a-avatar :src="avatar" mr-8px size="small" style="background-color: beige" />
       <span class="anticon">{{ nickname }}</span>
     </span>
     <template #overlay>

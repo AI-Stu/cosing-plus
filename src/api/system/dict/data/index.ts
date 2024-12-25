@@ -1,21 +1,20 @@
-import type { AxiosPromise } from 'axios';
 import type { DictDataForm, DictDataQuery, DictDataVO } from './types';
 
 const BASE_API = import.meta.env.VITE_APP_BASE_API_DEV;
 
 // 根据字典类型查询字典数据信息
-export function getDicts(dictType: string): AxiosPromise<DictDataVO[]> {
-  return useGet<DictDataVO[]>(`${BASE_API}/system/dict/data/type/${dictType}`) as AxiosPromise<DictDataVO[]>;
+export function getDicts(dictType: string) {
+  return useGet<DictDataVO[]>(`${BASE_API}/system/dict/data/type/${dictType}`);
 }
 
 // 查询字典数据列表
-export function listData(query: DictDataQuery): AxiosPromise<DictDataVO[]> {
-  return useGet<DictDataVO[]>(`${BASE_API}/system/dict/data/list`, query) as AxiosPromise<DictDataVO[]>;
+export function listData(query: DictDataQuery) {
+  return useGet<DictDataVO[]>(`${BASE_API}/system/dict/data/list`, query);
 }
 
 // 查询字典数据详细
-export function getData(dictCode: string | number): AxiosPromise<DictDataVO> {
-  return useGet<DictDataVO>(`${BASE_API}/system/dict/data/${dictCode}`) as AxiosPromise<DictDataVO>;
+export function getData(dictCode: string | number) {
+  return useGet<DictDataVO>(`${BASE_API}/system/dict/data/${dictCode}`);
 }
 
 // 新增字典数据

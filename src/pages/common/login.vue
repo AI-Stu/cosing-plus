@@ -50,20 +50,20 @@
               {{ t('pages.login.tips') }}
             </div>
             <a-form ref="formRef" :model="loginModel">
-              <a-tabs v-model:active-key="loginModel.type" centered>
-                <a-tab-pane key="account" :tab="t('pages.login.accountLogin.tab')" />
-                <a-tab-pane key="mobile" :tab="t('pages.login.phoneLogin.tab')" />
+              <a-tabs v-model:active-key="loginModel.grantType" centered>
+                <a-tab-pane key="password" :tab="t('pages.login.accountLogin.tab')" />
+                <a-tab-pane key="sms" :tab="t('pages.login.phoneLogin.tab')" />
               </a-tabs>
               <!-- 判断是否存在error -->
               <a-alert
-                v-if="errorAlert && loginModel.type === 'account'" mb-24px
+                v-if="errorAlert && loginModel.grantType === 'password'" mb-24px
                 :message="t('pages.login.accountLogin.errorMessage')" type="error" show-icon
               />
               <a-alert
-                v-if="errorAlert && loginModel.type === 'mobile'" mb-24px
+                v-if="errorAlert && loginModel.grantType === 'sms'" mb-24px
                 :message="t('pages.login.phoneLogin.errorMessage')" type="error" show-icon
               />
-              <template v-if="loginModel.type === 'account'">
+              <template v-if="loginModel.grantType === 'password'">
                 <a-form-item name="username" :rules="[{ required: true, message: t('pages.login.username.required') }]">
                   <a-input
                     v-model:value="loginModel.username" allow-clear
@@ -86,9 +86,9 @@
                   </a-input-password>
                 </a-form-item>
               </template>
-              <template v-if="loginModel.type === 'mobile'">
+              <template v-if="loginModel.grantType === 'sms'">
                 <a-form-item
-                  name="mobile" :rules="[
+                  name="phone" :rules="[
                     { required: true, message: t('pages.login.phoneNumber.required') },
                     {
                       pattern: /^(86)?1([38][0-9]|4[579]|5[0-35-9]|6[6]|7[0135678]|9[89])[0-9]{8}$/,
@@ -97,7 +97,7 @@
                   ]"
                 >
                   <a-input
-                    v-model:value="loginModel.mobile" allow-clear
+                    v-model:value="loginModel.phone" allow-clear
                     :placeholder="t('pages.login.phoneNumber.placeholder')" size="large" @press-enter="submit"
                   >
                     <template #prefix>
@@ -175,9 +175,9 @@ import {
 import { delayTimer } from '@v-c/utils';
 import { AxiosError } from 'axios';
 import GlobalLayoutFooter from '@/layouts/components/global-footer/index.vue';
-import { loginApi } from '@/api/common/login';
+import { loginApi } from '@/api/system/login';
+import type { LoginAccountParams, LoginMobileParams } from '@/api/system/login';
 import { getQueryParam } from '@/utils/tools';
-import type { LoginMobileParams, LoginParams } from '@/api/common/login';
 import pageBubble from '@/utils/page-bubble';
 
 const message = useMessage();
@@ -187,11 +187,14 @@ const { layoutSetting } = storeToRefs(appStore);
 const router = useRouter();
 const token = useAuthorization();
 const loginModel = reactive({
-  username: undefined,
+  tenantId: '000000',
+  tenantType: '',
+  username: 'platform',
   password: undefined,
-  mobile: undefined,
+  phone: undefined,
   code: undefined,
-  type: 'account',
+  clientId: import.meta.env.VITE_APP_CLIENT_ID,
+  grantType: 'password' as 'social' | 'password' | 'sms',
   remember: true
 });
 const { t } = useI18nLocale();
@@ -214,7 +217,7 @@ const { counter, pause, reset, resume, isActive } = useInterval(1000, {
 async function getCode() {
   codeLoading.value = true;
   try {
-    await formRef.value.validate(['mobile']);
+    await formRef.value.validate(['phone']);
     setTimeout(() => {
       reset();
       resume();
@@ -231,23 +234,28 @@ async function submit() {
   submitLoading.value = true;
   try {
     await formRef.value?.validate();
-    let params: LoginParams | LoginMobileParams;
+    let params: LoginAccountParams | LoginMobileParams;
 
-    if (loginModel.type === 'account') {
+    if (loginModel.grantType === 'password') {
       params = {
         username: loginModel.username,
         password: loginModel.password
-      } as unknown as LoginParams;
+      } as unknown as LoginAccountParams;
     }
     else {
       params = {
-        mobile: loginModel.mobile,
-        code: loginModel.code,
-        type: 'mobile'
+        phone: loginModel.phone,
+        code: loginModel.code
       } as unknown as LoginMobileParams;
     }
-    const { data } = await loginApi(params);
-    token.value = data?.token;
+    const { data } = await loginApi({
+      ...params,
+      tenantId: loginModel.tenantId,
+      tenantType: loginModel.tenantType,
+      grantType: loginModel.grantType,
+      clientId: loginModel.clientId
+    });
+    token.value = data?.access_token;
     notification.success({
       message: '登录成功',
       description: '欢迎回来！',
