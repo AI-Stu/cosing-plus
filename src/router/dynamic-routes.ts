@@ -4,6 +4,34 @@ import { AccessEnum } from '@/utils/constant';
 
 export default [
   {
+    path: '/system',
+    redirect: '/system/dict',
+    name: 'Dashboard',
+    meta: {
+      title: '系统管理',
+      icon: 'SettingOutlined'
+    },
+    component: basicRouteMap.RouteView,
+    children: [
+      {
+        path: '/system/user',
+        name: 'SystemUser',
+        component: () => import('@/pages/system/user/index.vue'),
+        meta: {
+          title: '用户管理'
+        }
+      },
+      {
+        path: '/system/dict',
+        name: 'SystemDict',
+        component: () => import('@/pages/system/dict/index.vue'),
+        meta: {
+          title: '字典管理'
+        }
+      }
+    ]
+  },
+  {
     path: '/dashboard',
     redirect: '/dashboard/analysis',
     name: 'Dashboard',

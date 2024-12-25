@@ -1,3 +1,5 @@
+const BASE_API = import.meta.env.VITE_APP_BASE_API;
+
 interface CrudTableModel {
   id?: number
   /**
@@ -17,11 +19,11 @@ interface CrudTableModel {
 type CrudTableParams = Partial<Omit<CrudTableModel, 'id'>>
 
 export async function getListApi(params?: CrudTableParams) {
-  return usePost<CrudTableModel[]>('/list/crud-table', params);
+  return usePost<CrudTableModel[]>(`${BASE_API}/list/crud-table`, params);
 }
 
 export async function deleteApi(id: string | number) {
-  return useDelete(`/list/${id}`);
+  return useDelete(`${BASE_API}/list/${id}`);
 }
 
 export type{

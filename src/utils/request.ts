@@ -11,13 +11,14 @@ export interface ResponseBody<T = any> {
   msg: string
 }
 
-export interface RequestConfigExtra {
+export interface RequestConfigExtra<T = any> {
   token?: boolean
   customDev?: boolean
   loading?: boolean
+  extraData?: T
 }
 const instance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_API ?? '/',
+  baseURL: '',
   timeout: 60000,
   headers: { 'Content-Type': ContentTypeEnum.JSON }
 });
@@ -109,6 +110,12 @@ instance.interceptors.request.use(requestHandler);
 instance.interceptors.response.use(responseHandler, errorHandler);
 
 export default instance;
+
+/**
+ * 实例化请求
+ * @param options
+ * @returns Promise
+ */
 function instancePromise<R = any, T = any>(options: AxiosOptions<T> & RequestConfigExtra): Promise<ResponseBody<R>> {
   const { loading } = options;
   return new Promise((resolve, reject) => {
@@ -123,7 +130,19 @@ function instancePromise<R = any, T = any>(options: AxiosOptions<T> & RequestCon
     });
   });
 }
-export function useGet< R = any, T = any>(url: string, params?: T, config?: AxiosRequestConfig & RequestConfigExtra): Promise<ResponseBody<R>> {
+
+/**
+ * get 请求
+ * @param url
+ * @param params
+ * @param config
+ * @returns Promise
+ */
+export function useGet< R = any, T = any>(
+  url: string,
+  params?: T,
+  config?: AxiosRequestConfig & RequestConfigExtra
+): Promise<ResponseBody<R>> {
   const options = {
     url,
     params,
@@ -133,7 +152,18 @@ export function useGet< R = any, T = any>(url: string, params?: T, config?: Axio
   return instancePromise< R, T >(options);
 }
 
-export function usePost< R = any, T = any>(url: string, data?: T, config?: AxiosRequestConfig & RequestConfigExtra): Promise<ResponseBody<R>> {
+/**
+ * Post 请求
+ * @param url
+ * @param data
+ * @param config
+ * @returns Promise
+ */
+export function usePost< R = any, T = any>(
+  url: string,
+  data?: T,
+  config?: AxiosRequestConfig & RequestConfigExtra
+): Promise<ResponseBody<R>> {
   const options = {
     url,
     data,
@@ -143,7 +173,18 @@ export function usePost< R = any, T = any>(url: string, data?: T, config?: Axios
   return instancePromise< R, T >(options);
 }
 
-export function usePut< R = any, T = any>(url: string, data?: T, config?: AxiosRequestConfig & RequestConfigExtra): Promise<ResponseBody<R>> {
+/**
+ * Put 请求
+ * @param url
+ * @param data
+ * @param config
+ * @returns Promise
+ */
+export function usePut< R = any, T = any>(
+  url: string,
+  data?: T,
+  config?: AxiosRequestConfig & RequestConfigExtra
+): Promise<ResponseBody<R>> {
   const options = {
     url,
     data,
@@ -153,7 +194,18 @@ export function usePut< R = any, T = any>(url: string, data?: T, config?: AxiosR
   return instancePromise<R, T>(options);
 }
 
-export function useDelete< R = any, T = any>(url: string, data?: T, config?: AxiosRequestConfig & RequestConfigExtra): Promise<ResponseBody<R>> {
+/**
+ * Delete 请求
+ * @param url
+ * @param data
+ * @param config
+ * @returns Promise
+ */
+export function useDelete< R = any, T = any>(
+  url: string,
+  data?: T,
+  config?: AxiosRequestConfig & RequestConfigExtra
+): Promise<ResponseBody<R>> {
   const options = {
     url,
     data,

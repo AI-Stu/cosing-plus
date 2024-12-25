@@ -13,6 +13,138 @@ const menuData = [
     locale: 'menu.dashboard.analysis'
   },
   {
+    id: 90,
+    parentId: null,
+    title: '系统管理',
+    icon: 'SettingOutlined',
+    component: 'RouteView',
+    redirect: '/system/dict',
+    path: '/system',
+    name: 'System',
+    locale: 'menu.system'
+  },
+  {
+    id: 91,
+    parentId: 90,
+    title: '用户管理',
+    component: '/system/user',
+    path: '/system/user',
+    name: 'SystemUser',
+    keepAlive: true,
+    locale: 'menu.system.user'
+  },
+  {
+    id: 92,
+    parentId: 90,
+    title: '角色管理',
+    component: '/system/role',
+    path: '/system/role',
+    name: 'SystemRole',
+    keepAlive: true,
+    locale: 'menu.system.role'
+  },
+  {
+    id: 93,
+    parentId: 90,
+    title: '部门管理',
+    component: '/system/dept',
+    path: '/system/dept',
+    name: 'SystemDept',
+    keepAlive: true,
+    locale: 'menu.system.dept'
+  },
+  {
+    id: 94,
+    parentId: 90,
+    title: '岗位管理',
+    component: '/system/post',
+    path: '/system/post',
+    name: 'SystemPost',
+    keepAlive: true,
+    locale: 'menu.system.post'
+  },
+  {
+    id: 95,
+    parentId: 90,
+    title: '菜单管理',
+    component: '/system/menu',
+    path: '/system/menu',
+    name: 'SystemMenu',
+    keepAlive: true,
+    locale: 'menu.system.menu'
+  },
+  {
+    id: 96,
+    parentId: 90,
+    title: '字典管理',
+    component: '/system/dict',
+    path: '/system/dict',
+    name: 'SystemDict',
+    keepAlive: true,
+    locale: 'menu.system.dict'
+  },
+  {
+    id: 97,
+    parentId: 90,
+    title: '参数管理',
+    component: '/system/config',
+    path: '/system/config',
+    name: 'SystemConfig',
+    keepAlive: true,
+    locale: 'menu.system.config'
+  },
+  {
+    id: 98,
+    parentId: 90,
+    title: '通知公告',
+    component: '/system/notice',
+    path: '/system/notice',
+    name: 'SystemNotice',
+    keepAlive: true,
+    locale: 'menu.system.notice'
+  },
+  {
+    id: 99,
+    parentId: 90,
+    title: '日志管理',
+    component: '/system/log',
+    path: '/system/log',
+    name: 'SystemLog',
+    keepAlive: true,
+    locale: 'menu.system.log'
+  },
+  {
+    id: 991,
+    parentId: 99,
+    title: '操作日志',
+    component: '/system/log/operate',
+    path: '/system/log/operate',
+    name: 'SystemOperateLog',
+    keepAlive: true,
+    locale: 'menu.system.log.operate'
+  },
+  {
+    id: 992,
+    parentId: 99,
+    title: '登录日志',
+    component: '/system/log/login',
+    path: '/system/log/login',
+    name: 'SystemLoginLog',
+    keepAlive: true,
+    locale: 'menu.system.log.login'
+  },
+  {
+    id: 100,
+    parentId: 90,
+    title: '登录日志',
+    component: '/system/client',
+    path: '/system/log/client',
+    name: 'SystemClient',
+    keepAlive: true,
+    locale: 'menu.system.client'
+  },
+
+  {
     id: 1,
     parentId: null,
     title: '仪表盘',

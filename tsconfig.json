@@ -6,12 +6,12 @@
     // paths
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "~#/*": ["src/enums/*"]
+      "@/*": ["./src/*"],
+      "~#/*": ["./src/enums/*"]
     },
     /* Bundler mode */
     "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts"]
+  "include": ["./src/**/*.ts", "./src/**/*.d.ts", "./src/**/*.tsx", "./src/**/*.vue", "./types/**/*.d.ts"]
   // "references": [{ "path": "./tsconfig.node.json" }]
 }

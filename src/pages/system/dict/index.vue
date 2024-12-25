@@ -4,18 +4,18 @@
       <a-form :label-col="{ span: 7 }" :model="formModel">
         <a-row :gutter="[15, 0]">
           <a-col :span="8">
-            <a-form-item name="name" label="字典名称">
-              <a-input v-model:value="formModel.name" placeholder="请输入字典名称" clearable @keyup.enter="onSearch" />
+            <a-form-item name="name" label="规则名称">
+              <a-input v-model:value="formModel.name" />
             </a-form-item>
           </a-col>
           <a-col :span="8">
-            <a-form-item name="desc" label="字典类型">
-              <a-input v-model:value="formModel.desc" placeholder="请输入字典类型" clearable @keyup.enter="onSearch" />
+            <a-form-item name="desc" label="描述">
+              <a-input v-model:value="formModel.desc" />
             </a-form-item>
           </a-col>
           <a-col :span="8">
-            <a-form-item name="updatedAt" label="创建时间">
-              <a-range-picker v-model:value="formModel.updatedAt" style="width: 100%" format="YYYY-MM-DD" />
+            <a-form-item name="updatedAt" label="上次调用时间">
+              <a-date-picker v-model:value="formModel.updatedAt" style="width: 100%" />
             </a-form-item>
           </a-col>
         </a-row>
@@ -157,11 +157,11 @@ const columns = shallowRef([
     dataIndex: 'id'
   },
   {
-    title: '字典名称',
+    title: '规则名称',
     dataIndex: 'name'
   },
   {
-    title: '字典类型',
+    title: '描述',
     dataIndex: 'desc'
   },
   {

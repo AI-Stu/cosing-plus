@@ -1,5 +1,7 @@
 import type { STATUS } from '@/utils/constant';
 
+const BASE_API = import.meta.env.VITE_APP_BASE_API;
+
 interface ConsultTableModel {
   id: number
   /**
@@ -32,11 +34,11 @@ interface ConsultTableModel {
 type ConsultTableParams = Partial<Omit<ConsultTableModel, 'id'>>
 
 export async function getListApi(params?: ConsultTableParams) {
-  return usePost<ConsultTableModel[]>('/list/consult-list', params);
+  return usePost<ConsultTableModel[]>(`${BASE_API}/list/consult-list`, params);
 }
 
 export async function deleteApi(id: string | number) {
-  return useDelete(`/list/${id}`);
+  return useDelete(`${BASE_API}/list/${id}`);
 }
 
 export type{

@@ -1,3 +1,4 @@
+const BASE_API = import.meta.env.VITE_APP_BASE_API;
 export interface UserInfo {
   id: number | string
   username: string
@@ -7,5 +8,5 @@ export interface UserInfo {
 }
 
 export function getUserInfoApi() {
-  return useGet<UserInfo>('/user/info');
+  return useGet<UserInfo>(`${BASE_API}/user/info`);
 }
