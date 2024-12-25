@@ -4,9 +4,9 @@ import { AxiosLoading } from './loading';
 import { decryptBase64, decryptWithAes, encryptBase64, encryptWithAes, generateAesKey } from '@/composables/crypto';
 import { decrypt, encrypt } from '@/composables/jsencrypt';
 import { STORAGE_AUTHORIZE_KEY, useAuthorization, useSessionRequest } from '@/composables/authorization';
-import { ContentTypeEnum, RequestEnum } from '~#/http-enum';
+import { ContentTypeEnum, RequestEnum } from '@/enums/HttpEnum';
 import router from '@/router';
-import { ErrorCodeEnum, HttpStatusEnum } from '@/enums/resp-enum';
+import { ErrorCodeEnum, HttpStatusEnum } from '@/enums/RespEnum';
 
 export interface ResponseBody<T = any> {
   code: number

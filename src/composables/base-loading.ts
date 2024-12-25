@@ -1,4 +1,4 @@
-import type { LoadingEnum } from '~#/loading-enum';
+import type { LoadingEnum } from '@/enums/LoadingEnum';
 import baseLoading from '@/components/base-loading/index.vue';
 
 interface LoadingType {

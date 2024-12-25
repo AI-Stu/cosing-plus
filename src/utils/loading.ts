@@ -1,5 +1,5 @@
+import { LoadingEnum } from '@/enums/LoadingEnum';
 import { useLoading } from '@/composables/base-loading';
-import { LoadingEnum } from '~#/loading-enum';
 
 const loading = useLoading({
   spin: LoadingEnum.CHASE,
