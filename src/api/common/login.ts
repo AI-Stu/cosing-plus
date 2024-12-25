@@ -21,7 +21,7 @@ export function loginApi(params: LoginParams | LoginMobileParams) {
     // 设置为false的时候不会携带token
     token: false,
     // 开发模式下使用自定义的接口
-    customDev: true,
+    customDev: false,
     // 是否开启全局请求loading
     loading: true
   });
