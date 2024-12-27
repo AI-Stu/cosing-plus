@@ -28,14 +28,6 @@ export default defineConfig(async (config) => {
             find: 'dayjs',
             replacement: 'dayjs/esm'
           },
-          // {
-          //   find: /^dayjs\/locale/,
-          //   replacement: 'dayjs/esm/locale'
-          // },
-          // {
-          //   find: /^dayjs\/plugin/,
-          //   replacement: 'dayjs/esm/plugin'
-          // },
           {
             find: 'vue-i18n',
             replacement: mode === 'development' ? 'vue-i18n/dist/vue-i18n.esm-browser.js' : 'vue-i18n/dist/vue-i18n.esm-bundler.js'

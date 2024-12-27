@@ -143,7 +143,7 @@ function responseHandler(response: any): ResponseBody<any> | AxiosResponse<any> 
     description: msg,
     duration: 3
   });
-  if (code === HttpStatusEnum.UNAUTHORIZED) {
+  if ([HttpStatusEnum.UNAUTHORIZED, HttpStatusEnum.UNAUTHORIZED_TENANT].includes(code)) {
     /**
      * 这里处理清空用户信息和token的逻辑，后续扩展
      */
