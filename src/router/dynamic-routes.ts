@@ -32,6 +32,42 @@ export default [
     ]
   },
   {
+    path: '/projectManagement',
+    redirect: '/projectManagement/project',
+    name: 'projectManagement',
+    meta: {
+      title: '项目管理',
+      icon: 'SettingOutlined'
+    },
+    component: basicRouteMap.RouteView,
+    children: [
+      {
+        path: '/projectManagement/sportsEvtent',
+        name: 'sportsEvtent',
+        component: () => import('@/pages/projectManagement/sportsEvtent/index.vue'),
+        meta: {
+          title: '项目管理'
+        }
+      },
+      {
+        path: '/projectManagement/projectData',
+        name: 'projectData',
+        component: () => import('@/pages/projectManagement/projectData/index.vue'),
+        meta: {
+          title: '项目数据管理'
+        }
+      },
+      {
+        path: '/projectManagement/oneMapDirectory',
+        name: 'oneMapDirectory',
+        component: () => import('@/pages/projectManagement/projectData/index.vue'),
+        meta: {
+          title: '一张图目录管理'
+        }
+      }
+    ]
+  },
+  {
     path: '/dashboard',
     redirect: '/dashboard/analysis',
     name: 'Dashboard',

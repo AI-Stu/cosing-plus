@@ -143,7 +143,27 @@ const menuData = [
     keepAlive: true,
     locale: 'menu.system.client'
   },
-
+  {
+    id: 80,
+    parentId: null,
+    title: '项目管理',
+    icon: 'FormOutlined',
+    component: 'RouteView',
+    redirect: '/projectManagement/sportsEvtent',
+    path: '/projectManagement',
+    name: 'projectManagement',
+    locale: '项目管理'
+  },
+  {
+    id: 810,
+    parentId: 80,
+    title: '项目管理',
+    component: '/projectManagement/sportsEvtent',
+    path: '/projectManagement/sportsEvtent',
+    name: 'sportsEvtent',
+    keepAlive: true,
+    locale: '项目管理'
+  },
   {
     id: 1,
     parentId: null,
