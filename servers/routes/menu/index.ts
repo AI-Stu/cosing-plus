@@ -151,8 +151,8 @@ const menuData = [
     component: 'RouteView',
     redirect: '/projectManagement/sportsEvtent',
     path: '/projectManagement',
-    name: 'projectManagement',
-    locale: '项目管理'
+    name: 'ProjectManagement',
+    locale: 'menu.ProjectManagement'
   },
   {
     id: 810,
@@ -160,9 +160,8 @@ const menuData = [
     title: '项目管理',
     component: '/projectManagement/sportsEvtent',
     path: '/projectManagement/sportsEvtent',
-    name: 'sportsEvtent',
-    keepAlive: true,
-    locale: '项目管理'
+    name: 'SportsEvtent',
+    locale: 'menu.ProjectManagement.SportsEvtent'
   },
   {
     id: 1,

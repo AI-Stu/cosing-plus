@@ -98,6 +98,8 @@ export default {
   'menu.system.log.login': '登录日志',
   'menu.system.client': '客户端管理',
 
+  'menu.ProjectManagement': '项目管理',
+  'menu.ProjectManagement.SportsEvtent': '项目管理',
   'menu.form': '表单页',
   'menu.form.basic-form': '基础表单',
   'menu.form.step-form': '分步表单',

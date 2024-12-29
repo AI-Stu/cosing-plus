@@ -97,6 +97,8 @@ export default {
   'menu.system.log.operate': 'OperateLog',
   'menu.system.log.login': 'LoginLog',
   'menu.system.client': 'Client',
+  'menu.ProjectManagement': 'ProjectManagement',
+  'menu.ProjectManagement.SportsEvtent': 'SportsEvtent',
   'menu.form': 'Form',
   'menu.form.basic-form': 'Basic Form',
   'menu.form.step-form': 'Step Form',

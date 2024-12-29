@@ -5,43 +5,89 @@
       :label-col="labelCol" :wrapper-col="wrapperCol"
     >
       <a-form-item
-        label="付款账户"
-        name="paymentAccount"
-        :rules="[{ required: true, message: '付款账户必须填写' }]"
+        label="项目编号"
+        name="xmbh"
+        :rules="[{ required: true, message: '项目编号必须填写' }]"
+      >
+        <a-input
+          v-model:value="formState.xmbh" placeholder="请输入项目编号"
+        />
+      </a-form-item>
+      <a-form-item
+        label="项目名称"
+        name="xmmc"
+        :rules="[{ required: true, message: '项目名称必须填写' }]"
+      >
+        <a-input
+          v-model:value="formState.xmmc" placeholder="请输入项目名称"
+        />
+      </a-form-item>
+      <a-form-item
+        label="委托单位"
+        name="unit"
+        :rules="[{ required: true, message: '委托单位必须填写' }]"
+      >
+        <a-input v-model:value="formState.unit" placeholder="请输入委托单位" />
+      </a-form-item>
+      <a-form-item
+        label="所属区域"
+        name="region"
+        :rules="[{ required: true, message: '所属区域必须选择' }]"
       >
         <a-select
-          v-model:value="formState.paymentAccount"
-          placeholder="ant-design@alipay.com"
+          v-model:value="formState.region"
+          placeholder="请选择所属区域"
         >
           <a-select-option value="1">
-            antdv@aibayanyu.com
+            湖北
           </a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item
-        label="收款账户"
-        name="collectAccount"
-        :rules="[{ required: true, message: '收款账户必须填写' }]"
+        label="签订时间"
+        name="signdata"
+        :rules="[{ required: true, message: '签订时间必须输入' }]"
       >
-        <a-input
-          v-model:value="formState.collectAccount"
-        />
+        <a-date-picker v-model:value="formState.signdata" :format="dateFormat" />
       </a-form-item>
       <a-form-item
-        label="收款人姓名"
-        name="name"
-        :rules="[{ required: true, message: '收款人名称必须核对' }]"
+        label="竣工时间"
+        name="jgsj"
+        :rules="[{ required: true, message: '竣工时间必须输入' }]"
       >
-        <a-input v-model:value="formState.name" />
+        <a-date-picker v-model:value="formState.jgsj" :format="dateFormat" />
       </a-form-item>
       <a-form-item
-        label="转账金额"
-        name="amount"
-        :rules="[{ required: true, message: '转账金额必须填写' }]"
+        label="是否竣工" name="isjg"
+        :rules="[{ required: true, message: '是否竣工必须选择' }]"
       >
-        <a-input v-model:value="formState.amount" prefix="￥" />
+        <a-switch v-model:checked="formState.isjg" />
+      </a-form-item>
+      <a-form-item
+        label="项目地址"
+        name="xmdz"
+        :rules="[{ required: true, message: '项目地址必须填写' }]"
+      >
+        <a-input v-model:value="formState.xmdz" placeholder="请选择项目地址">
+          <template #suffix>
+            <AimOutlined style="color: rgba(0, 0, 0, 0.45)" />
+          </template>
+        </a-input>
+      </a-form-item>
+      <a-form-item label="经纬度">
+        <div class="flex">
+          <a-input
+            v-model:value="longitude" placeholder="请输入经度" style="margin-right:5px;"
+          />
+          <a-input
+            v-model:value="latitude" placeholder="请输入纬度"
+          />
+        </div>
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
+        <a-button style="margin-right:10px;" @click="reset">
+          重置
+        </a-button>
         <a-button type="primary" @click="nextStep">
           下一步
         </a-button>
@@ -52,33 +98,49 @@
       <h3>
         说明
       </h3>
-      <h4>转账到支付宝账户</h4>
-      <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
-      <h4>转账到银行卡</h4>
-      <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
+      <h4>经纬度一定要录入，后续时空化处理。</h4>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { FormInstance } from 'ant-design-vue';
+import { AimOutlined } from '@ant-design/icons-vue';
+import dayjs from 'dayjs';
+import { reactive, ref } from 'vue';
 
 const emit = defineEmits(['nextStep']);
+const dateFormat = 'YYYY/MM/DD'; // 日期格式
 const formRef = ref<FormInstance>();
 const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
 const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 
+const value1 = ref(dayjs('2015/01/01', dateFormat));
+const value2 = ref(dayjs('2015/01/01', dateFormat));
+
 interface FirstFormState {
-  paymentAccount: string
-  collectAccount: string
-  name: string
-  amount: number | undefined
+  xmbh: string
+  xmmc: string
+  unit: string
+  region: string
+  signdata: string
+  jgsj: string
+  isjg: boolean
+  xmdz: string
+  longitude: string
+  latitude: string
 }
 const formState = reactive<FirstFormState>({
-  paymentAccount: '',
-  collectAccount: 'test@example.com',
-  name: 'Kirk Lin',
-  amount: 1000000
+  xmbh: '11123',
+  xmmc: '水立方项目',
+  unit: '湖北华强有限公司',
+  region: '1',
+  signdata: '',
+  jgsj: '',
+  isjg: true,
+  xmdz: '华强北',
+  longitude: '',
+  latitude: ''
 });
 async function nextStep() {
   try {
@@ -89,6 +151,9 @@ async function nextStep() {
     console.log('Failed:', errorInfo);
   }
 }
+
+// 重置
+function reset() {}
 </script>
 
 <style lang="less" scoped>

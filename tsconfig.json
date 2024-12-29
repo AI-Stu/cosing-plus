@@ -12,6 +12,6 @@
     /* Bundler mode */
     "allowImportingTsExtensions": true
   },
+  // "references": [{ "path": "./tsconfig.node.json" }],
   "include": ["./src/**/*.ts", "./src/**/*.d.ts", "./src/**/*.tsx", "./src/**/*.vue", "./types/**/*.d.ts"]
-  // "references": [{ "path": "./tsconfig.node.json" }]
 }

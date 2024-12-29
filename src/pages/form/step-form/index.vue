@@ -1,27 +1,25 @@
 <template>
-  <page-container>
-    <template #content>
-      将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。
-    </template>
-    <a-card :bordered="false">
-      <a-steps class="steps" :current="state.currentTab">
-        <a-step title="填写转账信息" />
-        <a-step title="确认转账信息" />
-        <a-step title="完成" />
-      </a-steps>
-      <div class="content">
-        <Step1 v-if="state.currentTab === 0" @next-step="nextStep" />
-        <Step2 v-if="state.currentTab === 1" @next-step="nextStep" @prev-step="prevStep" />
-        <Step3 v-if="state.currentTab === 2" @prevs-step="prevStep" @finish="finish" />
-      </div>
-    </a-card>
-  </page-container>
+  <a-card :bordered="false">
+    <a-steps class="steps" :current="state.currentTab">
+      <a-step title="填写项目信息" />
+      <a-step title="选择归档数据清单" />
+      <a-step title="挂接服务数据" />
+      <a-step title="完成" />
+    </a-steps>
+    <div class="content">
+      <Step1 v-if="state.currentTab === 0" @next-step="nextStep" />
+      <Step2 v-if="state.currentTab === 1" @next-step="nextStep" @prev-step="prevStep" />
+      <Step3 v-if="state.currentTab === 2" @next-step="nextStep" @prev-step="prevStep" />
+      <Step4 v-if="state.currentTab === 3" @prevs-step="prevStep" @finish="finish" />
+    </div>
+  </a-card>
 </template>
 
 <script setup lang="ts">
 import Step1 from './components/step1.vue';
 import Step2 from './components/step2.vue';
 import Step3 from './components/step3.vue';
+import Step4 from './components/step4.vue';
 
 defineOptions({
   name: 'StepForm'

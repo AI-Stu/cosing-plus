@@ -1,77 +1,99 @@
 <template>
   <div>
-    <a-form>
-      <a-result title="操作成功" :is-success="true" sub-title="预计两小时内到账" style="max-width: 560px; margin: 40px auto 0;">
-        <div class="information">
-          <a-row>
-            <a-col :sm="8" :xs="24">
-              付款账户：
-            </a-col>
-            <a-col :sm="16" :xs="24">
-              antdv@aibayanyu.com
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col :sm="8" :xs="24">
-              收款账户：
-            </a-col>
-            <a-col :sm="16" :xs="24">
-              test@example.com
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col :sm="8" :xs="24">
-              收款人姓名：
-            </a-col>
-            <a-col :sm="16" :xs="24">
-              Kirk Lin
-            </a-col>
-          </a-row>
-          <a-row>
-            <a-col :sm="8" :xs="24">
-              转账金额：
-            </a-col>
-            <a-col :sm="16" :xs="24">
-              <span class="money">1,000,000</span> 元
-            </a-col>
-          </a-row>
-        </div>
-        <template #extra>
-          <a-button type="primary" @click="finish">
-            再转一笔
-          </a-button>
-          <a-button style="margin-left: 8px" @click="toOrderList">
-            查看账单
-          </a-button>
-        </template>
-      </a-result>
+    <a-form ref="formRef" :model="formState" style="max-width: 500px; margin: 40px auto 0;">
+      <a-alert
+        :closable="true"
+        message="确认转账后，资金将直接打入对方账户，无法退回。"
+        style="margin-bottom: 24px;"
+      />
+      <a-form-item
+        label="付款账户"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+        class="stepFormText"
+      >
+        antdv@aibayanyu.com
+      </a-form-item>
+      <a-form-item
+        label="收款账户"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+        class="stepFormText"
+      >
+        test@example.com
+      </a-form-item>
+      <a-form-item
+        label="收款人姓名"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+        class="stepFormText"
+      >
+        Kirk Lin
+      </a-form-item>
+      <a-form-item
+        label="转账金额"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+        class="stepFormText"
+      >
+        ￥ 1,000,000.00
+      </a-form-item>
+      <a-divider />
+      <a-form-item
+        label="支付密码"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+        class="stepFormText"
+        name="paymentPassword"
+        :rules="[{ required: true, message: '需要支付密码才能进行支付' }]"
+      >
+        <a-input
+          v-model:value="formState.paymentPassword"
+          type="password"
+          style="width: 80%;"
+        />
+      </a-form-item>
+      <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
+        <a-button type="primary" @click="nextStep">
+          提交
+        </a-button>
+        <a-button style="margin-left: 8px" @click="prevStep">
+          上一步
+        </a-button>
+      </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['finish']);
-const router = useRouter();
-function finish() {
-  emit('finish');
+import type { FormInstance } from 'ant-design-vue';
+
+const emit = defineEmits(['prevStep', 'nextStep']);
+const formRef = ref<FormInstance>();
+const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
+const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
+
+const formState = reactive({
+  paymentPassword: '123456'
+});
+function nextStep() {
+  formRef.value?.validateFields().then(() => {
+    emit('nextStep');
+  });
 }
-function toOrderList() {
-  router.push('/profile/advanced');
+
+function prevStep() {
+  emit('prevStep');
 }
 </script>
 
 <style lang="less" scoped>
-  .information {
-    line-height: 22px;
+  .stepFormText {
+    margin-bottom: 24px;
 
-    .ant-row:not(:last-child) {
-      margin-bottom: 24px;
+    .ant-form-item-label,
+    .ant-form-item-control {
+      line-height: 22px;
     }
-  }
-  .money {
-    font-family: "Helvetica Neue",sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 14px;
   }
 </style>

@@ -1,99 +1,82 @@
 <template>
   <div>
-    <a-form ref="formRef" :model="formState" style="max-width: 500px; margin: 40px auto 0;">
-      <a-alert
-        :closable="true"
-        message="确认转账后，资金将直接打入对方账户，无法退回。"
-        style="margin-bottom: 24px;"
-      />
-      <a-form-item
-        label="付款账户"
-        :label-col="labelCol"
-        :wrapper-col="wrapperCol"
-        class="stepFormText"
-      >
-        antdv@aibayanyu.com
-      </a-form-item>
-      <a-form-item
-        label="收款账户"
-        :label-col="labelCol"
-        :wrapper-col="wrapperCol"
-        class="stepFormText"
-      >
-        test@example.com
-      </a-form-item>
-      <a-form-item
-        label="收款人姓名"
-        :label-col="labelCol"
-        :wrapper-col="wrapperCol"
-        class="stepFormText"
-      >
-        Kirk Lin
-      </a-form-item>
-      <a-form-item
-        label="转账金额"
-        :label-col="labelCol"
-        :wrapper-col="wrapperCol"
-        class="stepFormText"
-      >
-        ￥ 1,000,000.00
-      </a-form-item>
-      <a-divider />
-      <a-form-item
-        label="支付密码"
-        :label-col="labelCol"
-        :wrapper-col="wrapperCol"
-        class="stepFormText"
-        name="paymentPassword"
-        :rules="[{ required: true, message: '需要支付密码才能进行支付' }]"
-      >
-        <a-input
-          v-model:value="formState.paymentPassword"
-          type="password"
-          style="width: 80%;"
-        />
-      </a-form-item>
-      <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
-        <a-button type="primary" @click="nextStep">
-          提交
+    <a-alert
+      v-if="visible"
+      type="info"
+      closable
+      show-icon
+      style="width:600px;margin: 0 auto;"
+      :after-close="handleClose"
+    >
+      <template #message>
+        <div>11111111111</div>
+      </template>
+      <template #action>
+        <a-button size="small" type="link">
+          取消选择
         </a-button>
-        <a-button style="margin-left: 8px" @click="prevStep">
-          上一步
-        </a-button>
-      </a-form-item>
-    </a-form>
+      </template>
+    </a-alert>
+    <a-button size="small" type="primary">
+      添加
+    </a-button>
+    <div style="float:right;">
+      <a-button type="primary" @click="nextStep">
+        下一步
+      </a-button>
+      <a-button style="margin-left: 8px" @click="prevStep">
+        上一步
+      </a-button>
+    </div>
+    <a-divider />
+    <div class="step-form-style-desc ant-steps-item-title">
+      <h3>
+        说明
+      </h3>
+      <h4>数据标注来自数据标准管理，有补充请联系管理员。</h4>
+      <h4>附件除数据标准内已有选项，缺失项可以自行添加。</h4>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { FormInstance } from 'ant-design-vue';
+import { ref } from 'vue';
 
 const emit = defineEmits(['prevStep', 'nextStep']);
-const formRef = ref<FormInstance>();
-const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
-const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 
-const formState = reactive({
-  paymentPassword: '123456'
-});
-function nextStep() {
-  formRef.value?.validateFields().then(() => {
-    emit('nextStep');
-  });
+const visible = ref<boolean>(true);
+function handleClose() {
+  visible.value = false;
 }
 
 function prevStep() {
   emit('prevStep');
 }
+async function nextStep() {
+  emit('nextStep');
+}
 </script>
 
 <style lang="less" scoped>
-  .stepFormText {
-    margin-bottom: 24px;
+.step-form-style-desc {
+  padding: 0 56px;
 
-    .ant-form-item-label,
-    .ant-form-item-control {
-      line-height: 22px;
-    }
+  h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 32px;
   }
+
+  h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 22px;
+  }
+}
 </style>
