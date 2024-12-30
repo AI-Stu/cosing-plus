@@ -32,24 +32,44 @@
       </a-form>
     </a-card>
 
-    <a-card title="增删改查表格">
-      <template #extra>
+    <a-card>
+      <!-- 左 -->
+      <template #title>
         <a-space size="middle">
           <a-button type="primary" @click="handleAdd">
-            <template #icon>
-              <PlusOutlined />
-            </template>
             新增
+          </a-button>
+
+          <a-button danger @click="handleDelete()">
+            删除
+          </a-button>
+
+          <a-button success @click="handleExport">
+            导出
           </a-button>
         </a-space>
       </template>
+      <template #extra>
+        <TableRightToolbar
+          v-model:filter-columns="filterColumns"
+          :columns="columns"
+          @size-change="(val: 'small' | 'middle' | 'large') => tableSize = val"
+          @reset-query="initQuery"
+        />
+      </template>
       <a-table
-        row-key="id" :row-selection="state.rowSelections" :loading="state.loading" :columns="columns"
-        :data-source="state.dataSource" :pagination="state.pagination"
+        row-key="id" :row-selection="state.rowSelections"
+        :loading="state.loading" :columns="filterColumns"
+        :data-source="state.dataSource"
+        :pagination="state.pagination"
+        :size="tableSize"
       >
         <template #bodyCell="scope">
           <template v-if="scope?.column?.dataIndex === 'action'">
-            <div flex gap-2>
+            <div flex>
+              <a-button type="link" @click="handleInfo(scope?.record as CrudTableModel)">
+                详情
+              </a-button>
               <a-button type="link" @click="handleEdit(scope?.record as CrudTableModel)">
                 编辑
               </a-button>
@@ -72,7 +92,6 @@
 </template>
 
 <script setup lang="ts">
-import { PlusOutlined } from '@ant-design/icons-vue';
 import CrudTableModal from './components/crud-table-modal.vue';
 import type { CrudTableModel } from '@/api/list/crud-table';
 import { deleteApi, getListApi } from '@/api/list/crud-table';
@@ -80,7 +99,7 @@ import { useTableQuery } from '@/composables/table-query';
 
 const message = useMessage();
 
-const columns = shallowRef([
+const columns = [
   {
     title: '名',
     dataIndex: 'name'
@@ -97,8 +116,9 @@ const columns = shallowRef([
     title: '操作',
     dataIndex: 'action'
   }
-]);
-
+];
+const filterColumns = ref(columns);
+const tableSize = ref<('small' | 'middle' | 'large')>('large');
 const { state, initQuery, resetQuery, query } = useTableQuery({
   queryApi: getListApi,
   queryParams: {
@@ -137,6 +157,11 @@ function handleAdd() {
 
 function handleEdit(record: CrudTableModel) {
   crudTableModal.value?.open(record);
+}
+
+/** 导出按钮操作 */
+function handleExport() {
+
 }
 </script>
 

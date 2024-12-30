@@ -12,6 +12,7 @@ import '@/router/router-guard';
 import 'ant-design-vue/dist/reset.css';
 import '@/assets/styles/reset.css';
 import 'uno.css';
+import { registerGlobComp } from '@/components/registerGlobComp';
 
 const pinia = createPinia();
 async function start() {
@@ -19,6 +20,8 @@ async function start() {
   app.use(pinia);
   await setupI18n(app);
   setupDirective(app);
+  // 注册基础全局组件
+  registerGlobComp(app);
   app.use(router);
   app.mount('#app');
   app.config.performance = true;

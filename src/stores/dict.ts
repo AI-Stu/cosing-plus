@@ -54,9 +54,11 @@ export const useDictStore = defineStore('dict', () => {
         }
         else {
           await getDicts(dictType).then((resp) => {
-            res.value[dictType] = resp.data.map(
-              (p): DictDataOption => ({ label: p.dictLabel, value: p.dictValue, tagType: p.listClass, tagClass: p.cssClass })
-            );
+            if (resp.data) {
+              res.value[dictType] = resp.data.map(
+                (p): DictDataOption => ({ label: p.dictLabel, value: p.dictValue, tagType: p.tagType, tagClass: p.tagClass })
+              );
+            }
             setDict(dictType, res.value[dictType] || []);
           });
         }

@@ -40,6 +40,10 @@ export enum HttpStatusEnum {
    */
   UNAUTHORIZED_TENANT = 11014,
   /**
+   * 认证失败
+   */
+  AUTHENTICATION_FAILED = 11016,
+  /**
    * 访问受限，授权过期
    */
   FORBIDDEN = 403,

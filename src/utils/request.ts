@@ -1,11 +1,12 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import { AxiosLoading } from './loading';
+import { tansParams } from './tools';
+import router from '@/router';
 import { decryptBase64, decryptWithAes, encryptBase64, encryptWithAes, generateAesKey } from '@/composables/crypto';
 import { decrypt, encrypt } from '@/composables/jsencrypt';
 import { STORAGE_AUTHORIZE_KEY, useAuthorization, useSessionRequest } from '@/composables/authorization';
 import { ContentTypeEnum, RequestEnum } from '@/enums/HttpEnum';
-import router from '@/router';
 import { ErrorCodeEnum, HttpStatusEnum } from '@/enums/RespEnum';
 
 export interface ResponseBody<T = any> {
@@ -42,6 +43,14 @@ const service: AxiosInstance = axios.create({
 });
 
 const axiosLoading = new AxiosLoading(); // 全局请求loading
+const message = useMessage();
+export function globalHeaders() {
+  const token = useAuthorization();
+  return {
+    Authorization: `Bearer ${token.value}`,
+    clientid: VITE_APP_CLIENT_ID
+  };
+}
 
 /**
  * 处理请求
@@ -143,7 +152,11 @@ function responseHandler(response: any): ResponseBody<any> | AxiosResponse<any> 
     description: msg,
     duration: 3
   });
-  if ([HttpStatusEnum.UNAUTHORIZED, HttpStatusEnum.UNAUTHORIZED_TENANT].includes(code)) {
+  if ([
+    HttpStatusEnum.UNAUTHORIZED,
+    HttpStatusEnum.UNAUTHORIZED_TENANT,
+    HttpStatusEnum.AUTHENTICATION_FAILED
+  ].includes(code)) {
     /**
      * 这里处理清空用户信息和token的逻辑，后续扩展
      */
@@ -281,4 +294,38 @@ export function useDelete< R = any, T = any>(
     ...config
   };
   return servicePromise<R, T>(options);
+}
+
+/**
+ * 通用下载方法
+ */
+export function useDownload(url: string, params: any, fileName: string) {
+  axiosLoading.addLoading();
+
+  return service.post(url, params, {
+    transformRequest: [
+      (params: any) => {
+        return tansParams(params);
+      }
+    ],
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    responseType: 'blob'
+  }).then(async (resp: any) => {
+    const isLogin = resp !== 'application/json';
+    if (isLogin) {
+      const blob = new Blob([resp]);
+      FileSaver.saveAs(blob, fileName);
+    }
+    else {
+      const resText = await resp.data.text();
+      const rspObj = JSON.parse(resText);
+      const errMsg = errorCode[rspObj.code] || rspObj.msg || errorCode.default;
+      message.error(errMsg);
+    }
+    axiosLoading.closeLoading();
+  }).catch((r: any) => {
+    console.error(r);
+    message.error('下载文件出现错误，请联系管理员！');
+    axiosLoading.closeLoading();
+  });
 }

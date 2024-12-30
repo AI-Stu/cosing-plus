@@ -19,7 +19,7 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <a-row v-if="expand" :gutter="[15, 0]">
+        <a-row v-if="expand && lineNum > 0" :gutter="[15, 0]">
           <a-col :span="8">
             <a-form-item name="status" label="状态">
               <a-select
@@ -55,7 +55,7 @@
               <a-button :loading="loading" @click="onReset">
                 重置
               </a-button>
-              <a-button type="link" @click="expand = !expand">
+              <a-button v-if="lineNum > 0" type="link" @click="expand = !expand">
                 {{ expand ? '收起' : '展开' }}
                 <UpOutlined v-if="expand" />
                 <DownOutlined v-else />
@@ -66,15 +66,31 @@
       </a-form>
     </a-card>
 
-    <a-card title="查询表格">
-      <template #extra>
+    <a-card>
+      <!-- 左 -->
+      <template #title>
         <a-space size="middle">
-          <a-button type="primary" @click="() => open = true">
-            <template #icon>
-              <PlusOutlined />
-            </template>
+          <a-button type="primary" @click="handleAdd">
             新增
           </a-button>
+          <a-popconfirm
+            title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
+            @confirm="handleDelete(scope?.record as CrudTableModel)"
+          >
+            <a-button danger @click="handleDelete()">
+              删除
+            </a-button>
+          </a-popconfirm>
+
+          <a-button @click="handleExport">
+            导出
+          </a-button>
+        </a-space>
+      </template>
+
+      <!-- 右 -->
+      <template #extra>
+        <a-space size="middle">
           <a-tooltip title="刷新">
             <ReloadOutlined @click="onSearch" />
           </a-tooltip>
@@ -108,12 +124,12 @@
           </a-tooltip>
         </a-space>
       </template>
-      <a-table :loading="loading" :columns="filterColumns" :data-source="dataSource" :pagination="pagination" :size="tableSize[0]">
+      <a-table :loading="loading" :columns="filterColumns" :row-selection="rowSelections" :data-source="dataSource" :pagination="pagination" :size="tableSize[0]">
         <template #bodyCell="scope">
           <template v-if="scope?.column?.dataIndex === 'action'">
             <div flex gap-2>
-              <a c-error @click="handleDelete(scope?.record as ConsultTableModel)">
-                删除
+              <a @click="handleEdit(scope?.record as ConsultTableModel)">
+                编辑
               </a>
             </div>
           </template>
@@ -139,7 +155,7 @@
 
 <script setup lang="ts">
 import { Modal } from 'ant-design-vue';
-import { ColumnHeightOutlined, DownOutlined, PlusOutlined, ReloadOutlined, SettingOutlined, UpOutlined } from '@ant-design/icons-vue';
+import { ColumnHeightOutlined, DownOutlined, ReloadOutlined, SettingOutlined, UpOutlined } from '@ant-design/icons-vue';
 import type { MenuProps, PaginationProps } from 'ant-design-vue';
 import type { ConsultTableModel, ConsultTableParams } from '@/api/list/table-list';
 import { deleteApi, getListApi } from '@/api/list/table-list';
@@ -151,6 +167,7 @@ const statusMap = {
   3: '错误'
 };
 const message = useMessage();
+
 const columns = shallowRef([
   {
     title: '#',
@@ -207,7 +224,7 @@ const formModel = reactive<ConsultTableParams>({
   status: undefined,
   updatedAt: undefined
 });
-
+const lineNum = ref(Math.floor(Object.keys(formModel).length / 3));
 const tableSize = ref<('small' | 'middle' | 'large')[]>(['large']);
 const sizeItems = ref<MenuProps['items']>([
   {
@@ -249,7 +266,7 @@ const state = reactive({
   checkAll: true,
   checkList: getCheckList.value
 });
-
+const expand = ref(false);
 async function init() {
   if (loading.value)
     return;
@@ -380,6 +397,4 @@ function handleCheckChange(value: any) {
 onMounted(() => {
   init();
 });
-
-const expand = ref(false);
 </script>

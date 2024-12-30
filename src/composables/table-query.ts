@@ -114,7 +114,7 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
         column: 'createTime',
         showSizeChanger: true,
         showQuickJumper: true,
-        showTotal: total => `总数据位：${total}`,
+        showTotal: total => `共 ${total} 个`,
         onChange(current, pageSize) {
           state.pagination!.pageSize = pageSize;
           state.pagination!.current = current;
