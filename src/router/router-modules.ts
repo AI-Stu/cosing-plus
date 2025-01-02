@@ -33,8 +33,9 @@ export function getRouterModule(path?: string): any {
   if (!path)
     return basicRouteMap.ComponentError;
   // 判断是否在basicRouteMap中存在
-  if (path in basicRouteMap)
+  if (path in basicRouteMap) {
     return (basicRouteMap as any)[path];
+  }
 
   // 判断开头是不是/
   if (path.startsWith('/'))
