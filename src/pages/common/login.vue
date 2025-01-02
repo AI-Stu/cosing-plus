@@ -49,7 +49,7 @@
             <div class="text-center py-6 text-2xl">
               {{ t('pages.login.tips') }}
             </div>
-            <a-form ref="formRef" :model="loginModel">
+            <a-form ref="formRef" :model="loginModel" class="w-full">
               <a-tabs v-model:active-key="loginModel.grantType" centered>
                 <a-tab-pane key="password" :tab="t('pages.login.accountLogin.tab')" />
                 <a-tab-pane key="sms" :tab="t('pages.login.phoneLogin.tab')" />
@@ -127,6 +127,15 @@
                   </div>
                 </a-form-item>
               </template>
+              <a-form-item name="tenantId" :rules="[{ required: true, message: t('pages.login.tenant.required') }]">
+                <a-select
+                  v-model:value="loginModel.tenantId"
+                  size="large"
+                  allow-clear
+                  :placeholder="t('pages.login.tenant.placeholder')"
+                  :options="tenantOptions"
+                />
+              </a-form-item>
               <div class="mb-24px flex-between">
                 <a-checkbox v-model:checked="loginModel.remember">
                   {{ t('pages.login.rememberMe') }}
@@ -174,8 +183,9 @@ import {
 } from '@ant-design/icons-vue';
 import { delayTimer } from '@v-c/utils';
 import { AxiosError } from 'axios';
+import type { SelectProps } from 'ant-design-vue/es/select';
 import GlobalLayoutFooter from '@/layouts/components/global-footer/index.vue';
-import { loginApi } from '@/api/system/login';
+import { getTenantListApi, loginApi } from '@/api/system/login';
 import type { LoginAccountParams, LoginMobileParams } from '@/api/system/login';
 import { getQueryParam } from '@/utils/tools';
 import pageBubble from '@/utils/page-bubble';
@@ -186,10 +196,10 @@ const appStore = useAppStore();
 const { layoutSetting } = storeToRefs(appStore);
 const router = useRouter();
 const token = useAuthorization();
+const tenantOptions = ref<SelectProps['options']>([]);
 const loginModel = reactive({
-  tenantId: '000000',
-  tenantType: '',
-  username: 'platform',
+  tenantId: '955842',
+  username: 'quxiu',
   password: undefined,
   phone: undefined,
   code: undefined,
@@ -251,7 +261,6 @@ async function submit() {
     const { data } = await loginApi({
       ...params,
       tenantId: loginModel.tenantId,
-      tenantType: loginModel.tenantType,
       grantType: loginModel.grantType,
       clientId: loginModel.clientId
     });
@@ -275,7 +284,23 @@ async function submit() {
     submitLoading.value = false;
   }
 }
+
+/**
+ * 获取租户列表
+ */
+async function initTenantList() {
+  const { data } = await getTenantListApi();
+  tenantOptions.value = (data?.voList || []).map(e => ({
+    value: e.tenantId,
+    label: e.companyName
+  }));
+  if (tenantOptions?.value?.length !== 0) {
+    loginModel.tenantId = String(tenantOptions.value[0]?.value || '955842');
+  }
+}
+
 onMounted(async () => {
+  initTenantList();
   await delayTimer(300);
   pageBubble.init(unref(bubbleCanvas)!);
 });

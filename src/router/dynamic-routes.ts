@@ -158,7 +158,7 @@ export default [
         component: basicRouteMap.Iframe,
         meta: {
           title: 'AntDesign',
-          url: 'https://ant.design/'
+          link: 'https://ant.design/'
         }
       },
       {
@@ -167,7 +167,7 @@ export default [
         component: basicRouteMap.Iframe,
         meta: {
           title: 'AntDesignVue',
-          url: 'https://antdv.com/'
+          link: 'https://antdv.com/'
         }
       },
       {
@@ -514,7 +514,7 @@ export default [
         meta: {
           title: '个人设置1',
           locale: 'menu.account.settings',
-          hideInMenu: true,
+          hidden: true,
           parentKeys: ['/account/settings']
         }
       }

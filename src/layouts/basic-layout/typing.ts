@@ -28,13 +28,11 @@ export interface MenuDataItem {
   // 同路由中的name，主要是用于保活的左右
   name?: string
   // 是否隐藏当前菜单
-  hideInMenu?: boolean
+  hidden?: boolean
   // 如果使用了隐藏，那么点击当前菜单的时候，可以使用父级的key
   parentKeys?: string[]
-  // 是否套用iframe
-  isIframe?: boolean
   // 如果当前是iframe的模式，需要有一个跳转的url支撑，其不能和path重复，path还是为路由
-  url?: string
+  link?: string
   // 是否存在面包屑
   hideInBreadcrumb?: boolean
   // 是否需要显示所有的子菜单

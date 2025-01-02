@@ -6,10 +6,9 @@ declare module 'vue-router'{
   interface RouteMeta {
     title?: string
     icon?: string
-    hideInMenu?: boolean
+    hidden?: boolean
     parentKeys?: string[]
-    isIframe?: boolean
-    url?: string
+    link?: string
     hideInBreadcrumb?: boolean
     hideChildrenInMenu?: boolean
     keepAlive?: boolean

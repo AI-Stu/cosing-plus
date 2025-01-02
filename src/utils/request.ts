@@ -1,5 +1,13 @@
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import type {
+  AxiosError,
+  AxiosInstance,
+  AxiosOptions,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig
+} from 'axios';
 import axios from 'axios';
+import FileSaver from 'file-saver';
 import { AxiosLoading } from './loading';
 import { tansParams } from './tools';
 import router from '@/router';
@@ -186,12 +194,6 @@ service.interceptors.response.use(responseHandler, errorHandler);
 
 export default service;
 
-interface AxiosOptions<T> {
-  url: string
-  params?: T
-  data?: T
-}
-
 /**
  * 实例化请求
  * @param options
@@ -298,6 +300,11 @@ export function useDelete< R = any, T = any>(
 
 /**
  * 通用下载方法
+ * @description 主要用于代码生成器导出功能
+ * @param url
+ * @param params
+ * @param fileName
+ * @returns Promise
  */
 export function useDownload(url: string, params: any, fileName: string) {
   axiosLoading.addLoading();
@@ -311,21 +318,23 @@ export function useDownload(url: string, params: any, fileName: string) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     responseType: 'blob'
   }).then(async (resp: any) => {
-    const isLogin = resp !== 'application/json';
-    if (isLogin) {
+    if (resp.type !== 'application/json') {
       const blob = new Blob([resp]);
       FileSaver.saveAs(blob, fileName);
     }
     else {
       const resText = await resp.data.text();
       const rspObj = JSON.parse(resText);
-      const errMsg = errorCode[rspObj.code] || rspObj.msg || errorCode.default;
+      // 未设置状态码则默认成功状态
+      const code = rspObj.code || HttpStatusEnum.SUCCESS;
+      // 获取错误信息
+      const errMsg = ErrorCodeEnum[code] || rspObj.msg || ErrorCodeEnum.DEFAULT;
       message.error(errMsg);
     }
-    axiosLoading.closeLoading();
   }).catch((r: any) => {
     console.error(r);
     message.error('下载文件出现错误，请联系管理员！');
+  }).finally(() => {
     axiosLoading.closeLoading();
   });
 }

@@ -11,7 +11,7 @@
     @select="handleMenuSelect"
   >
     <template v-for="item in selectedMenus">
-      <template v-if="!item.hideInMenu">
+      <template v-if="!item.hidden">
         <SubMenu :key="item.path" :item="item" />
       </template>
     </template>

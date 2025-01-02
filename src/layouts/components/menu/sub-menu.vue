@@ -8,7 +8,7 @@
         {{ renderTitle(item.title) }}
       </template>
       <template v-for="menu in item.children">
-        <template v-if="!menu.hideInMenu">
+        <template v-if="!menu.hidden">
           <template v-if="menu.children">
             <sub-menu :key="menu.path" :item="menu" />
           </template>

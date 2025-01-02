@@ -8,14 +8,14 @@
       :spinning="loading"
       wrapper-class-name="b-rd-8px of-hidden w-full h-full flex flex-col flex-1"
     >
-      <iframe w-full h-full flex flex-col flex-1 :src="url" style="border: none" @load="finishLoading" />
+      <iframe w-full h-full flex flex-col flex-1 :src="link" style="border: none" @load="finishLoading" />
     </a-spin>
   </div>
 </template>
 
 <script setup lang="ts">
 const route = useRoute();
-const url = computed(() => route?.meta?.url);
+const link = computed(() => route?.meta?.link);
 const loading = ref(true);
 function finishLoading() {
   loading.value = false;

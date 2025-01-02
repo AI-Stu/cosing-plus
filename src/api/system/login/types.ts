@@ -1,6 +1,5 @@
 export interface LoginParams {
   tenantId: string
-  tenantType?: string | null
   grantType: 'social' | 'password' | 'sms'
   clientId?: string
   rememberMe?: boolean
@@ -45,7 +44,6 @@ export interface TenantVO {
   companyName: string
   domain: any
   tenantId: string
-  tenantType: string
   delFlag: string
 }
 

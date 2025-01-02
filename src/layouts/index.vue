@@ -1,3 +1,4 @@
+<!-- 全局基础布局 -->
 <template>
   <BasicLayout
     :collapsed="layoutSetting.collapsed"
@@ -18,24 +19,38 @@
     @update:collapsed="appStore.toggleCollapsed"
   >
     <template #headerActions>
+      <!-- 多语言 -->
       <SelectLang />
+
       <!-- <GithubLink /> -->
+
+      <!-- 帮助文档 -->
       <template v-if="!isMobile">
         <DocLink />
       </template>
+
+      <!-- 用户头像 -->
       <UserAvatar />
     </template>
+
+    <!-- 多页签 -->
     <template #contentPrefix>
       <MultiTab v-if="layoutSetting.multiTab" />
     </template>
+
     <template #renderFooterLinks />
+
+    <!-- 水印 -->
     <a-watermark
       class="h-full w-full flex flex-col flex-1"
       :content="layoutSetting.watermark ? layoutSetting.title ?? 'Cosing Plus' : ' ' "
     >
+      <!-- 页面 -->
       <RouteView />
     </a-watermark>
   </BasicLayout>
+
+  <!-- 整体风格设置面板 -->
   <SettingDrawer
     v-model:open="layoutSetting.drawerVisible"
     :t="t"

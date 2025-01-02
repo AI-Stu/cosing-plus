@@ -11,7 +11,7 @@ export function getUserInfoApi() {
  * 用户头像上传
  * @param data 头像文件
  */
-export function uploadAvatar(data: FormData) {
+export function uploadAvatarApi(data: FormData) {
   return usePost(
     `${BASE_API}/system/user/profile/avatar`,
     data
