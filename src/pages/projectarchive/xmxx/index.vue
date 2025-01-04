@@ -130,10 +130,10 @@ const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
   }
 ]);
 
-const selectValue = ref([]);
+const selectValue = ref<string[]>([]);
 
-function filterSelectValue(items: SelectListType[]) {
-  return items.filter(e => e.value);
+function filterSelectValue(items: SelectListType[]): string[] {
+  return items.map(e => e.value);
 }
 
 // 好评度

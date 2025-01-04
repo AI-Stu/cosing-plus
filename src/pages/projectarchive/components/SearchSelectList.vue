@@ -31,7 +31,7 @@ const props = defineProps<{
   modelValue: SelectListType[][] | string[][]
   filter?: (item: SelectListType[]) => any
 }>();
-const emits = defineEmits(['update:modelValue', 'resetQuery', 'sizeChange']);
+const emits = defineEmits(['update:modelValue']);
 const { token } = useAntdToken();
 
 const _values = reactive<SelectListType[][]>(Array.from({ length: props.options.length }, () => [])); // 用于存储选中的值
