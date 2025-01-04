@@ -39,7 +39,7 @@
             duration-300"
           >
             <template #default>
-              <div class="flex h-27">
+              <div class="flex h-27" :class=" index === 0 ? 'success' : 'error'">
                 <div class="w-10 h-10 bg-gray-300 rounded-full">
                   <img class="w-10 h-10 rounded-full" :src="item.link">
                 </div>
@@ -147,12 +147,35 @@ const praiseList = shallowRef([
 ]);
 </script>
 
-<style lang="less">
+<style land="less" scoped>
 .item-btm {
   margin-bottom: 12px;
 }
 .text-light-color{
   color: var(--text-light-color);
+}
+
+.error,
+.success{
+  &::before{
+    position: absolute;
+    content:"";
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+  }
+}
+.success{
+  &::before{
+    background: #18c418;
+  }
+}
+
+.error{
+  &::before{
+    background: #b42d15;
+  }
 }
 
 .category-other-item {

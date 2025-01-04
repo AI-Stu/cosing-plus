@@ -28,7 +28,7 @@
         <a-col :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
           <a-button class="w-1/1 h-204px text-light-color" type="dashed">
             <PlusOutlined style="font-size: 28px;" />
-            <div>新增项目</div>
+            <div>新增服务</div>
           </a-button>
         </a-col>
         <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
@@ -39,10 +39,7 @@
             duration-300"
           >
             <template #default>
-              <div class="flex h-27">
-                <div class="w-10 h-10 bg-gray-300 rounded-full">
-                  <img class="w-10 h-10 rounded-full" :src="item.link">
-                </div>
+              <div class="flex h-27" :class=" index === 0 ? 'success' : 'error'">
                 <div class="ml">
                   <div style="font-size: 18px; font-weight: 500;">
                     {{ item.title }}
@@ -151,12 +148,35 @@ const praiseList = shallowRef([
 ]);
 </script>
 
-<style lang="less">
+<style land="less" scoped>
 .item-btm {
   margin-bottom: 12px;
 }
 .text-light-color{
   color: var(--text-light-color);
+}
+
+.error,
+.success{
+  &::before{
+    position: absolute;
+    content:"";
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+  }
+}
+.success{
+  &::before{
+    background: #18c418;
+  }
+}
+
+.error{
+  &::before{
+    background: #b42d15;
+  }
 }
 
 .category-other-item {
