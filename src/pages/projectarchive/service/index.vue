@@ -1,5 +1,5 @@
 <template>
-  <page-container>
+  <page-container :loading="true">
     <a-card :bordered="false">
       <a-row>
         <a-col :span="18">
@@ -13,7 +13,7 @@
           </SearchSelectList>
         </a-col>
         <a-col :span="6" style="text-align: right;position:relative;">
-          <a-input v-model:value="searchValue" placeholder="Basic usage">
+          <a-input v-model:value="searchValue" placeholder="请输入服务名称">
             <template #suffix>
               <SearchOutlined style="color: rgba(0, 0, 0, 0.45)" />
             </template>
@@ -88,7 +88,7 @@ const data = ref([
     link: 'https://www.antdv.com/assets/logo.1ef800a8.svg'
   }
 ]);
-
+const selectValue = ref<string[][]>([]);
 const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
   {
     label: '数据类别',
@@ -134,10 +134,8 @@ const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
   }
 ]);
 
-const selectValue = ref([]);
-
-function filterSelectValue(items: SelectListType[]) {
-  return items.filter(e => e.value);
+function filterSelectValue(items: SelectListType[]): string[] {
+  return items.map(e => e.value);
 }
 
 // 好评度

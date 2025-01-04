@@ -13,7 +13,7 @@
           </SearchSelectList>
         </a-col>
         <a-col :span="6" style="text-align: right;position:relative;">
-          <a-input v-model:value="searchValue" placeholder="Basic usage">
+          <a-input v-model:value="searchValue" placeholder="请输入项目名称">
             <template #suffix>
               <SearchOutlined style="color: rgba(0, 0, 0, 0.45)" />
             </template>
@@ -88,7 +88,7 @@ const data = ref([
     link: 'https://www.antdv.com/assets/logo.1ef800a8.svg'
   }
 ]);
-
+const selectValue = ref<string[][]>([]);
 const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
   {
     label: '项目进度',
@@ -129,8 +129,6 @@ const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
     isMultiple: true
   }
 ]);
-
-const selectValue = ref<string[]>([]);
 
 function filterSelectValue(items: SelectListType[]): string[] {
   return items.map(e => e.value);
