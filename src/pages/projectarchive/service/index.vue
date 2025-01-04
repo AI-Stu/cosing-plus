@@ -91,19 +91,23 @@ const data = ref([
 
 const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
   {
-    label: '项目进度',
+    label: '数据类别',
     options: [
       { name: '全部', value: 'all' },
-      { name: '已开工', value: 'start' },
-      { name: '已竣工', value: 'done' }
+      { name: '三维数据', value: '3d' },
+      { name: '二维数据', value: '2d' },
+      { name: '物联设备', value: 'iot' },
+      { name: '物联设备', value: 'vr' }
     ]
   },
   {
-    label: '文档完备',
+    label: '服务类型',
     options: [
       { name: '全部', value: 'all' },
-      { name: '已完备', value: 'start' },
-      { name: '待完备', value: 'done' }
+      { name: '倾斜摄影', value: 'mesh' },
+      { name: '激光点云', value: 'lidar' },
+      { name: '基础地形', value: 'terrain' },
+      { name: 'BIM模型', value: 'bim' }
     ]
   },
   {
