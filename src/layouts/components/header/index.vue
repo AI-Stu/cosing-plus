@@ -9,10 +9,10 @@
   />
   <a-layout-header :style="headerStyle" :class="cls">
     <GlobalHeader>
-      <template v-if="$slots.headerActions" #headerActions>
+      <template v-if="slots.headerActions" #headerActions>
         <slot name="headerActions" />
       </template>
-      <template v-if="$slots.headerContent" #headerContent>
+      <template v-if="slots.headerContent" #headerContent>
         <slot name="headerContent" />
       </template>
     </GlobalHeader>
@@ -23,6 +23,16 @@
 import type { CSSProperties } from 'vue';
 import GlobalHeader from '../global-header/index.vue';
 import { useLayoutState } from '../../basic-layout/context';
+
+const slots = defineSlots<{
+  default: (props: any) => any
+  title?: (props: any) => any
+  content?: (props: any) => any
+  extraContent?: (props: any) => any
+  extra?: (props: any) => any
+  footer?: (props: any) => any
+  [key: string]: any
+}>();
 
 const {
   headerHeight,

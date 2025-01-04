@@ -83,9 +83,9 @@ declare global {
    * D : 查询参数
    */
   declare interface PageData<T, D> {
-    form: T
-    queryParams: D
-    rules: ElFormRules
+    formData: T
+    queryParams?: D
+    rules?: ElFormRules
   }
   /**
    * 分页查询参数

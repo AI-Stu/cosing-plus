@@ -7,10 +7,10 @@
       <a-layout>
         <template v-if="header">
           <Header>
-            <template v-if="$slots.headerActions" #headerActions>
+            <template v-if="slots.headerActions" #headerActions>
               <slot name="headerActions" />
             </template>
-            <template v-if="$slots.headerContent || layout === 'top' || layout === 'mix'" #headerContent>
+            <template v-if="slots.headerContent || layout === 'top' || layout === 'mix'" #headerContent>
               <slot name="headerContent">
                 <Menu v-if="!isMobile && layout === 'top'" />
                 <!-- 分割菜单的模式 -->
@@ -28,7 +28,7 @@
         <a-layout-footer v-if="footer" style="background-color: transparent;">
           <slot name="footerRender">
             <GlobalFooter :copyright="copyright">
-              <template v-if="$slots.renderFooterLinks" #renderFooterLinks>
+              <template v-if="slots.renderFooterLinks" #renderFooterLinks>
                 <footer-links />
               </template>
             </GlobalFooter>
@@ -55,6 +55,16 @@ defineOptions({
 });
 const props = defineProps(proLayoutProps);
 const emit = defineEmits(['update:collapsed']);
+
+const slots = defineSlots<{
+  renderFooterLinks?: () => any
+  headerActions?: () => any
+  headerContent?: () => any
+  contentPrefix?: () => any
+  default: () => any
+  footerRender?: () => any
+  [key: string]: any
+}>();
 
 /**
  * 处理展开收起的事件参数

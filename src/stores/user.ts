@@ -61,9 +61,9 @@ export const useUserStore = defineStore('user', () => {
 
   /**
    * 生成动态路由
-   * @returns
+   * @returns {Promise<void>} 路由
    */
-  const generateDynamicRoutes = async () => {
+  const generateDynamicRoutes = async (): Promise<void> => {
     const dynamicLoadWay = DYNAMIC_LOAD_WAY === DynamicLoadEnum.BACKEND ? getMenuRoutes : generateRoutes;
     const { menuData: treeMenuData, routeData } = await dynamicLoadWay();
 

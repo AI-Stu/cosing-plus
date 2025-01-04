@@ -42,6 +42,7 @@
 <script lang="ts" setup>
 import type { MenuProps } from 'ant-design-vue';
 import { ColumnHeightOutlined, ReloadOutlined, SettingOutlined } from '@ant-design/icons-vue';
+import type { CheckboxChangeEvent } from 'ant-design-vue/es/checkbox/interface';
 
 defineOptions({
   name: 'TableRightToolbar'
@@ -79,17 +80,19 @@ const sizeItems = ref<MenuProps['items']>([
     title: '紧凑'
   }
 ]);
-
-const getCheckList = computed(() => props.columns.map(item => item[columnsValueKey]));
+//
+const getCheckList = computed(() => props.columns.map((item: any) => item[columnsValueKey]));
+const checkList = computed(() => props.columns.filter((item: any) => !item.hide));
 
 const state = reactive({
   indeterminate: false,
   checkAll: true,
-  checkList: getCheckList.value
+  checkList: checkList.value.map((item: any) => item[columnsValueKey])
 });
 
+// 全部字段
 const options = computed(() => {
-  return props.columns.map(item => ({
+  return props.columns.map((item: any) => ({
     label: item[columnsLabelKey],
     value: item[columnsValueKey],
     disabled: item[columnsValueKey] === 'action'
@@ -122,7 +125,7 @@ function handleResetQuery() {
  *
  */
 function filterAction(value: string[]) {
-  return props.columns.filter((item) => {
+  return props.columns.filter((item: any) => {
     if (value.includes(item[columnsValueKey])) {
       // 为true时，循环遍历的值会暴露出去
       return true;
@@ -150,7 +153,7 @@ function handleCheckAllChange(e: CheckboxChangeEvent) {
   state.checkList = e.target.checked ? getCheckList.value : [];
   filterColumns.value = e.target.checked
     ? filterAction(getCheckList.value)
-    : filterColumns.value.filter(item => item[columnsValueKey] === 'action');
+    : filterColumns.value.filter((item: any) => item[columnsValueKey] === 'action');
   emits('update:filterColumns', toRaw(filterColumns.value));
 }
 

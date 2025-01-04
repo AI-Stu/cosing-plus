@@ -3,9 +3,9 @@ import type { AccessEnum } from '@/utils/constant';
 
 /**
  * 角色权限校验
- * @returns
+ * @returns {object} 角色&权限
  */
-export function useAccess() {
+export function useAccess(): any {
   const userStore = useUserStore();
   const roles = computed(() => userStore.roles);
   const hasAccess = (roles: (string | number)[] | string | number | AccessEnum) => {
