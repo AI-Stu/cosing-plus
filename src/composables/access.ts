@@ -1,7 +1,11 @@
 import { toArray } from '@v-c/utils';
 import type { AccessEnum } from '@/utils/constant';
 
-export function useAccess() {
+/**
+ * 角色权限校验
+ * @returns {object} 角色&权限
+ */
+export function useAccess(): any {
   const userStore = useUserStore();
   const roles = computed(() => userStore.roles);
   const hasAccess = (roles: (string | number)[] | string | number | AccessEnum) => {

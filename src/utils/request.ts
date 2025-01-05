@@ -1,11 +1,20 @@
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import type {
+  AxiosError,
+  AxiosInstance,
+  AxiosOptions,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig
+} from 'axios';
 import axios from 'axios';
+import FileSaver from 'file-saver';
 import { AxiosLoading } from './loading';
+import { tansParams } from './tools';
+import router from '@/router';
 import { decryptBase64, decryptWithAes, encryptBase64, encryptWithAes, generateAesKey } from '@/composables/crypto';
 import { decrypt, encrypt } from '@/composables/jsencrypt';
 import { STORAGE_AUTHORIZE_KEY, useAuthorization, useSessionRequest } from '@/composables/authorization';
 import { ContentTypeEnum, RequestEnum } from '@/enums/HttpEnum';
-import router from '@/router';
 import { ErrorCodeEnum, HttpStatusEnum } from '@/enums/RespEnum';
 
 export interface ResponseBody<T = any> {
@@ -42,6 +51,14 @@ const service: AxiosInstance = axios.create({
 });
 
 const axiosLoading = new AxiosLoading(); // 全局请求loading
+const message = useMessage();
+export function globalHeaders() {
+  const token = useAuthorization();
+  return {
+    Authorization: `Bearer ${token.value}`,
+    clientid: VITE_APP_CLIENT_ID
+  };
+}
 
 /**
  * 处理请求
@@ -146,7 +163,7 @@ function responseHandler(response: any): ResponseBody<any> | AxiosResponse<any> 
   if ([
     HttpStatusEnum.UNAUTHORIZED,
     HttpStatusEnum.UNAUTHORIZED_TENANT,
-    HttpStatusEnum.AUTH_FAILED
+    HttpStatusEnum.AUTHENTICATION_FAILED
   ].includes(code)) {
     /**
      * 这里处理清空用户信息和token的逻辑，后续扩展
@@ -176,12 +193,6 @@ service.interceptors.request.use(requestHandler);
 service.interceptors.response.use(responseHandler, errorHandler);
 
 export default service;
-
-interface AxiosOptions<T> {
-  url: string
-  params?: T
-  data?: T
-}
 
 /**
  * 实例化请求
@@ -285,4 +296,45 @@ export function useDelete< R = any, T = any>(
     ...config
   };
   return servicePromise<R, T>(options);
+}
+
+/**
+ * 通用下载方法
+ * @description 主要用于代码生成器导出功能
+ * @param url
+ * @param params
+ * @param fileName
+ * @returns Promise
+ */
+export function useDownload(url: string, params: any, fileName: string) {
+  axiosLoading.addLoading();
+
+  return service.post(url, params, {
+    transformRequest: [
+      (params: any) => {
+        return tansParams(params);
+      }
+    ],
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    responseType: 'blob'
+  }).then(async (resp: any) => {
+    if (resp.type !== 'application/json') {
+      const blob = new Blob([resp]);
+      FileSaver.saveAs(blob, fileName);
+    }
+    else {
+      const resText = await resp.data.text();
+      const rspObj = JSON.parse(resText);
+      // 未设置状态码则默认成功状态
+      const code = rspObj.code || HttpStatusEnum.SUCCESS;
+      // 获取错误信息
+      const errMsg = ErrorCodeEnum[code] || rspObj.msg || ErrorCodeEnum.DEFAULT;
+      message.error(errMsg);
+    }
+  }).catch((r: any) => {
+    console.error(r);
+    message.error('下载文件出现错误，请联系管理员！');
+  }).finally(() => {
+    axiosLoading.closeLoading();
+  });
 }

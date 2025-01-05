@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <div v-if="$slots.renderFooterLinks" :class="`${prefixCls}-links`">
+    <div v-if="slots.renderFooterLinks" :class="`${prefixCls}-links`">
       <slot name="renderFooterLinks" />
     </div>
     <div v-if="copyright" :class="`${prefixCls}-copyright`">
@@ -25,6 +25,16 @@ defineProps<{
   copyright?: string
   icp?: string
   record?: string
+}>();
+
+const slots = defineSlots<{
+  default: (props: any) => any
+  title?: (props: any) => any
+  content?: (props: any) => any
+  extraContent?: (props: any) => any
+  extra?: (props: any) => any
+  footer?: (props: any) => any
+  [key: string]: any
 }>();
 
 const prefixCls = shallowRef('ant-pro-global-footer');

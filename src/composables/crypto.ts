@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js';
 
 /**
  * 随机生成32位的字符串
- * @returns {string}
+ * @returns {string} 密钥
  */
 function generateRandomString() {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -16,7 +16,7 @@ function generateRandomString() {
 
 /**
  * 随机生成aes 密钥
- * @returns {string}
+ * @returns {string}  CryptoJS.enc.Utf8
  */
 export function generateAesKey() {
   return CryptoJS.enc.Utf8.parse(generateRandomString());
@@ -25,9 +25,9 @@ export function generateAesKey() {
 /**
  * 加密base64
  * @param str 密钥
- * @returns {string}
+ * @returns {string} CryptoJS.enc.Base64
  */
-export function encryptBase64(str: CryptoJS.lib.WordArray) {
+export function encryptBase64(str: CryptoJS.lib.WordArray): string {
   return CryptoJS.enc.Base64.stringify(str);
 }
 

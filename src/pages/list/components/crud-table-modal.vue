@@ -19,7 +19,7 @@ import type { FormInstance } from 'ant-design-vue';
 import { cloneDeep } from 'lodash';
 import type { CrudTableModel } from '@/api/list/crud-table';
 
-const emit = defineEmits(['cancel', 'ok']);
+const emits = defineEmits(['cancel', 'ok']);
 
 const isUpdate = ref(false);
 
@@ -53,8 +53,7 @@ async function handleOk() {
     await formRef.value?.validate();
 
     // 新增或者编辑接口...
-
-    emit('ok');
+    emits('ok');
     visible.value = false;
   }
   catch (errorInfo) {
@@ -64,7 +63,7 @@ async function handleOk() {
 
 function handleCancel() {
   formRef.value?.resetFields();
-  emit('cancel');
+  emits('cancel');
 }
 
 defineExpose({

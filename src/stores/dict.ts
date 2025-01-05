@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import { getDicts } from '@/api/system/dict/data';
+import { getDictsApi } from '@/api/system/dict/data';
 
 export const useDictStore = defineStore('dict', () => {
   const dict = ref<
@@ -41,6 +41,11 @@ export const useDictStore = defineStore('dict', () => {
     }
   };
 
+  /**
+   * 获取多个字典
+   * @param args
+   * @returns 字典Map
+   */
   const getDict = (...args: string[]): { [key: string]: DictDataOption[] } => {
     const res = ref<{
       [key: string]: DictDataOption[]
@@ -53,10 +58,12 @@ export const useDictStore = defineStore('dict', () => {
           res.value[dictType] = dicts;
         }
         else {
-          await getDicts(dictType).then((resp) => {
-            res.value[dictType] = resp.data.map(
-              (p): DictDataOption => ({ label: p.dictLabel, value: p.dictValue, tagType: p.listClass, tagClass: p.cssClass })
-            );
+          await getDictsApi(dictType).then((resp) => {
+            if (resp.data) {
+              res.value[dictType] = resp.data.map(
+                (p): DictDataOption => ({ label: p.dictLabel, value: p.dictValue, tagType: p.tagType, tagClass: p.tagClass })
+              );
+            }
             setDict(dictType, res.value[dictType] || []);
           });
         }

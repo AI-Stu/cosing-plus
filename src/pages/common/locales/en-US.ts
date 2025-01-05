@@ -9,6 +9,8 @@ export default {
   'pages.login.username.required': 'Please input your username!',
   'pages.login.password.placeholder': 'Password: admin',
   'pages.login.password.required': 'Please input your password!',
+  'pages.login.tenant.placeholder': 'Please select tenant',
+  'pages.login.tenant.required': 'Please select tenant',
   'pages.login.phoneLogin.tab': 'Phone Login',
   'pages.login.phoneLogin.errorMessage': 'Verification Code Error',
   'pages.login.phoneNumber.placeholder': 'Phone Number',

@@ -7,7 +7,7 @@
     @update:selected-keys="handleSplitSelectedKeys"
   >
     <template v-for="item in menuDataList">
-      <template v-if="!item.hideInMenu">
+      <template v-if="!item.hidden">
         <SubMenu :key="item.path" :item="item" :link="item.childrenCount <= 0" />
       </template>
     </template>

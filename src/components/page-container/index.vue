@@ -1,6 +1,7 @@
 <template>
   <div class="ant-pro-page-container">
     <div
+      v-if="false"
       class="bg-[var(--bg-color)]"
       :class="layoutSetting.multiTab ? 'pb-16px' : 'py-16px'"
       px-24px mb-24px mx--24px mt--24px
@@ -27,7 +28,9 @@
           <slot name="extra" />
         </div>
       </div>
-      <div v-if="$slots.content || $slots.extraContent" pt-12px>
+
+      <!--  -->
+      <div v-if="slots.content || slots.extraContent" pt-12px>
         <div flex w-full>
           <div flex-auto>
             <slot name="content" />
@@ -39,6 +42,7 @@
       </div>
       <slot name="footer" />
     </div>
+
     <div :class="contentCls">
       <slot />
     </div>
@@ -54,13 +58,13 @@ import { useLayoutState } from '@/layouts/basic-layout/context';
 defineProps<{
   title?: string
 }>();
-defineSlots<{
+const slots = defineSlots<{
   default: (props: any) => any
-  title: (props: any) => any
-  content: (props: any) => any
-  extraContent: (props: any) => any
-  extra: (props: any) => any
-  footer: (props: any) => any
+  title?: (props: any) => any
+  content?: (props: any) => any
+  extraContent?: (props: any) => any
+  extra?: (props: any) => any
+  footer?: (props: any) => any
 }>();
 const { layoutMenu: layoutMenuStore, appStore } = useLayoutMenuInject();
 const { layoutSetting } = (storeToRefs as any)(appStore);

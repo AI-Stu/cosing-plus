@@ -1,11 +1,16 @@
-import type { VNode } from 'vue';
+import type { Component, VNode } from 'vue';
 import { createVNode } from 'vue';
 
 const compMap = new Map<string, VNode>();
+const error = await import('@/pages/exception/component-error.vue');
 
 export function useCompConsumer() {
   const route = useRoute();
-  const getComp = (component: VNode): VNode => {
+  const getComp = (component: VNode): VNode | Component => {
+    if (!component) {
+      return error.default;
+    }
+
     // 判断当前是否包含name，如果不包含name，那就直接处理掉name
     if (!route.name)
       return component;

@@ -11,6 +11,69 @@ let cache_key = 1;
 
 const getCacheKey = () => `Cache_Key_${cache_key++}`;
 
+/**
+ * 遍历后台传来的路由字符串，转换为组件对象
+ * @param asyncRouterMap 后台传来的路由字符串
+ * @param lastRouter 上一级路由
+ * @param type 是否是重写路由
+ */
+export function filterAsyncRouter(asyncRouterMap: RouteRecordRaw[], lastRouter?: RouteRecordRaw, type = true): RouteRecordRaw[] {
+  return asyncRouterMap.filter((route) => {
+    if (type && route.children) {
+      route.children = filterChildren(route.children, route);
+    }
+    // Layout ParentView 组件特殊处理
+    if (route.component?.toString() === 'Layout') {
+      route.component = basicRouteMap.RouteView;
+    }
+    else if (route.component?.toString() === 'ParentView') {
+      route.component = basicRouteMap.ParentView;
+    }
+    else if (route.component?.toString() === 'InnerLink') {
+      route.component = basicRouteMap.Iframe;
+    }
+    else {
+      route.component = getRouterModule(route.component as string | undefined);
+    }
+    if (route.children != null && route.children && route.children.length) {
+      route.children = filterAsyncRouter(route.children, route, type);
+    }
+    else {
+      delete route.children;
+      delete route.redirect;
+    }
+    return true;
+  });
+}
+
+function filterChildren(childrenMap: RouteRecordRaw[], lastRouter?: RouteRecordRaw): RouteRecordRaw[] {
+  let children: RouteRecordRaw[] = [];
+  childrenMap.forEach((el) => {
+    if (el.children && el.children.length) {
+      if (el.component?.toString() === 'ParentView' && !lastRouter) {
+        el.children.forEach((c) => {
+          c.path = `${el.path}/${c.path}`;
+          if (c.children && c.children.length) {
+            children = children.concat(filterChildren(c.children, c));
+            return;
+          }
+          children.push(c);
+        });
+        return;
+      }
+    }
+    if (lastRouter) {
+      el.path = `${lastRouter.path}/${el.path}`;
+      if (el.children && el.children.length) {
+        children = children.concat(filterChildren(el.children, el));
+        return;
+      }
+    }
+    children = children.concat(el);
+  });
+  return children;
+}
+
 function renderTitle(route: RouteRecordRaw) {
   const { title, locale } = route.meta || {};
   if (!title)
@@ -25,14 +88,14 @@ function formatMenu(route: RouteRecordRaw, path?: string) {
     title: () => renderTitle(route),
     icon: route.meta?.icon || '',
     path: path ?? route.path,
-    hideInMenu: route.meta?.hideInMenu || false,
+    hidden: route.meta?.hidden || false,
     parentKeys: route.meta?.parentKeys || [],
     hideInBreadcrumb: route.meta?.hideInBreadcrumb || false,
     hideChildrenInMenu: route.meta?.hideChildrenInMenu || false,
     locale: route.meta?.locale,
     keepAlive: route.meta?.keepAlive || false,
     name: route.name as string,
-    url: route.meta?.url || '',
+    link: route.meta?.link || '',
     target: route.meta?.target || '_blank'
   };
 }
@@ -85,8 +148,8 @@ export function generateTreeRoutes(menus: MenuData) {
         parentId: menuItem?.parentId,
         affix: menuItem?.affix,
         parentKeys: menuItem?.parentKeys,
-        url: menuItem?.url,
-        hideInMenu: menuItem?.hideInMenu,
+        link: menuItem?.link,
+        hidden: menuItem?.hidden,
         hideChildrenInMenu: menuItem?.hideChildrenInMenu,
         hideInBreadcrumb: menuItem?.hideInBreadcrumb,
         target: menuItem?.target,
@@ -126,6 +189,7 @@ export function generateTreeRoutes(menus: MenuData) {
       }
     }
   }
+
   return {
     menuData,
     routeData
@@ -198,8 +262,6 @@ export function generateFlatRoutes(routes: RouteRecordRaw[]) {
     path: '/',
     redirect: ROOT_ROUTE_REDIRECT_PATH,
     name: 'ROOT_EMPTY_PATH',
-    // fix: https://github.com/AI-Stu/cosing-plus/issues/179
-    // component: getRouterModule('RouteView'),
     children: flatRoutesList
   };
   return [parentRoute];

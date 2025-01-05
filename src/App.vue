@@ -17,3 +17,9 @@ const { antd } = useI18nLocale();
 const layoutMenu = useLayoutMenu();
 useLayoutMenuProvide(layoutMenu, appStore);
 </script>
+
+<style>
+:root{
+  --text-light-color: #696969e0;
+}
+</style>

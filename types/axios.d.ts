@@ -6,4 +6,11 @@ declare module 'axios' {
     rows: T
     total: number
   }
+
+  interface AxiosOptions<T> {
+    url: string
+    params?: T
+    data?: T
+  }
+
 }

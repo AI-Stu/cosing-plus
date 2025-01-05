@@ -89,6 +89,15 @@
                 </div>
               </a-form-item>
             </template>
+            <a-form-item name="tenantId" :rules="[{ required: true, message: t('pages.login.tenant.required') }]">
+              <a-select
+                v-model:value="loginModel.tenantId"
+                size="large"
+                allow-clear
+                :placeholder="t('pages.login.tenant.placeholder')"
+                :options="tenantOptions"
+              />
+            </a-form-item>
             <div class="mb-24px" flex items-center justify-between>
               <a-checkbox v-model:checked="loginModel.remember">
                 {{ t('pages.login.rememberMe') }}
@@ -128,8 +137,9 @@ import {
   UserOutlined
 } from '@ant-design/icons-vue';
 import { AxiosError } from 'axios';
+import type { SelectProps } from 'ant-design-vue/es/select';
 import GlobalLayoutFooter from '@/layouts/components/global-footer/index.vue';
-import { loginApi } from '@/api/system/login';
+import { getTenantListApi, loginApi } from '@/api/system/login';
 import { getQueryParam } from '@/utils/tools';
 import type { LoginAccountParams, LoginMobileParams } from '@/api/system/login';
 
@@ -140,9 +150,8 @@ const { layoutSetting } = storeToRefs(appStore);
 const router = useRouter();
 const token = useAuthorization();
 const loginModel = reactive({
-  tenantId: '000000',
-  tenantType: '',
-  username: 'platform',
+  tenantId: '955842',
+  username: 'quxiu',
   password: undefined,
   phone: undefined,
   code: undefined,
@@ -150,6 +159,7 @@ const loginModel = reactive({
   grantType: 'password' as 'social' | 'password' | 'sms',
   remember: true
 });
+const tenantOptions = ref<SelectProps['options']>([]);
 const { t } = useI18nLocale();
 const formRef = shallowRef();
 const codeLoading = shallowRef(false);
@@ -167,6 +177,21 @@ const { counter, pause, reset, resume, isActive } = useInterval(1000, {
     }
   }
 });
+
+/**
+ * 获取租户列表
+ */
+async function initTenantList() {
+  const { data } = await getTenantListApi();
+  tenantOptions.value = (data?.voList || []).map(e => ({
+    value: e.tenantId,
+    label: e.companyName
+  }));
+  if (tenantOptions?.value?.length !== 0) {
+    loginModel.tenantId = String(tenantOptions.value[0]?.value || '955842');
+  }
+}
+
 async function getCode() {
   codeLoading.value = true;
   try {
@@ -205,7 +230,6 @@ async function submit() {
     const { data } = await loginApi({
       ...params,
       tenantId: loginModel.tenantId,
-      tenantType: loginModel.tenantType,
       grantType: loginModel.grantType,
       clientId: loginModel.clientId
     });
@@ -230,6 +254,10 @@ async function submit() {
     submitLoading.value = false;
   }
 }
+
+onMounted(() => {
+  initTenantList();
+});
 </script>
 
 <style lang="less" scoped>

@@ -30,7 +30,7 @@ export function logoutApi() {
 /**
  * 获取验证码
  */
-export function getCodeImg() {
+export function getCodeImgApi() {
   return useGet<VerifyCodeResult>(
     `${BASE_API}/auth/code`,
     null,
@@ -42,7 +42,7 @@ export function getCodeImg() {
 }
 
 // 获取租户列表
-export function getTenantList() {
+export function getTenantListApi() {
   return useGet<TenantInfo>(
     `${BASE_API}/auth/tenant/list`,
     null,

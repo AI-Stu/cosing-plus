@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-export const ROOT_ROUTE_REDIRECT_PATH = '/dashboard';
+export const ROOT_ROUTE_REDIRECT_PATH = '/system/dict';
 const Layout = () => import('@/layouts/index.vue');
 
 export const rootRoute: RouteRecordRaw = {

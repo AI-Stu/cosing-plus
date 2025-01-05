@@ -42,7 +42,7 @@ export enum HttpStatusEnum {
   /**
    * 认证失败
    */
-  AUTH_FAILED = 11016,
+  AUTHENTICATION_FAILED = 11016,
   /**
    * 访问受限，授权过期
    */
