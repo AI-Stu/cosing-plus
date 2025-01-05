@@ -91,13 +91,13 @@
                 <h1 style="font-size: 14px;font-weight: 600;height:44px;margin-bottom:10px;">
                   {{ item.title }}
                 </h1>
-                <ul>
-                  <li><UserOutlined /><span class="text-span">{{ item.name }}</span></li>
-                  <li><CalendarOutlined /><span class="text-span">{{ item.time }}</span></li>
-                  <li><ProfileOutlined /><span class="text-span">{{ item.standard }}</span></li>
-                  <li><CloudOutlined /><span class="text-span">{{ item.service }}</span></li>
-                  <li><BranchesOutlined /><span class="text-span">{{ item.attachment }}</span></li>
-                </ul>
+                <div class="item-info">
+                  <div><UserOutlined /><span class="text-span">{{ item.name }}</span></div>
+                  <div><CalendarOutlined /><span class="text-span">{{ item.time }}</span></div>
+                  <div><ProfileOutlined /><span class="text-span">{{ item.standard }}</span></div>
+                  <div><CloudOutlined /><span class="text-span">{{ item.service }}</span></div>
+                  <div><BranchesOutlined /><span class="text-span">{{ item.attachment }}</span></div>
+                </div>
                 <div class="rt-post">
                   <a-button type="text" style="margin-right:5px;" size="small">
                     删除
@@ -183,8 +183,6 @@ const number2 = ['已完备', '待完备'];
 const number3 = ['2024', '2023', '2022', '2021', '2020'];
 const number4 = ['市本级', '莲都区', '龙泉市'];
 
-console.log(router, 'router');
-
 interface ListType {
   name: string
   key: string
@@ -234,16 +232,6 @@ const activeList2 = ref<string[]>([]);
 const activeList3 = ref<string[]>([]);
 const activeList4 = ref<string[]>([]);
 
-const authorList = shallowRef([
-  {
-    label: '付晓晓',
-    value: '付晓晓'
-  },
-  {
-    label: '周毛毛',
-    value: '周毛毛'
-  }
-]);
 // 好评度
 const praiseList = shallowRef([
   {
@@ -258,7 +246,7 @@ const praiseList = shallowRef([
 
 function addProject() {
   router.push({
-    path: '/dashboard/analysis'
+    path: '/projectManagement/addSportsEvtent'
   });
 }
 
@@ -303,11 +291,8 @@ function handleClick(item: ListType) {
     margin-bottom: 0;
   }
 }
-ul{
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  li{
+.item-info{
+  div{
     color: #88929e;
     font-size: 12px;
     height: 18px;
@@ -329,11 +314,5 @@ ul{
   position: absolute;
   bottom: 0;
   right: -5px;
-}
-.overflow {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
 }
 </style>

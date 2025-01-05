@@ -48,17 +48,15 @@ export default [
         meta: {
           title: '项目管理'
         }
-        // children: [
-        //   {
-        //     path: '/projectManagement/sportsEvtent/add',
-        //     name: 'AddSportsEvtent',
-        //     component: () => import('@/pages/projectManagement/sportsEvtent/components/addProject.vue'),
-        //     meta: {
-        //       title: '创建项目'
-        //     }
-        //   }
-        // ]
       }
+      // {
+      //   path: '/projectManagement/addSportsEvtent',
+      //   name: 'AddSportsEvtent',
+      //   component: () => import('@/pages/projectManagement/sportsEvtent/components/AddSportsEvtent/index.vue'),
+      //   meta: {
+      //     title: '创建项目'
+      //   }
+      // }
       // {
       //   path: '/projectManagement/projectData',
       //   name: 'projectData',

@@ -77,10 +77,10 @@
       <a-form-item label="经纬度">
         <div class="flex">
           <a-input
-            v-model:value="longitude" placeholder="请输入经度" style="margin-right:5px;"
+            v-model:value="formState.longitude" placeholder="请输入经度" style="margin-right:5px;"
           />
           <a-input
-            v-model:value="latitude" placeholder="请输入纬度"
+            v-model:value="formState.latitude" placeholder="请输入纬度"
           />
         </div>
       </a-form-item>
@@ -106,7 +106,7 @@
 <script setup lang="ts">
 import type { FormInstance } from 'ant-design-vue';
 import { AimOutlined } from '@ant-design/icons-vue';
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 import { reactive, ref } from 'vue';
 
 const emit = defineEmits(['nextStep']);
@@ -115,8 +115,8 @@ const formRef = ref<FormInstance>();
 const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
 const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 
-const value1 = ref(dayjs('2015/01/01', dateFormat));
-const value2 = ref(dayjs('2015/01/01', dateFormat));
+// const value1 = ref(dayjs('2015/01/01', dateFormat));
+// const value2 = ref(dayjs('2015/01/01', dateFormat));
 
 interface FirstFormState {
   xmbh: string
@@ -139,8 +139,8 @@ const formState = reactive<FirstFormState>({
   jgsj: '',
   isjg: true,
   xmdz: '华强北',
-  longitude: '',
-  latitude: ''
+  longitude: '32.43525256',
+  latitude: '182.884548744'
 });
 async function nextStep() {
   try {

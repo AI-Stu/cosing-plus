@@ -99,6 +99,7 @@ export default {
   'menu.system.client': 'Client',
   'menu.ProjectManagement': 'ProjectManagement',
   'menu.ProjectManagement.SportsEvtent': 'SportsEvtent',
+  'menu.ProjectManagement.AddSportsEvtent': 'AddSportsEvtent',
   'menu.form': 'Form',
   'menu.form.basic-form': 'Basic Form',
   'menu.form.step-form': 'Step Form',

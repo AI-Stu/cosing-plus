@@ -163,6 +163,15 @@ const menuData = [
     name: 'SportsEvtent',
     locale: 'menu.ProjectManagement.SportsEvtent'
   },
+  // {
+  //   id: 811,
+  //   parentId: 80,
+  //   title: '创建项目',
+  //   component: '/projectManagement/addSportsEvtent',
+  //   path: '/projectManagement/addSportsEvtent',
+  //   name: 'AddSportsEvtent',
+  //   locale: 'menu.ProjectManagement.AddSportsEvtent'
+  // },
   {
     id: 1,
     parentId: null,
