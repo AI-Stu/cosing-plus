@@ -1,5 +1,5 @@
 <template>
-  <page-container>
+  <page-container :loading="true">
     <a-card :bordered="false">
       <a-row>
         <a-col :span="18">
@@ -13,7 +13,7 @@
           </SearchSelectList>
         </a-col>
         <a-col :span="6" style="text-align: right;position:relative;">
-          <a-input v-model:value="searchValue" placeholder="请输入项目名称">
+          <a-input v-model:value="searchValue" placeholder="请输入服务名称">
             <template #suffix>
               <SearchOutlined style="color: rgba(0, 0, 0, 0.45)" />
             </template>
@@ -28,7 +28,7 @@
         <a-col :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
           <a-button class="w-1/1 h-204px text-light-color" type="dashed">
             <PlusOutlined style="font-size: 28px;" />
-            <div>新增项目</div>
+            <div>新增服务</div>
           </a-button>
         </a-col>
         <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
@@ -40,9 +40,6 @@
           >
             <template #default>
               <div class="flex h-27" :class=" index === 0 ? 'success' : 'error'">
-                <div class="w-10 h-10 bg-gray-300 rounded-full">
-                  <img class="w-10 h-10 rounded-full" :src="item.link">
-                </div>
                 <div class="ml">
                   <div style="font-size: 18px; font-weight: 500;">
                     {{ item.title }}
@@ -91,19 +88,23 @@ const data = ref([
 const selectValue = ref<string[][]>([]);
 const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
   {
-    label: '项目进度',
+    label: '数据类别',
     options: [
       { name: '全部', value: 'all' },
-      { name: '已开工', value: 'start' },
-      { name: '已竣工', value: 'done' }
+      { name: '三维数据', value: '3d' },
+      { name: '二维数据', value: '2d' },
+      { name: '物联设备', value: 'iot' },
+      { name: '物联设备', value: 'vr' }
     ]
   },
   {
-    label: '文档完备',
+    label: '服务类型',
     options: [
       { name: '全部', value: 'all' },
-      { name: '已完备', value: 'start' },
-      { name: '待完备', value: 'done' }
+      { name: '倾斜摄影', value: 'mesh' },
+      { name: '激光点云', value: 'lidar' },
+      { name: '基础地形', value: 'terrain' },
+      { name: 'BIM模型', value: 'bim' }
     ]
   },
   {

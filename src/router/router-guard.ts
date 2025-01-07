@@ -1,4 +1,5 @@
 import { AxiosError } from 'axios';
+import type { RouteRecordRaw } from 'vue-router';
 import router from '@/router';
 import { useMetaTitle } from '@/composables/meta-title';
 import { setRouteEmitter } from '@/utils/route-listener';
@@ -30,7 +31,9 @@ router.beforeEach(async (to, _, next) => {
         await userStore.getUserInfo();
         // 获取路由菜单的信息
         const currentRoute = await userStore.generateDynamicRoutes();
-        router.addRoute(currentRoute);
+        console.log(currentRoute);
+
+        router.addRoute(currentRoute as unknown as RouteRecordRaw);
         next({
           ...to,
           replace: true

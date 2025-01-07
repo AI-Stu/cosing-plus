@@ -238,7 +238,7 @@ async function getList() {
  */
 function handleAdd() {
   router.push({
-    path: '/projectManagement/addSportsEvtent'
+    path: '/project/manage/add'
   });
 }
 
