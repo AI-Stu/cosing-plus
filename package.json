@@ -35,6 +35,7 @@
     "@v-c/utils": "catalog:",
     "@vueuse/core": "catalog:",
     "ant-design-vue": "catalog:",
+    "await-to-js": "catalog:",
     "axios": "catalog:",
     "crypto-js": "catalog:",
     "dayjs": "catalog:",

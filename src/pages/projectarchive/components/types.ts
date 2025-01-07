@@ -1,6 +1,6 @@
 export interface SelectListType {
   name: string
-  value: string
+  value: string | number
 }
 
 export interface SeacrhSelectListOptions {
