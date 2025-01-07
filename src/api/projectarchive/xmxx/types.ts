@@ -58,6 +58,11 @@ export interface XmxxForm extends BaseEntity {
   xmxxid?: string | number
 
   /**
+   * 项目名称
+   */
+  xmmc?: string
+
+  /**
    * 项目编号
    */
   xmbh?: string
@@ -110,6 +115,11 @@ export interface XmxxQuery extends PageQuery {
    * 项目编号
    */
   xmbh?: string
+
+  /**
+   * 项目名称
+   */
+  xmmc?: string
 
   /**
    * 委托单位
