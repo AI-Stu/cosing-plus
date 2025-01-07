@@ -1,14 +1,14 @@
 <template>
-  <page-container>
+  <page-container :hide-in-breadcrumb="true" :hide-in-title="true">
     <a-card :bordered="false">
       <a-row>
         <a-col :span="18">
           <SearchSelectList v-model="selectValue" :options="SearchSelectOptions" :filter="filterSelectValue">
             <template #end2>
-              <a-range-picker v-model:value="value5" size="small" picker="year" />
+              <a-range-picker v-model:value="rangeYear" size="small" picker="year" />
             </template>
             <template #end3>
-              <a-select size="small" placeholder="不限" style="width: 100px" :options="praiseList" />
+              <a-select v-model:value="region" size="small" :options="praiseList" placeholder="不限" style="width: 100px" />
             </template>
           </SearchSelectList>
         </a-col>
@@ -18,92 +18,108 @@
               <SearchOutlined style="color: rgba(0, 0, 0, 0.45)" />
             </template>
           </a-input>
-          <a-button style="position: absolute;bottom: 10px;right: 0;color: rgba(0, 0, 0, 0.45)" :icon="h(RedoOutlined)" />
+          <a-button
+            class="absolute bottom-[10px] right-0 color-[#00000073]"
+            :icon="h(RedoOutlined)"
+            @click="getList"
+          />
         </a-col>
       </a-row>
     </a-card>
 
-    <div class="mt-5" style="background: #fff;padding: 20px;box-sizing: border-box;">
+    <div class="mt-5 p-[20px] b-white box-border">
       <a-row :gutter="16">
         <a-col :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
-          <a-button class="w-1/1 h-204px text-light-color" type="dashed">
+          <a-button class="w-1/1 h-204px text-light-color" type="dashed" @click="handleAdd">
             <PlusOutlined style="font-size: 28px;" />
             <div>新增项目</div>
           </a-button>
         </a-col>
-        <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
+        <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4 ">
           <a-card
-            :bordered="false" style="border-color: 0" class="cursor-pointer
-            hover:shadow-[0_4px_20px_-5px_rgba(0,0,0,0.35)]
-            transition
-            duration-300"
+            style="border-left: 3px solid #108ee9; border-radius: 0"
+            class="cursor-pointer transition duration-300 h-204px b-r-2
+            hover:shadow-[0_4px_20px_-5px_rgba(0,0,0,0.35)]"
           >
             <template #default>
-              <div class="flex h-27" :class=" index === 0 ? 'success' : 'error'">
-                <div class="w-10 h-10 bg-gray-300 rounded-full">
-                  <img class="w-10 h-10 rounded-full" :src="item.link">
+              <div class="relative">
+                <h1 style="font-size: 14px;font-weight: 600;height:44px;margin-bottom:10px;">
+                  {{ item.xmmc }}
+                </h1>
+                <div class="item-info">
+                  <div><UserOutlined /><span class="text-span">{{ item.unit }}</span></div>
+                  <div><CalendarOutlined /><span class="text-span">{{ item.signdata }}</span></div>
+                  <div><ProfileOutlined /><span class="text-span">数据标准（{{ item.standard }}）</span></div>
+                  <div><CloudOutlined /><span class="text-span">挂接服务（{{ item.service }}）</span></div>
+                  <div><BranchesOutlined /><span class="text-span">附件（{{ item.attachment }}）</span></div>
                 </div>
-                <div class="ml">
-                  <div style="font-size: 18px; font-weight: 500;">
-                    {{ item.title }}
-                  </div>
-                  <div class="h-17 overflow-hidden overflow text-light-color">
-                    {{ content }}
-                  </div>
+                <div class="rt-post">
+                  <a-button type="text" style="margin-right:5px;" size="small" @click="handleDel(item)">
+                    删除
+                  </a-button>
+                  <a-button type="primary" ghost size="small" @click="handleInfo(item)">
+                    详情
+                  </a-button>
                 </div>
               </div>
-            </template>
-            <template #actions>
-              <li>操作一</li>
-              <li>操作二</li>
             </template>
           </a-card>
         </a-col>
       </a-row>
+      <a-pagination
+        v-model:current="current"
+        style="float:right"
+        :total="50"
+        :show-total="total => `共${total}条`"
+        show-less-items
+      />
     </div>
   </page-container>
 </template>
 
 <script setup lang="ts">
+import {
+  BranchesOutlined,
+  CalendarOutlined,
+  CloudOutlined,
+  PlusOutlined,
+  ProfileOutlined,
+  RedoOutlined,
+  SearchOutlined,
+  UserOutlined
+} from '@ant-design/icons-vue';
 import { h } from 'vue';
-import { PlusOutlined, RedoOutlined, SearchOutlined } from '@ant-design/icons-vue';
+import to from 'await-to-js';
 import type { SeacrhSelectListOptions, SelectListType } from '../components/types';
 import SearchSelectList from '../components/SearchSelectList.vue';
+import { listXmxx } from '@/api/projectarchive/xmxx';
+import type { XmxxQuery } from '@/api/projectarchive/xmxx/types';
 
 defineOptions({
-  name: 'SportsEvtent'
+  name: 'XMXXList'
 });
-
-const value5 = ref<any>();
-const searchValue = ref();
-const content = '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。';
-
-const data = ref([
-  {
-    title: 'Aipay',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png'
-  },
-  {
-    title: 'Ant Design Vue',
-    link: 'https://www.antdv.com/assets/logo.1ef800a8.svg'
-  }
-]);
+const router = useRouter();
+// 分页
+const current = ref<number>(1);
+const rangeYear = ref<any>();
+const region = ref<string>('');
+const searchValue = ref<string>('');
 const selectValue = ref<string[][]>([]);
 const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
   {
     label: '项目进度',
     options: [
       { name: '全部', value: 'all' },
-      { name: '已开工', value: 'start' },
-      { name: '已竣工', value: 'done' }
+      { name: '已开工', value: 1 },
+      { name: '已竣工', value: 2 }
     ]
   },
   {
     label: '文档完备',
     options: [
       { name: '全部', value: 'all' },
-      { name: '已完备', value: 'start' },
-      { name: '待完备', value: 'done' }
+      { name: '待完备', value: 1 },
+      { name: '已完备', value: 2 }
     ]
   },
   {
@@ -129,10 +145,52 @@ const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
     isMultiple: true
   }
 ]);
-
-function filterSelectValue(items: SelectListType[]): string[] {
+function filterSelectValue(items: SelectListType[]): (string | number)[] {
   return items.map(e => e.value);
 }
+
+const data = ref([
+  {
+    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
+    unit: '丽水湖房地产公司',
+    signdata: '2024-03-17',
+    standard: 2,
+    service: 2,
+    attachment: 2
+  },
+  {
+    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
+    unit: '丽水湖房地产公司',
+    signdata: '2024-03-17',
+    standard: 1,
+    service: 4,
+    attachment: 2
+  },
+  {
+    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
+    unit: '丽水湖房地产公司',
+    signdata: '2024-03-17',
+    standard: 2,
+    service: 3,
+    attachment: 2
+  },
+  {
+    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
+    unit: '丽水湖房地产公司',
+    signdata: '2024-03-17',
+    standard: 2,
+    service: 2,
+    attachment: 1
+  },
+  {
+    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
+    unit: '丽水湖房地产公司',
+    signdata: '2024-03-17',
+    standard: 1,
+    service: 3,
+    attachment: 4
+  }
+]);
 
 // 好评度
 const praiseList = shallowRef([
@@ -145,49 +203,100 @@ const praiseList = shallowRef([
     value: 2
   }
 ]);
+
+/**
+ * 获取项目列表
+ */
+async function getList() {
+  const [isjg, isWb, signdata, region] = selectValue.value;
+
+  const params: XmxxQuery = {
+    pageSize: 10,
+    pageNum: 1
+  };
+  if (isjg?.length === 1) {
+    params.isjg = isjg[0];
+  }
+  if (signdata?.length === 1) {
+    params.signdata = signdata[0];
+  }
+  if (region?.length === 1) {
+    params.region = region[0];
+  }
+
+  const [error, res] = await to(listXmxx(params));
+  if (error) {
+    return;
+  }
+  console.log('getList', res);
+
+  data.value = res.rows;
+}
+
+/**
+ * 新增项目
+ */
+function handleAdd() {
+  router.push({
+    path: '/projectManagement/addSportsEvtent'
+  });
+}
+
+/**
+ * 项目详情
+ * @param item
+ */
+function handleInfo(item: any) {
+  console.log(item);
+}
+
+/**
+ * 删除项目
+ * @param item
+ */
+function handleDel(item: any) {
+  console.log(item);
+}
+
+onMounted(() => {
+  // getList();
+});
 </script>
 
-<style land="less" scoped>
-.item-btm {
+<style lang="less">
+.item-btm{
   margin-bottom: 12px;
 }
+
 .text-light-color{
   color: var(--text-light-color);
 }
 
-.error,
-.success{
-  &::before{
-    position: absolute;
-    content:"";
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-  }
-}
-.success{
-  &::before{
-    background: #18c418;
-  }
-}
-
-.error{
-  &::before{
-    background: #b42d15;
-  }
-}
-
-.category-other-item {
-  .ant-form-item {
+.category-other-item{
+  .ant-form-item{
     margin-bottom: 0;
   }
 }
+.item-info{
+  div{
+    color: var(--text-light-color);
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    .text-span{
+      margin-left: 6px;
+      font-weight: 500;
+    }
+  }
+}
 
-.overflow {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
+.rt-post{
+  position: absolute;
+  bottom: 0;
+  right: -5px;
 }
 </style>

@@ -44,7 +44,7 @@ export default [
       {
         path: '/projectManagement/sportsEvtent',
         name: 'SportsEvtent',
-        component: () => import('@/pages/projectManagement/sportsEvtent/index.vue'),
+        component: () => import('@/pages/projectarchive/xmxx/index.vue'),
         meta: {
           title: '项目管理'
         }

@@ -225,7 +225,7 @@ export function useGet< R = any, T = any>(
   url: string,
   params?: T,
   config?: AxiosRequestConfig & RequestConfigExtra
-): Promise<ResponseBody<R>> {
+): Promise<ResponseBody<R> | AxiosResponse<any> | any> {
   const options = {
     url,
     params,
