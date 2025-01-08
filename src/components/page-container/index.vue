@@ -20,7 +20,7 @@
         <div flex items-center my-4px of-hidden>
           <slot name="title">
             <span text-20px line-height-32px mr-12px mb-0 truncate font-600>
-              {{ renderTitle(title ?? currentItem.title) }}
+              {{ renderTitle(props.title ?? currentItem.title) }}
             </span>
           </slot>
         </div>
