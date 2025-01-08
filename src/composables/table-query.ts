@@ -140,17 +140,18 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
 
     try {
       await state.beforeQuery();
-      const { data } = await state.queryApi({
+      const { rows, total } = await state.queryApi({
         current: state.pagination.current,
         pageSize: state.pagination.pageSize,
         column: state.pagination.column,
         order: state.pagination.order,
         ...state.queryParams
       });
-      if (data) {
-        const _data = await state.afterQuery(data);
-        state.dataSource = _data.records ?? [];
-        state.pagination.total = _data.total ?? 0;
+
+      if (rows) {
+        const _data = await state.afterQuery(rows);
+        state.dataSource = _data ?? [];
+        state.pagination.total = total ?? 0;
       }
     }
     catch (e) {

@@ -55,9 +55,11 @@ import type { VNodeChild } from 'vue';
 import { useLayoutMenuInject } from './context.ts';
 import { useLayoutState } from '@/layouts/basic-layout/context';
 
-defineProps<{
+const props = defineProps<{
   title?: string
+  isFull?: boolean
 }>();
+
 const slots = defineSlots<{
   default: (props: any) => any
   title?: (props: any) => any
@@ -102,6 +104,9 @@ const contentCls = computed(() => {
 
   else if (contentWidth.value === 'Fixed')
     cls.push(...['max-w-1200px w-1200px', 'mx-auto']);
+  if (props.isFull) {
+    cls.push('h-full');
+  }
 
   return cls;
 });
