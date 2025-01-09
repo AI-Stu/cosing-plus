@@ -8,8 +8,8 @@
 
       <!-- 目录树 -->
       <a-directory-tree
-        v-model:expanded-keys="tree.expandedKeys"
-        v-model:selected-keys="tree.selectedKeys" :tree-data="search.keyword.length > 0 ? search.filterData : tree.data" :checkable="false"
+        v-model:expanded-keys="tree.expandedKeys" v-model:selected-keys="tree.selectedKeys"
+        :tree-data="search.keyword.length > 0 ? search.filterData : tree.data" :checkable="false"
       />
     </div>
 
@@ -38,10 +38,7 @@
       <!-- 列表 -->
       <a-table :columns="table.columns" :data-source="table.data" />
       <div class="pageContainer">
-        <a-pagination
-          v-model:current="table.pageNum" :total="table.total" show-less-items hide-on-single-page
-          @change="queryTableData"
-        />
+        <a-pagination v-model:current="table.pageNum" :total="table.total" show-less-items @change="queryTableData" />
       </div>
     </div>
   </div>
@@ -231,13 +228,13 @@ function onClickCapsuleRefresh() {
   display: flex;
   justify-content: space-between;
   justify-items: stretch;
-  border: 1px solid #f00;
+  // border: 1px solid #f00;
   padding: 0;
 
   .left {
-    width: 330px;
-    background-color: #fff;
+    width: 20vw;
     border-radius: 8px;
+    border: 1px solid #80808040;
 
     .topBar {
       display: flex;
@@ -249,16 +246,16 @@ function onClickCapsuleRefresh() {
       }
     }
 
-    .ant-menu {
+    .ant-tree-directory {
       max-height: calc(100% - 48px);
       overflow: hidden auto;
     }
   }
 
   .right {
-    width: calc(100% - 330px - 16px);
-    background-color: #fff;
+    width: calc(100% - 20vw - 12px);
     border-radius: 8px;
+    border: 1px solid #80808040;
 
     .topBar {
       display: flex;
