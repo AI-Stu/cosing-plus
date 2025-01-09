@@ -155,6 +155,25 @@ function handleAdd() {
     path: '/data/service/add'
   });
 }
+
+/**
+ * 项目详情
+ * @param item
+ */
+function handleInfo(item: any) {
+  router.push({
+    path: `/project/manage/${item.id}`
+  });
+  console.log(item);
+}
+
+/**
+ * 删除项目
+ * @param item
+ */
+function handleDel(item: any) {
+  console.log(item);
+}
 </script>
 
 <style land="less" scoped>
