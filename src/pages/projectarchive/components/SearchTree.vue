@@ -1,10 +1,11 @@
 <template>
   <div class="h-full">
     <a-spin :spinning="loading">
-      <a-space mb-16px>
+      <a-space mb-16px w-full style="border: 1px solid #f00;">
         <a-input
           v-model:value="searchValue" size="small" enter-button
-          :placeholder="props.searchPlaceholder" @change="getList"
+          :placeholder="props.searchPlaceholder" w-calc-(100%-60px)
+          @change="getList"
         >
           <template #suffix>
             <SearchOutlined style="color: rgba(0, 0, 0, 0.45)" />
