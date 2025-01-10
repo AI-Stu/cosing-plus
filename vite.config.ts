@@ -20,7 +20,13 @@ export default defineConfig(async (config) => {
     };
   }
   return {
-    application: {},
+    application: {
+      buildInfoOptions: {
+        configureServerOptions: {
+          '接口文档地址': 'http://150.158.76.216:8085/doc.html#/home'
+        }
+      }
+    },
     vite: {
       resolve: {
         alias: [
