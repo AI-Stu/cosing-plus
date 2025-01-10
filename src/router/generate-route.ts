@@ -103,7 +103,7 @@ function formatMenu(route: RouteRecordRaw, path?: string) {
 // 本地静态路由生成菜单的信息
 export function genRoutes(routes: RouteRecordRaw[], parent?: MenuDataItem) {
   const menuData: MenuData = [];
-  routes.forEach((route) => {
+  routes.forEach((route: any) => {
     let path = route.path;
     if (!path.startsWith('/') && !isUrl(path)) {
       // 判断当前是不是以 /开头，如果不是就表示当前的路由地址为不完全的地址
@@ -115,6 +115,7 @@ export function genRoutes(routes: RouteRecordRaw[], parent?: MenuDataItem) {
     // 判断是不是存在name，如果不存在name的情况下，自动补充一个自定义的name，为了更容易的去实现保活的功能，name是必须的
     if (!route.name)
       route.name = getCacheKey();
+    route.meta = { ...route.meta, hidden: route.hidden };
     const item: MenuDataItem = formatMenu(route, path);
     item.children = [];
     if (route.children && route.children.length)
@@ -123,6 +124,8 @@ export function genRoutes(routes: RouteRecordRaw[], parent?: MenuDataItem) {
       delete item.children;
     menuData.push(item);
   });
+  console.log(menuData);
+
   return menuData;
 }
 

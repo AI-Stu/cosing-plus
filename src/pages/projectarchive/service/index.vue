@@ -26,7 +26,7 @@
     <div class="mt-5" style="background: #fff;padding: 20px;box-sizing: border-box;">
       <a-row :gutter="16">
         <a-col :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
-          <a-button class="w-1/1 h-204px text-light-color" type="dashed">
+          <a-button class="w-1/1 h-204px text-light-color" type="dashed" @click="handleAdd">
             <PlusOutlined style="font-size: 28px;" />
             <div>新增服务</div>
           </a-button>
@@ -66,6 +66,7 @@ import { h } from 'vue';
 import { PlusOutlined, RedoOutlined, SearchOutlined } from '@ant-design/icons-vue';
 import type { SeacrhSelectListOptions, SelectListType } from '../components/types';
 import SearchSelectList from '../components/SearchSelectList.vue';
+import router from '@/router';
 
 defineOptions({
   name: 'SportsEvtent'
@@ -146,6 +147,33 @@ const praiseList = shallowRef([
     value: 2
   }
 ]);
+/**
+ * 新增项目
+ */
+function handleAdd() {
+  router.push({
+    path: '/data/service/add'
+  });
+}
+
+/**
+ * 项目详情
+ * @param item
+ */
+function handleInfo(item: any) {
+  router.push({
+    path: `/project/manage/${item.id}`
+  });
+  console.log(item);
+}
+
+/**
+ * 删除项目
+ * @param item
+ */
+function handleDel(item: any) {
+  console.log(item);
+}
 </script>
 
 <style land="less" scoped>

@@ -512,7 +512,9 @@ export default [
         component: () => import('@/pages/account/settings.vue'),
         meta: {
           title: '个人设置',
-          locale: 'menu.account.settings'
+          locale: 'menu.account.settings',
+          hidden: true,
+          parentKeys: ['/account/center']
         }
       },
       {

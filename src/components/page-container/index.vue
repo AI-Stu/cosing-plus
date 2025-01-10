@@ -20,7 +20,7 @@
         <div flex items-center my-4px of-hidden>
           <slot name="title">
             <span text-20px line-height-32px mr-12px mb-0 truncate font-600>
-              {{ renderTitle(title ?? currentItem.title) }}
+              {{ renderTitle(props.title ?? currentItem.title) }}
             </span>
           </slot>
         </div>
@@ -55,9 +55,11 @@ import type { VNodeChild } from 'vue';
 import { useLayoutMenuInject } from './context.ts';
 import { useLayoutState } from '@/layouts/basic-layout/context';
 
-defineProps<{
+const props = defineProps<{
   title?: string
+  isFull?: boolean
 }>();
+
 const slots = defineSlots<{
   default: (props: any) => any
   title?: (props: any) => any
@@ -102,6 +104,9 @@ const contentCls = computed(() => {
 
   else if (contentWidth.value === 'Fixed')
     cls.push(...['max-w-1200px w-1200px', 'mx-auto']);
+  if (props.isFull) {
+    cls.push('h-full');
+  }
 
   return cls;
 });

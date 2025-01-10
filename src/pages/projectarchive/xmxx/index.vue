@@ -69,7 +69,7 @@
       <a-pagination
         v-model:current="current"
         style="float:right"
-        :total="50"
+        :total="total"
         :show-total="total => `共${total}条`"
         show-less-items
       />
@@ -149,48 +149,8 @@ function filterSelectValue(items: SelectListType[]): (string | number)[] {
   return items.map(e => e.value);
 }
 
-const data = ref([
-  {
-    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
-    unit: '丽水湖房地产公司',
-    signdata: '2024-03-17',
-    standard: 2,
-    service: 2,
-    attachment: 2
-  },
-  {
-    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
-    unit: '丽水湖房地产公司',
-    signdata: '2024-03-17',
-    standard: 1,
-    service: 4,
-    attachment: 2
-  },
-  {
-    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
-    unit: '丽水湖房地产公司',
-    signdata: '2024-03-17',
-    standard: 2,
-    service: 3,
-    attachment: 2
-  },
-  {
-    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
-    unit: '丽水湖房地产公司',
-    signdata: '2024-03-17',
-    standard: 2,
-    service: 2,
-    attachment: 1
-  },
-  {
-    xmmc: '中台产品的研发过程中，会出现不同的设计规范和实现方式',
-    unit: '丽水湖房地产公司',
-    signdata: '2024-03-17',
-    standard: 1,
-    service: 3,
-    attachment: 4
-  }
-]);
+const data = ref<any[]>([]);
+const total = ref<number>(0);
 
 // 好评度
 const praiseList = shallowRef([
@@ -231,6 +191,7 @@ async function getList() {
   console.log('getList', res);
 
   data.value = res.rows;
+  total.value = res.total;
 }
 
 /**
@@ -238,7 +199,7 @@ async function getList() {
  */
 function handleAdd() {
   router.push({
-    path: '/projectManagement/addSportsEvtent'
+    path: '/project/manage/add'
   });
 }
 
@@ -247,6 +208,9 @@ function handleAdd() {
  * @param item
  */
 function handleInfo(item: any) {
+  router.push({
+    path: `/project/manage/${item.id}`
+  });
   console.log(item);
 }
 
@@ -259,7 +223,7 @@ function handleDel(item: any) {
 }
 
 onMounted(() => {
-  // getList();
+  getList();
 });
 </script>
 

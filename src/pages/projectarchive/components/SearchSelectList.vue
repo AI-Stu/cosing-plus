@@ -35,10 +35,7 @@ const emits = defineEmits(['update:modelValue']);
 const { token } = useAntdToken();
 
 const _values = reactive<SelectListType[][]>(Array.from({ length: props.options.length }, () => [])); // 用于存储选中的值
-const values = computed({
-  get: () => props.modelValue,
-  set: val => emits('update:modelValue', val)
-});
+const values = useVModel(props, 'modelValue', emits);
 
 values.value = JSON.parse(JSON.stringify(_values));
 
@@ -65,7 +62,7 @@ function handleClick(index: number, item: SelectListType, items: SeacrhSelectLis
       curValues = [toRaw(item)];
     }
     const hasAll = keys.includes('all');
-    if (keys.includes(item.value)) {
+    if (keys.includes(item.value as string)) {
       // 删除当前选中
       curValues = curValues.filter(e =>
         hasAll ? e.value !== item.value : e.value !== item.value && e.value !== 'all'

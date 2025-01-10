@@ -86,37 +86,32 @@
           </template>
           <template v-if="scope?.column?.dataIndex === 'isfile'">
             <div flex gap-2>
-              <span> {{ scope.record.isfile }} </span>
+              <span> {{ scope.record.isfile || '-' }} </span>
             </div>
           </template>
           <template v-if="scope?.column?.dataIndex === 'isrelxm'">
             <div flex gap-2>
-              <span> {{ scope.record.isrelxm }} </span>
+              <span> {{ scope.record.isrelxm || '-' }} </span>
             </div>
           </template>
           <template v-if="scope?.column?.dataIndex === 'ispublish'">
             <div flex gap-2>
-              <span> {{ scope.record.ispublish }} </span>
+              <span> {{ scope.record.ispublish || '-' }} </span>
             </div>
           </template>
           <template v-if="scope?.column?.dataIndex === 'fileSize'">
             <div flex gap-2>
-              <span> {{ scope.record.fileSize }} </span>
+              <span> {{ scope.record.fileSize || '-' }} </span>
             </div>
           </template>
           <template v-if="scope?.column?.dataIndex === 'fileType'">
             <div flex gap-2>
-              <span> {{ scope.record.fileType }} </span>
+              <span> {{ scope.record.fileType || '-' }} </span>
             </div>
           </template>
           <template v-if="scope?.column?.dataIndex === 'fileSuffix'">
             <div flex gap-2>
-              <span> {{ scope.record.fileSuffix }} </span>
-            </div>
-          </template>
-          <template v-if="scope?.column?.dataIndex === 'filePath'">
-            <div flex gap-2>
-              <span> {{ scope.record.filePath }} </span>
+              <span> {{ scope.record.fileSuffix || '-' }} </span>
             </div>
           </template>
           <template v-if="scope?.column?.dataIndex === 'orderindex'">
@@ -129,12 +124,12 @@
               <a-button type="link" @click="handleInfo(scope?.record as DataStorageVO)">
                 详情
               </a-button>
-              <a-button
+              <!-- <a-button
                 v-hasPermi="['projectarchive:dataStorage:edit']" type="link"
                 @click="handleUpdate(scope?.record as DataStorageVO)"
               >
                 编辑
-              </a-button>
+              </a-button> -->
               <a-popconfirm
                 title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
                 @confirm="handleDelete(scope?.record as DataStorageVO)"
@@ -160,11 +155,11 @@
         ref="dataStorageFormRef" :model="formData" class="w-full" :rules="rules" :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-item label="父目录" name="pid">
-          <a-input v-model:value="formData.pid" :maxlength="50" placeholder="请输入父目录" disabled />
+        <a-form-item label="父目录" name="filePath">
+          <a-input v-model:value="formData.filePath" :maxlength="50" placeholder="请输入父目录" disabled />
         </a-form-item>
-        <a-form-item label="文件名" name="fileName">
-          <a-input v-model:value="formData.orderindex" :maxlength="50" placeholder="请输入文件名" />
+        <a-form-item label="文件名" name="name">
+          <a-input v-model:value="formData.name" :maxlength="50" placeholder="请输入文件名" />
         </a-form-item>
       </a-form>
     </a-modal>
@@ -201,6 +196,8 @@ const loading = reactive({
   isSearch: false
 });
 
+const selectRow = ref<DataStorageForm>();
+
 // const { } = toRefs<any>(dictStore.getDictByKey());
 
 // 表格列
@@ -215,14 +212,13 @@ const columns = [
   {
     title: '文件名',
     dataIndex: 'name',
-    resizable: true,
-    width: '200px'
+    resizable: true
   },
   {
     title: '类型',
     dataIndex: 'fileType',
     resizable: true,
-    width: '100px'
+    width: '140px'
   },
   {
     title: '父目录id',
@@ -235,14 +231,15 @@ const columns = [
     title: '是否文件',
     dataIndex: 'isfile',
     resizable: true,
-    width: '100px'
+    width: '100px',
+    hide: true
   },
 
   {
     title: '大小',
     dataIndex: 'fileSize',
     resizable: true,
-    width: '100px'
+    width: '140px'
   },
 
   {
@@ -256,19 +253,20 @@ const columns = [
     title: '文件路径',
     dataIndex: 'filePath',
     resizable: true,
+    hide: true,
     width: '100px'
   },
   {
     title: '是否关联项目',
     dataIndex: 'isrelxm',
     resizable: true,
-    width: '100px'
+    width: '140px'
   },
   {
     title: '是否发布服务',
     dataIndex: 'ispublish',
     resizable: true,
-    width: '100px'
+    width: '140px'
   },
   {
     title: '顺序',
@@ -437,19 +435,17 @@ async function handleUpdate(row?: DataStorageVO) {
 
 /** 提交按钮 */
 function submitForm() {
-  dataStorageFormRef.value?.validate(async (valid: boolean) => {
-    if (valid) {
-      buttonLoading.value = true;
-      if (formData.value?.id) {
-        await updateDataStorage(formData.value).finally(() => buttonLoading.value = false);
-      }
-      else {
-        await addDataStorage(formData.value).finally(() => buttonLoading.value = false);
-      }
-      ElMessage.success('操作成功');
-      modal.open = false;
-      await initQuery();
+  dataStorageFormRef.value?.validate().then(async () => {
+    buttonLoading.value = true;
+    if (formData.value?.id) {
+      await updateDataStorage(formData.value).finally(() => buttonLoading.value = false);
     }
+    else {
+      await addDataStorage(formData.value).finally(() => buttonLoading.value = false);
+    }
+    ElMessage.success('操作成功');
+    modal.open = false;
+    initQuery();
   });
 }
 
@@ -458,7 +454,7 @@ async function handleDelete(row?: DataStorageVO) {
   const _ids = row?.id || ids.value;
   await delDataStorage(_ids);
   ElMessage.success('删除成功');
-  await initQuery();
+  initQuery();
 }
 
 /** 导出按钮操作 */

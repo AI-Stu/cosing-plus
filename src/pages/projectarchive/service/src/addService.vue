@@ -8,9 +8,9 @@
 // import { h, ref, shallowRef } from 'vue';
 
 defineOptions({
-  name: 'AddSportsEvtent'
+  name: 'AddService'
 });
 </script>
 
-  <style lang="less">
-  </style>
+<style lang="less">
+</style>
