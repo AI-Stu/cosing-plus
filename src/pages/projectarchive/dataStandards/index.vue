@@ -1,48 +1,47 @@
 <template>
   <page-container is-full>
-    <div style="display: flex; justify-content: space-between; border: 1px solid #f00; width: 100%; height: 100%;">
-      <a-card class="w-260px" style="padding: 0;">
+    <div class="w-full h-full flex justify-between ">
+      <a-card class="w-[15%]">
         <template #title>
-          <a-space class="w-full" style="border: 1px solid #f00;">
-            <a-input-search v-model="search.keyword" placeholder="数据标准类型" :loading="search.loading" />
+          <div class="w-full flex justify-between">
+            <a-input-search v-model="search.keyword" placeholder="数据标准类型" :loading="search.loading" class="w-[calc(100%-40px)]" />
             <a-button type="primary" :icon="h(PlusOutlined)" class="addBtn" @click="clickCatalogAdd" />
-          </a-space>
+          </div>
         </template>
-
+        <!-- 目录树 -->
         <a-directory-tree
           v-model:expanded-keys="tree.expandedKeys" v-model:selected-keys="tree.selectedKeys"
           :tree-data="search.keyword.length > 0 ? search.filterData : tree.data" :checkable="false"
         />
       </a-card>
 
-      <a-card class="w-[calc(100%-276px)]">
-        <a-card>
-          <template #title>
-            <a-space>
-              <a-button type="primary" :icon="h(PlusOutlined)" @click="clickCreate">
-                新建
-              </a-button>
-              <a-button @click="clickBatchImport">
-                批量导入
-              </a-button>
-              <a-button @click="clickBatchExport">
-                批量导出
-              </a-button>
-            </a-space>
-          </template>
-          <template #extra>
-            <RedoOutlined @click="queryTableData" />
-          </template>
-          <template>
-            <a-table :columns="table.columns" :data-source="table.data" />
-            <div class="pageContainer">
-              <a-pagination
-                v-model:current="table.pageNum" :total="table.total" show-less-items
-                @change="queryTableData"
-              />
-            </div>
-          </template>
-        </a-card>
+      <a-card class="w-[calc(85%-12px)]">
+        <template #title>
+          <a-space>
+            <a-button type="primary" :icon="h(PlusOutlined)" @click="clickCreate">
+              新建
+            </a-button>
+            <a-button @click="clickBatchImport">
+              批量导入
+            </a-button>
+            <a-button @click="clickBatchExport">
+              批量导出
+            </a-button>
+          </a-space>
+        </template>
+        <template #extra>
+          <a-button :icon="h(RedoOutlined)" @click="queryTableData" />
+        </template>
+        <!-- 数据标准列表 -->
+        <template>
+          <a-table :columns="table.columns" :data-source="table.data" />
+          <div class="pageContainer">
+            <a-pagination
+              v-model:current="table.pageNum" :total="table.total" show-less-items
+              @change="queryTableData"
+            />
+          </div>
+        </template>
       </a-card>
     </div>
 
@@ -83,16 +82,18 @@
 
 <script setup lang="ts">
 import { h, reactive, watch } from 'vue';
-import { PlusOutlined } from '@ant-design/icons-vue';
+import { PlusOutlined, RedoOutlined } from '@ant-design/icons-vue';
 import type { DataNode } from 'ant-design-vue/es/tree';
 import type { TableColumnType } from 'ant-design-vue';
 import type { Key } from 'ant-design-vue/es/_util/type';
-import type { DataStandardsQuery, DataStandardsVO } from '@/api/projectarchive/dataStandards/types';
-import { addDataStandards, delDataStandards, getCatalogTree, getDataStandards, listDataStandards, updateDataStandards } from '@/api/projectarchive/dataStandards';
+import type { DataStandardsQuery } from '@/api/projectarchive/dataStandards/types';
+import { getCatalogTree, listDataStandards } from '@/api/projectarchive/dataStandards';
 
 defineOptions({
   name: 'DataStandards'
 });
+const ElMessage = useMessage();
+const dictStore = useDictStore();
 
 const tree = reactive<{
   data: DataNode[]
@@ -240,167 +241,27 @@ function clickBatchImport() {
 }
 
 function clickBatchExport() {
-  useDownload('projectarchive/dataStandards/export', {
-    ...toRaw(state.queryParams)
-  }, `dataStandards_${new Date().getTime()}.xlsx`);
-}
-
-const { proxy } = getCurrentInstance() as ComponentInternalInstance;
-const ElMessage = useMessage();
-
-const dictStore = useDictStore();
-const { hnt_type } = toRefs<any>(dictStore.getDictByKey('hnt_type'));
-
-// 表格列
-const columns = [
-  {
-    title: '$comment',
-    dataIndex: 'id',
-    resizable: true
-  },
-  {
-    title: '数据标准目录id',
-    dataIndex: 'dataStandardCatalogId',
-    resizable: true
-  },
-  {
-    title: '标准名称',
-    dataIndex: 'name',
-    resizable: true
-  },
-  {
-    title: '数据类型',
-    dataIndex: 'dataType',
-    resizable: true
-  },
-  {
-    title: '技术标准',
-    dataIndex: 'skillStandards',
-    resizable: true
-  },
-  {
-    title: '资料类型',
-    dataIndex: 'materialType',
-    resizable: true
-  },
-  {
-    title: '数据标准',
-    dataIndex: 'dataStandards',
-    resizable: true
-  },
-  {
-    title: '数量',
-    dataIndex: 'sl',
-    resizable: true
-  },
-  {
-    title: '状态',
-    dataIndex: 'stauts',
-    resizable: true
-  },
-  {
-    title: '顺序',
-    dataIndex: 'orderindex',
-    resizable: true
-  },
-  {
-    title: '租户号',
-    dataIndex: 'tenantId',
-    resizable: true
-  },
-  {
-    title: '创建人',
-    dataIndex: 'createBy',
-    resizable: true
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'createTime',
-    resizable: true
-  },
-  {
-    title: '更新人',
-    dataIndex: 'updateBy',
-    resizable: true
-  },
-  {
-    title: '更新时间',
-    dataIndex: 'updateTime',
-    resizable: true
-  }
-];
-const filterColumns = ref(columns);
-const tableSize = ref<('small' | 'middle' | 'large')>('large');
-const buttonLoading = ref(false);
-const loading = ref(true);
-const expand = ref(false);
-const labelCol = { style: { width: '100px' } };
-const wrapperCol = { span: 24 };
-
-/** 取消按钮 */
-function handleCancel() {
-  reset();
-  modal.visible = false;
-}
-
-/** 表单重置 */
-function reset() {
-  formData.value = { ...initFormData };
-  dataStandardsFormRef.value?.resetFields();
-}
-
-/** 新增按钮操作 */
-function handleAdd() {
-  reset();
-  modal.visible = true;
-  modal.title = '添加数据标准';
-}
-
-function handleInfo(row?: DataStandardsVO) {
-  console.log(row);
-}
-
-/** 修改按钮操作 */
-async function handleUpdate(row?: DataStandardsVO) {
-  reset();
-  const _id = row?.id || ids.value[0];
-  const res = await getDataStandards(_id);
-  Object.assign(formData.value, res.data);
-  modal.visible = true;
-  modal.title = '修改数据标准';
-}
-
-/** 提交按钮 */
-function submitForm() {
-  dataStandardsFormRef.value?.validate(async (valid: boolean) => {
-    if (valid) {
-      buttonLoading.value = true;
-      if (formData.value.id) {
-        await updateDataStandards(formData.value).finally(() => buttonLoading.value = false);
-      }
-      else {
-        await addDataStandards(formData.value).finally(() => buttonLoading.value = false);
-      }
-      ElMessage.success('操作成功');
-      modal.visible = false;
-      await initQuery();
-    }
-  });
-}
-
-/** 删除按钮操作 */
-async function handleDelete(row?: DataStandardsVO) {
-  const _ids = row?.id || ids.value;
-  await proxy?.$modal.confirm(`是否确认删除数据标准编号为"${_ids}"的数据项？`)
-    .finally(() => loading.value = false);
-  await delDataStandards(_ids);
-  ElMessage.success('删除成功');
-  await initQuery();
+  // useDownload('projectarchive/dataStandards/export', {
+  //   ...toRaw(state.queryParams)
+  // }, `dataStandards_${new Date().getTime()}.xlsx`);
 }
 </script>
 
 <style lang="less" scoped>
 .ant-pro-page-container {
   height: 100%;
+
+  :deep(.ant-card) {
+
+    .ant-card-head {
+      padding: 0 8px;
+    }
+
+    .ant-card-body {
+      width: 100%;
+      max-height: calc(100% - 56px);
+      padding: 8px;
+    }
+  }
 }
 </style>
