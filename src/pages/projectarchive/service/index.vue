@@ -4,118 +4,161 @@
       <a-row>
         <a-col :span="18">
           <SearchSelectList v-model="selectValue" :options="SearchSelectOptions" :filter="filterSelectValue">
-            <template #end2>
+            <template #end1>
               <a-range-picker v-model:value="rangeYear" size="small" picker="year" />
             </template>
-            <template #end3>
+            <template #end2>
               <a-select
-                v-model:value="region" :options="praiseList" size="small" placeholder="不限"
-                style="width: 100px"
+                v-model:value="region" :options="regionList" mode="tags" size="small" placeholder="不限" :max-tag-count="1" :max-tag-text-length="60"
+                style="width: 200px;"
               />
-            </template>
+            </template>Cascader
           </SearchSelectList>
         </a-col>
         <a-col :span="6" style="text-align: right;position:relative;">
-          <a-input v-model:value="searchValue" placeholder="请输入项目名称">
+          <a-input v-model:value="searchValue" placeholder="请输入服务名称">
             <template #suffix>
               <SearchOutlined style="color: rgba(0, 0, 0, 0.45)" />
             </template>
           </a-input>
-          <a-button class="absolute bottom-[10px] right-0 color-[#00000073]" :icon="h(RedoOutlined)" @click="getList" />
+          <a-button
+            class="absolute bottom-[10px] right-0 color-[#00000073]"
+            :icon="h(RedoOutlined)" :loading="spinning" @click="getList"
+          />
         </a-col>
       </a-row>
     </a-card>
 
-    <div class="mt-5 box-border">
-      <a-row :gutter="16">
-        <a-col :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
-          <a-button class="w-1/1 h-204px text-light-color" type="dashed" @click="handleAdd">
-            <PlusOutlined style="font-size: 28px;" />
-            <div>新增服务</div>
-          </a-button>
-        </a-col>
-        <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
-          <a-card
-            class="cursor-pointer transition duration-300 h-204px b-r-2 success
+    <a-spin :spinning="spinning">
+      <div class="mt-5 box-border">
+        <a-row :gutter="16">
+          <a-col :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
+            <a-button class="w-1/1 h-204px text-light-color" type="dashed" @click="handleAdd">
+              <PlusOutlined style="font-size: 28px;" />
+              <div>新增服务</div>
+            </a-button>
+          </a-col>
+          <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
+            <a-card
+              class="cursor-pointer transition duration-300 h-full b-r-2 success
             hover:shadow-[0_4px_20px_-5px_rgba(0,0,0,0.35)]"
-          >
-            <template #default>
-              <div class="relative ">
-                <h1 style="font-size: 14px;font-weight: 600;height:44px;margin-bottom:10px;">
-                  {{ item.serviceName }}
-                </h1>
-                <div class="item-info">
-                  <div>
-                    <ProfileOutlined /><span class="text-span">{{ item.region }}</span>
+              :body-style="{ height: '100%', padding: '14px 20px' }"
+            >
+              <template #default>
+                <div class="flex flex-col h-full">
+                  <h1 font-bold h-48px mb-2>
+                    {{ item.serviceName }}
+                  </h1>
+                  <div flex-1>
+                    <a-flex wrap="wrap" gap="small">
+                      <a-tag color="#769cf62e" :bordered="false">
+                        <span class="color-[#769cf6]">{{ SYS_SERVICE_TYPE[item.serviceType] }}</span>
+                      </a-tag>
+                      <a-tag color="#769cf62e" :bordered="false">
+                        <span class="color-[#769cf6]">{{ item.serviceYear }}</span>
+                      </a-tag>
+                      <a-tag color="#769cf62e" :bordered="false">
+                        <span class="color-[#769cf6]">{{ item.region }}</span>
+                      </a-tag>
+                      <a-tag color="#769cf62e" :bordered="false">
+                        <span class="color-[#769cf6]">{{ item.serviceType }}</span>
+                      </a-tag>
+                    </a-flex>
                   </div>
-                  <div>
-                    <CloudOutlined /><span class="text-span">{{ item.serviceType }}</span>
-                  </div>
-                  <div>
-                    <BranchesOutlined /><span class="text-span">{{ item.serviceYear }}</span>
+
+                  <div flex items-center justify-between>
+                    <a-tag color="success" :bordered="false">
+                      <template #icon>
+                        <CheckCircleFilled />
+                      </template>
+                      在线
+                    </a-tag>
+                    <!-- <a-tag color="error" :bordered="false">
+                      <template #icon>
+                        <CloseCircleFilled />
+                      </template>
+                      注销
+                    </a-tag> -->
+
+                    <div flex items-center>
+                      <a-button type="text" mr-3 size="small" @click="handleDel(item)">
+                        删除
+                      </a-button>
+                      <a-button type="primary" ghost size="small" @click="handleInfo(item)">
+                        详情
+                      </a-button>
+                    </div>
                   </div>
                 </div>
-                <div class="absolute bottom-0 right-0">
-                  <a-button type="text" style="margin-right:5px;" size="small" @click="handleDel(item)">
-                    删除
-                  </a-button>
-                  <a-button type="primary" ghost size="small" @click="handleInfo(item)">
-                    详情
-                  </a-button>
-                </div>
-              </div>
-            </template>
-          </a-card>
-        </a-col>
-      </a-row>
-      <a-pagination
-        v-model:current="current" style="float:right" :total="total" :show-total="total => `共${total}条`"
-        show-less-items
-      />
-    </div>
+              </template>
+            </a-card>
+          </a-col>
+        </a-row>
+        <a-pagination
+          v-model:current="current" style="float:right" :total="total" :show-total="total => `共${total}条`"
+          show-less-items
+        />
+      </div>
+    </a-spin>
   </page-container>
 </template>
 
 <script setup lang="ts">
 import { h } from 'vue';
 import to from 'await-to-js';
-import { PlusOutlined, RedoOutlined, SearchOutlined } from '@ant-design/icons-vue';
-import type { SeacrhSelectListOptions, SelectListType } from '../components/types';
+import { CheckCircleFilled, PlusOutlined, RedoOutlined, SearchOutlined } from '@ant-design/icons-vue';
+import type { SelectListType } from '../components/types';
 import SearchSelectList from '../components/SearchSelectList.vue';
-import { listService } from '@/api/projectarchive/service';
+import { delService, listService } from '@/api/projectarchive/service';
 import type { ServiceQuery } from '@/api/projectarchive/service/types';
 
 defineOptions({
-  name: 'SportsEvtent'
+  name: 'ServiceManage'
 });
 
+const message = useMessage();
 const router = useRouter();
+const dictStore = useDictStore();
+const { sys_service_type } = toRefs<any>(dictStore.getDict('sys_service_type'));
+const SERVICE_TYPE = [] as SelectListType[];
+console.log(sys_service_type);
+const SYS_SERVICE_TYPE = {} as Record<string, string>;
+sys_service_type?.value.forEach((e: DictDataOption) => {
+  SERVICE_TYPE.push({
+    name: e.label,
+    value: e.value
+  });
+  SYS_SERVICE_TYPE[e.value] = e.label;
+});
+
 // 分页
+const spinning = ref<boolean>(false);
 const current = ref<number>(1);
 const rangeYear = ref<any>();
-const region = ref<string>('');
+const region = ref<string>();
 const searchValue = ref();
 const selectValue = ref<string[][]>([]);
 
-const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
-  {
-    label: '数据类别',
-    options: [
-      { name: '全部', value: 'all' },
-      { name: '三维数据', value: '3d' },
-      { name: '二维数据', value: '2d' },
-      { name: '物联设备', value: 'iot' },
-      { name: '物联设备', value: 'vr' }
-    ]
-  },
+const SearchSelectOptions = computed(() => ([
+  // {
+  //   label: '数据类别',
+  //   options: [
+  //     { name: '全部', value: 'all' },
+  //     { name: '三维数据', value: '3d' },
+  //     { name: '二维数据', value: '2d' },
+  //     { name: '物联设备', value: 'iot' },
+  //     { name: '物联设备', value: 'vr' }
+  //   ]
+  // },
   {
     label: '服务类型',
     options: [
       { name: '全部', value: 'all' },
-      { name: '倾斜摄影', value: 'mesh' },
-      { name: '激光点云', value: 'lidar' },
-      { name: '基础地形', value: 'terrain' },
-      { name: 'BIM模型', value: 'bim' }
+      ...SERVICE_TYPE
+      // { name: '倾斜摄影', value: 'mesh' },
+      // { name: '激光点云', value: 'lidar' },
+      // { name: '基础地形', value: 'terrain' },
+      // { name: 'BIM模型', value: 'bim' }
     ]
   },
   {
@@ -140,9 +183,9 @@ const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
     ],
     isMultiple: true
   }
-]);
+]));
 
-function filterSelectValue(items: SelectListType[]): string[] {
+function filterSelectValue(items: SelectListType[]): (string | number)[] {
   return items.map(e => e.value);
 }
 
@@ -150,9 +193,10 @@ const data = ref<any[]>([]);
 const total = ref<number>(0);
 
 /**
- * 获取项目列表
+ * 获取服务列表
  */
 async function getList() {
+  spinning.value = true;
   const [dataType, serviceType, serviceYear, region] = selectValue.value;
 
   const params: ServiceQuery = {
@@ -171,27 +215,51 @@ async function getList() {
 
   const [error, res] = await to(listService(params));
   if (error) {
+    spinning.value = false;
     return;
   }
   console.log('getList', res);
-
-  data.value = res.rows;
-  total.value = res.total;
+  const { rows, total } = res;
+  setTimeout(() => {
+    spinning.value = false;
+    data.value = rows;
+    total.value = total;
+  }, 200);
 }
 
-// 好评度
-const praiseList = shallowRef([
+// 区划
+const regionList = shallowRef([
   {
-    label: '优秀',
-    value: 1
+    label: '青田县',
+    value: '青田县'
   },
   {
-    label: '普通',
-    value: 2
+    label: '缙云县',
+    value: '缙云县'
+  },
+  {
+    label: '遂昌县',
+    value: '遂昌县'
+  },
+  {
+    label: '松阳县',
+    value: '松阳县'
+  },
+  {
+    label: '云和县',
+    value: '云和县'
+  },
+  {
+    label: '庆元县',
+    value: '庆元县'
+  },
+  {
+    label: '景宁畲族自治县',
+    value: '景宁畲族自治县'
   }
 ]);
 /**
- * 新增项目
+ * 新增服务
  */
 function handleAdd() {
   router.push({
@@ -200,46 +268,34 @@ function handleAdd() {
 }
 
 /**
- * 项目详情
+ * 服务详情
  * @param item
  */
 function handleInfo(item: any) {
   router.push({
-    path: `/project/manage/${item.id}`
+    path: `/data/service/${item.id}`
   });
   console.log(item);
 }
 
 /**
- * 删除项目
+ * 删除服务
  * @param item
  */
-function handleDel(item: any) {
-  console.log(item);
+async function handleDel(item: any) {
+  await delService(item.id);
+  getList();
+  message.success('删除成功');
 }
+
+onBeforeMount(() => {
+  getList();
+});
 </script>
 
 <style land="less" scoped>
 .text-light-color {
   color: var(--text-light-color);
-}
-
-.item-info {
-  div {
-    color: var(--text-light-color);
-    font-size: 12px;
-    height: 18px;
-    line-height: 18px;
-    margin-bottom: 5px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    .text-span {
-      margin-left: 6px;
-      font-weight: 500;
-    }
-  }
 }
 
 .error,

@@ -1,58 +1,23 @@
 <template>
   <div>
     <a-form
-      ref="formRef" :model="formState" style="max-width: 500px; margin: 40px auto 0;"
-      :label-col="labelCol" :wrapper-col="wrapperCol"
+      ref="formRef" :model="formState" style="max-width: 500px; margin: 40px auto 0;" :label-col="labelCol"
+      :wrapper-col="wrapperCol"
     >
-      <a-form-item
-        label="服务编号"
-        name="xmbh"
-        :rules="[{ required: true, message: '服务编号必须填写' }]"
-      >
-        <a-input
-          v-model:value="formState.serviceCode" placeholder="请输入服务编号"
-        />
+      <a-form-item label="服务编号" name="serviceCode" :rules="[{ required: true, message: '服务编号必须填写' }]">
+        <a-input v-model:value="formState.serviceCode" placeholder="请输入服务编号" />
       </a-form-item>
-      <a-form-item
-        label="服务名称"
-        name="xmmc"
-        :rules="[{ required: true, message: '服务名称必须填写' }]"
-      >
-        <a-input
-          v-model:value="formState.serviceName" placeholder="请输入服务名称"
-        />
+      <a-form-item label="服务名称" name="serviceName" :rules="[{ required: true, message: '服务名称必须填写' }]">
+        <a-input v-model:value="formState.serviceName" placeholder="请输入服务名称" />
       </a-form-item>
-      <a-form-item
-        label="服务地址"
-        name="xmdz"
-        :rules="[{ required: true, message: '服务地址必须填写' }]"
-      >
-        <a-input v-model:value="formState.serviceUrl" placeholder="请选择服务地址">
-          <template #suffix>
-            <AimOutlined style="color: rgba(0, 0, 0, 0.45)" />
-          </template>
-        </a-input>
+      <a-form-item label="服务地址" name="serviceUrl" :rules="[{ required: true, message: '服务地址必须填写' }]">
+        <a-input v-model:value="formState.serviceUrl" placeholder="https://" />
       </a-form-item>
-      <a-form-item
-        label="服务年份"
-        name="xmdz"
-        :rules="[{ required: true, message: '服务年份必须填写' }]"
-      >
-        <a-input v-model:value="formState.serviceYear" placeholder="请选择服务年份">
-          <template #suffix>
-            <AimOutlined style="color: rgba(0, 0, 0, 0.45)" />
-          </template>
-        </a-input>
+      <a-form-item label="服务年份" name="serviceYear" picker="year" :rules="[{ required: true, message: '服务年份必须填写' }]">
+        <a-date-picker v-model:value="formState.serviceYear" picker="year" placeholder="请选择服务年份" />
       </a-form-item>
-      <a-form-item
-        label="服务类型"
-        name="serviceType"
-        :rules="[{ required: true, message: '服务类型必须填写' }]"
-      >
-        <a-select
-          v-model:value="formState.serviceType"
-          placeholder="请选择所属区域"
-        >
+      <a-form-item label="服务类型" name="serviceType" :rules="[{ required: true, message: '服务类型必须填写' }]">
+        <a-select v-model:value="formState.serviceType" :options="SYS_SERVICE_TYPE" placeholder="请选择服务类型">
           <a-select-option value="1">
             倾斜摄影
           </a-select-option>
@@ -61,29 +26,11 @@
           </a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item
-        label="所属区域"
-        name="region"
-        :rules="[{ required: true, message: '所属区域必须选择' }]"
-      >
-        <a-select
-          v-model:value="formState.region"
-          placeholder="请选择所属区域"
-        >
-          <a-select-option value="1">
-            湖北
-          </a-select-option>
-          <a-select-option value="2">
-            湖南
-          </a-select-option>
-        </a-select>
+      <a-form-item label="所属区域" name="region" :rules="[{ required: true, message: '所属区域必须选择' }]">
+        <a-select v-model:value="formState.region" :options="regionList" placeholder="请选择所属区域" />
       </a-form-item>
 
-      <a-form-item
-        label="范围" name="bounds"
-        :auto-link="false"
-        :rules="[{ required: true, message: '范围必须填写' }]"
-      >
+      <a-form-item label="范围" name="bounds" :auto-link="false" :rules="[{ required: true, message: '范围必须填写' }]">
         <a-row :gutter="24" mb-4>
           <a-col class="gutter-row" :span="12">
             <a-input v-model:value.trim="bounds.lt" placeholder="请输入左上经纬度" />
@@ -122,16 +69,20 @@
 
 <script setup lang="ts">
 import type { FormInstance } from 'ant-design-vue';
-import { AimOutlined } from '@ant-design/icons-vue';
 import type { ServiceVO } from '@/api/projectarchive/service/types';
+import { addService } from '@/api/projectarchive/service';
+import { regionList } from '@/assets/region';
 
 const emit = defineEmits(['nextStep']);
+const dictStore = useDictStore();
 const formRef = ref<FormInstance>();
 const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
 const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
-
-const formState = reactive<ServiceVO>({});
-
+const { sys_service_type } = toRefs<any>(dictStore.getDict('sys_service_type'));
+const SYS_SERVICE_TYPE = computed(() => sys_service_type?.value.map((e: any) => ({ label: e.label, value: e.value })));
+const formState = reactive<ServiceVO>({
+  orderindex: '1'
+});
 const bounds = reactive({
   lt: '',
   lb: '',
@@ -142,42 +93,37 @@ watch(bounds, () => {
   formState.bounds = `${bounds.lt},${bounds.lb},${bounds.rt},${bounds.rb}`;
 });
 async function nextStep() {
-  try {
-    // await formRef.value?.validateFields();
-    // const res = await addService(formState);
-    // console.log(res);
-
+  formRef.value?.validateFields().then(async () => {
+    const res = await addService(formState);
+    console.log(res);
     emit('nextStep');
-  }
-  catch (errorInfo) {
-    console.log('Failed:', errorInfo);
-  }
+  });
 }
 
 // 重置
-function reset() {}
+function reset() { }
 </script>
 
-  <style lang="less" scoped>
-  .step-form-style-desc {
-    padding: 0 56px;
+<style lang="less" scoped>
+.step-form-style-desc {
+  padding: 0 56px;
 
-    h3 {
-      margin: 0 0 12px;
-      font-size: 16px;
-      line-height: 32px;
-    }
-
-    h4 {
-      margin: 0 0 4px;
-      font-size: 14px;
-      line-height: 22px;
-    }
-
-    p {
-      margin-top: 0;
-      margin-bottom: 12px;
-      line-height: 22px;
-    }
+  h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 32px;
   }
-  </style>
+
+  h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 22px;
+  }
+}
+</style>

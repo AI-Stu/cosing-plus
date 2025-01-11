@@ -160,7 +160,7 @@ const ElMessage = useMessage();
 const { hasAccess } = useAccess();
 
 const dictStore = useDictStore();
-// const { } = toRefs<any>(dictStore.getDictByKey());
+// const { } = toRefs<any>(dictStore.getDictByKey(['sys_service_type']));
 
 // 表格列
 const columns = [

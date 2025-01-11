@@ -61,7 +61,7 @@ export const useDictStore = defineStore('dict', () => {
           await getDictsApi(dictType).then((resp) => {
             if (resp.data) {
               res.value[dictType] = resp.data.map(
-                (p): DictDataOption => ({ label: p.dictLabel, value: p.dictValue, tagType: p.tagType, tagClass: p.tagClass })
+                (p: any): DictDataOption => ({ label: p.dictLabel, value: p.dictValue, tagType: p.listClass, tagClass: p.cssClass })
               );
             }
             setDict(dictType, res.value[dictType] || []);

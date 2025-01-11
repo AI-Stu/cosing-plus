@@ -8,7 +8,10 @@
               <a-range-picker v-model:value="rangeYear" size="small" picker="year" />
             </template>
             <template #end3>
-              <a-select v-model:value="region" size="small" :options="praiseList" placeholder="不限" style="width: 100px" />
+              <a-select
+                v-model:value="region" :options="regionList" mode="tags" size="small" placeholder="不限" :max-tag-count="1" :max-tag-text-length="60"
+                style="width: 200px;"
+              />
             </template>
           </SearchSelectList>
         </a-col>
@@ -37,28 +40,41 @@
         </a-col>
         <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4 ">
           <a-card
-            class="cursor-pointer transition duration-300 h-204px b-r-2 success
+            class="cursor-pointer transition duration-300 h-full b-r-2 success
             hover:shadow-[0_4px_20px_-5px_rgba(0,0,0,0.35)]"
+            :body-style="{ height: '100%', padding: '14px 20px' }"
           >
             <template #default>
-              <div class="relative">
-                <h1 style="font-size: 14px;font-weight: 600;height:44px;margin-bottom:10px;">
+              <div class="flex flex-col h-full">
+                <h1 font-bold h-48px mb-2>
                   {{ item.xmmc }}
                 </h1>
-                <div class="item-info">
-                  <div><UserOutlined /><span class="text-span">{{ item.unit }}</span></div>
-                  <div><CalendarOutlined /><span class="text-span">{{ item.signdata }}</span></div>
-                  <div><ProfileOutlined /><span class="text-span">数据标准（{{ item.standard }}）</span></div>
-                  <div><CloudOutlined /><span class="text-span">挂接服务（{{ item.service }}）</span></div>
-                  <div><BranchesOutlined /><span class="text-span">附件（{{ item.attachment }}）</span></div>
+                <div>
+                  <div class="item-info">
+                    <UserOutlined /><span class="text-span">{{ item.unit }}</span>
+                  </div>
+                  <div class="item-info">
+                    <CalendarOutlined /><span class="text-span">{{ item.signdata }}</span>
+                  </div>
+                  <div class="item-info">
+                    <ProfileOutlined /><span class="text-span">数据标准（{{ item.standard || 0 }}）</span>
+                  </div>
+                  <div class="item-info">
+                    <CloudOutlined /><span class="text-span">挂接服务（{{ item.service || 0 }}）</span>
+                  </div>
                 </div>
-                <div class="absolute bottom-0 right-0">
-                  <a-button type="text" style="margin-right:5px;" size="small" @click="handleDel(item)">
-                    删除
-                  </a-button>
-                  <a-button type="primary" ghost size="small" @click="handleInfo(item)">
-                    详情
-                  </a-button>
+                <div flex items-center justify-between>
+                  <div class="item-info">
+                    <BranchesOutlined /><span class="text-span">附件（{{ item.attachment || 0 }}）</span>
+                  </div>
+                  <div flex items-center>
+                    <a-button type="text" style="margin-right:5px;" size="small" @click="handleDel(item)">
+                      删除
+                    </a-button>
+                    <a-button type="primary" ghost size="small" @click="handleInfo(item)">
+                      详情
+                    </a-button>
+                  </div>
                 </div>
               </div>
             </template>
@@ -101,7 +117,7 @@ const router = useRouter();
 // 分页
 const current = ref<number>(1);
 const rangeYear = ref<any>();
-const region = ref<string>('');
+const region = ref<string>();
 const searchValue = ref<string>('');
 const selectValue = ref<string[][]>([]);
 const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
@@ -151,18 +167,37 @@ function filterSelectValue(items: SelectListType[]): (string | number)[] {
 const data = ref<any[]>([]);
 const total = ref<number>(0);
 
-// 好评度
-const praiseList = shallowRef([
+// 区划
+const regionList = shallowRef([
   {
-    label: '优秀',
-    value: 1
+    label: '青田县',
+    value: '青田县'
   },
   {
-    label: '普通',
-    value: 2
+    label: '缙云县',
+    value: '缙云县'
+  },
+  {
+    label: '遂昌县',
+    value: '遂昌县'
+  },
+  {
+    label: '松阳县',
+    value: '松阳县'
+  },
+  {
+    label: '云和县',
+    value: '云和县'
+  },
+  {
+    label: '庆元县',
+    value: '庆元县'
+  },
+  {
+    label: '景宁畲族自治县',
+    value: '景宁畲族自治县'
   }
 ]);
-
 /**
  * 获取项目列表
  */
@@ -233,19 +268,17 @@ onMounted(() => {
 }
 
 .item-info{
-  div{
-    color: var(--text-light-color);
-    font-size: 12px;
-    height: 18px;
-    line-height: 18px;
-    margin-bottom: 5px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    .text-span{
-      margin-left: 6px;
-      font-weight: 500;
-    }
+  color: var(--text-light-color);
+  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  .text-span{
+    margin-left: 6px;
+    font-weight: 500;
   }
 }
 

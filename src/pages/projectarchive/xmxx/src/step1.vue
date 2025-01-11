@@ -1,97 +1,42 @@
 <template>
   <div>
     <a-form
-      ref="formRef" :model="formState" style="max-width: 500px; margin: 40px auto 0;"
-      :label-col="labelCol" :wrapper-col="wrapperCol"
+      ref="formRef" :model="formState" style="max-width: 500px; margin: 40px auto 0;" :label-col="labelCol"
+      :wrapper-col="wrapperCol"
     >
-      <a-form-item
-        label="项目编号"
-        name="xmbh"
-        :rules="[{ required: true, message: '项目编号必须填写' }]"
-      >
-        <a-input
-          v-model:value="formState.xmbh" placeholder="请输入项目编号"
-        />
+      <a-form-item label="项目编号" name="xmbh" :rules="[{ required: true, message: '项目编号必须填写' }]">
+        <a-input v-model:value="formState.xmbh" placeholder="请输入项目编号" />
       </a-form-item>
-      <a-form-item
-        label="项目名称"
-        name="xmmc"
-        :rules="[{ required: true, message: '项目名称必须填写' }]"
-      >
-        <a-input
-          v-model:value="formState.xmmc" placeholder="请输入项目名称"
-        />
+      <a-form-item label="项目名称" name="xmmc" :rules="[{ required: true, message: '项目名称必须填写' }]">
+        <a-input v-model:value="formState.xmmc" placeholder="请输入项目名称" />
       </a-form-item>
-      <a-form-item
-        label="委托单位"
-        name="unit"
-        :rules="[{ required: true, message: '委托单位必须填写' }]"
-      >
+      <a-form-item label="委托单位" name="unit" :rules="[{ required: true, message: '委托单位必须填写' }]">
         <a-input v-model:value="formState.unit" placeholder="请输入委托单位" />
       </a-form-item>
-      <a-form-item
-        label="所属区域"
-        name="region"
-        :rules="[{ required: true, message: '所属区域必须选择' }]"
-      >
-        <a-select
-          v-model:value="formState.region"
-          placeholder="请选择所属区域"
-        >
-          <a-select-option value="1">
-            湖北
-          </a-select-option>
-          <a-select-option value="2">
-            湖南
-          </a-select-option>
-        </a-select>
+      <a-form-item label="所属区域" name="region" :rules="[{ required: true, message: '所属区域必须选择' }]">
+        <a-select v-model:value="formState.region" :options="regionList" placeholder="请选择所属区域" />
       </a-form-item>
-      <a-form-item
-        label="签订时间"
-        name="signdata"
-        :rules="[{ required: true, message: '签订时间必须输入' }]"
-      >
+      <a-form-item label="签订时间" name="signdata" :rules="[{ required: true, message: '签订时间必须输入' }]">
         <a-date-picker v-model:default-value="formState.signdata" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
       </a-form-item>
-      <a-form-item
-        label="竣工时间"
-        name="jgsj"
-        :rules="[{ required: true, message: '竣工时间必须输入' }]"
-      >
+      <a-form-item label="竣工时间" name="jgsj" :rules="[{ required: true, message: '竣工时间必须输入' }]">
         <a-date-picker v-model:default-value="formState.jgsj" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
       </a-form-item>
-      <a-form-item
-        label="是否竣工" name="isjg"
-        :rules="[{ required: true, message: '是否竣工必须选择' }]"
-      >
+      <a-form-item label="是否竣工" name="isjg" :rules="[{ required: true, message: '是否竣工必须选择' }]">
         <a-switch v-model:checked="formState.isjg" />
       </a-form-item>
-      <a-form-item
-        label="项目地址"
-        name="xmdz"
-        :rules="[{ required: true, message: '项目地址必须填写' }]"
-      >
+      <a-form-item label="项目地址" name="xmdz" :rules="[{ required: true, message: '项目地址必须填写' }]">
         <a-input v-model:value="formState.xmdz" placeholder="请选择项目地址">
           <template #suffix>
             <AimOutlined style="color: rgba(0, 0, 0, 0.45)" />
           </template>
         </a-input>
       </a-form-item>
-      <a-form-item
-        label="经度" name="longitude"
-        :rules="[{ required: true, message: '经度必须填写' }]"
-      >
-        <a-input
-          v-model:value="formState.longitude" placeholder="请输入经度"
-        />
+      <a-form-item label="经度" name="longitude" :rules="[{ required: true, message: '经度必须填写' }]">
+        <a-input v-model:value="formState.longitude" placeholder="请输入经度" />
       </a-form-item>
-      <a-form-item
-        label="纬度" name="latitude"
-        :rules="[{ required: true, message: '纬度必须填写' }]"
-      >
-        <a-input
-          v-model:value="formState.latitude" placeholder="请输入纬度"
-        />
+      <a-form-item label="纬度" name="latitude" :rules="[{ required: true, message: '纬度必须填写' }]">
+        <a-input v-model:value="formState.latitude" placeholder="请输入纬度" />
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 24, offset: 16 }">
         <a-button mr-4 @click="reset">
@@ -116,6 +61,7 @@
 import type { FormInstance } from 'ant-design-vue';
 import { AimOutlined } from '@ant-design/icons-vue';
 import type { XmxxVO } from '@/api/projectarchive/xmxx/types';
+import { regionList } from '@/assets/region';
 
 const emit = defineEmits(['nextStep']);
 const formRef = ref<FormInstance>();
@@ -126,7 +72,6 @@ const formState = reactive<XmxxVO>({
   xmbh: `1101`,
   xmmc: '水立方项目',
   unit: '湖北华强有限公司',
-  region: '1',
   signdata: '2015-01-01',
   jgsj: '2015-04-01',
   isjg: true ? 1 : 0,
@@ -149,29 +94,29 @@ async function nextStep() {
 }
 
 // 重置
-function reset() {}
+function reset() { }
 </script>
 
-  <style lang="less" scoped>
-  .step-form-style-desc {
-    padding: 0 56px;
+<style lang="less" scoped>
+.step-form-style-desc {
+  padding: 0 56px;
 
-    h3 {
-      margin: 0 0 12px;
-      font-size: 16px;
-      line-height: 32px;
-    }
-
-    h4 {
-      margin: 0 0 4px;
-      font-size: 14px;
-      line-height: 22px;
-    }
-
-    p {
-      margin-top: 0;
-      margin-bottom: 12px;
-      line-height: 22px;
-    }
+  h3 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 32px;
   }
-  </style>
+
+  h4 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 22px;
+  }
+}
+</style>
