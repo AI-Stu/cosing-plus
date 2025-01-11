@@ -42,16 +42,16 @@
     <a-card>
       <template #title>
         <a-space size="middle">
-          <a-button v-hasPermi="['projectarchive:catalog:add']" type="primary" @click="handleAdd">
+          <a-button v-if="hasAccess(['projectarchive:catalog:add'])" type="primary" @click="handleAdd">
             新增
           </a-button>
-          <a-button v-hasPermi="['projectarchive:catalog:edit']" success :disabled="ids.length !== 1" @click="handleUpdate()">
+          <a-button v-if="hasAccess(['projectarchive:catalog:edit'])" success :disabled="ids.length !== 1" @click="handleUpdate()">
             修改
           </a-button>
-          <a-button v-hasPermi="['projectarchive:catalog:remove']" danger :disabled="!ids.length" @click="handleDelete()">
+          <a-button v-if="hasAccess(['projectarchive:catalog:remove'])" danger :disabled="!ids.length" @click="handleDelete()">
             删除
           </a-button>
-          <a-button v-hasPermi="['projectarchive:catalog:export']" @click="handleExport">
+          <a-button v-if="hasAccess(['projectarchive:catalog:export'])" @click="handleExport">
             导出
           </a-button>
         </a-space>
@@ -115,14 +115,14 @@
               <a-button type="link" @click="handleInfo(scope?.record)">
                 详情
               </a-button>
-              <a-button v-hasPermi="['projectarchive:catalog:edit']" type="link" @click="handleUpdate(scope?.record)">
+              <a-button v-if="hasAccess(['projectarchive:catalog:edit'])" type="link" @click="handleUpdate(scope?.record)">
                 编辑
               </a-button>
               <a-popconfirm
                 title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
                 @confirm="handleDelete(scope?.record)"
               >
-                <a-button v-hasPermi="['projectarchive:catalog:remove']" type="link" danger>
+                <a-button v-if="hasAccess(['projectarchive:catalog:remove'])" type="link" danger>
                   删除
                 </a-button>
               </a-popconfirm>
@@ -160,6 +160,7 @@ defineOptions({
 
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 const ElMessage = useMessage();
+const { hasAccess } = useAccess();
 
 const dictStore = useDictStore();
 // const { } = toRefs<any>(dictStore.getDictByKey());

@@ -125,7 +125,8 @@
                 详情
               </a-button>
               <!-- <a-button
-                v-hasPermi="['projectarchive:dataStorage:edit']" type="link"
+                v-if="hasAccess(['projectarchive:dataStorage:edit'])"
+                type="link"
                 @click="handleUpdate(scope?.record as DataStorageVO)"
               >
                 编辑
@@ -134,7 +135,7 @@
                 title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
                 @confirm="handleDelete(scope?.record as DataStorageVO)"
               >
-                <a-button v-hasPermi="['projectarchive:dataStorage:remove']" type="link" danger>
+                <a-button v-if="hasAccess(['projectarchive:dataStorage:remove'])" type="link" danger>
                   删除
                 </a-button>
               </a-popconfirm>
@@ -190,6 +191,7 @@ defineOptions({
 
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 const ElMessage = useMessage();
+const { hasAccess } = useAccess();
 
 const loading = reactive({
   isRefresh: false,

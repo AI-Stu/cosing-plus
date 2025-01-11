@@ -15,13 +15,13 @@
         <a-card class="h-full">
           <template #title>
             <a-space size="middle">
-              <a-button v-hasPermi="['projectarchive:xmxxDataStandardsRel:add']" type="primary" @click="handleAdd">
+              <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:add'])" type="primary" @click="handleAdd">
                 添加
               </a-button>
-              <a-button v-hasPermi="['projectarchive:xmxxDataStandardsRel:edit']" @click="handleUpdate()">
+              <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:edit'])" @click="handleUpdate()">
                 批量导入
               </a-button>
-              <a-button v-hasPermi="['projectarchive:xmxxDataStandardsRel:export']" @click="handleExport">
+              <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:export'])" @click="handleExport">
                 批量导出
               </a-button>
             </a-space>
@@ -102,14 +102,14 @@
                   <a-button type="link" @click="handleInfo(scope?.record)">
                     详情
                   </a-button>
-                  <a-button v-hasPermi="['projectarchive:xmxxDataStandardsRel:edit']" type="link" @click="handleUpdate(scope?.record)">
+                  <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:edit'])" type="link" @click="handleUpdate(scope?.record)">
                     编辑
                   </a-button>
                   <a-popconfirm
                     title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
                     @confirm="handleDelete(scope?.record)"
                   >
-                    <a-button v-hasPermi="['projectarchive:xmxxDataStandardsRel:remove']" type="link" danger>
+                    <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:remove'])" type="link" danger>
                       删除
                     </a-button>
                   </a-popconfirm>
@@ -157,6 +157,7 @@ console.log(proxy);
 
 const router = useRouter();
 const ElMessage = useMessage();
+const { hasAccess } = useAccess();
 
 const dictStore = useDictStore();
 // const { } = toRefs<any>(dictStore.getDictByKey());

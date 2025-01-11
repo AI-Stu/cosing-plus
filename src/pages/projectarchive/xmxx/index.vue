@@ -208,10 +208,11 @@ function handleAdd() {
  * @param item
  */
 function handleInfo(item: any) {
-  router.push({
-    path: `/project/manage/${item.id}`
-  });
   console.log(item);
+
+  router.push({
+    path: `/project/manage/${item.xmxxid}`
+  });
 }
 
 /**

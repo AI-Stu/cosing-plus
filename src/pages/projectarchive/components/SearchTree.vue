@@ -1,10 +1,10 @@
 <template>
   <div class="h-full">
     <a-spin :spinning="loading">
-      <a-space mb-16px w-full style="border: 1px solid #f00;">
+      <a-space mb-16px>
         <a-input
           v-model:value="searchValue" size="small" enter-button
-          :placeholder="props.searchPlaceholder" w-calc-(100%-60px)
+          :placeholder="props.searchPlaceholder" w-full
           @change="getList"
         >
           <template #suffix>
