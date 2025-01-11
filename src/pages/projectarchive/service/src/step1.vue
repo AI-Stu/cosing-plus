@@ -101,7 +101,7 @@
           </a-col>
         </a-row>
       </a-form-item>
-      <a-form-item :wrapper-col="{ span: 24, offset: 16 }">
+      <a-form-item :wrapper-col="{ span: 24, offset: 16 }" text-right>
         <a-button style="margin-right:10px;" @click="reset">
           重置
         </a-button>

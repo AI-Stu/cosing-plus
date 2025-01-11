@@ -42,7 +42,7 @@
         <a-button @click="prevStep">
           上一步
         </a-button>
-        <a-button style="margin-left: 8px" type="primary" @click="nextStep">
+        <a-button ml-4 type="primary" @click="nextStep">
           确定
         </a-button>
       </div>
@@ -55,7 +55,7 @@
       <h4>数据标注来自数据标准管理，有补充请联系管理员。</h4>
       <h4>附件除数据标准内已有选项，缺失项可以自行添加。</h4>
     </div>
-    <ServiceModal :opens="open" @close="modalClose" />
+    <ServiceModal :open="open" @close="modalClose" />
   </div>
 </template>
 
