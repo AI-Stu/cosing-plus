@@ -10,8 +10,8 @@
         </template>
         <!-- 目录树 -->
         <a-directory-tree
-          v-model:expanded-keys="tree.expandedKeys" v-model:selected-keys="tree.selectedKeys"
-          :tree-data="search.keyword.length > 0 ? search.filterData : tree.data" :checkable="false"
+          v-model:expanded-keys="tree.expandedKeys" v-model:selected-keys="tree.selectedKeys" :field-names="defaultProps" :tree-data="search.keyword.length > 0 ? search.filterData : tree.data"
+          :checkable="false" @select="treeSelect"
         />
       </a-card>
 
@@ -46,8 +46,11 @@
     </div>
 
     <!-- 添加目录对话框 -->
-    <a-modal v-model:open="catalog.visible" :title="catalog.title">
+    <a-modal v-model:open="catalog.visible" :title="catalog.title" @ok="saveCatalog">
       <a-form :model="catalog.form" :rules="catalog.formRules" class="w-full">
+        <a-form-item label="父目录名称" name="parentName">
+          <a-input v-model:value="catalog.form.parentName" :maxlength="20" placeholder="" disabled />
+        </a-form-item>
         <a-form-item label="目录名称" name="name">
           <a-input v-model:value="catalog.form.name" :maxlength="20" placeholder="请输入目录名称" />
         </a-form-item>
@@ -122,6 +125,7 @@ const catalog = reactive({
   title: '添加目录',
   formRules: {},
   form: {
+    pid: '',
     name: ''
   }
 });
@@ -179,6 +183,12 @@ const table = reactive<{
   pageNum: 1,
   data: []
 });
+
+const defaultProps = {
+  // 规定
+  children: 'children',
+  title: 'label'
+};
 
 watch(() => search.keyword, (nv, _ov) => {
   if (nv.length > 0) {
@@ -244,6 +254,22 @@ function clickBatchExport() {
   // useDownload('projectarchive/dataStandards/export', {
   //   ...toRaw(state.queryParams)
   // }, `dataStandards_${new Date().getTime()}.xlsx`);
+}
+
+function saveCatalog() {
+  console.log(tree.selectedKeys);
+  addCatalog(catalog.form).then((res) => {
+    if (res.code === 200) {
+      catalog.visible = false;
+      queryTreeData();
+    }
+  });
+}
+
+function treeSelect(selectedKeys, e: { selected: bool, selectedNodes, node, event }) {
+  console.log(e);
+  catalog.form.parentName = e.node.dataRef.label;
+  catalog.form.pid = e.node.dataRef.id;
 }
 </script>
 
