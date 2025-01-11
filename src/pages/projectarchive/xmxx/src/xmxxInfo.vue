@@ -34,7 +34,7 @@
     <a-card :bordered="false" style="margin: 10px 0;">
       <div class="flex justify-between" style="align-items: center;margin-bottom: 10px;">
         <div>项目附件</div>
-        <a-button size="small" type="primary">
+        <a-button type="primary">
           添加
         </a-button>
       </div>
@@ -71,7 +71,7 @@
     <a-card :bordered="false" style="margin: 10px 0;">
       <div class="flex justify-between" style="align-items: center;margin-bottom: 10px;">
         <div>挂接服务</div>
-        <a-button size="small" type="primary">
+        <a-button type="primary">
           添加
         </a-button>
       </div>
@@ -87,38 +87,31 @@
         </template>
       </a-table>
     </a-card>
-    <a-card :bordered="false" style="margin: 10px 0;">
-      <a-row>
+    <a-card :bordered="false" class="position-sticky bottom-0 border-rd-0  shadow">
+      <a-flex>
         <a-col :span="18">
-          <a-button type="primary" size="small">
-            <template #icon>
-              <ArrowLeftOutlined />
-            </template>
+          <a-button type="primary" :icon="h(ArrowLeftOutlined)">
             返回
           </a-button>
         </a-col>
-        <a-col :span="6" style="text-align: right;">
-          <a-button size="small">
-            <template #icon>
-              <RedoOutlined />
-            </template>
+        <a-col :span="6" text-right>
+          <a-button :icon="h(RedoOutlined)" mr-4>
             恢复
           </a-button>
-          <a-button style="margin-left: 10px;" type="primary" size="small">
-            <template #icon>
-              <FileDoneOutlined />
-            </template>
+          <a-button type="primary" :icon="h(FileDoneOutlined)">
             保存
           </a-button>
         </a-col>
-      </a-row>
+      </a-flex>
     </a-card>
   </page-container>
 </template>
 
 <script setup lang="ts">
+import { h } from 'vue';
 import { ArrowLeftOutlined, FileDoneOutlined, RedoOutlined } from '@ant-design/icons-vue';
-import type { ConsultTableModel } from '@/api/list/table-list';
+import to from 'await-to-js';
+import { getXmxx } from '@/api/projectarchive/xmxx/index';
 
 interface DataItem {
   key: number
@@ -128,6 +121,10 @@ interface DataItem {
   num: number
   time: string
 }
+
+const route = useRoute();
+const xmxxid = route.params.id as string | undefined;
+console.log(route.params.id);
 
 const data: DataItem[] = [
   {
@@ -173,15 +170,28 @@ const columns = [
 ];
 const searchValue = ref(95);
 
+async function getInfo() {
+  if (xmxxid) {
+    const [err, res] = await to(getXmxx(xmxxid));
+    if (res) {
+      console.log(res);
+    }
+  }
+}
+
 function handle(record: ConsultTableModel) {
 }
+
+onBeforeMount(() => {
+  getInfo();
+});
 </script>
 
-    <style lang="less" scoped>
-    .title {
-      color: rgba(0, 0, 0, 0.85);
-      font-size: 16px;
-      font-weight: 500;
-      margin-bottom: 16px;
-    }
-    </style>
+<style lang="less" scoped>
+.title {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+</style>

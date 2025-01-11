@@ -12,10 +12,9 @@
         </template>
       </a-alert>
       <div class="flex justify-between" style="align-items: center;">
-        <a-button type="primary" my-3 @click="openClick">
+        <a-button type="primary" my-3 @click="open = true">
           添加
         </a-button>
-        <div>一张图目录是否展示 <a-switch v-model:checked="checked" /></div>
       </div>
       <a-table
         style="margin-bottom: 10px;" :loading="loading" :columns="filterColumns" :pagination="false"
@@ -136,10 +135,6 @@ async function handleDelete(record: ConsultTableModel) {
 
 function handleClose() {
   visible.value = false;
-}
-
-function openClick() {
-  open.value = true;
 }
 
 function nextStep() {

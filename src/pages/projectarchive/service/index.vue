@@ -5,25 +5,28 @@
         <a-col :span="18">
           <SearchSelectList v-model="selectValue" :options="SearchSelectOptions" :filter="filterSelectValue">
             <template #end2>
-              <a-range-picker v-model:value="value5" size="small" picker="year" />
+              <a-range-picker v-model:value="rangeYear" size="small" picker="year" />
             </template>
             <template #end3>
-              <a-select size="small" placeholder="不限" style="width: 100px" :options="praiseList" />
+              <a-select
+                v-model:value="region" :options="praiseList" size="small" placeholder="不限"
+                style="width: 100px"
+              />
             </template>
           </SearchSelectList>
         </a-col>
         <a-col :span="6" style="text-align: right;position:relative;">
-          <a-input v-model:value="searchValue" placeholder="请输入服务名称">
+          <a-input v-model:value="searchValue" placeholder="请输入项目名称">
             <template #suffix>
               <SearchOutlined style="color: rgba(0, 0, 0, 0.45)" />
             </template>
           </a-input>
-          <a-button style="position: absolute;bottom: 10px;right: 0;color: rgba(0, 0, 0, 0.45)" :icon="h(RedoOutlined)" />
+          <a-button class="absolute bottom-[10px] right-0 color-[#00000073]" :icon="h(RedoOutlined)" @click="getList" />
         </a-col>
       </a-row>
     </a-card>
 
-    <div class="mt-5" style="background: #fff;padding: 20px;box-sizing: border-box;">
+    <div class="mt-5 box-border">
       <a-row :gutter="16">
         <a-col :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
           <a-button class="w-1/1 h-204px text-light-color" type="dashed" @click="handleAdd">
@@ -33,60 +36,67 @@
         </a-col>
         <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
           <a-card
-            :bordered="false" style="border-color: 0" class="cursor-pointer
-            hover:shadow-[0_4px_20px_-5px_rgba(0,0,0,0.35)]
-            transition
-            duration-300"
+            class="cursor-pointer transition duration-300 h-204px b-r-2 success
+            hover:shadow-[0_4px_20px_-5px_rgba(0,0,0,0.35)]"
           >
             <template #default>
-              <div class="flex h-27" :class=" index === 0 ? 'success' : 'error'">
-                <div class="ml">
-                  <div style="font-size: 18px; font-weight: 500;">
-                    {{ item.title }}
+              <div class="relative ">
+                <h1 style="font-size: 14px;font-weight: 600;height:44px;margin-bottom:10px;">
+                  {{ item.serviceName }}
+                </h1>
+                <div class="item-info">
+                  <div>
+                    <ProfileOutlined /><span class="text-span">{{ item.region }}</span>
                   </div>
-                  <div class="h-17 overflow-hidden overflow text-light-color">
-                    {{ content }}
+                  <div>
+                    <CloudOutlined /><span class="text-span">{{ item.serviceType }}</span>
+                  </div>
+                  <div>
+                    <BranchesOutlined /><span class="text-span">{{ item.serviceYear }}</span>
                   </div>
                 </div>
+                <div class="absolute bottom-0 right-0">
+                  <a-button type="text" style="margin-right:5px;" size="small" @click="handleDel(item)">
+                    删除
+                  </a-button>
+                  <a-button type="primary" ghost size="small" @click="handleInfo(item)">
+                    详情
+                  </a-button>
+                </div>
               </div>
-            </template>
-            <template #actions>
-              <li>操作一</li>
-              <li>操作二</li>
             </template>
           </a-card>
         </a-col>
       </a-row>
+      <a-pagination
+        v-model:current="current" style="float:right" :total="total" :show-total="total => `共${total}条`"
+        show-less-items
+      />
     </div>
   </page-container>
 </template>
 
 <script setup lang="ts">
 import { h } from 'vue';
+import to from 'await-to-js';
 import { PlusOutlined, RedoOutlined, SearchOutlined } from '@ant-design/icons-vue';
 import type { SeacrhSelectListOptions, SelectListType } from '../components/types';
 import SearchSelectList from '../components/SearchSelectList.vue';
-import router from '@/router';
+import { listService } from '@/api/projectarchive/service';
+import type { ServiceQuery } from '@/api/projectarchive/service/types';
 
 defineOptions({
   name: 'SportsEvtent'
 });
 
-const value5 = ref<any>();
+const router = useRouter();
+// 分页
+const current = ref<number>(1);
+const rangeYear = ref<any>();
+const region = ref<string>('');
 const searchValue = ref();
-const content = '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。';
-
-const data = ref([
-  {
-    title: 'Aipay',
-    link: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png'
-  },
-  {
-    title: 'Ant Design Vue',
-    link: 'https://www.antdv.com/assets/logo.1ef800a8.svg'
-  }
-]);
 const selectValue = ref<string[][]>([]);
+
 const SearchSelectOptions = reactive<SeacrhSelectListOptions[]>([
   {
     label: '数据类别',
@@ -136,6 +146,39 @@ function filterSelectValue(items: SelectListType[]): string[] {
   return items.map(e => e.value);
 }
 
+const data = ref<any[]>([]);
+const total = ref<number>(0);
+
+/**
+ * 获取项目列表
+ */
+async function getList() {
+  const [dataType, serviceType, serviceYear, region] = selectValue.value;
+
+  const params: ServiceQuery = {
+    pageSize: 10,
+    pageNum: 1
+  };
+  if (serviceType?.length === 1) {
+    params.serviceType = serviceType[0];
+  }
+  if (serviceYear?.length === 1) {
+    params.serviceYear = serviceYear[0];
+  }
+  if (region?.length === 1) {
+    params.region = region[0];
+  }
+
+  const [error, res] = await to(listService(params));
+  if (error) {
+    return;
+  }
+  console.log('getList', res);
+
+  data.value = res.rows;
+  total.value = res.total;
+}
+
 // 好评度
 const praiseList = shallowRef([
   {
@@ -177,46 +220,49 @@ function handleDel(item: any) {
 </script>
 
 <style land="less" scoped>
-.item-btm {
-  margin-bottom: 12px;
-}
-.text-light-color{
+.text-light-color {
   color: var(--text-light-color);
 }
 
+.item-info {
+  div {
+    color: var(--text-light-color);
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    .text-span {
+      margin-left: 6px;
+      font-weight: 500;
+    }
+  }
+}
+
 .error,
-.success{
-  &::before{
+.success {
+  &::before {
     position: absolute;
-    content:"";
+    content: "";
     top: 0;
     left: 0;
     width: 4px;
     height: 100%;
   }
 }
-.success{
-  &::before{
+
+.success {
+  &::before {
     background: #18c418;
   }
 }
 
-.error{
-  &::before{
+.error {
+  &::before {
     background: #b42d15;
   }
-}
-
-.category-other-item {
-  .ant-form-item {
-    margin-bottom: 0;
-  }
-}
-
-.overflow {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
 }
 </style>

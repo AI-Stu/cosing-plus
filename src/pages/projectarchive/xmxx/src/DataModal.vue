@@ -103,13 +103,19 @@ import type { TreeProps } from 'ant-design-vue';
 import { ReadOutlined, UnorderedListOutlined } from '@ant-design/icons-vue';
 import type { ConsultTableModel } from '@/api/list/table-list';
 
-const { open } = defineProps(['open']);
+defineOptions({ name: 'DataModal' });
+
+const props = defineProps({
+  open: {
+    type: Boolean,
+    default: false
+  }
+});
 
 // 定义事件
-const emit = defineEmits(['close']);
-console.log(open, 'open');
+const emits = defineEmits(['update:open', 'close']);
+const openValue = useVModel(props, 'open', emits);
 
-const openValue = ref(open);
 // 数据
 const columns = [
   {
@@ -240,11 +246,11 @@ function handleClose() {}
 
 // 向父组件发送事件
 function handleOk() {
-  emit('close');
+  emits('close');
 };
 
 function handleCancel() {
-  emit('close');
+  emits('close');
 }
 </script>
 

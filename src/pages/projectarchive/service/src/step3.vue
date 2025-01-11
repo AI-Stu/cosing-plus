@@ -126,7 +126,7 @@ function finish() {
   emit('finish');
 }
 function toOrderList() {
-  router.push('/project/manage');
+  router.push('/data/service');
 }
 </script>
 

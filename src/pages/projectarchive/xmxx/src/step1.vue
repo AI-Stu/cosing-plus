@@ -93,8 +93,8 @@
           v-model:value="formState.latitude" placeholder="请输入纬度"
         />
       </a-form-item>
-      <a-form-item :wrapper-col="{ span: 19, offset: 5 }">
-        <a-button style="margin-right:10px;" @click="reset">
+      <a-form-item :wrapper-col="{ span: 24, offset: 16 }">
+        <a-button mr-4 @click="reset">
           重置
         </a-button>
         <a-button type="primary" @click="nextStep">
@@ -113,36 +113,22 @@
 </template>
 
 <script setup lang="ts">
-import type { Dayjs } from 'dayjs';
-import dayjs from 'dayjs';
 import type { FormInstance } from 'ant-design-vue';
 import { AimOutlined } from '@ant-design/icons-vue';
-import { addXmxx } from '@/api/projectarchive/xmxx';
+import type { XmxxVO } from '@/api/projectarchive/xmxx/types';
 
 const emit = defineEmits(['nextStep']);
 const formRef = ref<FormInstance>();
 const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
 const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 
-interface FirstFormState {
-  xmbh: string
-  xmmc: string
-  unit: string
-  region: string
-  signdata: Dayjs | string
-  jgsj: Dayjs | string
-  isjg: number
-  xmdz: string
-  longitude: number
-  latitude: number
-}
-const formState = reactive<FirstFormState>({
+const formState = reactive<XmxxVO>({
   xmbh: `1101`,
   xmmc: '水立方项目',
   unit: '湖北华强有限公司',
   region: '1',
-  signdata: dayjs('2015-01-01', 'YYYY-MM-DD'),
-  jgsj: dayjs('2015-04-01', 'YYYY-MM-DD'),
+  signdata: '2015-01-01',
+  jgsj: '2015-04-01',
   isjg: true ? 1 : 0,
   xmdz: '华强北',
   longitude: 32.43525256,
@@ -150,10 +136,10 @@ const formState = reactive<FirstFormState>({
 });
 async function nextStep() {
   try {
-    await formRef.value?.validateFields();
-    console.log(formState, 'formState');
-    const res = await addXmxx(formState);
-    console.log(res, 'res');
+    // await formRef.value?.validateFields();
+    // console.log(formState, 'formState');
+    // const res = await addXmxx(formState);
+    // console.log(res, 'res');
 
     emit('nextStep');
   }

@@ -1,6 +1,6 @@
 <template>
   <!-- 新增弹窗 -->
-  <a-modal v-model:open="openValue" title="选择挂接服务" width="1000px" @cancel="handleCancel" @ok="handleOk">
+  <a-modal v-model:open="openValue" title="选择数据清单" width="1000px" @cancel="handleCancel" @ok="handleOk">
     <a-row>
       <a-col :span="24">
         <a-form :label-col="{ span: 7 }" :model="formModel">
@@ -79,7 +79,6 @@
 import type { ConsultTableModel, ConsultTableParams } from '@/api/list/table-list';
 
 defineOptions({ name: 'ServiceModal' });
-
 const props = defineProps({
   open: {
     type: Boolean,
@@ -192,5 +191,4 @@ function handleCancel() {
 }
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

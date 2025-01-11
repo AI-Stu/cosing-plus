@@ -2,52 +2,57 @@ export interface XmxxVO {
   /**
    * 项目信息id
    */
-  xmxxid: string | number
+  xmxxid?: string | number
+
+  /**
+   * 项目名称
+   */
+  xmmc?: string
 
   /**
    * 项目编号
    */
-  xmbh: string
+  xmbh?: string
 
   /**
    * 委托单位
    */
-  unit: string
+  unit?: string
 
   /**
    * 区域
    */
-  region: string
+  region?: string
 
   /**
    * 项目地址
    */
-  xmdz: string
+  xmdz?: string
 
   /**
    * 是否竣工
    */
-  isjg: number
+  isjg?: number
 
   /**
    * 竣工时间
    */
-  jgsj: string
+  jgsj?: string
 
   /**
    * 签定时间
    */
-  signdata: string
+  signdata?: string
 
   /**
    * 经度
    */
-  longitude: number
+  longitude?: number
 
   /**
    * 纬度
    */
-  latitude: number
+  latitude?: number
 
 }
 

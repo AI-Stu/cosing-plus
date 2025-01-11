@@ -27,7 +27,7 @@
       </a-row>
     </a-card>
 
-    <div class="mt-5 p-[20px] b-white box-border">
+    <div class="mt-5 box-border">
       <a-row :gutter="16">
         <a-col :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4">
           <a-button class="w-1/1 h-204px text-light-color" type="dashed" @click="handleAdd">
@@ -37,8 +37,7 @@
         </a-col>
         <a-col v-for="(item, index) in data" :key="index" :xs="16" :sm="8" :md="6" :lg="6" :xl="6" class="mb-4 ">
           <a-card
-            style="border-left: 3px solid #108ee9; border-radius: 0"
-            class="cursor-pointer transition duration-300 h-204px b-r-2
+            class="cursor-pointer transition duration-300 h-204px b-r-2 success
             hover:shadow-[0_4px_20px_-5px_rgba(0,0,0,0.35)]"
           >
             <template #default>
@@ -53,7 +52,7 @@
                   <div><CloudOutlined /><span class="text-span">挂接服务（{{ item.service }}）</span></div>
                   <div><BranchesOutlined /><span class="text-span">附件（{{ item.attachment }}）</span></div>
                 </div>
-                <div class="rt-post">
+                <div class="absolute bottom-0 right-0">
                   <a-button type="text" style="margin-right:5px;" size="small" @click="handleDel(item)">
                     删除
                   </a-button>
@@ -229,19 +228,10 @@ onMounted(() => {
 </script>
 
 <style lang="less">
-.item-btm{
-  margin-bottom: 12px;
-}
-
 .text-light-color{
   color: var(--text-light-color);
 }
 
-.category-other-item{
-  .ant-form-item{
-    margin-bottom: 0;
-  }
-}
 .item-info{
   div{
     color: var(--text-light-color);
@@ -259,9 +249,26 @@ onMounted(() => {
   }
 }
 
-.rt-post{
-  position: absolute;
-  bottom: 0;
-  right: -5px;
+.error,
+.success{
+  &::before{
+    position: absolute;
+    content:"";
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+  }
+}
+.success{
+  &::before{
+    background: #18c418;
+  }
+}
+
+.error{
+  &::before{
+    background: #b42d15;
+  }
 }
 </style>

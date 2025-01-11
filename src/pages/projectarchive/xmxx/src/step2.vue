@@ -17,7 +17,7 @@
           </a-button>
         </template>
       </a-alert>
-      <a-button size="small" type="primary" style="margin: 10px 0;" @click="openClick">
+      <a-button type="primary" my-3 @click="open = true">
         添加
       </a-button>
       <a-table style="margin-bottom: 10px;" :loading="loading" :columns="filterColumns" :pagination="false" :data-source="dataSource" size="small">
@@ -39,12 +39,12 @@
         </template>
       </a-table>
       <div style="clear: both;" />
-      <div style="float:right; margin-bottom: 10px;">
+      <div float-right mb-4>
+        <a-button mr-4 @click="prevStep">
+          上一步
+        </a-button>
         <a-button type="primary" @click="nextStep">
           下一步
-        </a-button>
-        <a-button style="margin-left: 8px" @click="prevStep">
-          上一步
         </a-button>
       </div>
     </div>
@@ -57,12 +57,12 @@
       <h4>附件除数据标准内已有选项，缺失项可以自行添加。</h4>
     </div>
 
-    <modal :open="open" @close="modalClose" />
+    <DataModal :open="open" @close="modalClose" />
   </div>
 </template>
 
 <script setup lang="ts">
-import modal from './modal.vue';
+import DataModal from './DataModal.vue';
 import type { ConsultTableModel, ConsultTableParams } from '@/api/list/table-list';
 import { deleteApi, getListApi } from '@/api/list/table-list';
 
@@ -115,10 +115,6 @@ const formModel = reactive<ConsultTableParams>({
 const getCheckList = computed(() => columns.value.map(item => item.dataIndex));
 function handleClose() {
   visible.value = false;
-}
-
-function openClick() {
-  open.value = true;
 }
 
 /**

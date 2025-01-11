@@ -2,57 +2,57 @@ export interface ServiceVO {
   /**
    * $column.columnComment
    */
-  id: string | number
+  id?: string | number
 
   /**
    * 服务名称
    */
-  serviceName: string
+  serviceName?: string
 
   /**
    * 服务别名
    */
-  serviceAlias: string
+  serviceAlias?: string
 
   /**
    * 服务编号
    */
-  serviceCode: string
+  serviceCode?: string
 
   /**
    * 服务地址
    */
-  serviceUrl: string
+  serviceUrl?: string
 
   /**
    * 服务类型
    */
-  serviceType: string
+  serviceType?: string
 
   /**
    * 年份
    */
-  serviceYear: string
+  serviceYear?: string
 
   /**
    * 区域
    */
-  region: string
+  region?: string
 
   /**
    * 视角
    */
-  camera: string
+  camera?: string
 
   /**
    * 范围
    */
-  bounds: string
+  bounds?: string
 
   /**
    * 顺序
    */
-  orderindex: string
+  orderindex?: string
 
 }
 
