@@ -120,16 +120,10 @@ const message = useMessage();
 const router = useRouter();
 const dictStore = useDictStore();
 const { sys_service_type } = toRefs<any>(dictStore.getDict('sys_service_type'));
-const SERVICE_TYPE = [] as SelectListType[];
-console.log(sys_service_type);
-const SYS_SERVICE_TYPE = {} as Record<string, string>;
-sys_service_type?.value.forEach((e: DictDataOption) => {
-  SERVICE_TYPE.push({
-    name: e.label,
-    value: e.value
-  });
-  SYS_SERVICE_TYPE[e.value] = e.label;
-});
+const SYS_SERVICE_TYPE = computed(() => sys_service_type?.value.reduce((acc: any, cur: any) => {
+  acc[cur.value] = cur.label;
+  return acc;
+}, {}));
 
 // 分页
 const spinning = ref<boolean>(false);
@@ -154,7 +148,7 @@ const SearchSelectOptions = computed(() => ([
     label: '服务类型',
     options: [
       { name: '全部', value: 'all' },
-      ...SERVICE_TYPE
+      ...sys_service_type?.value.map((e: DictDataOption) => ({ name: e.label, value: e.value }))
       // { name: '倾斜摄影', value: 'mesh' },
       // { name: '激光点云', value: 'lidar' },
       // { name: '基础地形', value: 'terrain' },
@@ -219,11 +213,10 @@ async function getList() {
     return;
   }
   console.log('getList', res);
-  const { rows, total } = res;
   setTimeout(() => {
     spinning.value = false;
-    data.value = rows;
-    total.value = total;
+    data.value = res.rows;
+    total.value = res.total;
   }, 200);
 }
 

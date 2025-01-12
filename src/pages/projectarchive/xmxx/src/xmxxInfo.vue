@@ -3,31 +3,31 @@
     <a-card :bordered="false">
       <a-descriptions title="基本信息">
         <a-descriptions-item label="项目编号">
-          1000000000
+          {{ formState.xmbh }}
         </a-descriptions-item>
         <a-descriptions-item label="项目名称">
-          1234123421
+          {{ formState.xmmc }}
         </a-descriptions-item>
         <a-descriptions-item label="委托单位">
-          1234123421
+          {{ formState.unit }}
         </a-descriptions-item>
         <a-descriptions-item label="项目地址">
-          3214321432
+          {{ formState.xmdz }}
         </a-descriptions-item>
         <a-descriptions-item label="所属区域">
-          1000000000
+          {{ formState.region }}
         </a-descriptions-item>
         <a-descriptions-item label="经纬度">
-          111
+          {{ formState.latitude && formState.longitude && (`${formState.latitude}, ${formState.longitude}`) }}
         </a-descriptions-item>
         <a-descriptions-item label="签订时间">
-          1234123421
+          {{ formState.signdata }}
         </a-descriptions-item>
         <a-descriptions-item label="竣工时间">
-          1234123421
+          {{ formState.jgsj }}
         </a-descriptions-item>
         <a-descriptions-item label="是否竣工">
-          1234123421
+          {{ formState.isjg }}
         </a-descriptions-item>
       </a-descriptions>
     </a-card>
@@ -90,15 +90,15 @@
     <a-card :bordered="false" class="position-sticky bottom-0 border-rd-0  shadow">
       <a-flex>
         <a-col :span="18">
-          <a-button type="primary" :icon="h(ArrowLeftOutlined)">
+          <a-button type="primary" :icon="h(ArrowLeftOutlined)" @click="router.push('/project/manage')">
             返回
           </a-button>
         </a-col>
         <a-col :span="6" text-right>
-          <a-button :icon="h(RedoOutlined)" mr-4>
+          <a-button :icon="h(RedoOutlined)" mr-4 @click="handleReset()">
             恢复
           </a-button>
-          <a-button type="primary" :icon="h(FileDoneOutlined)">
+          <a-button type="primary" :icon="h(FileDoneOutlined)" @click="handleUpdate()">
             保存
           </a-button>
         </a-col>
@@ -111,7 +111,8 @@
 import { h } from 'vue';
 import { ArrowLeftOutlined, FileDoneOutlined, RedoOutlined } from '@ant-design/icons-vue';
 import to from 'await-to-js';
-import { getXmxx } from '@/api/projectarchive/xmxx/index';
+import { getXmxx, updateXmxx } from '@/api/projectarchive/xmxx/index';
+import type { XmxxVO } from '@/api/projectarchive/xmxx/types';
 
 interface DataItem {
   key: number
@@ -123,9 +124,10 @@ interface DataItem {
 }
 
 const route = useRoute();
+const router = useRouter();
 const xmxxid = route.params.id as string | undefined;
-console.log(route.params.id);
 
+const formState = ref<XmxxVO>({});
 const data: DataItem[] = [
   {
     key: 1,
@@ -174,12 +176,32 @@ async function getInfo() {
   if (xmxxid) {
     const [err, res] = await to(getXmxx(xmxxid));
     if (res) {
-      console.log(res);
+      formState.value = res.data;
     }
   }
 }
 
 function handle(record: ConsultTableModel) {
+}
+
+/**
+ * 保存
+ */
+async function handleUpdate() {
+  const params = {
+
+  };
+  const [err, res] = await to(updateXmxx(params));
+  if (res) {
+    console.log(res);
+  }
+}
+
+/**
+ * 重置
+ */
+function handleReset() {
+  getInfo();
 }
 
 onBeforeMount(() => {
