@@ -41,3 +41,11 @@ export function updateCatalog(data: CatalogForm) {
 export function delCatalog(id: string | number | Array<string | number>) {
   return useDelete(`${BASE_API}/projectarchive/catalog/${id}`);
 }
+// 获取目录树
+export function getCatalogTree(): Promise<any> {
+  return useGet(`${BASE_API}/projectarchive/catalogEx/getAllTree`);
+}
+
+export function getServiceList(query?: CatalogQuery) {
+  return useGet<CatalogVO[]>(`${BASE_API}/projectarchive/serviceEx/getServiceList`, query);
+}

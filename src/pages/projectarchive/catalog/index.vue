@@ -1,376 +1,416 @@
 <template>
-  <page-container>
-    <a-card mb-4>
-      <a-form :label-col="{ span: 7 }" :model="state.queryParams">
-        <a-row :gutter="[15, 0]">
-          <a-col :span="8">
-            <a-form-item label="${comment}" name="pid">
-              <a-input v-model:value="state.queryParams.pid" placeholder="请输入${comment}" clearable @keyup.enter="initQuery" />
-            </a-form-item>
-          </a-col>
-          <a-col :span="8">
-            <a-form-item label="是否显示" name="isshow">
-              <a-input v-model:value="state.queryParams.isshow" placeholder="请输入是否显示" clearable @keyup.enter="initQuery" />
-            </a-form-item>
-          </a-col>
-          <a-col :span="8">
-            <a-form-item label="顺序" name="orderindex">
-              <a-input v-model:value="state.queryParams.orderindex" placeholder="请输入顺序" clearable @keyup.enter="initQuery" />
-            </a-form-item>
-          </a-col>
-        </a-row>
-        <a-row :span="24" style="text-align: right">
-          <a-col :span="24">
-            <a-space flex justify-end w-full>
-              <a-button :loading="loading" type="primary" @click="initQuery">
-                查询
-              </a-button>
-              <a-button :loading="loading" @click="resetQuery">
-                重置
-              </a-button>
-              <a-button type="link" @click="expand = !expand">
-                {{ expand ? '收起' : '展开' }}
-                <UpOutlined v-if="expand" />
-                <DownOutlined v-else />
-              </a-button>
-            </a-space>
-          </a-col>
-        </a-row>
-      </a-form>
-    </a-card>
-
-    <a-card>
-      <template #title>
-        <a-space size="middle">
-          <a-button v-if="hasAccess(['projectarchive:catalog:add'])" type="primary" @click="handleAdd">
-            新增
-          </a-button>
-          <a-button v-if="hasAccess(['projectarchive:catalog:edit'])" success :disabled="ids.length !== 1" @click="handleUpdate()">
-            修改
-          </a-button>
-          <a-button v-if="hasAccess(['projectarchive:catalog:remove'])" danger :disabled="!ids.length" @click="handleDelete()">
-            删除
-          </a-button>
-          <a-button v-if="hasAccess(['projectarchive:catalog:export'])" @click="handleExport">
-            导出
-          </a-button>
-        </a-space>
-      </template>
-      <template #extra>
-        <TableRightToolbar
-          v-model:filter-columns="filterColumns"
-          :columns="columns"
-          @size-change="(val: 'small' | 'middle' | 'large') => tableSize = val"
-          @reset-query="initQuery"
+  <page-container is-full>
+    <div class="w-full h-full flex justify-between ">
+      <a-card class="w-[15%]">
+        <template #title>
+          <div class="w-full flex justify-between">
+            <a-input-search v-model="search.keyword" placeholder="目录名称" :loading="search.loading" class="w-[calc(100%-40px)]" />
+            <a-button type="primary" :icon="h(PlusOutlined)" class="addBtn" @click="clickCatalogAdd" />
+          </div>
+        </template>
+        <!-- 目录树 -->
+        <a-directory-tree
+          v-model:expanded-keys="tree.expandedKeys" v-model:selected-keys="tree.selectedKeys" :field-names="defaultProps" :tree-data="search.keyword.length > 0 ? search.filterData : tree.data"
+          :checkable="false" @select="treeSelect"
         />
-      </template>
+      </a-card>
 
-      <a-table
-        row-key="id"
-        :row-selection="state.rowSelections"
-        :loading="state.loading" :columns="filterColumns"
-        :data-source="state.dataSource"
-        :pagination="state.pagination"
-        :size="tableSize"
-        @resize-column="(w, col) => {
-          col.width = w;
-        }"
-      >
-        <template #bodyCell="scope">
-          <template v-if="scope?.column?.dataIndex === 'id'">
-            <span> {{ scope.record.id }} </span>
-          </template>
-          <template v-if="scope?.column?.dataIndex === 'pid'">
-            <div flex gap-2>
-              <span> {{ scope.record.pid }} </span>
-            </div>
-          </template>
-          <template v-if="scope?.column?.dataIndex === 'catalogname'">
-            <div flex gap-2>
-              <span> {{ scope.record.catalogname }} </span>
-            </div>
-          </template>
-          <template v-if="scope?.column?.dataIndex === 'catalogalias'">
-            <div flex gap-2>
-              <span> {{ scope.record.catalogalias }} </span>
-            </div>
-          </template>
-          <template v-if="scope?.column?.dataIndex === 'catalogcode'">
-            <div flex gap-2>
-              <span> {{ scope.record.catalogcode }} </span>
-            </div>
-          </template>
-          <template v-if="scope?.column?.dataIndex === 'isshow'">
-            <div flex gap-2>
-              <span> {{ scope.record.isshow }} </span>
-            </div>
-          </template>
-          <template v-if="scope?.column?.dataIndex === 'orderindex'">
-            <div flex gap-2>
-              <span> {{ scope.record.orderindex }} </span>
-            </div>
-          </template>
-          <template v-if="scope?.column?.dataIndex === 'action'">
-            <div flex>
-              <a-button type="link" @click="handleInfo(scope?.record)">
-                详情
+      <a-card class="w-[calc(85%-12px)]">
+        <template #title>
+          <a-space>
+            <a-button type="primary" :icon="h(PlusOutlined)" @click="clickCreate">
+              挂接
+            </a-button>
+            <a-button @click="clickBatchImport">
+              批量导入
+            </a-button>
+            <a-button @click="clickBatchExport">
+              批量导出
+            </a-button>
+          </a-space>
+        </template>
+        <template #extra>
+          <a-button :icon="h(RedoOutlined)" @click="queryTableData" />
+        </template>
+        <!-- 数据标准列表 -->
+        <a-table :columns="table.columns" :data-source="table.data">
+          <template #bodyCell="{ column }">
+            <template v-if="column.dataIndex === 'status'" />
+
+            <template v-if="column.dataIndex === 'handler'">
+              <a-button size="small" style="margin-left: 2px;">
+                删除
               </a-button>
-              <a-button v-if="hasAccess(['projectarchive:catalog:edit'])" type="link" @click="handleUpdate(scope?.record)">
-                编辑
-              </a-button>
-              <a-popconfirm
-                title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
-                @confirm="handleDelete(scope?.record)"
-              >
-                <a-button v-if="hasAccess(['projectarchive:catalog:remove'])" type="link" danger>
-                  删除
-                </a-button>
-              </a-popconfirm>
-            </div>
+            </template>
+          </template>
+        </a-table>
+
+        <div class="pageContainer">
+          <a-pagination
+            v-model:current="table.pageNum" :total="table.total" show-less-items
+            @change="queryTableData"
+          />
+        </div>
+      </a-card>
+    </div>
+
+    <!-- 添加目录对话框 -->
+    <a-modal v-model:open="catalog.visible" :title="catalog.title" @ok="saveCatalog">
+      <a-form :model="catalog.form" :rules="catalog.formRules" class="w-full">
+        <a-form-item label="父目录名称" name="parentName">
+          <a-input v-model:value="catalog.form.parentName" :maxlength="20" placeholder="" disabled />
+        </a-form-item>
+        <a-form-item label="目录名称" name="name">
+          <a-input v-model:value="catalog.form.catalogname" :maxlength="20" placeholder="请输入目录名称" />
+        </a-form-item>
+      </a-form>
+    </a-modal>
+
+    <!-- 添加或修改数据标准对话框 -->
+    <a-modal v-model:open="paramObj.showAddServicePanelVisible" :title="paramObj.title" width="80%" @ok="addServiceRel" @cancel="handleCancel">
+      <a-table :columns="serviceHookingTable.columns" :data-source="serviceHookingTable.data" :row-selection="rowSelection">
+        <template #bodyCell="{ column }">
+          <template v-if="column.dataIndex === 'handler'">
+            <a-button size="small" style="margin-left: 2px;">
+              删除
+            </a-button>
           </template>
         </template>
       </a-table>
-    </a-card>
-    <!-- 添加或修改目录管理对话框 -->
-    <a-modal v-model:open="modal.visible" :title="modal.title" @ok="submitForm" @cancel="handleCancel">
-      <a-form ref="catalogFormRef" :model="formData" class="w-full" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
-        <a-form-item label="${comment}" name="pid">
-          <a-input v-model:value="formData.pid" :maxlength="50" placeholder="请输入${comment}" />
-        </a-form-item>
-        <a-form-item label="是否显示" name="isshow">
-          <a-input v-model:value="formData.isshow" :maxlength="50" placeholder="请输入是否显示" />
-        </a-form-item>
-        <a-form-item label="顺序" name="orderindex">
-          <a-input v-model:value="formData.orderindex" :maxlength="50" placeholder="请输入顺序" />
-        </a-form-item>
-      </a-form>
+
+      <div class="pageContainer">
+        <a-pagination
+          v-model:current="serviceHookingTable.pageNum" :total="serviceHookingTable.total" show-less-items
+          @change="queryServiceHookingData"
+        />
+      </div>
     </a-modal>
   </page-container>
 </template>
 
 <script setup lang="ts">
-import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
-import type { FormInstance } from 'ant-design-vue';
-import { addCatalog, delCatalog, getCatalog, listCatalog, updateCatalog } from '@/api/projectarchive/catalog';
-import type { CatalogForm, CatalogQuery, CatalogVO } from '@/api/projectarchive/catalog/types';
+import { h, reactive, watch } from 'vue';
+import { PlusOutlined, RedoOutlined } from '@ant-design/icons-vue';
+import type { DataNode } from 'ant-design-vue/es/tree';
+import type { TableColumnType } from 'ant-design-vue';
+import type { Key } from 'ant-design-vue/es/_util/type';
+
+import { addCatalog, getCatalogTree } from '@/api/projectarchive/catalog';
+import { getServiceList, saveServiceCatalogRel } from '@/api/projectarchive/service';
 
 defineOptions({
-  name: 'Catalog'
+  name: 'DataStandards'
+});
+const ElMessage = useMessage();
+const dictStore = useDictStore();
+
+const tree = reactive<{
+  data: DataNode[]
+  expandedKeys: Key[]
+  selectedKeys: Key[]
+}>({
+  data: [],
+  expandedKeys: [],
+  selectedKeys: []
 });
 
-const { proxy } = getCurrentInstance() as ComponentInternalInstance;
-const ElMessage = useMessage();
-const { hasAccess } = useAccess();
+const search = reactive<{
+  keyword: string
+  timer: number | null
+  loading: boolean
+  filterData: DataNode[]
+}>({
+  keyword: '',
+  timer: null,
+  loading: false,
+  filterData: []
+});
 
-const dictStore = useDictStore();
-// const { } = toRefs<any>(dictStore.getDictByKey());
+const catalog = reactive({
+  visible: false,
+  title: '添加目录',
+  formRules: {},
+  form: {
+    pid: '',
+    catalogname: ''
+  }
+});
 
-// 表格列
-const columns = [
+const paramObj = reactive({
+  showAddServicePanelVisible: false,
+  title: '服务挂接'
+
+});
+
+const dataTypeArr = [
   {
-    title: '$comment',
-    dataIndex: 'id',
-    resizable: true
-  },
-  {
-    title: '$comment',
-    dataIndex: 'pid',
-    resizable: true
-  },
-  {
-    title: '名称',
-    dataIndex: 'catalogname',
-    resizable: true
-  },
-  {
-    title: '别名',
-    dataIndex: 'catalogalias',
-    resizable: true
-  },
-  {
-    title: '目录编号',
-    dataIndex: 'catalogcode',
-    resizable: true
-  },
-  {
-    title: '是否显示',
-    dataIndex: 'isshow',
-    resizable: true
-  },
-  {
-    title: '顺序',
-    dataIndex: 'orderindex',
-    resizable: true
-  },
-  {
-    title: '租户号',
-    dataIndex: 'tenantId',
-    resizable: true
-  },
-  {
-    title: '创建人',
-    dataIndex: 'createBy',
-    resizable: true
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'createTime',
-    resizable: true
-  },
-  {
-    title: '更新人',
-    dataIndex: 'updateBy',
-    resizable: true
-  },
-  {
-    title: '更新时间',
-    dataIndex: 'updateTime',
-    resizable: true
+    'label': '文本',
+    'value': '1'
   }
 ];
-const filterColumns = ref(columns);
-const tableSize = ref<('small' | 'middle' | 'large')>('large');
-const buttonLoading = ref(false);
-const loading = ref(true);
-const expand = ref(false);
-const labelCol = { style: { width: '100px' } };
-const wrapperCol = { span: 24 };
-
-const { state, initQuery, resetQuery, query } = useTableQuery({
-  queryApi: listCatalog,
-  queryParams: {
-    pid: undefined,
-    catalogname: undefined,
-    catalogalias: undefined,
-    catalogcode: undefined,
-    isshow: undefined,
-    orderindex: undefined
+const materialTypeArr = [
+  {
+    'label': 'pdf',
+    'value': 'pdf'
   },
-  beforeQuery: () => {
-
-  },
-  afterQuery: (res) => {
-    console.log(res);
-    return res;
+  {
+    'label': 'png',
+    'value': 'png'
   }
+];
+
+const stautsArr = [
+  {
+    'label': '启用',
+    'value': '1'
+  },
+  {
+    'label': '不启用',
+    'value': '0 '
+  }
+];
+
+const table = reactive<{
+  columns: TableColumnType[]
+  total: number
+  pageSize: number
+  pageNum: number
+  data: any[]
+}>({
+  columns: [
+    {
+      title: '序号',
+      key: 'serialNumber',
+      customRender: ({ index }) => {
+        return index + 1;
+      }
+    },
+    {
+      key: 'serviceName',
+      dataIndex: 'serviceName',
+      title: '服务名称'
+    },
+    {
+      key: 'serviceUrl',
+      dataIndex: 'serviceUrl',
+      title: '服务地址'
+    },
+    {
+      key: 'serviceType',
+      dataIndex: 'serviceType',
+      title: '服务类型'
+    },
+
+    {
+      key: 'createTime',
+      dataIndex: 'createTime',
+      title: '创建时间'
+    },
+
+    {
+      title: '操作',
+      dataIndex: 'handler'
+    }
+  ],
+  total: 0,
+  pageSize: 20,
+  pageNum: 1,
+  data: []
+});
+const serviceHookingTable = reactive<{
+  columns: TableColumnType[]
+  selectedRows: any[]
+  total: number
+  pageSize: number
+  pageNum: number
+  data: any[]
+}>({
+  columns: [
+    {
+      title: '序号',
+      key: 'serialNumber',
+      customRender: ({ index }) => {
+        return index + 1;
+      }
+    },
+    {
+      key: 'serviceName',
+      dataIndex: 'serviceName',
+      title: '服务名称'
+    },
+    {
+      key: 'serviceUrl',
+      dataIndex: 'serviceUrl',
+      title: '服务地址'
+    },
+    {
+      key: 'serviceType',
+      dataIndex: 'serviceType',
+      title: '服务类型'
+    },
+
+    {
+      key: 'createTime',
+      dataIndex: 'createTime',
+      title: '创建时间'
+    }
+  ],
+  total: 0,
+  pageSize: 20,
+  pageNum: 1,
+  data: [],
+  selectedRows: []
 });
 
-const ids = computed(() => state.rowSelections.selectedRows.map(item => item.id));
-
-const catalogFormRef = ref<FormInstance>();
-
-const modal = reactive({
-  visible: false,
-  title: ''
-});
-
-const initFormData: CatalogForm = {
-  id: undefined,
-  pid: undefined,
-  catalogname: undefined,
-  catalogalias: undefined,
-  catalogcode: undefined,
-  isshow: undefined,
-  orderindex: undefined
+const defaultProps = {
+  // 规定
+  children: 'children',
+  title: 'label'
 };
-const data = reactive<PageData<CatalogForm, CatalogQuery>>({
-  formData: { ...initFormData },
-  rules: {
-    id: [
-      { required: true, message: '$comment不能为空', trigger: 'blur' }
-    ],
-    pid: [
-      { required: true, message: '$comment不能为空', trigger: 'blur' }
-    ],
-    catalogname: [
-      { required: true, message: '名称不能为空', trigger: 'blur' }
-    ],
-    catalogalias: [
-      { required: true, message: '别名不能为空', trigger: 'blur' }
-    ],
-    catalogcode: [
-      { required: true, message: '目录编号不能为空', trigger: 'blur' }
-    ],
-    isshow: [
-      { required: true, message: '是否显示不能为空', trigger: 'blur' }
-    ],
-    orderindex: [
-      { required: true, message: '顺序不能为空', trigger: 'blur' }
-    ]
+
+const rowSelection = ref({
+  onChange: (selectedRowKeys, selectedRows) => {
+    serviceHookingTable.selectedRows = selectedRows;
+  },
+  onSelect: (record, selected, selectedRows) => {
+  },
+  onSelectAll: (selected, selectedRows, changeRows) => {
   }
 });
 
-const { queryParams, formData, rules } = toRefs(data);
+watch(() => search.keyword, (nv, _ov) => {
+  if (nv.length > 0) {
+    if (search.timer) {
+      clearTimeout(search.timer);
+      search.timer = null;
+    }
+    search.timer = setTimeout(() => {
+      search.filterData = tree.data.filter((item) => {
+        return item.title.includes(nv);
+      }, 250);
+    });
+  }
+  else {
+    search.filterData = [];
+  }
+});
 
-/** 取消按钮 */
-function handleCancel() {
-  reset();
-  modal.visible = false;
-}
+onMounted(() => {
+  queryTreeData();
+});
 
-/** 表单重置 */
-function reset() {
-  formData.value = { ...initFormData };
-  catalogFormRef.value?.resetFields();
-}
-
-/** 新增按钮操作 */
-function handleAdd() {
-  reset();
-  modal.visible = true;
-  modal.title = '添加目录管理';
-}
-
-function handleInfo(row?: CatalogVO) {
-  console.log(row);
-}
-
-/** 修改按钮操作 */
-async function handleUpdate(row?: CatalogVO) {
-  reset();
-  const _id = row?.id || ids.value[0];
-  const res = await getCatalog(_id);
-  Object.assign(formData.value, res.data);
-  modal.visible = true;
-  modal.title = '修改目录管理';
-}
-
-/** 提交按钮 */
-function submitForm() {
-  catalogFormRef.value?.validate(async (valid: boolean) => {
-    if (valid) {
-      buttonLoading.value = true;
-      if (formData.value.id) {
-        await updateCatalog(formData.value).finally(() => buttonLoading.value = false);
-      }
-      else {
-        await addCatalog(formData.value).finally(() => buttonLoading.value = false);
-      }
-      ElMessage.success('操作成功');
-      modal.visible = false;
-      await initQuery();
+function queryTreeData() {
+  getCatalogTree().then((res) => {
+    if (res.code === 200) {
+      tree.data = res.data;
+    }
+    else {
+      console.log(res.msg);
     }
   });
 }
 
-/** 删除按钮操作 */
-async function handleDelete(row?: CatalogVO) {
-  const _ids = row?.id || ids.value;
-  await proxy?.$modal.confirm(`是否确认删除目录管理编号为"${_ids}"的数据项？`)
-    .finally(() => loading.value = false);
-  await delCatalog(_ids);
-  ElMessage.success('删除成功');
-  await initQuery();
+function clickCatalogAdd() {
+  catalog.visible = true;
+  catalog.form.catalogname = '';
 }
 
-/** 导出按钮操作 */
-function handleExport() {
-  useDownload('projectarchive/catalog/export', {
-    ...toRaw(state.queryParams)
-  }, `catalog_${new Date().getTime()}.xlsx`);
+// 右侧 查询列表数据
+function queryTableData() {
+  const param: listService = {
+    catalogId: catalog.form.pid,
+    pageSize: table.pageSize,
+    pageNum: table.pageNum
+  };
+  getServiceList(param).then((res) => {
+    if (res.code === 200) {
+      table.total = res.total;
+      table.data = res.rows;
+    }
+  });
 }
 
-onMounted(() => {
-  initQuery();
-});
+function queryServiceHookingData() {
+  const param: listService = {
+    pageSize: serviceHookingTable.pageSize,
+    pageNum: serviceHookingTable.pageNum
+  };
+  getServiceList(param).then((res) => {
+    if (res.code === 200) {
+      serviceHookingTable.total = res.total;
+      serviceHookingTable.data = res.rows;
+    }
+  });
+}
+
+function clickCreate() {
+  if (catalog.form.pid) {
+    paramObj.showAddServicePanelVisible = true;
+    queryServiceHookingData();
+    console.log(catalog.form);
+  }
+}
+
+function clickBatchImport() {
+
+}
+
+function clickBatchExport() {
+  // useDownload('projectarchive/dataStandards/export', {
+  //   ...toRaw(state.queryParams)
+  // }, `dataStandards_${new Date().getTime()}.xlsx`);
+}
+
+function saveCatalog() {
+  console.log(tree.selectedKeys);
+  addCatalog(catalog.form).then((res) => {
+    if (res.code === 200) {
+      catalog.visible = false;
+      queryTreeData();
+    }
+  });
+}
+
+function treeSelect(selectedKeys, e: { selected: bool, selectedNodes, node, event }) {
+  catalog.form.parentName = e.node.dataRef.label;
+  catalog.form.pid = e.node.dataRef.id;
+  queryTableData();
+}
+
+function addServiceRel() {
+  console.log(serviceHookingTable.selectedRows);
+  const objArr = [];
+  if (catalog.form.pid && serviceHookingTable.selectedRows.length > 0) {
+    serviceHookingTable.selectedRows.forEach((item) => {
+      const obj = {
+        serviceid: item.id,
+        catalogid: catalog.form.pid
+      };
+      objArr.push(obj);
+    });
+    saveServiceCatalogRel(objArr).then((res) => {
+      paramObj.showAddServicePanelVisible = false;
+      queryTableData();
+    });
+  }
+}
 </script>
+
+<style lang="less" scoped>
+.ant-pro-page-container {
+  height: 100%;
+
+  :deep(.ant-card) {
+
+    .ant-card-head {
+      padding: 0 8px;
+    }
+
+    .ant-card-body {
+      width: 100%;
+      max-height: calc(100% - 56px);
+      padding: 8px;
+    }
+  }
+}
+</style>

@@ -41,3 +41,11 @@ export function updateService(data: ServiceForm) {
 export function delService(id: string | number | Array<string | number>) {
   return useDelete(`${BASE_API}/projectarchive/service/${id}`);
 }
+
+export function getServiceList(query?: ServiceQuery) {
+  return usePost<ServiceVO[]>(`${BASE_API}/projectarchive/serviceEx/getServiceList`, query);
+}
+
+export function saveServiceCatalogRel(param?: any) {
+  return usePost(`${BASE_API}/projectarchive/serviceEx/saveServiceCatalogRel`, param);
+}

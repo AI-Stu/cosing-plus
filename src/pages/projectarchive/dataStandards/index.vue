@@ -33,15 +33,28 @@
           <a-button :icon="h(RedoOutlined)" @click="queryTableData" />
         </template>
         <!-- 数据标准列表 -->
-        <template>
-          <a-table :columns="table.columns" :data-source="table.data" />
-          <div class="pageContainer">
-            <a-pagination
-              v-model:current="table.pageNum" :total="table.total" show-less-items
-              @change="queryTableData"
-            />
-          </div>
-        </template>
+
+        <a-table :columns="table.columns" :data-source="table.data">
+          <template #bodyCell="{ column }">
+            <template v-if="column.dataIndex === 'status'" />
+
+            <template v-if="column.dataIndex === 'handler'">
+              <a-button size="small">
+                修改
+              </a-button>
+              <a-button size="small" style="margin-left: 2px;">
+                删除
+              </a-button>
+            </template>
+          </template>
+        </a-table>
+
+        <div class="pageContainer">
+          <a-pagination
+            v-model:current="table.pageNum" :total="table.total" show-less-items
+            @change="queryTableData"
+          />
+        </div>
       </a-card>
     </div>
 
@@ -58,28 +71,31 @@
     </a-modal>
 
     <!-- 添加或修改数据标准对话框 -->
-    <!-- <a-modal v-model:open="modal.visible" :title="modal.title" @ok="submitForm" @cancel="handleCancel">
-      <a-form ref="dataStandardsFormRef" :model="formData" class="w-full" :rules="rules" :label-col="labelCol"
-        :wrapper-col="wrapperCol">
-        <a-form-item label="数据标准目录id" name="dataStandardCatalogId">
-          <a-input v-model:value="formData.dataStandardCatalogId" :maxlength="50" placeholder="请输入数据标准目录id" />
+    <a-modal v-model:open="paramObj.showDataStandardsVisible" :title="paramObj.title" @ok="submitForm" @cancel="handleCancel">
+      <a-form
+        ref="dataStandardsFormRef" :model="formData" class="w-full" :rules="rules" :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+      >
+        <a-form-item label="文档资料名称" name="name">
+          <a-input v-model:value="paramObj.formData.name" :maxlength="50" placeholder="文档资料名称" />
         </a-form-item>
         <a-form-item label="数据类型" name="dataType">
-          <a-select v-model:value="formData.dataType" placeholder="请选择数据类型">
-            <a-select-option v-for="dict in hnt_type" :key="dict.value" :label="dict.label" :value="dict.value" />
-          </a-select>
+          <a-select v-model:value="paramObj.formData.dataType" placeholder="请选择数据类型" :options="dataTypeArr" />
+        </a-form-item>
+        <a-form-item label="资料类型" name="materialType">
+          <a-select v-model:value="paramObj.formData.materialType" placeholder="请选择数据类型" :options="materialTypeArr" />
         </a-form-item>
         <a-form-item label="数量" name="sl">
-          <a-input v-model:value="formData.sl" :maxlength="50" placeholder="请输入数量" />
+          <a-input v-model:value="paramObj.formData.sl" :maxlength="50" placeholder="请输入数量" />
         </a-form-item>
         <a-form-item label="状态" name="stauts">
-          <a-input v-model:value="formData.stauts" :maxlength="50" placeholder="请输入状态" />
+          <a-select v-model:value="paramObj.formData.stauts" placeholder="请选择数据类型" :options="stautsArr" />
         </a-form-item>
         <a-form-item label="顺序" name="orderindex">
-          <a-input v-model:value="formData.orderindex" :maxlength="50" placeholder="请输入顺序" />
+          <a-input v-model:value="paramObj.formData.orderindex" :maxlength="50" placeholder="请输入顺序" />
         </a-form-item>
       </a-form>
-    </a-modal> -->
+    </a-modal>
   </page-container>
 </template>
 
@@ -90,14 +106,14 @@ import type { DataNode } from 'ant-design-vue/es/tree';
 import type { TableColumnType } from 'ant-design-vue';
 import type { Key } from 'ant-design-vue/es/_util/type';
 import type { DataStandardsQuery } from '@/api/projectarchive/dataStandards/types';
-import { getCatalogTree, listDataStandards } from '@/api/projectarchive/dataStandards';
+import { addDataStandards, getCatalogTree, listDataStandards } from '@/api/projectarchive/dataStandards';
 
 defineOptions({
   name: 'DataStandards'
 });
 const ElMessage = useMessage();
 const dictStore = useDictStore();
-
+const dataStandardsFormRef = ref<FormInstance>();
 const tree = reactive<{
   data: DataNode[]
   expandedKeys: Key[]
@@ -130,6 +146,40 @@ const catalog = reactive({
   }
 });
 
+const paramObj = reactive({
+  showDataStandardsVisible: false,
+  title: '新增数据标准',
+  formData: {}
+});
+
+const dataTypeArr = [
+  {
+    'label': '文本',
+    'value': '1'
+  }
+];
+const materialTypeArr = [
+  {
+    'label': 'pdf',
+    'value': 'pdf'
+  },
+  {
+    'label': 'png',
+    'value': 'png'
+  }
+];
+
+const stautsArr = [
+  {
+    'label': '启用',
+    'value': '1'
+  },
+  {
+    'label': '不启用',
+    'value': '0 '
+  }
+];
+
 const table = reactive<{
   columns: TableColumnType[]
   total: number
@@ -146,7 +196,8 @@ const table = reactive<{
       }
     },
     {
-      key: 'profile',
+      key: 'name',
+      dataIndex: 'name',
       title: '应收文档资料'
     },
     {
@@ -155,27 +206,32 @@ const table = reactive<{
     },
     {
       key: 'dataType',
+      dataIndex: 'dataType',
       title: '数据类型'
     },
     {
-      key: 'profileType',
+      key: 'materialType',
+      dataIndex: 'materialType',
       title: '资料类型'
     },
     {
-      key: 'count',
+      key: 'sl',
+      dataIndex: 'sl',
       title: '数量'
     },
     {
       key: 'createTime',
+      dataIndex: 'createTime',
       title: '创建时间'
     },
     {
       key: 'status',
+      dataIndex: 'status',
       title: '状态'
     },
     {
-      key: 'handler',
-      title: '操作'
+      title: '操作',
+      dataIndex: 'handler'
     }
   ],
   total: 0,
@@ -209,6 +265,7 @@ watch(() => search.keyword, (nv, _ov) => {
 
 onMounted(() => {
   queryTreeData();
+  queryTableData();
 });
 
 function queryTreeData() {
@@ -230,7 +287,7 @@ function clickCatalogAdd() {
 // 右侧 查询列表数据
 function queryTableData() {
   const param: DataStandardsQuery = {
-    dataStandardCatalogId: tree.selectedKeys[0],
+    dataStandardCatalogId: catalog.form.pid,
     pageSize: table.pageSize,
     pageNum: table.pageNum
   };
@@ -243,7 +300,10 @@ function queryTableData() {
 }
 
 function clickCreate() {
-
+  if (catalog.form.pid) {
+    paramObj.showDataStandardsVisible = true;
+    console.log(catalog.form);
+  }
 }
 
 function clickBatchImport() {
@@ -270,6 +330,17 @@ function treeSelect(selectedKeys, e: { selected: bool, selectedNodes, node, even
   console.log(e);
   catalog.form.parentName = e.node.dataRef.label;
   catalog.form.pid = e.node.dataRef.id;
+  queryTableData();
+}
+
+function submitForm() {
+  paramObj.formData.dataStandardCatalogId = catalog.form.pid;
+  addDataStandards(paramObj.formData).then((res) => {
+    if (res.code === 200) {
+      paramObj.showDataStandardsVisible = false;
+      queryTableData();
+    }
+  });
 }
 </script>
 
