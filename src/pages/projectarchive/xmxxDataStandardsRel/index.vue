@@ -143,7 +143,7 @@
 
 <script setup lang="ts">
 import type { FormInstance } from 'ant-design-vue';
-import { addXmxxDataStandardsRel, delXmxxDataStandardsRel, getXmxxDataStandardsRel, listXmxxDataStandardsRel, updateXmxxDataStandardsRel } from '@/api/projectarchive/xmxxDataStandardsRel';
+import { addXmxxDataStandardsRelApi, delXmxxDataStandardsRelApi, getXmxxDataStandardsRelApi, listXmxxDataStandardsRelApi, updateXmxxDataStandardsRelApi } from '@/api/projectarchive/xmxxDataStandardsRel';
 import type { XmxxDataStandardsRelForm, XmxxDataStandardsRelQuery, XmxxDataStandardsRelVO } from '@/api/projectarchive/xmxxDataStandardsRel/types';
 
 import SearchTree from '@/pages/projectarchive/components/SearchTree.vue';
@@ -207,7 +207,7 @@ const labelCol = { style: { width: '100px' } };
 const wrapperCol = { span: 24 };
 
 const { state, initQuery, resetQuery, query } = useTableQuery({
-  queryApi: listXmxxDataStandardsRel,
+  queryApi: listXmxxDataStandardsRelApi,
   queryParams: {
     xmid: undefined,
     dataStandardsId: undefined,
@@ -291,7 +291,7 @@ function handleInfo(row?: XmxxDataStandardsRelVO) {
 async function handleUpdate(row?: XmxxDataStandardsRelVO) {
   reset();
   const _id = row?.id || ids.value[0];
-  const res = await getXmxxDataStandardsRel(_id);
+  const res = await getXmxxDataStandardsRelApi(_id);
   Object.assign(formData.value, res.data);
   modal.visible = true;
   modal.title = '修改项目信息数据标准关系';
@@ -303,10 +303,10 @@ function submitForm() {
     if (valid) {
       buttonLoading.value = true;
       if (formData.value.id) {
-        await updateXmxxDataStandardsRel(formData.value).finally(() => buttonLoading.value = false);
+        await updateXmxxDataStandardsRelApi(formData.value).finally(() => buttonLoading.value = false);
       }
       else {
-        await addXmxxDataStandardsRel(formData.value).finally(() => buttonLoading.value = false);
+        await addXmxxDataStandardsRelApi(formData.value).finally(() => buttonLoading.value = false);
       }
       ElMessage.success('操作成功');
       modal.visible = false;
@@ -320,7 +320,7 @@ async function handleDelete(row?: XmxxDataStandardsRelVO) {
   const _ids = row?.id || ids.value;
   await proxy?.$modal.confirm(`是否确认删除项目信息数据标准关系编号为"${_ids}"的数据项？`)
     .finally(() => loading.value = false);
-  await delXmxxDataStandardsRel(_ids);
+  await delXmxxDataStandardsRelApi(_ids);
   ElMessage.success('删除成功');
   await initQuery();
 }

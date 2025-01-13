@@ -23,6 +23,14 @@ defineOptions({
 });
 
 const emit = defineEmits(['goback']);
+const route = useRoute();
+
+const dictStore = useDictStore();
+const { sys_service_type } = dictStore.getDict('sys_service_type');
+
+// 提供静态值
+provide('serviceId', route.query.serviceId);
+provide('sys_service_type', sys_service_type);
 
 const state = reactive({
   currentTab: 0,

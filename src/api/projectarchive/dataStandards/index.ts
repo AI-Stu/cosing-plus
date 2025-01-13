@@ -2,53 +2,43 @@ import type { DataStandardsForm, DataStandardsQuery, DataStandardsVO } from '@/a
 
 const BASE_API = import.meta.env.VITE_APP_BASE_API_DEV;
 
-// 获取目录树
-export function getCatalogTree(): Promise<any> {
-  return useGet(`${BASE_API}/projectarchive/dataStandardsCatalogEx/getAllTree`);
-}
-
-// 新增目录
-export function addCatalog(data: any): Promise<any> {
-  return usePost(`${BASE_API}//projectarchive/dataStandardsCatalog`, data);
-}
-
 /**
  * 查询数据标准列表
  * @param query
- * @returns {*}
+ * @returns {Promise<any>} 结果列表
  */
-export function listDataStandards(query?: DataStandardsQuery) {
+export function listDataStandardsApi(query?: DataStandardsQuery) {
   return useGet<DataStandardsVO[]>(`${BASE_API}/projectarchive/dataStandards/list`, query);
-}
+};
 
 /**
  * 查询数据标准详细
  * @param id
  */
-export function getDataStandards(id: string | number) {
+export function getDataStandardsApi(id: string | number) {
   return useGet<DataStandardsVO>(`${BASE_API}/projectarchive/dataStandards/${id}`);
-}
+};
 
 /**
  * 新增数据标准
  * @param data
  */
-export function addDataStandards(data: DataStandardsForm) {
+export function addDataStandardsApi(data: DataStandardsForm) {
   return usePost(`${BASE_API}/projectarchive/dataStandards`, data);
-}
+};
 
 /**
  * 修改数据标准
  * @param data
  */
-export function updateDataStandards(data: DataStandardsForm) {
+export function updateDataStandardsApi(data: DataStandardsForm) {
   return usePut(`${BASE_API}/projectarchive/dataStandards`, data);
-}
+};
 
 /**
  * 删除数据标准
  * @param id
  */
-export function delDataStandards(id: string | number | Array<string | number>) {
+export function delDataStandardsApi(id: string | number | Array<string | number>) {
   return useDelete(`${BASE_API}/projectarchive/dataStandards/${id}`);
-}
+};

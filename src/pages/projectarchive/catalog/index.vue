@@ -4,18 +4,18 @@
       <a-card class="w-[15%]">
         <template #title>
           <div class="w-full flex justify-between">
-            <a-input-search v-model="search.keyword" placeholder="目录名称" :loading="search.loading" class="w-[calc(100%-40px)]" />
+            <a-input-search
+              v-model="search.keyword" placeholder="目录名称" :loading="search.loading"
+              class="w-[calc(100%-40px)]"
+            />
             <a-button type="primary" :icon="h(PlusOutlined)" class="addBtn" @click="clickCatalogAdd" />
           </div>
         </template>
         <!-- 目录树 -->
         <a-directory-tree
-          v-model:expanded-keys="tree.expandedKeys"
-          v-model:selected-keys="tree.selectedKeys"
-          :field-names="defaultProps"
-          :tree-data="search.keyword.length > 0 ? search.filterData : tree.data"
-          :checkable="false"
-          @select="treeSelect"
+          v-model:expanded-keys="tree.expandedKeys" v-model:selected-keys="tree.selectedKeys"
+          :field-names="defaultProps" :tree-data="search.keyword.length > 0 ? search.filterData : tree.data"
+          :checkable="false" @select="treeSelect"
         />
       </a-card>
 
@@ -50,10 +50,7 @@
         </a-table>
 
         <div class="pageContainer">
-          <a-pagination
-            v-model:current="table.pageNum" :total="table.total" show-less-items
-            @change="queryTableData"
-          />
+          <a-pagination v-model:current="table.pageNum" :total="table.total" show-less-items @change="queryTableData" />
         </div>
       </a-card>
     </div>
@@ -71,8 +68,14 @@
     </a-modal>
 
     <!-- 添加或修改数据标准对话框 -->
-    <a-modal v-model:open="paramObj.showAddServicePanelVisible" :title="paramObj.title" width="80%" @ok="addServiceRel" @cancel="handleCancel">
-      <a-table :columns="serviceHookingTable.columns" :data-source="serviceHookingTable.data" :row-selection="rowSelection">
+    <a-modal
+      v-model:open="paramObj.showAddServicePanelVisible" :title="paramObj.title" width="80%" @ok="addServiceRel"
+      @cancel="handleCancel"
+    >
+      <a-table
+        :columns="serviceHookingTable.columns" :data-source="serviceHookingTable.data"
+        :row-selection="rowSelection"
+      >
         <template #bodyCell="{ column }">
           <template v-if="column.dataIndex === 'handler'">
             <a-button size="small" style="margin-left: 2px;">
@@ -93,14 +96,15 @@
 </template>
 
 <script setup lang="ts">
-import { h, reactive, watch } from 'vue';
+import { h } from 'vue';
 import { PlusOutlined, RedoOutlined } from '@ant-design/icons-vue';
 import type { DataNode } from 'ant-design-vue/es/tree';
 import type { TableColumnType } from 'ant-design-vue';
 import type { Key } from 'ant-design-vue/es/_util/type';
 
-import { addCatalog, getCatalogTree } from '@/api/projectarchive/catalog';
-import { getServiceList, saveServiceCatalogRel } from '@/api/projectarchive/service';
+import { addCatalogApi, getOneMapCatalogTreeApi } from '@/api/projectarchive/catalog';
+import { getServiceListApi, saveServiceCatalogRelApi } from '@/api/projectarchive/service';
+import type { ServiceQuery } from '@/api/projectarchive/service/types';
 
 defineOptions({
   name: 'DataStandards'
@@ -146,34 +150,6 @@ const paramObj = reactive({
 
 });
 
-const dataTypeArr = [
-  {
-    'label': '文本',
-    'value': '1'
-  }
-];
-const materialTypeArr = [
-  {
-    'label': 'pdf',
-    'value': 'pdf'
-  },
-  {
-    'label': 'png',
-    'value': 'png'
-  }
-];
-
-const stautsArr = [
-  {
-    'label': '启用',
-    'value': '1'
-  },
-  {
-    'label': '不启用',
-    'value': '0 '
-  }
-];
-
 const table = reactive<{
   columns: TableColumnType[]
   total: number
@@ -204,13 +180,11 @@ const table = reactive<{
       dataIndex: 'serviceType',
       title: '服务类型'
     },
-
     {
       key: 'createTime',
       dataIndex: 'createTime',
       title: '创建时间'
     },
-
     {
       title: '操作',
       dataIndex: 'handler'
@@ -304,7 +278,7 @@ onMounted(() => {
 });
 
 function queryTreeData() {
-  getCatalogTree().then((res) => {
+  getOneMapCatalogTreeApi().then((res) => {
     if (res.code === 200) {
       tree.data = res.data;
     }
@@ -321,29 +295,25 @@ function clickCatalogAdd() {
 
 // 右侧 查询列表数据
 function queryTableData() {
-  const param: listService = {
+  const param: ServiceQuery = {
     catalogId: catalog.form.pid,
     pageSize: table.pageSize,
     pageNum: table.pageNum
   };
-  getServiceList(param).then((res) => {
-    if (res.code === 200) {
-      table.total = res.total;
-      table.data = res.rows;
-    }
+  getServiceListApi(param).then((res) => {
+    table.total = res.total;
+    table.data = res.rows;
   });
 }
 
 function queryServiceHookingData() {
-  const param: listService = {
+  const param: ServiceQuery = {
     pageSize: serviceHookingTable.pageSize,
     pageNum: serviceHookingTable.pageNum
   };
-  getServiceList(param).then((res) => {
-    if (res.code === 200) {
-      serviceHookingTable.total = res.total;
-      serviceHookingTable.data = res.rows;
-    }
+  getServiceListApi(param).then((res) => {
+    serviceHookingTable.total = res.total;
+    serviceHookingTable.data = res.rows;
   });
 }
 
@@ -367,7 +337,7 @@ function clickBatchExport() {
 
 function saveCatalog() {
   console.log(tree.selectedKeys);
-  addCatalog(catalog.form).then((res) => {
+  addCatalogApi(catalog.form).then((res) => {
     if (res.code === 200) {
       catalog.visible = false;
       queryTreeData();
@@ -392,7 +362,7 @@ function addServiceRel() {
       };
       objArr.push(obj);
     });
-    saveServiceCatalogRel(objArr).then((res) => {
+    saveServiceCatalogRelApi(objArr).then((res) => {
       paramObj.showAddServicePanelVisible = false;
       queryTableData();
     });

@@ -68,9 +68,14 @@
                     <BranchesOutlined /><span class="text-span">附件（{{ item.attachment || 0 }}）</span>
                   </div>
                   <div flex items-center>
-                    <a-button type="text" style="margin-right:5px;" size="small" @click="handleDel(item)">
-                      删除
-                    </a-button>
+                    <a-popconfirm
+                      title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
+                      @confirm="handleDel(item)"
+                    >
+                      <a-button type="text" mr-3 size="small">
+                        删除
+                      </a-button>
+                    </a-popconfirm>
                     <a-button type="primary" ghost size="small" @click="handleInfo(item)">
                       详情
                     </a-button>
@@ -107,7 +112,7 @@ import { h } from 'vue';
 import to from 'await-to-js';
 import type { SeacrhSelectListOptions, SelectListType } from '../components/types';
 import SearchSelectList from '../components/SearchSelectList.vue';
-import { delXmxx, listXmxx } from '@/api/projectarchive/xmxx';
+import { delXmxxApi, listXmxxApi } from '@/api/projectarchive/xmxx';
 import type { XmxxQuery } from '@/api/projectarchive/xmxx/types';
 
 defineOptions({
@@ -219,7 +224,7 @@ async function getList() {
     params.region = region[0];
   }
 
-  const [error, res] = await to(listXmxx(params));
+  const [error, res] = await to(listXmxxApi(params));
   if (error) {
     return;
   }
@@ -268,7 +273,7 @@ function handleInfo(item: any) {
  */
 function handleDel(item: any) {
   console.log(item);
-  delXmxx(item.xmxxid).then(() => {
+  delXmxxApi(item.xmxxid).then(() => {
     message.success('删除成功');
     getList();
   });

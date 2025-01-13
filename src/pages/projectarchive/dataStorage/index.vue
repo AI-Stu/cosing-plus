@@ -181,7 +181,7 @@ import {
 import { type VNodeChild, h } from 'vue';
 import type { FormInstance, ModalProps, UploadFile, UploadProps } from 'ant-design-vue';
 import { isFunction } from '@v-c/utils';
-import { addDataStorage, delDataStorage, getDataStorage, listDataStorage, updateDataStorage } from '@/api/projectarchive/dataStorage';
+import { addDataStorageApi, delDataStorageApi, getDataStorageApi, listDataStorageApi, updateDataStorageApi } from '@/api/projectarchive/dataStorage';
 import type { DataStorageForm, DataStorageQuery, DataStorageVO } from '@/api/projectarchive/dataStorage/types';
 import AssociativeArray from '@/utils/AssociativeArray';
 
@@ -327,7 +327,7 @@ const wrapperCol = { span: 24 };
 const breadcrumbLsit = shallowRef(new AssociativeArray());
 
 const { state, initQuery, resetQuery } = useTableQuery({
-  queryApi: listDataStorage,
+  queryApi: listDataStorageApi,
   queryParams: {
     name: undefined,
     filePath: undefined
@@ -429,7 +429,7 @@ function handleInfo(row?: DataStorageVO) {
 async function handleUpdate(row?: DataStorageVO) {
   reset();
   const _id = row?.id || ids.value[0];
-  const res = await getDataStorage(_id);
+  const res = await getDataStorageApi(_id);
   Object.assign(formData.value, res.data);
   modal.open = true;
   modal.title = '修改数据存储管理';
@@ -440,10 +440,10 @@ function submitForm() {
   dataStorageFormRef.value?.validate().then(async () => {
     buttonLoading.value = true;
     if (formData.value?.id) {
-      await updateDataStorage(formData.value).finally(() => buttonLoading.value = false);
+      await updateDataStorageApi(formData.value).finally(() => buttonLoading.value = false);
     }
     else {
-      await addDataStorage(formData.value).finally(() => buttonLoading.value = false);
+      await addDataStorageApi(formData.value).finally(() => buttonLoading.value = false);
     }
     ElMessage.success('操作成功');
     modal.open = false;
@@ -454,7 +454,7 @@ function submitForm() {
 /** 删除按钮操作 */
 async function handleDelete(row?: DataStorageVO) {
   const _ids = row?.id || ids.value;
-  await delDataStorage(_ids);
+  await delDataStorageApi(_ids);
   ElMessage.success('删除成功');
   initQuery();
 }

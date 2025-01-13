@@ -106,7 +106,9 @@ import type { DataNode } from 'ant-design-vue/es/tree';
 import type { TableColumnType } from 'ant-design-vue';
 import type { Key } from 'ant-design-vue/es/_util/type';
 import type { DataStandardsQuery } from '@/api/projectarchive/dataStandards/types';
-import { addDataStandards, getCatalogTree, listDataStandards } from '@/api/projectarchive/dataStandards';
+import { addDataStandardsApi, listDataStandardsApi } from '@/api/projectarchive/dataStandards';
+import { addCatalogApi } from '@/api/projectarchive/catalog';
+import { getStandardsCatalogTreeApi } from '@/api/projectarchive/dataStandardsCatalog';
 
 defineOptions({
   name: 'DataStandards'
@@ -269,7 +271,7 @@ onMounted(() => {
 });
 
 function queryTreeData() {
-  getCatalogTree().then((res) => {
+  getStandardsCatalogTreeApi().then((res) => {
     if (res.code === 200) {
       tree.data = res.data;
     }
@@ -291,7 +293,7 @@ function queryTableData() {
     pageSize: table.pageSize,
     pageNum: table.pageNum
   };
-  listDataStandards(param).then((res) => {
+  listDataStandardsApi(param).then((res) => {
     if (res.code === 200) {
       table.total = res.total;
       table.data = res.rows;
@@ -318,7 +320,7 @@ function clickBatchExport() {
 
 function saveCatalog() {
   console.log(tree.selectedKeys);
-  addCatalog(catalog.form).then((res) => {
+  addCatalogApi(catalog.form).then((res) => {
     if (res.code === 200) {
       catalog.visible = false;
       queryTreeData();
@@ -335,7 +337,7 @@ function treeSelect(selectedKeys, e: { selected: bool, selectedNodes, node, even
 
 function submitForm() {
   paramObj.formData.dataStandardCatalogId = catalog.form.pid;
-  addDataStandards(paramObj.formData).then((res) => {
+  addDataStandardsApi(paramObj.formData).then((res) => {
     if (res.code === 200) {
       paramObj.showDataStandardsVisible = false;
       queryTableData();

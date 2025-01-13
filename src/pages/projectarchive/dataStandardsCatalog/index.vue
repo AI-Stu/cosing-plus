@@ -133,7 +133,7 @@
 <script setup lang="ts">
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
 import type { FormInstance } from 'ant-design-vue';
-import { addDataStandardsCatalog, delDataStandardsCatalog, getDataStandardsCatalog, listDataStandardsCatalog, updateDataStandardsCatalog } from '@/api/projectarchive/dataStandardsCatalog';
+import { addDataStandardsCatalogApi, delDataStandardsCatalogApi, getDataStandardsCatalogApi, listDataStandardsCatalogApi, updateDataStandardsCatalogApi } from '@/api/projectarchive/dataStandardsCatalog';
 import type { DataStandardsCatalogForm, DataStandardsCatalogQuery, DataStandardsCatalogVO } from '@/api/projectarchive/dataStandardsCatalog/types';
 
 defineOptions({
@@ -208,7 +208,7 @@ const labelCol = { style: { width: '100px' } };
 const wrapperCol = { span: 24 };
 
 const { state, initQuery, resetQuery, query } = useTableQuery({
-  queryApi: listDataStandardsCatalog,
+  queryApi: listDataStandardsCatalogApi,
   queryParams: {
     pid: undefined,
     name: undefined,
@@ -281,7 +281,7 @@ function handleInfo(row?: DataStandardsCatalogVO) {
 async function handleUpdate(row?: DataStandardsCatalogVO) {
   reset();
   const _id = row?.id || ids.value[0];
-  const res = await getDataStandardsCatalog(_id);
+  const res = await getDataStandardsCatalogApi(_id);
   Object.assign(formData.value, res.data);
   modal.visible = true;
   modal.title = '修改数据标准目录';
@@ -293,10 +293,10 @@ function submitForm() {
     if (valid) {
       buttonLoading.value = true;
       if (formData.value.id) {
-        await updateDataStandardsCatalog(formData.value).finally(() => buttonLoading.value = false);
+        await updateDataStandardsCatalogApi(formData.value).finally(() => buttonLoading.value = false);
       }
       else {
-        await addDataStandardsCatalog(formData.value).finally(() => buttonLoading.value = false);
+        await addDataStandardsCatalogApi(formData.value).finally(() => buttonLoading.value = false);
       }
       ElMessage.success('操作成功');
       modal.visible = false;
@@ -310,7 +310,7 @@ async function handleDelete(row?: DataStandardsCatalogVO) {
   const _ids = row?.id || ids.value;
   await proxy?.$modal.confirm(`是否确认删除数据标准目录编号为"${_ids}"的数据项？`)
     .finally(() => loading.value = false);
-  await delDataStandardsCatalog(_ids);
+  await delDataStandardsCatalogApi(_ids);
   ElMessage.success('删除成功');
   await initQuery();
 }

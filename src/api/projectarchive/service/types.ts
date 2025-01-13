@@ -57,12 +57,12 @@ export interface ServiceVO {
   /**
    * 状态
    */
-  status?: number
+  status?: string
 
   /**
    * 步骤
    */
-  step?: number
+  step?: string
 
 }
 
@@ -125,12 +125,12 @@ export interface ServiceForm extends BaseEntity {
   /**
    * 状态
    */
-  status?: number
+  status?: string
 
   /**
    * 步骤
    */
-  step?: number
+  step?: string
 
 }
 
@@ -189,12 +189,17 @@ export interface ServiceQuery extends PageQuery {
   /**
    * 状态
    */
-  status?: number
+  status?: string
 
   /**
    * 步骤
    */
-  step?: number
+  step?: string
+
+  /**
+   * 目录Id
+   */
+  catalogId?: string
 
   /**
    * 日期范围参数

@@ -246,7 +246,7 @@ export function usePost< R = any, T = any>(
   url: string,
   data?: T,
   config?: AxiosRequestConfig & RequestConfigExtra
-): Promise<ResponseBody<R>> {
+): Promise<ResponseBody<R> | AxiosResponse<any> | any> {
   const options = {
     url,
     data,

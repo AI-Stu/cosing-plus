@@ -9,7 +9,7 @@
         :after-close="handleClose"
       >
         <template #message>
-          <div>共选择15项标准，共需提交45个文件</div>
+          <div>共选择 {{ total.dataStandards }} 项标准，共需提交 {{ total.file }} 个文件</div>
         </template>
         <template #action>
           <a-button size="small" type="link">
@@ -29,10 +29,10 @@
               </a>
             </div>
           </template>
-          <template v-if="scope?.column?.dataIndex === 'fj'">
+          <template v-if="scope?.column?.dataIndex === 'sl'">
             <div gap-2>
               <a-button type="link" block>
-                {{ scope?.record?.fj || 1 }}
+                {{ scope?.record?.sl || 1 }}
               </a-button>
             </div>
           </template>
@@ -62,11 +62,15 @@
 </template>
 
 <script setup lang="ts">
+import { cloneDeep } from 'lodash-es';
 import DataModal from './DataModal.vue';
-import type { ConsultTableModel, ConsultTableParams } from '@/api/list/table-list';
-import { deleteApi, getListApi } from '@/api/list/table-list';
+import { delXmxxDataStandardsRelApi, listXmxxDataStandardsRelApi } from '@/api/projectarchive/xmxxDataStandardsRel';
+import type { XmxxDataStandardsRelVO } from '@/api/projectarchive/xmxxDataStandardsRel/types';
 
 const emit = defineEmits(['prevStep', 'nextStep']);
+const xmxxid = inject('xmxxid') as string;
+const message = useMessage();
+
 const columns = shallowRef([
   {
     title: '序号',
@@ -74,7 +78,7 @@ const columns = shallowRef([
   },
   {
     title: '数据标准',
-    dataIndex: 'name'
+    dataIndex: 'dataStandards'
   },
   {
     title: '父级目录',
@@ -83,12 +87,12 @@ const columns = shallowRef([
   },
   {
     title: '技术标准',
-    dataIndex: 'callNo',
+    dataIndex: 'skillStandards',
     ellipsis: true
   },
   {
     title: '附件',
-    dataIndex: 'fj',
+    dataIndex: 'sl',
     width: 50
   },
   {
@@ -97,20 +101,41 @@ const columns = shallowRef([
     width: 80
   }
 ]);
+
+const { state, initQuery, resetQuery, query } = useTableQuery({
+  queryApi: listXmxxDataStandardsRelApi,
+  queryParams: {
+    xmid: undefined,
+    dataStandardsId: undefined,
+    dataType: undefined,
+    dataStandards: undefined,
+    skillStandards: undefined,
+    materialType: undefined,
+    sl: undefined,
+    stauts: undefined,
+    name: undefined
+  },
+  beforeQuery: () => {
+
+  },
+  afterQuery: (res) => {
+    console.log(res);
+    return res;
+  }
+});
+
 const open = ref(false);
 const visible = ref<boolean>(true);
-const message = useMessage();
 // 数据
 const loading = shallowRef(false);
+const total = reactive({
+  dataStandards: 0,
+  file: 0
+});
 
 const dataSource = shallowRef<ConsultTableModel[]>([]);
-const formModel = reactive<ConsultTableParams>({
-  name: undefined,
-  callNo: undefined,
-  desc: undefined,
-  status: undefined,
-  updatedAt: undefined
-});
+let resetForm = [];
+const formModel = ref<XmxxDataStandardsRelVO[]>();
 
 const getCheckList = computed(() => columns.value.map(item => item.dataIndex));
 function handleClose() {
@@ -142,7 +167,7 @@ async function init() {
     return;
   loading.value = true;
   try {
-    const { data } = await getListApi({
+    const { data } = await listXmxxDataStandardsRelApi({
       ...formModel
     });
     dataSource.value = data ?? [];
@@ -160,10 +185,10 @@ async function init() {
  *  @param record
  *
  */
-async function handleDelete(record: ConsultTableModel) {
+async function handleDelete(record) {
   const close = message.loading('删除中......');
   try {
-    const res = await deleteApi(record!.id);
+    const res = await delXmxxDataStandardsRelApi(record!.id);
     if (res.code === 200)
       await init();
     message.success('删除成功');
@@ -175,6 +200,16 @@ async function handleDelete(record: ConsultTableModel) {
     close();
   }
 }
+
+onBeforeMount(async () => {
+  if (xmxxid) {
+    listXmxxDataStandardsRelApi({ xmid: xmxxid }).then((res) => {
+      delete res.rows.createTime;
+      resetForm = cloneDeep(res.data);
+      formState.value = res.data;
+    });
+  }
+});
 
 function prevStep() {
   emit('prevStep');

@@ -1,6 +1,6 @@
 export interface XmxxDataStandardsRelVO {
   /**
-   * $column.columnComment
+   * id
    */
   id: string | number
 
@@ -48,6 +48,11 @@ export interface XmxxDataStandardsRelVO {
    * 标准名称
    */
   name: string
+
+  /**
+   * $column.columnComment
+   */
+  datastorageid: string | number
 
 }
 
@@ -102,6 +107,11 @@ export interface XmxxDataStandardsRelForm extends BaseEntity {
    */
   name?: string
 
+  /**
+   * $column.columnComment
+   */
+  datastorageid?: string | number
+
 }
 
 export interface XmxxDataStandardsRelQuery extends PageQuery {
@@ -150,6 +160,11 @@ export interface XmxxDataStandardsRelQuery extends PageQuery {
    * 标准名称
    */
   name?: string
+
+  /**
+   * $column.columnComment
+   */
+  datastorageid?: string | number
 
   /**
    * 日期范围参数

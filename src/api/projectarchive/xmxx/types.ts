@@ -5,11 +5,6 @@ export interface XmxxVO {
   xmxxid?: string | number
 
   /**
-   * 项目名称
-   */
-  xmmc?: string
-
-  /**
    * 项目编号
    */
   xmbh?: string
@@ -55,14 +50,19 @@ export interface XmxxVO {
   latitude?: number
 
   /**
+   * 项目名称
+   */
+  xmmc?: string
+
+  /**
    * 状态
    */
-  status?: number
+  status?: string
 
   /**
    * 步骤
    */
-  step?: number
+  step?: string
 
 }
 
@@ -73,11 +73,6 @@ export interface XmxxForm extends BaseEntity {
   xmxxid?: string | number
 
   /**
-   * 项目名称
-   */
-  xmmc?: string
-
-  /**
    * 项目编号
    */
   xmbh?: string
@@ -123,14 +118,19 @@ export interface XmxxForm extends BaseEntity {
   latitude?: number
 
   /**
+   * 项目名称
+   */
+  xmmc?: string
+
+  /**
    * 状态
    */
-  status?: number
+  status?: string
 
   /**
    * 步骤
    */
-  step?: number
+  step?: string
 
 }
 
@@ -142,11 +142,6 @@ export interface XmxxQuery extends PageQuery {
   xmbh?: string
 
   /**
-   * 项目名称
-   */
-  xmmc?: string
-
-  /**
    * 委托单位
    */
   unit?: string
@@ -187,14 +182,19 @@ export interface XmxxQuery extends PageQuery {
   latitude?: number
 
   /**
+   * 项目名称
+   */
+  xmmc?: string
+
+  /**
    * 状态
    */
-  status?: number
+  status?: string
 
   /**
    * 步骤
    */
-  step?: number
+  step?: string
 
   /**
    * 日期范围参数

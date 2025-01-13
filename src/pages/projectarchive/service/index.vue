@@ -81,9 +81,15 @@
                     </a-tag> -->
 
                     <div flex items-center>
-                      <a-button type="text" mr-3 size="small" @click="handleDel(item)">
-                        删除
-                      </a-button>
+                      <a-popconfirm
+                        title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
+                        @confirm="handleDel(item)"
+                      >
+                        <a-button type="text" mr-3 size="small">
+                          删除
+                        </a-button>
+                      </a-popconfirm>
+
                       <a-button type="primary" ghost size="small" @click="handleInfo(item)">
                         详情
                       </a-button>
@@ -109,7 +115,7 @@ import to from 'await-to-js';
 import { CheckCircleFilled, PlusOutlined, RedoOutlined, SearchOutlined } from '@ant-design/icons-vue';
 import type { SelectListType } from '../components/types';
 import SearchSelectList from '../components/SearchSelectList.vue';
-import { delService, listService } from '@/api/projectarchive/service';
+import { delServiceApi, listServiceApi } from '@/api/projectarchive/service';
 import type { ServiceQuery } from '@/api/projectarchive/service/types';
 
 defineOptions({
@@ -149,10 +155,6 @@ const SearchSelectOptions = computed(() => ([
     options: [
       { name: '全部', value: 'all' },
       ...sys_service_type?.value.map((e: DictDataOption) => ({ name: e.label, value: e.value }))
-      // { name: '倾斜摄影', value: 'mesh' },
-      // { name: '激光点云', value: 'lidar' },
-      // { name: '基础地形', value: 'terrain' },
-      // { name: 'BIM模型', value: 'bim' }
     ]
   },
   {
@@ -207,7 +209,7 @@ async function getList() {
     params.region = region[0];
   }
 
-  const [error, res] = await to(listService(params));
+  const [error, res] = await to(listServiceApi(params));
   if (error) {
     spinning.value = false;
     return;
@@ -265,6 +267,18 @@ function handleAdd() {
  * @param item
  */
 function handleInfo(item: any) {
+  // 如果步骤没走完，继续新建流程
+  if (item.step !== 2) {
+    router.push({
+      path: `/data/service/add`,
+      query: {
+        serviceId: item.id,
+        step: item.step || 0
+      }
+    });
+    return;
+  }
+
   router.push({
     path: `/data/service/${item.id}`
   });
@@ -276,7 +290,7 @@ function handleInfo(item: any) {
  * @param item
  */
 async function handleDel(item: any) {
-  await delService(item.id);
+  await delServiceApi(item.id);
   getList();
   message.success('删除成功');
 }

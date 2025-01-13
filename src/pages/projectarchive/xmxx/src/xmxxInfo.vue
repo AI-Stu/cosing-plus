@@ -111,7 +111,7 @@
 import { h } from 'vue';
 import { ArrowLeftOutlined, FileDoneOutlined, RedoOutlined } from '@ant-design/icons-vue';
 import to from 'await-to-js';
-import { getXmxx, updateXmxx } from '@/api/projectarchive/xmxx/index';
+import { getXmxxApi, updateXmxxApi } from '@/api/projectarchive/xmxx/index';
 import type { XmxxVO } from '@/api/projectarchive/xmxx/types';
 
 interface DataItem {
@@ -174,7 +174,7 @@ const searchValue = ref(95);
 
 async function getInfo() {
   if (xmxxid) {
-    const [err, res] = await to(getXmxx(xmxxid));
+    const [err, res] = await to(getXmxxApi(xmxxid));
     if (res) {
       formState.value = res.data;
     }
@@ -191,7 +191,7 @@ async function handleUpdate() {
   const params = {
 
   };
-  const [err, res] = await to(updateXmxx(params));
+  const [err, res] = await to(updateXmxxApi(params));
   if (res) {
     console.log(res);
   }

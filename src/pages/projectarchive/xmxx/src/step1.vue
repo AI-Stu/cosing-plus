@@ -63,7 +63,7 @@ import { AimOutlined } from '@ant-design/icons-vue';
 import { cloneDeep, isEqual } from 'lodash-es';
 import type { XmxxVO } from '@/api/projectarchive/xmxx/types';
 import { regionList } from '@/assets/region';
-import { addXmxx, getXmxx, updateXmxx } from '@/api/projectarchive/xmxx';
+import { addXmxxApi, getXmxxApi, updateXmxxApi } from '@/api/projectarchive/xmxx';
 
 const emit = defineEmits(['nextStep']);
 const xmxxid = inject('xmxxid') as string;
@@ -75,19 +75,19 @@ const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 
 let resetForm = {}; // 优化提交
 const formState = ref<XmxxVO>({
-  step: 0
+  step: '0'
 });
 async function nextStep() {
   await formRef.value?.validateFields();
   if (formState.value.xmxxid) {
     if (!isEqual(resetForm, formState.value)) {
-      await updateXmxx(formState.value);
+      await updateXmxxApi(formState.value);
       resetForm = cloneDeep(formState.value);
       message.success('修改成功');
     }
   }
   else {
-    await addXmxx(formState.value);
+    await addXmxxApi(formState.value);
     message.success('提交成功');
   }
 
@@ -96,7 +96,8 @@ async function nextStep() {
 
 onBeforeMount(async () => {
   if (xmxxid) {
-    getXmxx(xmxxid).then((res) => {
+    getXmxxApi(xmxxid).then((res) => {
+      delete res.data.createTime;
       resetForm = cloneDeep(res.data);
       formState.value = res.data;
     });
