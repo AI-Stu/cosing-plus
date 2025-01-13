@@ -7,10 +7,10 @@
       <a-step title="完成" />
     </a-steps>
     <div class="content">
-      <Step1 v-if="state.currentTab === 0" @next-step="nextStep" />
-      <Step2 v-if="state.currentTab === 1" @next-step="nextStep" @prev-step="prevStep" />
-      <Step3 v-if="state.currentTab === 2" @next-step="nextStep" @prev-step="prevStep" />
-      <Step4 v-if="state.currentTab === 3" @prevs-step="prevStep" @finish="finish" />
+      <Step1 v-show="state.currentTab === 0" @next-step="nextStep" />
+      <Step2 v-show="state.currentTab === 1" @next-step="nextStep" @prev-step="prevStep" />
+      <Step3 v-show="state.currentTab === 2" @next-step="nextStep" @prev-step="prevStep" />
+      <Step4 v-show="state.currentTab === 3" @prevs-step="prevStep" @finish="finish" />
     </div>
   </a-card>
 </template>
@@ -24,11 +24,14 @@ import Step4 from './step4.vue';
 defineOptions({
   name: 'AddXmxx'
 });
-
 const emit = defineEmits(['goback']);
+const route = useRoute();
+
+// 提供静态值
+provide('xmxxid', route.query.xmxxid);
 
 const state = reactive({
-  currentTab: 0,
+  currentTab: Number(route.query.step) || 0,
   form: null
 });
 

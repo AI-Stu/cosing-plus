@@ -10,8 +10,12 @@
         </template>
         <!-- 目录树 -->
         <a-directory-tree
-          v-model:expanded-keys="tree.expandedKeys" v-model:selected-keys="tree.selectedKeys" :field-names="defaultProps" :tree-data="search.keyword.length > 0 ? search.filterData : tree.data"
-          :checkable="false" @select="treeSelect"
+          v-model:expanded-keys="tree.expandedKeys"
+          v-model:selected-keys="tree.selectedKeys"
+          :field-names="defaultProps"
+          :tree-data="search.keyword.length > 0 ? search.filterData : tree.data"
+          :checkable="false"
+          @select="treeSelect"
         />
       </a-card>
 

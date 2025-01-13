@@ -96,6 +96,7 @@ const columns = shallowRef([
     width: 80
   }
 ]);
+
 const dataSource = shallowRef<ConsultTableModel[]>([]);
 const visible = ref<boolean>(true);
 const checked = ref<boolean>(false);

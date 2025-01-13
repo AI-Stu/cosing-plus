@@ -54,6 +54,16 @@ export interface ServiceVO {
    */
   orderindex?: string
 
+  /**
+   * 状态
+   */
+  status?: number
+
+  /**
+   * 步骤
+   */
+  step?: number
+
 }
 
 export interface ServiceForm extends BaseEntity {
@@ -112,6 +122,16 @@ export interface ServiceForm extends BaseEntity {
    */
   orderindex?: string
 
+  /**
+   * 状态
+   */
+  status?: number
+
+  /**
+   * 步骤
+   */
+  step?: number
+
 }
 
 export interface ServiceQuery extends PageQuery {
@@ -165,6 +185,16 @@ export interface ServiceQuery extends PageQuery {
    * 顺序
    */
   orderindex?: string
+
+  /**
+   * 状态
+   */
+  status?: number
+
+  /**
+   * 步骤
+   */
+  step?: number
 
   /**
    * 日期范围参数

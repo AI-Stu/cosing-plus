@@ -17,13 +17,13 @@
         <a-select v-model:value="formState.region" :options="regionList" placeholder="请选择所属区域" />
       </a-form-item>
       <a-form-item label="签订时间" name="signdata" :rules="[{ required: true, message: '签订时间必须输入' }]">
-        <a-date-picker v-model:default-value="formState.signdata" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
+        <a-date-picker v-model:value="formState.signdata" value-format="YYYY-MM-DD" />
       </a-form-item>
       <a-form-item label="竣工时间" name="jgsj" :rules="[{ required: true, message: '竣工时间必须输入' }]">
-        <a-date-picker v-model:default-value="formState.jgsj" format="YYYY-MM-DD" value-format="YYYY-MM-DD" />
+        <a-date-picker v-model:value="formState.jgsj" value-format="YYYY-MM-DD" />
       </a-form-item>
       <a-form-item label="是否竣工" name="isjg" :rules="[{ required: true, message: '是否竣工必须选择' }]">
-        <a-switch v-model:checked="formState.isjg" />
+        <a-switch v-model:checked="formState.isjg" :checked-value="1" :un-checked-value="0" />
       </a-form-item>
       <a-form-item label="项目地址" name="xmdz" :rules="[{ required: true, message: '项目地址必须填写' }]">
         <a-input v-model:value="formState.xmdz" placeholder="请选择项目地址">
@@ -60,41 +60,53 @@
 <script setup lang="ts">
 import type { FormInstance } from 'ant-design-vue';
 import { AimOutlined } from '@ant-design/icons-vue';
+import { cloneDeep, isEqual } from 'lodash-es';
 import type { XmxxVO } from '@/api/projectarchive/xmxx/types';
 import { regionList } from '@/assets/region';
+import { addXmxx, getXmxx, updateXmxx } from '@/api/projectarchive/xmxx';
 
 const emit = defineEmits(['nextStep']);
+const xmxxid = inject('xmxxid') as string;
+const message = useMessage();
+
 const formRef = ref<FormInstance>();
 const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
 const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 
-const formState = reactive<XmxxVO>({
-  xmbh: `1101`,
-  xmmc: '水立方项目',
-  unit: '湖北华强有限公司',
-  signdata: '2015-01-01',
-  jgsj: '2015-04-01',
-  isjg: true ? 1 : 0,
-  xmdz: '华强北',
-  longitude: 32.43525256,
-  latitude: 182.884548744
+let resetForm = {}; // 优化提交
+const formState = ref<XmxxVO>({
+  step: 0
 });
 async function nextStep() {
-  try {
-    // await formRef.value?.validateFields();
-    // console.log(formState, 'formState');
-    // const res = await addXmxx(formState);
-    // console.log(res, 'res');
+  await formRef.value?.validateFields();
+  if (formState.value.xmxxid) {
+    if (!isEqual(resetForm, formState.value)) {
+      await updateXmxx(formState.value);
+      resetForm = cloneDeep(formState.value);
+      message.success('修改成功');
+    }
+  }
+  else {
+    await addXmxx(formState.value);
+    message.success('提交成功');
+  }
 
-    emit('nextStep');
-  }
-  catch (errorInfo) {
-    console.log('Failed:', errorInfo);
-  }
+  emit('nextStep');
 }
 
+onBeforeMount(async () => {
+  if (xmxxid) {
+    getXmxx(xmxxid).then((res) => {
+      resetForm = cloneDeep(res.data);
+      formState.value = res.data;
+    });
+  }
+});
+
 // 重置
-function reset() { }
+function reset() {
+  formState.value = resetForm;
+}
 </script>
 
 <style lang="less" scoped>

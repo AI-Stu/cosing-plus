@@ -1,63 +1,12 @@
 <template>
-  <!-- 新增弹窗 -->
   <a-modal v-model:open="openValue" title="选择数据清单" width="1000px" @cancel="handleCancel" @ok="handleOk">
-    <a-row v-if="!ishow" :gutter="20">
-      <a-col :span="18" :push="6">
-        <a-breadcrumb>
-          <a-breadcrumb-item>施工图建筑面积预绘测</a-breadcrumb-item>
-          <a-breadcrumb-item>商业及其他用房-附件列表</a-breadcrumb-item>
-        </a-breadcrumb>
-        <a-table :columns="columns" :data-source="data" :row-selection="rowSelection" :pagination="false" size="small">
-          <template #bodyCell="scope">
-            <template v-if="scope?.column?.dataIndex === 'action'">
-              <div flex gap-2>
-                <a @click="handle(scope?.record as ConsultTableModel)">
-                  详情
-                </a>
-              </div>
-            </template>
-          </template>
-        </a-table>
-        <a-button size="small" type="primary" style="float: right;margin-top: 10px;">
-          添加
-        </a-button>
-        <div style="clear: both;" />
-        <a-alert
-          v-if="visible"
-          style="margin: 10px 0;"
-          type="info"
-          closable
-          show-icon
-          :after-close="handleClose"
-        >
-          <template #message>
-            <div>共选择15项标准，共需提交45个文件</div>
-          </template>
-          <template #action>
-            <a-button size="small" type="link">
-              取消选择
-            </a-button>
-          </template>
-        </a-alert>
-        <div style="margin-bottom: 10px;">
-          <a-button size="small" type="primary" style="margin-right: 10px;">
-            自定义附件
-          </a-button>
-          <a-button size="small" type="primary" danger>
-            删除
-          </a-button>
-        </div>
-        <a-table :columns="columns" :data-source="data" :row-selection="rowSelection" :pagination="false" size="small" />
-      </a-col>
-      <a-col :span="6" :pull="18">
+    <a-row v-if="true" :gutter="20">
+      <!-- 数据标准类型树 -->
+      <a-col :span="6">
         <a-input v-model:value="searchValue" style="margin-bottom: 8px" placeholder="数据标准类型" />
         <a-tree
-          v-model:selected-keys="selectedKeys"
-          show-icon default-expand-all
-          :expanded-keys="expandedKeys"
-          :auto-expand-parent="autoExpandParent"
-          :tree-data="gData"
-          @expand="onExpand"
+          v-model:selected-keys="selectedKeys" show-icon default-expand-all :expanded-keys="expandedKeys"
+          :auto-expand-parent="autoExpandParent" :tree-data="gData" @expand="onExpand"
         >
           <template #title="{ title }">
             <span v-if="title.indexOf(searchValue) > -1">
@@ -77,6 +26,51 @@
           </template>
         </a-tree>
       </a-col>
+
+      <!-- 附件列表 -->
+      <a-col :span="18">
+        <a-breadcrumb mb-4>
+          <a-breadcrumb-item>施工图建筑面积预绘测</a-breadcrumb-item>
+          <a-breadcrumb-item>商业及其他用房-附件列表</a-breadcrumb-item>
+        </a-breadcrumb>
+        <a-table :columns="columns" :data-source="data" :row-selection="rowSelection" :pagination="false" size="small">
+          <template #bodyCell="scope">
+            <template v-if="scope?.column?.dataIndex === 'action'">
+              <div flex gap-2>
+                <a @click="handle(scope?.record as ConsultTableModel)">
+                  详情
+                </a>
+              </div>
+            </template>
+          </template>
+        </a-table>
+        <a-button size="small" type="primary" mt-2 float-right>
+          添加
+        </a-button>
+        <div style="clear: both;" />
+        <a-alert v-if="visible" style="margin: 10px 0;" type="info" closable show-icon :after-close="handleClose">
+          <template #message>
+            <div>共选择15项标准，共需提交45个文件</div>
+          </template>
+          <template #action>
+            <a-button size="small" type="link">
+              取消选择
+            </a-button>
+          </template>
+        </a-alert>
+        <div style="margin-bottom: 10px;">
+          <a-button size="small" type="primary" style="margin-right: 10px;">
+            自定义附件
+          </a-button>
+          <a-button size="small" type="primary" danger>
+            删除
+          </a-button>
+        </div>
+        <a-table
+          :columns="columns" :data-source="data" :row-selection="rowSelection" :pagination="false"
+          size="small"
+        />
+      </a-col>
     </a-row>
     <a-row v-else>
       <a-col :span="24">
@@ -92,7 +86,10 @@
             删除
           </a-button>
         </div>
-        <a-table :columns="columns" :data-source="data" :row-selection="rowSelection" :pagination="false" size="small" />
+        <a-table
+          :columns="columns" :data-source="data" :row-selection="rowSelection" :pagination="false"
+          size="small"
+        />
       </a-col>
     </a-row>
   </a-modal>
@@ -101,6 +98,7 @@
 <script setup lang="ts">
 import type { TreeProps } from 'ant-design-vue';
 import { ReadOutlined, UnorderedListOutlined } from '@ant-design/icons-vue';
+import type { EventDataNode } from 'ant-design-vue/es/tree';
 import type { ConsultTableModel } from '@/api/list/table-list';
 
 defineOptions({ name: 'DataModal' });
@@ -184,7 +182,16 @@ const rowSelection = ref({
   }
 });
 const selectedKeys = ref(['0-0']);
-const genData: TreeProps['treeData'] = [{ title: '项目启动标准', key: '0-0', children: [{ title: '测绘服务', key: '0-1-0' }] }, { title: '施工图建筑面积预测绘', key: '0-2' }];
+const genData: TreeProps['treeData'] = [
+  {
+    title: '项目启动标准',
+    key: '0-0',
+    children: [
+      { title: '测绘服务', key: '0-1-0' }
+    ]
+  },
+  { title: '施工图建筑面积预测绘', key: '0-2' }
+];
 
 const dataList: TreeProps['treeData'] = [];
 function generateList(data: TreeProps['treeData']) {
@@ -219,7 +226,7 @@ const searchValue = ref<string>('');
 const autoExpandParent = ref<boolean>(true);
 const gData = ref<TreeProps['treeData']>(genData);
 
-function onExpand(keys: string[]) {
+function onExpand(keys: (string | number)[], info: { node: EventDataNode, expanded: boolean, nativeEvent: MouseEvent }) {
   expandedKeys.value = keys;
   autoExpandParent.value = false;
 }
@@ -242,7 +249,7 @@ function handle(record: ConsultTableModel) {
   ishow.value = true;
 }
 
-function handleClose() {}
+function handleClose() { }
 
 // 向父组件发送事件
 function handleOk() {
@@ -254,5 +261,4 @@ function handleCancel() {
 }
 </script>
 
-    <style lang="less" scoped>
-    </style>
+<style lang="less" scoped></style>

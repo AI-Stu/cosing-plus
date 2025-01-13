@@ -54,6 +54,16 @@ export interface XmxxVO {
    */
   latitude?: number
 
+  /**
+   * 状态
+   */
+  status?: number
+
+  /**
+   * 步骤
+   */
+  step?: number
+
 }
 
 export interface XmxxForm extends BaseEntity {
@@ -112,6 +122,16 @@ export interface XmxxForm extends BaseEntity {
    */
   latitude?: number
 
+  /**
+   * 状态
+   */
+  status?: number
+
+  /**
+   * 步骤
+   */
+  step?: number
+
 }
 
 export interface XmxxQuery extends PageQuery {
@@ -165,6 +185,16 @@ export interface XmxxQuery extends PageQuery {
    * 纬度
    */
   latitude?: number
+
+  /**
+   * 状态
+   */
+  status?: number
+
+  /**
+   * 步骤
+   */
+  step?: number
 
   /**
    * 日期范围参数

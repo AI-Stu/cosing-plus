@@ -81,8 +81,10 @@ const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 const { sys_service_type } = toRefs<any>(dictStore.getDict('sys_service_type'));
 const SYS_SERVICE_TYPE = computed(() => sys_service_type?.value.map((e: any) => ({ label: e.label, value: e.value })));
 const formState = reactive<ServiceVO>({
-  orderindex: '1'
+  orderindex: '1',
+  step: 0
 });
+
 const bounds = reactive({
   lt: '',
   lb: '',

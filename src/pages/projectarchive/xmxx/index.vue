@@ -107,13 +107,14 @@ import { h } from 'vue';
 import to from 'await-to-js';
 import type { SeacrhSelectListOptions, SelectListType } from '../components/types';
 import SearchSelectList from '../components/SearchSelectList.vue';
-import { listXmxx } from '@/api/projectarchive/xmxx';
+import { delXmxx, listXmxx } from '@/api/projectarchive/xmxx';
 import type { XmxxQuery } from '@/api/projectarchive/xmxx/types';
 
 defineOptions({
   name: 'XMXXList'
 });
 const router = useRouter();
+const message = useMessage();
 // 分页
 const current = ref<number>(1);
 const rangeYear = ref<any>();
@@ -208,9 +209,9 @@ async function getList() {
     pageSize: 10,
     pageNum: 1
   };
-  if (isjg?.length === 1) {
-    params.isjg = isjg[0];
-  }
+  // if (isjg?.length === 1) {
+  //   params.isjg = isjg[0];
+  // }
   if (signdata?.length === 1) {
     params.signdata = signdata[0];
   }
@@ -244,6 +245,18 @@ function handleAdd() {
 function handleInfo(item: any) {
   console.log(item);
 
+  // 如果步骤没走完，继续新建流程
+  if (item.step !== 3) {
+    router.push({
+      path: `/project/manage/add`,
+      query: {
+        xmxxid: item.xmxxid,
+        step: item.step || 0
+      }
+    });
+    return;
+  }
+
   router.push({
     path: `/project/manage/${item.xmxxid}`
   });
@@ -255,6 +268,10 @@ function handleInfo(item: any) {
  */
 function handleDel(item: any) {
   console.log(item);
+  delXmxx(item.xmxxid).then(() => {
+    message.success('删除成功');
+    getList();
+  });
 }
 
 onMounted(() => {
