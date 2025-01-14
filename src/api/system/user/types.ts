@@ -12,5 +12,6 @@ export interface User {
   deptId?: number
   companyName?: string
   phonenumber?: number | string
+  permissions?: string[]
   roles: (string | number)[]
 }

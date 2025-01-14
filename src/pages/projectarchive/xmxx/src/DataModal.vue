@@ -30,10 +30,18 @@
       <!-- 附件列表 -->
       <a-col :span="18">
         <a-breadcrumb mb-4>
-          <a-breadcrumb-item>施工图建筑面积预绘测</a-breadcrumb-item>
-          <a-breadcrumb-item>商业及其他用房-附件列表</a-breadcrumb-item>
+          <a-breadcrumb-item v-for="item in treeList" :key="item.key">
+            {{ item.title }}
+          </a-breadcrumb-item>
         </a-breadcrumb>
-        <a-table :columns="columns" :data-source="data" :row-selection="rowSelection" :pagination="false" size="small">
+        <a-table
+          :columns="columns"
+          :data-source="data" :row-selection="rowSelection"
+          :pagination="false" size="small"
+          :scroll="{
+            y: '300px',
+          }"
+        >
           <template #bodyCell="scope">
             <template v-if="scope?.column?.dataIndex === 'action'">
               <div flex gap-2>
@@ -67,7 +75,7 @@
           </a-button>
         </div>
         <a-table
-          :columns="columns" :data-source="data" :row-selection="rowSelection" :pagination="false"
+          :columns="columns" :data-source="data" :row-selection="rowSelection" :pagination="false" :height="300"
           size="small"
         />
       </a-col>
@@ -98,7 +106,7 @@
 <script setup lang="ts">
 import type { TreeProps } from 'ant-design-vue';
 import { ReadOutlined, UnorderedListOutlined } from '@ant-design/icons-vue';
-import type { EventDataNode } from 'ant-design-vue/es/tree';
+import type { DataNode, EventDataNode } from 'ant-design-vue/es/tree';
 import type { ConsultTableModel } from '@/api/list/table-list';
 
 defineOptions({ name: 'DataModal' });
@@ -113,6 +121,7 @@ const props = defineProps({
 // 定义事件
 const emits = defineEmits(['update:open', 'close']);
 const openValue = useVModel(props, 'open', emits);
+const treeList = reactive<DataNode[]>([]);
 
 // 数据
 const columns = [

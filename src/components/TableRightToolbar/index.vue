@@ -95,7 +95,7 @@ const options = computed(() => {
   return props.columns.map((item: any) => ({
     label: item[columnsLabelKey],
     value: item[columnsValueKey],
-    disabled: item[columnsValueKey] === 'action'
+    disabled: item.disabled || item[columnsValueKey] === 'action'
   }));
 });
 
@@ -108,8 +108,6 @@ const filterColumns = ref(filterAction(getCheckList.value));
  */
 const handleSizeChange: MenuProps['onClick'] = (e) => {
   tableSize.value[0] = e.key as 'large' | 'middle' | 'small';
-  console.log(tableSize.value);
-
   emits('sizeChange', toRaw(tableSize.value[0]));
 };
 

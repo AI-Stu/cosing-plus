@@ -3,9 +3,9 @@
     <a-row :gutter="16" class="h-full">
       <a-col :span="4">
         <a-card size="small" class="h-full">
-          <SearchTree
-            v-model:loading="loading"
+          <DataStandardsTree
             :height="reactHeight"
+            @select="handleSelect"
             @add="router.push({ path: '/project/manage/add' });"
           />
         </a-card>
@@ -18,7 +18,7 @@
               <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:add'])" type="primary" @click="handleAdd">
                 添加
               </a-button>
-              <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:edit'])" @click="handleUpdate()">
+              <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:edit'])" @click="handleImport">
                 批量导入
               </a-button>
               <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:export'])" @click="handleExport">
@@ -39,64 +39,17 @@
           <a-table
             row-key="id"
             :row-selection="state.rowSelections"
-            :loading="state.loading" :columns="filterColumns"
+            :loading="state.loading"
+            :columns="filterColumns"
             :data-source="state.dataSource"
             :pagination="false"
             :size="tableSize"
             :scroll="{ y: reactHeight - 56 - 48 - 76 }"
             @resize-column="(w, col) => {
-              col.width = w;
+              col.width = w || 0;
             }"
           >
             <template #bodyCell="scope">
-              <template v-if="scope?.column?.dataIndex === 'id'">
-                <span> {{ scope.record.id }} </span>
-              </template>
-              <template v-if="scope?.column?.dataIndex === 'xmid'">
-                <div flex gap-2>
-                  <span> {{ scope.record.xmid }} </span>
-                </div>
-              </template>
-              <template v-if="scope?.column?.dataIndex === 'dataStandardsId'">
-                <div flex gap-2>
-                  <span> {{ scope.record.dataStandardsId }} </span>
-                </div>
-              </template>
-              <template v-if="scope?.column?.dataIndex === 'dataType'">
-                <div flex gap-2>
-                  <span> {{ scope.record.dataType }} </span>
-                </div>
-              </template>
-              <template v-if="scope?.column?.dataIndex === 'dataStandards'">
-                <div flex gap-2>
-                  <span> {{ scope.record.dataStandards }} </span>
-                </div>
-              </template>
-              <template v-if="scope?.column?.dataIndex === 'skillStandards'">
-                <div flex gap-2>
-                  <span> {{ scope.record.skillStandards }} </span>
-                </div>
-              </template>
-              <template v-if="scope?.column?.dataIndex === 'materialType'">
-                <div flex gap-2>
-                  <span> {{ scope.record.materialType }} </span>
-                </div>
-              </template>
-              <template v-if="scope?.column?.dataIndex === 'sl'">
-                <div flex gap-2>
-                  <span> {{ scope.record.sl }} </span>
-                </div>
-              </template>
-              <template v-if="scope?.column?.dataIndex === 'stauts'">
-                <div flex gap-2>
-                  <span> {{ scope.record.stauts }} </span>
-                </div>
-              </template>
-              <template v-if="scope?.column?.dataIndex === 'name'">
-                <div flex gap-2>
-                  <span> {{ scope.record.name }} </span>
-                </div>
-              </template>
               <template v-if="scope?.column?.dataIndex === 'action'">
                 <div flex>
                   <a-button type="link" @click="handleInfo(scope?.record)">
@@ -107,7 +60,7 @@
                   </a-button>
                   <a-popconfirm
                     title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
-                    @confirm="handleDelete(scope?.record)"
+                    @confirm="handleDelete(scope?.index, scope?.record)"
                   >
                     <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:remove'])" type="link" danger>
                       删除
@@ -146,62 +99,81 @@ import type { FormInstance } from 'ant-design-vue';
 import { addXmxxDataStandardsRelApi, delXmxxDataStandardsRelApi, getXmxxDataStandardsRelApi, listXmxxDataStandardsRelApi, updateXmxxDataStandardsRelApi } from '@/api/projectarchive/xmxxDataStandardsRel';
 import type { XmxxDataStandardsRelForm, XmxxDataStandardsRelQuery, XmxxDataStandardsRelVO } from '@/api/projectarchive/xmxxDataStandardsRel/types';
 
-import SearchTree from '@/pages/projectarchive/components/SearchTree.vue';
+import DataStandardsTree from '@/pages/projectarchive/components/DataStandardsTree.vue';
 
 defineOptions({
   name: 'XmxxDataStandardsRel'
 });
 
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
-console.log(proxy);
 
 const router = useRouter();
 const ElMessage = useMessage();
 const { hasAccess } = useAccess();
-
 const dictStore = useDictStore();
+const reactHeight = ref<number>(0);
 // const { } = toRefs<any>(dictStore.getDictByKey(['sys_service_type']));
 
 // 表格列
 const columns = [
   {
-    title: '因收文档资料',
+    title: '序号',
+    dataIndex: 'serialNumber',
+    customRender: ({ index }: { index: number }) => {
+      return index + 1;
+    },
+    width: 80,
+    minWidth: 80,
+    maxWidth: 120,
+    disabled: true
+  },
+  {
+    title: '应收文档资料',
+    key: 'name',
     dataIndex: 'name',
+    width: 250,
     resizable: true
   },
   {
     title: '技术标准',
+    key: 'skillStandards',
     dataIndex: 'skillStandards',
+    width: 120,
     resizable: true
   },
   {
     title: '资料类型',
+    key: 'materialType',
     dataIndex: 'materialType',
+    width: 120,
     resizable: true
   },
   {
     title: '数量',
+    key: 'sl',
     dataIndex: 'sl',
-    resizable: true
+    width: 120
   },
   {
     title: '创建时间',
-    dataIndex: 'updateTime',
-    resizable: true
+    key: 'createTime',
+    dataIndex: 'createTime',
+    width: 140
   },
   {
     title: '状态',
+    key: 'stauts',
     dataIndex: 'stauts',
-    resizable: true
+    width: 120
   },
   {
     title: '操作',
-    dataIndex: 'action'
+    dataIndex: 'action',
+    width: 120
   }
 ];
 const filterColumns = ref(columns);
 const tableSize = ref<('small' | 'middle' | 'large')>('large');
-const buttonLoading = ref(false);
 const loading = ref(false);
 const labelCol = { style: { width: '100px' } };
 const wrapperCol = { span: 24 };
@@ -223,7 +195,6 @@ const { state, initQuery, resetQuery, query } = useTableQuery({
 
   },
   afterQuery: (res) => {
-    console.log(res);
     return res;
   }
 });
@@ -234,7 +205,8 @@ const xmxxDataStandardsRelFormRef = ref<FormInstance>();
 
 const modal = reactive({
   visible: false,
-  title: ''
+  title: '',
+  formData: {}
 });
 
 const initFormData: XmxxDataStandardsRelForm = {
@@ -262,7 +234,13 @@ const data = reactive<PageData<XmxxDataStandardsRelForm, XmxxDataStandardsRelQue
 });
 
 const { queryParams, formData, rules } = toRefs(data);
-const reactHeight = ref<number>(0);
+
+/**
+ * 目录树节点选中事件
+ */
+function handleSelect({ key, info }) {
+
+}
 
 /** 取消按钮 */
 function handleCancel() {
@@ -283,6 +261,25 @@ function handleAdd() {
   modal.title = '添加项目信息数据标准关系';
 }
 
+/** 提交按钮 */
+function submitForm() {
+  xmxxDataStandardsRelFormRef.value?.validate(async (valid: boolean) => {
+    if (valid) {
+      loading.value = true;
+      if (formData.value.id) {
+        await updateXmxxDataStandardsRelApi(formData.value).finally(() => loading.value = false);
+      }
+      else {
+        await addXmxxDataStandardsRelApi(formData.value).finally(() => loading.value = false);
+      }
+      ElMessage.success('操作成功');
+      modal.visible = false;
+      await initQuery();
+    }
+  });
+}
+
+/** 详情按钮操作 */
 function handleInfo(row?: XmxxDataStandardsRelVO) {
   console.log(row);
 }
@@ -297,32 +294,12 @@ async function handleUpdate(row?: XmxxDataStandardsRelVO) {
   modal.title = '修改项目信息数据标准关系';
 }
 
-/** 提交按钮 */
-function submitForm() {
-  xmxxDataStandardsRelFormRef.value?.validate(async (valid: boolean) => {
-    if (valid) {
-      buttonLoading.value = true;
-      if (formData.value.id) {
-        await updateXmxxDataStandardsRelApi(formData.value).finally(() => buttonLoading.value = false);
-      }
-      else {
-        await addXmxxDataStandardsRelApi(formData.value).finally(() => buttonLoading.value = false);
-      }
-      ElMessage.success('操作成功');
-      modal.visible = false;
-      await initQuery();
-    }
-  });
-}
-
 /** 删除按钮操作 */
-async function handleDelete(row?: XmxxDataStandardsRelVO) {
+async function handleDelete(index: number, row?: XmxxDataStandardsRelVO) {
   const _ids = row?.id || ids.value;
-  await proxy?.$modal.confirm(`是否确认删除项目信息数据标准关系编号为"${_ids}"的数据项？`)
-    .finally(() => loading.value = false);
   await delXmxxDataStandardsRelApi(_ids);
   ElMessage.success('删除成功');
-  await initQuery();
+  initQuery();
 }
 
 /** 导出按钮操作 */
@@ -332,8 +309,12 @@ function handleExport() {
   }, `xmxxDataStandardsRel_${new Date().getTime()}.xlsx`);
 }
 
+/** 导入按钮操作 */
+function handleImport() {
+
+}
+
 onMounted(() => {
-  console.log(proxy?.$el.offsetHeight);
   reactHeight.value = proxy?.$el.offsetHeight;
   initQuery();
 });

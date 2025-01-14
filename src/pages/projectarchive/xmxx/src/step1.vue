@@ -73,16 +73,18 @@ const formRef = ref<FormInstance>();
 const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
 const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
 
-let resetForm = {}; // 优化提交
+let resetData = {}; // 优化提交
 const formState = ref<XmxxVO>({
   step: '0'
 });
+
+// 下一步
 async function nextStep() {
   await formRef.value?.validateFields();
   if (formState.value.xmxxid) {
-    if (!isEqual(resetForm, formState.value)) {
+    if (!isEqual(resetData, formState.value)) {
       await updateXmxxApi(formState.value);
-      resetForm = cloneDeep(formState.value);
+      resetData = cloneDeep(formState.value);
       message.success('修改成功');
     }
   }
@@ -94,20 +96,20 @@ async function nextStep() {
   emit('nextStep');
 }
 
+// 重置
+function reset() {
+  formState.value = resetData;
+}
+
 onBeforeMount(async () => {
   if (xmxxid) {
     getXmxxApi(xmxxid).then((res) => {
       delete res.data.createTime;
-      resetForm = cloneDeep(res.data);
+      resetData = cloneDeep(res.data);
       formState.value = res.data;
     });
   }
 });
-
-// 重置
-function reset() {
-  formState.value = resetForm;
-}
 </script>
 
 <style lang="less" scoped>

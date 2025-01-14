@@ -2,57 +2,57 @@ export interface XmxxDataStandardsRelVO {
   /**
    * id
    */
-  id: string | number
+  id?: string | number
 
   /**
    * xmid
    */
-  xmid: string | number
+  xmid?: string | number
 
   /**
    * 数据标准id
    */
-  dataStandardsId: string | number
+  dataStandardsId?: string | number
 
   /**
    * 数据类型
    */
-  dataType: string
+  dataType?: string
 
   /**
    * 数据标准
    */
-  dataStandards: string
+  dataStandards?: string
 
   /**
    * 技术标准
    */
-  skillStandards: string
+  skillStandards?: string
 
   /**
    * 资料类型
    */
-  materialType: string
+  materialType?: string
 
   /**
    * 数量
    */
-  sl: number
+  sl?: number
 
   /**
    * 状态
    */
-  stauts: number
+  stauts?: number
 
   /**
    * 标准名称
    */
-  name: string
+  name?: string
 
   /**
-   * $column.columnComment
+   * 附件id
    */
-  datastorageid: string | number
+  datastorageid?: string | number
 
 }
 

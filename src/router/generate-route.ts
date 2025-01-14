@@ -202,7 +202,6 @@ export function generateTreeRoutes(menus: MenuData) {
 /**
  * 通过前端数据中的dynamic-routes动态生成菜单和数据
  */
-
 export async function generateRoutes() {
   const { hasAccess } = useAccess();
   function filterRoutesByAccess(routes: RouteRecordRaw[]) {

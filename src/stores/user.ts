@@ -20,6 +20,7 @@ export const useUserStore = defineStore('user', () => {
   );
   const nickname = computed(() => userInfo.value?.nickname ?? userInfo.value?.username);
   const roles = computed(() => userInfo.value?.roles);
+  const permissions = computed(() => userInfo.value?.permissions);
 
   const getMenuRoutes = async () => {
     const { data } = await getRoutersApi();
@@ -79,6 +80,7 @@ export const useUserStore = defineStore('user', () => {
   const getUserInfo = async () => {
     // 获取用户信息
     const { data } = await getUserInfoApi() as { data: UserInfo };
+    data.user.permissions = data.permissions;
     data.user.roles = data.user.roles.length > 0 ? data.user.roles : data.roles;
     userInfo.value = data.user as User;
   };
@@ -100,6 +102,7 @@ export const useUserStore = defineStore('user', () => {
   return {
     userInfo,
     roles,
+    permissions,
     getUserInfo,
     logout,
     routerData,

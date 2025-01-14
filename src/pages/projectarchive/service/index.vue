@@ -83,7 +83,7 @@
                     <div flex items-center>
                       <a-popconfirm
                         title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
-                        @confirm="handleDel(item)"
+                        @confirm="handleDelete(item)"
                       >
                         <a-button type="text" mr-3 size="small">
                           删除
@@ -289,7 +289,7 @@ function handleInfo(item: any) {
  * 删除服务
  * @param item
  */
-async function handleDel(item: any) {
+async function handleDelete(item: any) {
   await delServiceApi(item.id);
   getList();
   message.success('删除成功');

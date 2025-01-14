@@ -183,52 +183,6 @@ const treeData = ref([
   }
 ]);
 const treeData2 = buildList(treeData);
-/**
- * 树转成一维数组
- * @param data []
- */
-function buildList(data: any) {
-  const _treeData: any[] = [];
-  if (!data)
-    return;
-  function handle(data: any) {
-    for (let i = 0; i < data.length; i++) {
-      const node = props.filter ? props.filter(data[i]) : data[i];
-      _treeData.push(node);
-      if (node.children) {
-        handle(node.children);
-      }
-    }
-  }
-  return _treeData;
-}
-
-/**
- * 一维数组转成树
- * @param data []
- */
-function buildTree(data: [], key = 'id', parentKey = 'pid') {
-  if (!data)
-    return;
-  const result = [] as any;
-  const map = {} as Record<string, any>;
-
-  // 创建一个映射，每个节点以 id 为键
-  data.forEach((item: any) => {
-    map[item[key]] = props.filter ? props.filter(item) : { ...item, children: [] };
-  });
-
-  data.forEach((item: any) => {
-    if (item[parentKey] === null) {
-      result.push(map[item[key]]);
-    }
-    else {
-      map[item[parentKey]].children.push(map[item[key]]);
-    }
-  });
-
-  return result;
-}
 
 async function getList(key?: string | null) {
   props.queryApi && props.queryApi(key).then((res) => {

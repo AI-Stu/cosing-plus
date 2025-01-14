@@ -41,3 +41,11 @@ export function updateXmxxDataStandardsRelApi(data: XmxxDataStandardsRelForm) {
 export function delXmxxDataStandardsRelApi(id: string | number | Array<string | number>) {
   return useDelete(`${BASE_API}/projectarchive/xmxxDataStandardsRel/${id}`);
 };
+
+/**
+ * 批量保存项目数据标准关系
+ * @param xmxxid
+ */
+export function saveXmxxDataStandardsListApi(xmxxid: string | number, data: XmxxDataStandardsRelVO[]) {
+  return useDelete(`${BASE_API}/projectarchive/xmxxEx/saveXmxxDataStandardsList/${xmxxid}`, data);
+};

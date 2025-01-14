@@ -2,37 +2,52 @@
   <div>
     <div style="width:700px;margin: 0 auto;">
       <a-alert
-        v-if="visible"
+        v-if="visible.alert"
         type="info"
         closable
         show-icon
-        :after-close="handleClose"
+        :after-close="() => visible.alert = false"
       >
         <template #message>
           <div>共选择 {{ total.dataStandards }} 项标准，共需提交 {{ total.file }} 个文件</div>
         </template>
         <template #action>
-          <a-button size="small" type="link">
-            取消选择
-          </a-button>
+          <a-popconfirm
+            title="确定重置选择？" ok-text="确定" cancel-text="取消"
+            @confirm="reset"
+          >
+            <a-button type="link" mr-3 size="small">
+              重置选择
+            </a-button>
+          </a-popconfirm>
         </template>
       </a-alert>
-      <a-button type="primary" my-3 @click="open = true">
+      <a-button type="primary" my-3 @click="visible.madel = true">
         添加
       </a-button>
-      <a-table style="margin-bottom: 10px;" :loading="loading" :columns="filterColumns" :pagination="false" :data-source="dataSource" size="small">
+      <a-table
+        style="margin-bottom: 10px;"
+        :loading="loading"
+        :columns="filterColumns"
+        :pagination="false"
+        :data-source="dataSource"
+        size="small"
+      >
         <template #bodyCell="scope">
           <template v-if="scope?.column?.dataIndex === 'action'">
-            <div flex gap-2>
-              <a c-error @click="handleDelete(scope?.record as ConsultTableModel)">
+            <a-popconfirm
+              title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
+              @confirm="handleDelete(scope.index, scope.record)"
+            >
+              <a-button type="text" mr-3 size="small">
                 删除
-              </a>
-            </div>
+              </a-button>
+            </a-popconfirm>
           </template>
           <template v-if="scope?.column?.dataIndex === 'sl'">
             <div gap-2>
               <a-button type="link" block>
-                {{ scope?.record?.sl || 1 }}
+                {{ scope?.record?.sl || 0 }}
               </a-button>
             </div>
           </template>
@@ -57,14 +72,14 @@
       <h4>附件除数据标准内已有选项，缺失项可以自行添加。</h4>
     </div>
 
-    <DataModal :open="open" @close="modalClose" />
+    <DataModal :open="visible.madel" @close="visible.madel = false" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep, isEqual } from 'lodash-es';
 import DataModal from './DataModal.vue';
-import { delXmxxDataStandardsRelApi, listXmxxDataStandardsRelApi } from '@/api/projectarchive/xmxxDataStandardsRel';
+import { delXmxxDataStandardsRelApi, listXmxxDataStandardsRelApi, saveXmxxDataStandardsListApi } from '@/api/projectarchive/xmxxDataStandardsRel';
 import type { XmxxDataStandardsRelVO } from '@/api/projectarchive/xmxxDataStandardsRel/types';
 
 const emit = defineEmits(['prevStep', 'nextStep']);
@@ -101,46 +116,23 @@ const columns = shallowRef([
     width: 80
   }
 ]);
-
-const { state, initQuery, resetQuery, query } = useTableQuery({
-  queryApi: listXmxxDataStandardsRelApi,
-  queryParams: {
-    xmid: undefined,
-    dataStandardsId: undefined,
-    dataType: undefined,
-    dataStandards: undefined,
-    skillStandards: undefined,
-    materialType: undefined,
-    sl: undefined,
-    stauts: undefined,
-    name: undefined
-  },
-  beforeQuery: () => {
-
-  },
-  afterQuery: (res) => {
-    console.log(res);
-    return res;
-  }
+const visible = reactive({
+  alert: true,
+  madel: false
 });
-
-const open = ref(false);
-const visible = ref<boolean>(true);
-// 数据
 const loading = shallowRef(false);
 const total = reactive({
   dataStandards: 0,
   file: 0
 });
-
-const dataSource = shallowRef<ConsultTableModel[]>([]);
-let resetForm = [];
-const formModel = ref<XmxxDataStandardsRelVO[]>();
-
+const dataSource = shallowRef<XmxxDataStandardsRelVO[]>([]);
 const getCheckList = computed(() => columns.value.map(item => item.dataIndex));
-function handleClose() {
-  visible.value = false;
-}
+let resetData: XmxxDataStandardsRelVO[] = []; // 优化提交
+
+watch(() => dataSource, () => {
+  total.dataStandards = dataSource.value.length;
+  total.file = dataSource.value.reduce((a, b) => a + (b.sl || 0), 0);
+});
 
 /**
  * 过滤
@@ -158,68 +150,60 @@ function filterAction(value: string[]) {
 // 备份columns
 const filterColumns = ref(filterAction(getCheckList.value));
 
-function modalClose() {
-  open.value = false;
-}
-
-async function init() {
-  if (loading.value)
-    return;
+// 获取列表
+function getList() {
   loading.value = true;
-  try {
-    const { data } = await listXmxxDataStandardsRelApi({
-      ...formModel
-    });
-    dataSource.value = data ?? [];
-  }
-  catch (e) {
-    console.log(e);
-  }
-  finally {
+  const queryParams = { xmid: xmxxid, pageNum: 1, pageSize: 2000 };
+  listXmxxDataStandardsRelApi(queryParams).then((res) => {
+    resetData = cloneDeep(res.rows);
+  }).finally(() => {
     loading.value = false;
-  }
+  });
 }
 
 /**
  * 删除功能
- *  @param record
- *
+ * @param index
+ * @param record
  */
-async function handleDelete(record) {
-  const close = message.loading('删除中......');
-  try {
-    const res = await delXmxxDataStandardsRelApi(record!.id);
-    if (res.code === 200)
-      await init();
-    message.success('删除成功');
+async function handleDelete(index: number, record: XmxxDataStandardsRelVO) {
+  if (record.id) {
+    await delXmxxDataStandardsRelApi(record.id);
   }
-  catch (e) {
-    console.log(e);
+  dataSource.value.splice(index, 1);
+  message.success('删除成功');
+}
+
+// 上一步
+function prevStep() {
+  emit('prevStep');
+}
+
+// 下一步
+async function nextStep() {
+  if (xmxxid) {
+    if (!isEqual(resetData, dataSource.value)) {
+      await saveXmxxDataStandardsListApi(xmxxid, dataSource.value);
+      resetData = cloneDeep(dataSource.value);
+      message.success('保存成功');
+    }
   }
-  finally {
-    close();
-  }
+  emit('nextStep');
+}
+
+// 重置
+function reset() {
+  dataSource.value = resetData;
 }
 
 onBeforeMount(async () => {
   if (xmxxid) {
-    listXmxxDataStandardsRelApi({ xmid: xmxxid }).then((res) => {
-      delete res.rows.createTime;
-      resetForm = cloneDeep(res.data);
-      formState.value = res.data;
-    });
+    getList();
   }
 });
 
-function prevStep() {
-  emit('prevStep');
-}
-async function nextStep() {
-  emit('nextStep');
-}
-
 onMounted(() => {
-  init();
+
 });
 </script>
 

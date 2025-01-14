@@ -79,7 +79,7 @@ const message = useMessage();
 const formRef = ref<FormInstance>();
 const labelCol = { lg: { span: 5 }, sm: { span: 5 } };
 const wrapperCol = { lg: { span: 19 }, sm: { span: 19 } };
-let resetForm = {} as any; // 优化提交
+let resetData = {} as any; // 优化提交
 const formState = ref<ServiceVO>({
   orderindex: '1',
   step: '0'
@@ -94,9 +94,9 @@ async function nextStep() {
   await formRef.value?.validateFields();
 
   if (formState.value.id) {
-    if (!isEqual(resetForm, formState.value)) {
+    if (!isEqual(resetData, formState.value)) {
       await updateServiceApi(formState.value);
-      resetForm = cloneDeep(formState.value);
+      resetData = cloneDeep(formState.value);
       message.success('修改成功');
     }
   }
@@ -114,7 +114,7 @@ onBeforeMount(async () => {
       delete res.data.createTime;
       const [lt, lb, rt, rb] = res.data?.bounds.split(',');
       bounds.value = { lt, lb, rt, rb };
-      resetForm = cloneDeep(res.data);
+      resetData = cloneDeep(res.data);
       formState.value = res.data;
     });
   }
@@ -122,12 +122,12 @@ onBeforeMount(async () => {
 
 // 重置
 function reset() {
-  if (resetForm.bounds) {
-    const [lt, lb, rt, rb] = resetForm.bounds.split(',');
+  if (resetData.bounds) {
+    const [lt, lb, rt, rb] = resetData.bounds.split(',');
     bounds.value = { lt, lb, rt, rb };
   }
 
-  formState.value = resetForm;
+  formState.value = resetData;
 }
 </script>
 

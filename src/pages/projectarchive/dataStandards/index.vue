@@ -1,98 +1,109 @@
 <template>
-  <page-container is-full>
-    <div class="w-full h-full flex justify-between ">
-      <a-card class="w-[15%]">
-        <template #title>
-          <div class="w-full flex justify-between">
-            <a-input-search v-model="search.keyword" placeholder="数据标准类型" :loading="search.loading" class="w-[calc(100%-40px)]" />
-            <a-button type="primary" :icon="h(PlusOutlined)" class="addBtn" @click="clickCatalogAdd" />
-          </div>
-        </template>
-        <!-- 目录树 -->
-        <a-directory-tree
-          v-model:expanded-keys="tree.expandedKeys" v-model:selected-keys="tree.selectedKeys" :field-names="defaultProps" :tree-data="search.keyword.length > 0 ? search.filterData : tree.data"
-          :checkable="false" @select="treeSelect"
-        />
-      </a-card>
-
-      <a-card class="w-[calc(85%-12px)]">
-        <template #title>
-          <a-space>
-            <a-button type="primary" :icon="h(PlusOutlined)" @click="clickCreate">
-              新建
-            </a-button>
-            <a-button @click="clickBatchImport">
-              批量导入
-            </a-button>
-            <a-button @click="clickBatchExport">
-              批量导出
-            </a-button>
-          </a-space>
-        </template>
-        <template #extra>
-          <a-button :icon="h(RedoOutlined)" @click="queryTableData" />
-        </template>
-        <!-- 数据标准列表 -->
-
-        <a-table :columns="table.columns" :data-source="table.data">
-          <template #bodyCell="{ column }">
-            <template v-if="column.dataIndex === 'status'" />
-
-            <template v-if="column.dataIndex === 'handler'">
-              <a-button size="small">
-                修改
-              </a-button>
-              <a-button size="small" style="margin-left: 2px;">
-                删除
-              </a-button>
-            </template>
-          </template>
-        </a-table>
-
-        <div class="pageContainer">
-          <a-pagination
-            v-model:current="table.pageNum" :total="table.total" show-less-items
-            @change="queryTableData"
+  <page-container class="h-full" :is-full="true">
+    <a-row :gutter="16" class="h-full">
+      <a-col :span="4">
+        <a-card size="small" class="h-full">
+          <DataStandardsTree
+            :height="reactHeight"
+            @select="handleSelect"
+            @add="catalog.visible = true;"
           />
-        </div>
-      </a-card>
-    </div>
+        </a-card>
+      </a-col>
+      <a-col :span="20">
+        <a-card class="h-full">
+          <template #title>
+            <a-space>
+              <a-button type="primary" :icon="h(PlusOutlined)" @click="handleAdd">
+                新增
+              </a-button>
+              <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:edit'])" @click="handleImport">
+                批量导入
+              </a-button>
+              <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:export'])" @click="handleExport">
+                批量导出
+              </a-button>
+            </a-space>
+          </template>
+          <template #extra>
+            <TableRightToolbar
+              v-model:filter-columns="filterColumns"
+              :columns="columns"
+              @size-change="(val: 'small' | 'middle' | 'large') => tableSize = val"
+              @reset-query="initQuery"
+            />
+          </template>
+          <!-- 数据标准列表 -->
+
+          <a-table
+            row-key="id"
+            :columns="filterColumns"
+            :data-source="state.dataSource"
+            :size="tableSize"
+            :loading="state.loading"
+          >
+            <template #bodyCell="scope">
+              <template v-if="scope.column.dataIndex === 'status'" />
+
+              <template v-if="scope.column.dataIndex === 'action'">
+                <div flex>
+                  <a-button type="link" @click="handleInfo(scope.record)">
+                    详情
+                  </a-button>
+                  <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:edit'])" type="link" @click="handleUpdate(scope?.record)">
+                    编辑
+                  </a-button>
+                  <a-popconfirm
+                    title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
+                    @confirm="handleDelete(scope.index, scope.record)"
+                  >
+                    <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:remove'])" type="link" danger>
+                      删除
+                    </a-button>
+                  </a-popconfirm>
+                </div>
+              </template>
+            </template>
+          </a-table>
+        </a-card>
+      </a-col>
+    </a-row>
 
     <!-- 添加目录对话框 -->
-    <a-modal v-model:open="catalog.visible" :title="catalog.title" @ok="saveCatalog">
-      <a-form :model="catalog.form" :rules="catalog.formRules" class="w-full">
-        <a-form-item label="父目录名称" name="parentName">
+    <a-modal v-model:open="catalog.visible" title="添加数据标准目录" @ok="saveCatalog">
+      <a-form :model="catalog.form" class="w-full" :label-col="labelCol">
+        <a-form-item label="父目录名称" name="parentName" :rules="[{ required: true, message: '请选择父目录' }]">
           <a-input v-model:value="catalog.form.parentName" :maxlength="20" placeholder="" disabled />
         </a-form-item>
-        <a-form-item label="目录名称" name="name">
+        <a-form-item label="目录名称" name="name" :rules="[{ required: true, message: '请输入目录名称' }]">
           <a-input v-model:value="catalog.form.name" :maxlength="20" placeholder="请输入目录名称" />
         </a-form-item>
       </a-form>
     </a-modal>
 
     <!-- 添加或修改数据标准对话框 -->
-    <a-modal v-model:open="paramObj.showDataStandardsVisible" :title="paramObj.title" @ok="submitForm" @cancel="handleCancel">
+    <a-modal v-model:open="modal.visible" :title="modal.title" @ok="submitForm" @cancel="handleCancel">
       <a-form
         ref="dataStandardsFormRef" :model="formData" class="w-full" :rules="rules" :label-col="labelCol"
-        :wrapper-col="wrapperCol"
+        :wrapper-col="{ span: 24 }" :disabled="modal.disabled"
       >
         <a-form-item label="文档资料名称" name="name">
-          <a-input v-model:value="paramObj.formData.name" :maxlength="50" placeholder="文档资料名称" />
+          <a-input v-model:value="formData.name" :maxlength="50" placeholder="文档资料名称" />
         </a-form-item>
         <a-form-item label="数据类型" name="dataType">
-          <a-select v-model:value="paramObj.formData.dataType" placeholder="请选择数据类型" :options="dataTypeArr" />
+          <a-select v-model:value="formData.dataType" placeholder="请选择数据类型" :options="dataTypeArr" />
         </a-form-item>
         <a-form-item label="资料类型" name="materialType">
-          <a-select v-model:value="paramObj.formData.materialType" placeholder="请选择数据类型" :options="materialTypeArr" />
+          <a-select v-model:value="formData.materialType" placeholder="请选择数据类型" :options="materialTypeArr" />
         </a-form-item>
         <a-form-item label="数量" name="sl">
-          <a-input v-model:value="paramObj.formData.sl" :maxlength="50" placeholder="请输入数量" />
+          <a-input v-model:value="formData.sl" :maxlength="50" placeholder="请输入数量" />
         </a-form-item>
         <a-form-item label="状态" name="stauts">
-          <a-select v-model:value="paramObj.formData.stauts" placeholder="请选择数据类型" :options="stautsArr" />
+          <a-select v-model:value="formData.stauts" placeholder="请选择数据类型" :options="stautsArr" />
         </a-form-item>
         <a-form-item label="顺序" name="orderindex">
-          <a-input v-model:value="paramObj.formData.orderindex" :maxlength="50" placeholder="请输入顺序" />
+          <a-input-number v-model:value="formData.orderindex" :min="0" :max="9999" class="w-full" placeholder="请输入顺序" />
         </a-form-item>
       </a-form>
     </a-modal>
@@ -100,58 +111,131 @@
 </template>
 
 <script setup lang="ts">
-import { h, reactive, watch } from 'vue';
-import { PlusOutlined, RedoOutlined } from '@ant-design/icons-vue';
-import type { DataNode } from 'ant-design-vue/es/tree';
-import type { TableColumnType } from 'ant-design-vue';
-import type { Key } from 'ant-design-vue/es/_util/type';
-import type { DataStandardsQuery } from '@/api/projectarchive/dataStandards/types';
-import { addDataStandardsApi, listDataStandardsApi } from '@/api/projectarchive/dataStandards';
-import { addCatalogApi } from '@/api/projectarchive/catalog';
-import { getStandardsCatalogTreeApi } from '@/api/projectarchive/dataStandardsCatalog';
+import { h } from 'vue';
+import { PlusOutlined } from '@ant-design/icons-vue';
+import type { Rule } from 'ant-design-vue/es/form';
+import type { DataStandardsVO } from '@/api/projectarchive/dataStandards/types';
+import { addDataStandardsCatalogApi } from '@/api/projectarchive/dataStandardsCatalog';
+import { addDataStandardsApi, delDataStandardsApi, listDataStandardsApi, updateDataStandardsApi } from '@/api/projectarchive/dataStandards';
+import DataStandardsTree from '@/pages/projectarchive/components/DataStandardsTree.vue';
 
 defineOptions({
   name: 'DataStandards'
 });
-const ElMessage = useMessage();
+const { proxy } = getCurrentInstance() as ComponentInternalInstance;
+
+const { hasAccess } = useAccess();
+const message = useMessage();
 const dictStore = useDictStore();
-const dataStandardsFormRef = ref<FormInstance>();
-const tree = reactive<{
-  data: DataNode[]
-  expandedKeys: Key[]
-  selectedKeys: Key[]
-}>({
-  data: [],
-  expandedKeys: [],
-  selectedKeys: []
-});
 
-const search = reactive<{
-  keyword: string
-  timer: number | null
-  loading: boolean
-  filterData: DataNode[]
-}>({
-  keyword: '',
-  timer: null,
-  loading: false,
-  filterData: []
-});
+const reactHeight = ref<number>(0);
 
+/**
+ * 数据标准目录
+ */
 const catalog = reactive({
   visible: false,
-  title: '添加目录',
-  formRules: {},
   form: {
     pid: '',
+    parentName: '',
     name: ''
   }
 });
+const labelCol = { style: { width: '110px' } };
+const columns = [
+  {
+    title: '序号',
+    dataIndex: 'serialNumber',
+    customRender: ({ index }: { index: number }) => {
+      return index + 1;
+    },
+    width: 80,
+    minWidth: 80,
+    maxWidth: 120,
+    disabled: true
+  },
+  {
+    title: '应收文档资料',
+    key: 'name',
+    dataIndex: 'name',
+    width: 250,
+    resizable: true
+  },
+  {
+    title: '技术标准',
+    key: 'skillStandards',
+    dataIndex: 'standared',
+    width: 120,
+    resizable: true
+  },
+  {
+    title: '数据类型',
+    key: 'dataType',
+    dataIndex: 'dataType',
+    width: 120
+  },
+  {
+    title: '资料类型',
+    key: 'materialType',
+    dataIndex: 'materialType',
+    width: 120,
+    resizable: true
+  },
+  {
+    title: '数量',
+    key: 'sl',
+    dataIndex: 'sl',
+    width: 120
+  },
+  {
+    title: '创建时间',
+    key: 'createTime',
+    dataIndex: 'createTime',
+    width: 140
+  },
+  {
+    title: '状态',
+    key: 'stauts',
+    dataIndex: 'stauts',
+    width: 120
+  },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    width: 120
+  }
+];
+const rules: Record<string, Rule[]> = {
+  name: [
+    { required: true, message: '文档资料名称不能为空', trigger: 'change' }
+  ]
 
-const paramObj = reactive({
-  showDataStandardsVisible: false,
-  title: '新增数据标准',
-  formData: {}
+};
+
+const filterColumns = ref(columns);
+const tableSize = ref<('small' | 'middle' | 'large')>('large');
+
+const dataStandardsFormRef = ref<FormInstance>();
+const formData = ref<DataStandardsVO>({});
+const modal = reactive({
+  visible: false,
+  disabled: false,
+  title: '添加数据标准'
+});
+
+const { state, initQuery } = useTableQuery({
+  queryApi: listDataStandardsApi,
+  queryParams: {
+    dataStandardCatalogId: null
+  },
+  beforeQuery: () => {
+    state.queryParams = {
+      dataStandardCatalogId: catalog.form.pid
+    };
+  },
+  afterQuery: (res) => {
+    return res;
+  }
 });
 
 const dataTypeArr = [
@@ -182,185 +266,113 @@ const stautsArr = [
   }
 ];
 
-const table = reactive<{
-  columns: TableColumnType[]
-  total: number
-  pageSize: number
-  pageNum: number
-  data: any[]
-}>({
-  columns: [
-    {
-      title: '序号',
-      key: 'serialNumber',
-      customRender: ({ index }) => {
-        return index + 1;
-      }
-    },
-    {
-      key: 'name',
-      dataIndex: 'name',
-      title: '应收文档资料'
-    },
-    {
-      key: 'standared',
-      title: '技术标准'
-    },
-    {
-      key: 'dataType',
-      dataIndex: 'dataType',
-      title: '数据类型'
-    },
-    {
-      key: 'materialType',
-      dataIndex: 'materialType',
-      title: '资料类型'
-    },
-    {
-      key: 'sl',
-      dataIndex: 'sl',
-      title: '数量'
-    },
-    {
-      key: 'createTime',
-      dataIndex: 'createTime',
-      title: '创建时间'
-    },
-    {
-      key: 'status',
-      dataIndex: 'status',
-      title: '状态'
-    },
-    {
-      title: '操作',
-      dataIndex: 'handler'
-    }
-  ],
-  total: 0,
-  pageSize: 20,
-  pageNum: 1,
-  data: []
-});
+/** 新增目录 */
+function saveCatalog() {
+  addDataStandardsCatalogApi(catalog.form).then((res) => {
+    catalog.visible = false;
+    message.success('添加成功');
+  });
+}
 
-const defaultProps = {
-  // 规定
-  children: 'children',
-  title: 'label'
-};
+/**
+ * 树节点选中事件
+ */
+function handleSelect({ info }: { info: any }) {
+  if (info.node.dataRef.id) {
+    catalog.form.parentName = info.node.dataRef.name;
+    catalog.form.pid = info.node.dataRef.id;
+    state.queryParams.dataStandardCatalogId = catalog.form.pid;
+    initQuery();
+  }
+}
 
-watch(() => search.keyword, (nv, _ov) => {
-  if (nv.length > 0) {
-    if (search.timer) {
-      clearTimeout(search.timer);
-      search.timer = null;
-    }
-    search.timer = setTimeout(() => {
-      search.filterData = tree.data.filter((item) => {
-        return item.title.includes(nv);
-      }, 250);
-    });
+/** 新增按钮操作 */
+function handleAdd() {
+  reset();
+  modal.visible = true;
+  modal.disabled = false;
+  modal.title = '添加数据标准';
+}
+
+/** 提交按钮 */
+async function submitForm() {
+  formData.value.dataStandardCatalogId = catalog.form.pid;
+  delete formData.value.createTime;
+  if (formData.value.id) {
+    await updateDataStandardsApi(formData.value);
+    message.success('修改成功');
   }
   else {
-    search.filterData = [];
+    await addDataStandardsApi(formData.value);
+    message.success('新增成功');
   }
-});
+
+  modal.visible = false;
+  initQuery();
+}
+
+/** 导出按钮操作 */
+function handleExport() {
+  useDownload('projectarchive/xmxxDataStandardsRel/export', {
+    ...toRaw(state.queryParams)
+  }, `xmxxDataStandardsRel_${new Date().getTime()}.xlsx`);
+}
+
+/** 导入按钮操作 */
+function handleImport() {
+
+}
+
+/** 取消按钮 */
+function handleCancel() {
+  reset();
+  modal.visible = false;
+}
+
+/** 表单重置 */
+function reset() {
+  formData.value = {};
+  dataStandardsFormRef.value?.resetFields();
+}
+
+/**
+ * 详情
+ * @param row
+ */
+function handleInfo(row?: DataStandardsVO) {
+  Object.assign(formData.value, row);
+  modal.visible = true;
+  modal.disabled = true;
+  modal.title = '修改数据详情';
+}
+
+/** 编辑按钮操作 */
+async function handleUpdate(row: DataStandardsVO) {
+  reset();
+  Object.assign(formData.value, row);
+  modal.visible = true;
+  modal.disabled = false;
+  modal.title = '修改数据标准';
+}
+
+/**
+ * 删除功能
+ * @param index
+ * @param row
+ */
+async function handleDelete(index: number, row: DataStandardsVO) {
+  if (row.id) {
+    await delDataStandardsApi(row.id);
+  }
+  state.dataSource.splice(index, 1);
+  message.success('删除成功');
+}
 
 onMounted(() => {
-  queryTreeData();
-  queryTableData();
+  reactHeight.value = proxy?.$el.offsetHeight;
 });
-
-function queryTreeData() {
-  getStandardsCatalogTreeApi().then((res) => {
-    if (res.code === 200) {
-      tree.data = res.data;
-    }
-    else {
-      console.log(res.msg);
-    }
-  });
-}
-
-function clickCatalogAdd() {
-  catalog.visible = true;
-  console.log(catalog.form);
-}
-
-// 右侧 查询列表数据
-function queryTableData() {
-  const param: DataStandardsQuery = {
-    dataStandardCatalogId: catalog.form.pid,
-    pageSize: table.pageSize,
-    pageNum: table.pageNum
-  };
-  listDataStandardsApi(param).then((res) => {
-    if (res.code === 200) {
-      table.total = res.total;
-      table.data = res.rows;
-    }
-  });
-}
-
-function clickCreate() {
-  if (catalog.form.pid) {
-    paramObj.showDataStandardsVisible = true;
-    console.log(catalog.form);
-  }
-}
-
-function clickBatchImport() {
-
-}
-
-function clickBatchExport() {
-  // useDownload('projectarchive/dataStandards/export', {
-  //   ...toRaw(state.queryParams)
-  // }, `dataStandards_${new Date().getTime()}.xlsx`);
-}
-
-function saveCatalog() {
-  console.log(tree.selectedKeys);
-  addCatalogApi(catalog.form).then((res) => {
-    if (res.code === 200) {
-      catalog.visible = false;
-      queryTreeData();
-    }
-  });
-}
-
-function treeSelect(selectedKeys, e: { selected: bool, selectedNodes, node, event }) {
-  console.log(e);
-  catalog.form.parentName = e.node.dataRef.label;
-  catalog.form.pid = e.node.dataRef.id;
-  queryTableData();
-}
-
-function submitForm() {
-  paramObj.formData.dataStandardCatalogId = catalog.form.pid;
-  addDataStandardsApi(paramObj.formData).then((res) => {
-    if (res.code === 200) {
-      paramObj.showDataStandardsVisible = false;
-      queryTableData();
-    }
-  });
-}
 </script>
 
 <style lang="less" scoped>
-.ant-pro-page-container {
-  height: 100%;
 
-  :deep(.ant-card) {
-
-    .ant-card-head {
-      padding: 0 8px;
-    }
-
-    .ant-card-body {
-      width: 100%;
-      max-height: calc(100% - 56px);
-      padding: 8px;
-    }
-  }
-}
 </style>

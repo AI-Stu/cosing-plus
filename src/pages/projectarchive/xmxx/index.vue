@@ -70,7 +70,7 @@
                   <div flex items-center>
                     <a-popconfirm
                       title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
-                      @confirm="handleDel(item)"
+                      @confirm="handleDelete(item)"
                     >
                       <a-button type="text" mr-3 size="small">
                         删除
@@ -271,7 +271,7 @@ function handleInfo(item: any) {
  * 删除项目
  * @param item
  */
-function handleDel(item: any) {
+function handleDelete(item: any) {
   console.log(item);
   delXmxxApi(item.xmxxid).then(() => {
     message.success('删除成功');

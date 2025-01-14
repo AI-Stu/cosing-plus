@@ -13,6 +13,7 @@ import 'ant-design-vue/dist/reset.css';
 import '@/assets/styles/reset.css';
 import 'uno.css';
 import { registerGlobComp } from '@/components/registerGlobComp';
+import { setupErrorHandle } from '@/composables/errorHandle';
 
 const pinia = createPinia();
 async function start() {
@@ -22,6 +23,8 @@ async function start() {
   setupDirective(app);
   // 注册基础全局组件
   registerGlobComp(app);
+  // 配置全局错误处理
+  setupErrorHandle(app);
   app.use(router);
   app.mount('#app');
   app.config.performance = true;
@@ -32,4 +35,5 @@ function setupDirective(app: App) {
   setupLoadingDirective(app);
   setupAccessDirective(app);
 }
+
 start();
