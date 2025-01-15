@@ -1,7 +1,9 @@
 import type { TreeProps } from 'ant-design-vue';
 import type { DataNode, EventDataNode } from 'ant-design-vue/es/tree';
+import { Tree } from 'ant-design-vue';
 import { assign } from 'lodash-es';
 
+const { TreeNode } = Tree;
 /**
  * 表格选择框扩展类型
  */
@@ -38,10 +40,20 @@ export interface TreeQueryOptions<D = any> {
    * 数据源
    */
   dataSource: D[]
+
+  /**
+   * 默认选中
+   */
+  defaultSelectedKeys: (string | number)[]
   /**
    * 查询参数
    */
   queryParams: Record<string, any>
+
+  /**
+   * 已加载的节点
+   */
+  loadedKeys: (string | number)[]
   /**
    * 选择的key
    */
@@ -49,7 +61,7 @@ export interface TreeQueryOptions<D = any> {
   /**
    * 展开的key
    */
-  expandedKeys: string[]
+  expandedKeys: (string | number)[]
   /**
    * 挂载时进行查询
    */
@@ -99,6 +111,8 @@ export function useTreeQuery(_options: Partial<TreeQueryOptions>) {
     loading: false,
     dataSource: [],
     queryParams: {},
+    defaultSelectedKeys: [],
+    loadedKeys: [],
     expandedKeys: [],
     rowSelections: {
       selectedRowKeys: [],
@@ -111,8 +125,6 @@ export function useTreeQuery(_options: Partial<TreeQueryOptions>) {
     queryOnMounted: true,
     expand: false,
     loadData: async (treeNode: EventDataNode) => {
-      console.log(treeNode);
-
       if (!treeNode.dataRef || treeNode.dataRef.children) {
         return Promise.resolve();
       }
@@ -120,13 +132,16 @@ export function useTreeQuery(_options: Partial<TreeQueryOptions>) {
       const _queryParams = state.beforeQueryNode(treeNode.dataRef);
       const { rows } = await state.queryApi({
         ..._queryParams
+      }).catch(() => {
+        return Promise.resolve();
       });
 
       if (rows) {
         const _data = state.afterQuery(rows);
         treeNode.dataRef.children = _data ?? [];
       }
-
+      state.expandedKeys.push(treeNode.dataRef.key);
+      state.loadedKeys.push(treeNode.dataRef.key);
       state.dataSource = [...state.dataSource];
       return Promise.resolve();
     },
@@ -223,12 +238,46 @@ export function useTreeQuery(_options: Partial<TreeQueryOptions>) {
   // 初始化查询
   function initQuery() {
     state.dataSource = [];
-    query();
+    state.loadedKeys = [];
+    state.expandedKeys = [];
+    query().then(() => {
+      state.defaultSelectedKeys = [state.dataSource[0].key];
+      state.rowSelections.selectedRowKeys = [state.dataSource[0].key];
+    });
   }
+
+  // 新增子节点
+  const addNode = async (key: string | number, data: any) => {
+    const nodeData = await state.afterQuery(data);
+
+    function addNodeRecursively(nodes: any[]): any[] {
+      return nodes.map((node: any) => {
+        if (node.key === key) {
+          return {
+            ...node,
+            children: [
+              ...node.children,
+              nodeData
+            ]
+          };
+        }
+        if (node.children) {
+          return {
+            ...node,
+            children: addNodeRecursively(node.children)
+          };
+        }
+        return node;
+      });
+    };
+
+    return addNodeRecursively(state.dataSource);
+  };
 
   return {
     resetQuery,
     initQuery,
+    addNode,
     buildList,
     buildTree,
     state

@@ -113,6 +113,7 @@ import { ArrowLeftOutlined, FileDoneOutlined, RedoOutlined } from '@ant-design/i
 import to from 'await-to-js';
 import { getXmxxApi, updateXmxxApi } from '@/api/projectarchive/xmxx/index';
 import type { XmxxVO } from '@/api/projectarchive/xmxx/types';
+import type { ConsultTableModel } from '@/api/list/table-list';
 
 interface DataItem {
   key: number
@@ -192,9 +193,6 @@ async function handleUpdate() {
 
   };
   const [err, res] = await to(updateXmxxApi(params));
-  if (res) {
-    console.log(res);
-  }
 }
 
 /**

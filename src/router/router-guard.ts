@@ -31,7 +31,6 @@ router.beforeEach(async (to, _, next) => {
         await userStore.getUserInfo();
         // 获取路由菜单的信息
         const currentRoute = await userStore.generateDynamicRoutes();
-        console.log(currentRoute);
 
         router.addRoute(currentRoute as unknown as RouteRecordRaw);
         next({

@@ -52,8 +52,8 @@
       <template #extra>
         <TableRightToolbar
           v-model:filter-columns="filterColumns"
+          v-model:table-size="tableSize"
           :columns="columns"
-          @size-change="(val: 'small' | 'middle' | 'large') => tableSize = val"
           @reset-query="initQuery"
         />
       </template>

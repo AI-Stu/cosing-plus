@@ -54,8 +54,8 @@
       <template #extra>
         <TableRightToolbar
           v-model:filter-columns="filterColumns"
+          v-model:table-size="tableSize"
           :columns="columns"
-          @size-change="(val: 'small' | 'middle' | 'large') => tableSize = val"
           @reset-query="initQuery"
         />
       </template>
@@ -199,7 +199,7 @@ const columns = [
     resizable: true
   }
 ];
-const filterColumns = ref(columns);
+const filterColumns = shallowRef(columns.filter((e: any) => !e.hide));
 const tableSize = ref<('small' | 'middle' | 'large')>('large');
 const buttonLoading = ref(false);
 const loading = ref(true);
@@ -219,7 +219,6 @@ const { state, initQuery, resetQuery, query } = useTableQuery({
 
   },
   afterQuery: (res) => {
-    console.log(res);
     return res;
   }
 });

@@ -1,3 +1,4 @@
+<!-- 数据标准目录树 -->
 <template>
   <div class="h-full">
     <a-spin :spinning="state.loading">
@@ -17,24 +18,26 @@
         </a-tooltip>
       </a-space>
       <a-tree
+        v-model:expanded-keys="state.expandedKeys"
         :show-line="true"
         :show-icon="false"
         :tree-data="state.dataSource"
         :height="height"
         :load-data="state.loadData"
+        :loaded-keys="state.loadedKeys"
         @select="onSelect"
       >
         <template #icon="{ children, key }">
-          <ReadOutlined v-if="!children" :style="{ color: selectNode.key === key ? 'var(--pro-ant-color-primary)' : '' }" />
+          <ReadOutlined v-if="!children" :style="{ color: selectNode.node?.id === key ? 'var(--pro-ant-color-primary)' : '' }" />
         </template>
         <template #title="{ title, key }">
           <a-dropdown :trigger="['contextmenu']">
-            <span v-if="title.indexOf(searchValue) > -1" :style="{ color: selectNode.key === key ? 'var(--pro-ant-color-primary)' : '' }">
+            <span v-if="title.indexOf(searchValue) > -1" :style="{ color: selectNode.node?.id === key ? 'var(--pro-ant-color-primary)' : '' }">
               {{ title.substring(0, title.indexOf(searchValue)) }}
               <span style="color: #f50">{{ searchValue }}</span>
               {{ title.substring(title.indexOf(searchValue) + searchValue?.length) }}
             </span>
-            <span v-else :style="{ color: 'var(--pro-ant-color-primary)' }">{{ title }}</span>
+            <span v-else :style="{ color: selectNode.node?.id === key ? 'var(--pro-ant-color-primary)' : '' }">{{ title }}</span>
             <template v-if="rightMenu" #overlay>
               <a-menu @click="({ key: menuKey }) => onContextMenuClick(key, menuKey)">
                 <a-popconfirm
@@ -88,25 +91,23 @@ import { useTreeQuery } from '@/composables/tree-query';
 import { delDataStandardsCatalogApi, listDataStandardsCatalogApi, updateDataStandardsCatalogApi } from '@/api/projectarchive/dataStandardsCatalog';
 
 defineOptions({
-  name: 'SearchTree'
+  name: 'DataStandardsTree'
 });
 
 const props = withDefaults(defineProps<{
-  modelValue?: any
+  modelValue: any
   searchPlaceholder?: string
   height?: number
   add?: boolean
   rightMenu?: boolean
-  queryApi?: (params?: any) => Promise<any>
-  filter?: (item: any) => any
 }>(), {
+  modelValue: {},
   searchPlaceholder: '搜索',
   add: true,
   rightMenu: true,
   height: 0
 });
 const emits = defineEmits(['update:modelValue', 'add', 'select']);
-
 const selectNode = useVModel(props, 'modelValue', emits);
 const searchValue = ref<string>();
 
@@ -180,18 +181,19 @@ function handleUpdate(key: string | number) {
 
 // 树节点选中事件
 const onSelect: TreeProps['onSelect'] = (key, info) => {
-  selectNode.value = {
-    id: info.node.id,
-    name: info.node.name,
-    parent: info.node.parent,
-    pid: info.node.pid,
-    orderindex: info.node.orderindex
-  };
   emits('select', { key, info });
+  // const item = {
+  //   id: info.node.id,
+  //   name: info.node.name,
+  //   dataStandardsPath: info.node.dataStandardsPath,
+  //   pid: info.node.pid,
+  //   orderindex: info.node.orderindex
+  // };
+
+  selectNode.value = info;
 };
 
 onBeforeMount(() => {
-  // getList();
   initQuery();
 });
 </script>

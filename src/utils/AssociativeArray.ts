@@ -41,6 +41,51 @@ export default class AssociativeArray {
   }
 
   /**
+   * 数组是否包含key
+   * @param {string | number} key
+   * @returns {boolean} 存在 true 否则 false
+   */
+  contains(key: number | string): boolean {
+    if (typeof key !== 'string' && typeof key !== 'number') {
+      throw console.error('键必须是字符串或数字！');
+    }
+    return defined(this._hash[key]);
+  }
+
+  /**
+   * 将提供的 key与 value相关联。
+   * 如果 key已经存在时，将被覆盖
+   *
+   * @param {string | number} key
+   * @param {*} value
+   */
+  set(key: number | string, value: any) {
+    if (typeof key !== 'string' && typeof key !== 'number') {
+      throw console.error('键必须是字符串或数字！');
+    }
+
+    const oldValue = this._hash[key];
+    if (value !== oldValue) {
+      this.remove(key);
+      this._hash[key] = value;
+      this._array.unshift(value);
+    }
+  }
+
+  /**
+   * 根据 key 获取 value
+   *
+   * @param {string | number} key
+   * @returns {*} value
+   */
+  get(key: number | string): any {
+    if (typeof key !== 'string' && typeof key !== 'number') {
+      throw console.error('键必须是字符串或数字！');
+    }
+    return this._hash[key];
+  }
+
+  /**
    * 数组交换位置
    * @param {number | string} index1
    * @param {number | string} index2

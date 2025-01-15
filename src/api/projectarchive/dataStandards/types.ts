@@ -49,6 +49,11 @@ export interface DataStandardsVO {
    */
   orderindex?: number
 
+  /**
+   * 创建时间
+   */
+  createTime?: string
+
 }
 
 export interface DataStandardsForm extends BaseEntity {
@@ -102,6 +107,11 @@ export interface DataStandardsForm extends BaseEntity {
    */
   orderindex?: number
 
+  /**
+   * 创建时间
+   */
+  createTime?: string
+
 }
 
 export interface DataStandardsQuery extends PageQuery {
@@ -150,6 +160,11 @@ export interface DataStandardsQuery extends PageQuery {
    * 顺序
    */
   orderindex?: number
+
+  /**
+   * 创建时间
+   */
+  createTime?: string
 
   /**
    * 日期范围参数

@@ -318,7 +318,7 @@ const columns = [
     width: '100px'
   }
 ];
-const filterColumns = shallowRef(columns.filter(e => !e.hide));
+const filterColumns = shallowRef(columns.filter((e: any) => !e.hide));
 const tableSize = ref<('small' | 'middle' | 'large')>('large');
 const buttonLoading = ref(false);
 const searchValue = ref('');
@@ -336,7 +336,6 @@ const { state, initQuery, resetQuery } = useTableQuery({
 
   },
   afterQuery: (res) => {
-    console.log(res);
     return res;
   }
 });

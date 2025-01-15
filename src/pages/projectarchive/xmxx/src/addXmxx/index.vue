@@ -24,10 +24,10 @@
 </template>
 
 <script setup lang="ts">
-import Step1 from './step1.vue';
-import Step2 from './step2.vue';
-import Step3 from './step3.vue';
-import Step4 from './step4.vue';
+import Step1 from './src/step1.vue';
+import Step2 from './src/step2.vue';
+import Step3 from './src/step3.vue';
+import Step4 from './src/step4.vue';
 
 defineOptions({
   name: 'AddXmxx'

@@ -4,9 +4,11 @@
       <a-col :span="4">
         <a-card size="small" class="h-full">
           <DataStandardsTree
+            ref="dataStandardsTreeRef"
+            v-model="selectNode"
             :height="reactHeight"
             @select="handleSelect"
-            @add="catalog.visible = true;"
+            @add="addStandardsCatalog"
           />
         </a-card>
       </a-col>
@@ -14,13 +16,13 @@
         <a-card class="h-full">
           <template #title>
             <a-space>
-              <a-button type="primary" :icon="h(PlusOutlined)" @click="handleAdd">
+              <a-button v-if="hasAccess([AccessKey.ADD])" type="primary" :icon="h(PlusOutlined)" @click="handleAdd">
                 新增
               </a-button>
-              <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:edit'])" @click="handleImport">
+              <a-button v-if="hasAccess([AccessKey.EDIT])" @click="handleImport">
                 批量导入
               </a-button>
-              <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:export'])" @click="handleExport">
+              <a-button v-if="hasAccess([AccessKey.EXPORT])" @click="handleExport">
                 批量导出
               </a-button>
             </a-space>
@@ -28,8 +30,8 @@
           <template #extra>
             <TableRightToolbar
               v-model:filter-columns="filterColumns"
+              v-model:table-size="tableSize"
               :columns="columns"
-              @size-change="(val: 'small' | 'middle' | 'large') => tableSize = val"
               @reset-query="initQuery"
             />
           </template>
@@ -39,25 +41,33 @@
             row-key="id"
             :columns="filterColumns"
             :data-source="state.dataSource"
+            :pagination="state.pagination"
             :size="tableSize"
             :loading="state.loading"
+            :scroll="{ y: reactHeight - 56 - 48 - 76 }"
+            @resize-column="(w, col) => {
+              col.width = w || 0;
+            }"
           >
             <template #bodyCell="scope">
               <template v-if="scope.column.dataIndex === 'status'" />
 
               <template v-if="scope.column.dataIndex === 'action'">
                 <div flex>
-                  <a-button type="link" @click="handleInfo(scope.record)">
+                  <a-button type="link" size="small" @click="handleInfo(scope.record)">
                     详情
                   </a-button>
-                  <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:edit'])" type="link" @click="handleUpdate(scope?.record)">
+                  <a-button
+                    v-if="hasAccess([AccessKey.EDIT])" type="link" size="small"
+                    @click="handleUpdate(scope?.record)"
+                  >
                     编辑
                   </a-button>
                   <a-popconfirm
                     title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
                     @confirm="handleDelete(scope.index, scope.record)"
                   >
-                    <a-button v-if="hasAccess(['projectarchive:xmxxDataStandardsRel:remove'])" type="link" danger>
+                    <a-button v-if="hasAccess([AccessKey.DEL])" type="link" size="small" danger>
                       删除
                     </a-button>
                   </a-popconfirm>
@@ -78,17 +88,26 @@
         <a-form-item label="目录名称" name="name" :rules="[{ required: true, message: '请输入目录名称' }]">
           <a-input v-model:value="catalog.form.name" :maxlength="20" placeholder="请输入目录名称" />
         </a-form-item>
+        <a-form-item label="顺序" name="orderindex" :rules="[{ required: true, message: '请输入顺序' }]">
+          <a-input-number v-model:value="catalog.form.orderindex" :min="0" :max="9999" class="w-full" placeholder="请输入顺序" />
+        </a-form-item>
       </a-form>
     </a-modal>
 
     <!-- 添加或修改数据标准对话框 -->
     <a-modal v-model:open="modal.visible" :title="modal.title" @ok="submitForm" @cancel="handleCancel">
       <a-form
-        ref="dataStandardsFormRef" :model="formData" class="w-full" :rules="rules" :label-col="labelCol"
-        :wrapper-col="{ span: 24 }" :disabled="modal.disabled"
+        ref="dataStandardsFormRef"
+        :model="formData" class="w-full"
+        :rules="rules" :label-col="labelCol"
+        :wrapper-col="{ span: 24 }"
+        :disabled="modal.disabled"
       >
         <a-form-item label="文档资料名称" name="name">
           <a-input v-model:value="formData.name" :maxlength="50" placeholder="文档资料名称" />
+        </a-form-item>
+        <a-form-item label="技术标准" name="skillStandards">
+          <a-input v-model:value="formData.skillStandards" :maxlength="50" placeholder="请输入技术标准" />
         </a-form-item>
         <a-form-item label="数据类型" name="dataType">
           <a-select v-model:value="formData.dataType" placeholder="请选择数据类型" :options="dataTypeArr" />
@@ -113,10 +132,7 @@
 <script setup lang="ts">
 import { h } from 'vue';
 import { PlusOutlined } from '@ant-design/icons-vue';
-import type { Rule } from 'ant-design-vue/es/form';
-import type { DataStandardsVO } from '@/api/projectarchive/dataStandards/types';
-import { addDataStandardsCatalogApi } from '@/api/projectarchive/dataStandardsCatalog';
-import { addDataStandardsApi, delDataStandardsApi, listDataStandardsApi, updateDataStandardsApi } from '@/api/projectarchive/dataStandards';
+import { AccessKey, Api, type DataVo, columns, rules } from './data';
 import DataStandardsTree from '@/pages/projectarchive/components/DataStandardsTree.vue';
 
 defineOptions({
@@ -138,85 +154,18 @@ const catalog = reactive({
   form: {
     pid: '',
     parentName: '',
-    name: ''
+    name: '',
+    orderindex: 1
   }
 });
+const selectNode = ref<any>({});
 const labelCol = { style: { width: '110px' } };
-const columns = [
-  {
-    title: '序号',
-    dataIndex: 'serialNumber',
-    customRender: ({ index }: { index: number }) => {
-      return index + 1;
-    },
-    width: 80,
-    minWidth: 80,
-    maxWidth: 120,
-    disabled: true
-  },
-  {
-    title: '应收文档资料',
-    key: 'name',
-    dataIndex: 'name',
-    width: 250,
-    resizable: true
-  },
-  {
-    title: '技术标准',
-    key: 'skillStandards',
-    dataIndex: 'standared',
-    width: 120,
-    resizable: true
-  },
-  {
-    title: '数据类型',
-    key: 'dataType',
-    dataIndex: 'dataType',
-    width: 120
-  },
-  {
-    title: '资料类型',
-    key: 'materialType',
-    dataIndex: 'materialType',
-    width: 120,
-    resizable: true
-  },
-  {
-    title: '数量',
-    key: 'sl',
-    dataIndex: 'sl',
-    width: 120
-  },
-  {
-    title: '创建时间',
-    key: 'createTime',
-    dataIndex: 'createTime',
-    width: 140
-  },
-  {
-    title: '状态',
-    key: 'stauts',
-    dataIndex: 'stauts',
-    width: 120
-  },
-  {
-    title: '操作',
-    dataIndex: 'action',
-    width: 120
-  }
-];
-const rules: Record<string, Rule[]> = {
-  name: [
-    { required: true, message: '文档资料名称不能为空', trigger: 'change' }
-  ]
-
-};
-
-const filterColumns = ref(columns);
-const tableSize = ref<('small' | 'middle' | 'large')>('large');
+const filterColumns = shallowRef(columns.filter((e: any) => !e.hide));
+const tableSize = ref<('small' | 'middle' | 'large')>('small');
 
 const dataStandardsFormRef = ref<FormInstance>();
-const formData = ref<DataStandardsVO>({});
+const dataStandardsTreeRef = ref();
+const formData = ref<DataVo>({});
 const modal = reactive({
   visible: false,
   disabled: false,
@@ -224,14 +173,10 @@ const modal = reactive({
 });
 
 const { state, initQuery } = useTableQuery({
-  queryApi: listDataStandardsApi,
+  queryApi: Api.LIST_API,
+  queryOnMounted: false,
   queryParams: {
     dataStandardCatalogId: null
-  },
-  beforeQuery: () => {
-    state.queryParams = {
-      dataStandardCatalogId: catalog.form.pid
-    };
   },
   afterQuery: (res) => {
     return res;
@@ -266,11 +211,26 @@ const stautsArr = [
   }
 ];
 
+function addStandardsCatalog() {
+  catalog.visible = true;
+}
+
 /** 新增目录 */
-function saveCatalog() {
-  addDataStandardsCatalogApi(catalog.form).then((res) => {
-    catalog.visible = false;
-    message.success('添加成功');
+async function saveCatalog() {
+  await Api.ADD_CATALOG_API(catalog.form);
+  catalog.visible = false;
+  message.success('添加成功');
+  Api.LIST_CATALOG_API({
+    pid: catalog.form.pid,
+    pageNum: 1,
+    pageSize: 2000
+  }).then(({ rows }) => {
+    selectNode.value.node.dataRef.children = rows.map((item: any) => ({
+      key: item.id,
+      title: item.name,
+      ...item
+    }));
+    // dataStandardsTreeRef.value?.addNode(catalog.form.pid, rows);
   });
 }
 
@@ -296,26 +256,25 @@ function handleAdd() {
 
 /** 提交按钮 */
 async function submitForm() {
-  formData.value.dataStandardCatalogId = catalog.form.pid;
-  delete formData.value.createTime;
-  if (formData.value.id) {
-    await updateDataStandardsApi(formData.value);
-    message.success('修改成功');
+  if (!modal.disabled) {
+    formData.value.dataStandardCatalogId = catalog.form.pid;
+    delete formData.value.createTime;
+    if (formData.value.id) {
+      await Api.UPDATE_API(formData.value);
+      message.success('修改成功');
+    }
+    else {
+      await Api.ADD_API(formData.value);
+      message.success('新增成功');
+    }
+    initQuery();
   }
-  else {
-    await addDataStandardsApi(formData.value);
-    message.success('新增成功');
-  }
-
   modal.visible = false;
-  initQuery();
 }
 
 /** 导出按钮操作 */
 function handleExport() {
-  useDownload('projectarchive/xmxxDataStandardsRel/export', {
-    ...toRaw(state.queryParams)
-  }, `xmxxDataStandardsRel_${new Date().getTime()}.xlsx`);
+  useDownload(Api.DOWNLOAD, { ...toRaw(state.queryParams) }, `数据标准_${new Date().getTime()}.xlsx`);
 }
 
 /** 导入按钮操作 */
@@ -339,15 +298,15 @@ function reset() {
  * 详情
  * @param row
  */
-function handleInfo(row?: DataStandardsVO) {
+function handleInfo(row?: DataVo) {
   Object.assign(formData.value, row);
   modal.visible = true;
   modal.disabled = true;
-  modal.title = '修改数据详情';
+  modal.title = '数据标准详情';
 }
 
 /** 编辑按钮操作 */
-async function handleUpdate(row: DataStandardsVO) {
+async function handleUpdate(row: DataVo) {
   reset();
   Object.assign(formData.value, row);
   modal.visible = true;
@@ -360,9 +319,9 @@ async function handleUpdate(row: DataStandardsVO) {
  * @param index
  * @param row
  */
-async function handleDelete(index: number, row: DataStandardsVO) {
+async function handleDelete(index: number, row: DataVo) {
   if (row.id) {
-    await delDataStandardsApi(row.id);
+    await Api.DEL_API(row.id);
   }
   state.dataSource.splice(index, 1);
   message.success('删除成功');
@@ -373,6 +332,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>

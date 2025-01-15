@@ -228,7 +228,6 @@ async function getList() {
   if (error) {
     return;
   }
-  console.log('getList', res);
 
   data.value = res.rows;
   total.value = res.total;
@@ -248,8 +247,6 @@ function handleAdd() {
  * @param item
  */
 function handleInfo(item: any) {
-  console.log(item);
-
   // 如果步骤没走完，继续新建流程
   if (item.step !== 3) {
     router.push({
@@ -272,7 +269,6 @@ function handleInfo(item: any) {
  * @param item
  */
 function handleDelete(item: any) {
-  console.log(item);
   delXmxxApi(item.xmxxid).then(() => {
     message.success('删除成功');
     getList();

@@ -78,7 +78,7 @@
 
 <script setup lang="ts">
 import { cloneDeep, isEqual } from 'lodash-es';
-import DataModal from './DataModal.vue';
+import DataModal from '@/pages/projectarchive/components/DataStandardsModal/index.vue';
 import { delXmxxDataStandardsRelApi, listXmxxDataStandardsRelApi, saveXmxxDataStandardsListApi } from '@/api/projectarchive/xmxxDataStandardsRel';
 import type { XmxxDataStandardsRelVO } from '@/api/projectarchive/xmxxDataStandardsRel/types';
 

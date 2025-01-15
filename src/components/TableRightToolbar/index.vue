@@ -7,7 +7,7 @@
       <a-dropdown trigger="click">
         <ColumnHeightOutlined />
         <template #overlay>
-          <a-menu v-model:selected-keys="tableSize" :items="sizeItems" @click="handleSizeChange" />
+          <a-menu v-model:selected-keys="selectList" :items="sizeItems" @click="handleSizeChange" />
         </template>
       </a-dropdown>
     </a-tooltip>
@@ -55,14 +55,19 @@ const props = defineProps({
   filterColumns: {
     type: Array,
     default: () => []
+  },
+  tableSize: {
+    type: String as () => 'small' | 'middle' | 'large',
+    default: 'middle'
   }
 });
 
-const emits = defineEmits(['update:filterColumns', 'resetQuery', 'sizeChange']);
+const emits = defineEmits(['update:filterColumns', 'update:tableSize', 'resetQuery', 'sizeChange']);
 const columnsValueKey = 'dataIndex';
 const columnsLabelKey = 'title';
 const dropdownVisible = ref(false);
-const tableSize = ref<('small' | 'middle' | 'large')[]>(['large']);
+const tableSize = useVModel(props, 'tableSize', emits);
+const selectList = reactive([props.tableSize]);
 const sizeItems = ref<MenuProps['items']>([
   {
     key: 'large',
@@ -106,9 +111,9 @@ const filterColumns = ref(filterAction(getCheckList.value));
  * 密度切换
  *
  */
-const handleSizeChange: MenuProps['onClick'] = (e) => {
-  tableSize.value[0] = e.key as 'large' | 'middle' | 'small';
-  emits('sizeChange', toRaw(tableSize.value[0]));
+const handleSizeChange: MenuProps['onClick'] = ({ key }) => {
+  selectList[0] = key as 'large' | 'middle' | 'small';
+  tableSize.value = key as 'large' | 'middle' | 'small';
 };
 
 /**

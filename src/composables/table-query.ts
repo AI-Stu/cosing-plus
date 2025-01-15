@@ -1,6 +1,6 @@
 import type { PaginationProps } from 'ant-design-vue';
 import type { TableRowSelection } from 'ant-design-vue/es/table/interface';
-import { assign } from 'lodash';
+import { assign } from 'lodash-es';
 
 /**
  * 表格分页扩展类型
@@ -9,11 +9,11 @@ export interface TablePaginationProps extends PaginationProps {
   /**
    * 排序字段
    */
-  column: string
+  column?: string
   /**
    * 排序方式
    */
-  order: string
+  order?: string
 }
 
 /**

@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import ServiceModal from './ServiceModal.vue';
+import ServiceModal from '@/pages/projectarchive/components/ServiceModal.vue';
 import type { ConsultTableModel } from '@/api/list/table-list';
 
 const emit = defineEmits(['prevStep', 'nextStep']);

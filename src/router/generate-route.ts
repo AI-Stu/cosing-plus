@@ -124,8 +124,6 @@ export function genRoutes(routes: RouteRecordRaw[], parent?: MenuDataItem) {
       delete item.children;
     menuData.push(item);
   });
-  console.log(menuData);
-
   return menuData;
 }
 
