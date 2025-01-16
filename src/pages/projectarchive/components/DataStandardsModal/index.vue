@@ -1,6 +1,6 @@
 <template>
   <a-modal v-model:open="openValue" title="选择数据清单" width="1300px" @cancel="emits('close')" @ok="handleOk">
-    <a-row :gutter="16" class="h-65vh overflow-hidden">
+    <a-row v-if="isAdd" :gutter="16" class="h-65vh overflow-hidden">
       <a-col :span="5">
         <DataStandardsTree
           ref="dataStandardsTreeRef"
@@ -103,6 +103,51 @@
         </a-table>
       </a-col>
     </a-row>
+    <a-row v-else>
+      <a-col :span="24">
+        <a-breadcrumb separator=">" font-bold>
+          <a-breadcrumb-item>施工图建筑面积预绘测</a-breadcrumb-item>
+          <a-breadcrumb-item>商业及其他用房-附件列表</a-breadcrumb-item>
+        </a-breadcrumb>
+        <div style="margin: 10px 0;">
+          <a-button size="small" type="primary" style="margin-right: 10px;">
+            自定义附件
+          </a-button>
+          <a-button size="small" type="primary" danger>
+            删除
+          </a-button>
+        </div>
+        <a-table
+          row-key="id"
+          :columns="filterFileColumns"
+          :data-source="fileState.dataSource"
+          :row-selection="rowSelection"
+          :pagination="false"
+          :scroll="{
+            y: 400,
+          }"
+          size="small"
+          @resize-column="(w, col) => {
+            col.width = w;
+          }"
+        >
+          <template #bodyCell="scope">
+            <template v-if="scope.column.dataIndex === 'action'">
+              <div flex>
+                <a-popconfirm
+                  title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
+                  @confirm="handleDelete(scope.index, scope.record)"
+                >
+                  <a-button type="link" size="small" danger>
+                    删除
+                  </a-button>
+                </a-popconfirm>
+              </div>
+            </template>
+          </template>
+        </a-table>
+      </a-col>
+    </a-row>
 
     <!-- 添加或修改数据标准对话框 -->
     <a-modal v-model:open="modal.visible" :title="modal.title" @cancel="handleCancel" @ok="handleCancel">
@@ -152,6 +197,14 @@ const props = defineProps({
   open: {
     type: Boolean,
     default: false
+  },
+  value: {
+    type: Array,
+    default: () => []
+  },
+  isAdd: {
+    type: Boolean,
+    default: true
   }
 });
 

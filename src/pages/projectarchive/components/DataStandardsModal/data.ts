@@ -102,12 +102,19 @@ export const fileColumns = [
     ellipsis: true,
     resizable: true
   },
-
   {
     title: '数据标准',
+    key: 'dataStandards',
+    dataIndex: 'dataStandards',
+    width: 300,
+    ellipsis: true,
+    resizable: true
+  },
+  {
+    title: '数据类型',
     key: 'dataType',
     dataIndex: 'dataType',
-    width: 300,
+    width: 150,
     ellipsis: true,
     resizable: true
   },
