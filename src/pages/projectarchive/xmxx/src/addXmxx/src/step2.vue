@@ -193,7 +193,7 @@ async function nextStep() {
 
 // 重置
 function reset() {
-  dataSource.value = resetData;
+  dataSource.value = cloneDeep(resetData);
 }
 
 onBeforeMount(async () => {
