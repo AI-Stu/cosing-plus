@@ -127,7 +127,7 @@ function reset() {
     bounds.value = { lt, lb, rt, rb };
   }
 
-  formState.value = resetData;
+  formState.value = cloneDeep(resetData);
 }
 </script>
 

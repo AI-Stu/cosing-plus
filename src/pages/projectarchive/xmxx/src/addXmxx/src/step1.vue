@@ -98,7 +98,7 @@ async function nextStep() {
 
 // 重置
 function reset() {
-  formState.value = resetData;
+  formState.value = cloneDeep(resetData);
 }
 
 onBeforeMount(async () => {
