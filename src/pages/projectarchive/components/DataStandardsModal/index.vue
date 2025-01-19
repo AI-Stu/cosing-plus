@@ -21,13 +21,14 @@
           <TableRightToolbar
             v-model:filter-columns="filterColumns"
             v-model:table-size="tableSize"
+            v-model:loading="state.loading"
             :columns="columns"
             @reset-query="initQuery"
           />
         </a-flex>
 
         <a-table
-          row-key="id"
+          :row-key="PRIMARY_KEY"
           :columns="filterColumns"
           :data-source="state.dataSource"
           :pagination="state.pagination"
@@ -68,15 +69,15 @@
           <a-button size="small" type="primary" style="margin-right: 10px;">
             自定义附件
           </a-button>
-          <a-button size="small" type="primary" danger>
+          <a-button size="small" type="primary" danger @click="handleDelete">
             删除
           </a-button>
         </div>
         <a-table
-          row-key="id"
+          :row-key="PRIMARY_KEY"
           :columns="filterFileColumns"
           :data-source="fileState.dataSource"
-          :row-selection="rowSelection"
+          :row-selection="fileRowSelection"
           :pagination="false"
           :scroll="{
             y: 400,
@@ -91,7 +92,7 @@
               <div flex>
                 <a-popconfirm
                   title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
-                  @confirm="handleDelete(scope.index, scope.record)"
+                  @confirm="handleRowDelete(scope.index, scope.record)"
                 >
                   <a-button type="link" size="small" danger>
                     删除
@@ -118,10 +119,10 @@
           </a-button>
         </div>
         <a-table
-          row-key="id"
+          :row-key="PRIMARY_KEY"
           :columns="filterFileColumns"
           :data-source="fileState.dataSource"
-          :row-selection="rowSelection"
+          :row-selection="fileRowSelection"
           :pagination="false"
           :scroll="{
             y: 400,
@@ -136,7 +137,7 @@
               <div flex>
                 <a-popconfirm
                   title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
-                  @confirm="handleDelete(scope.index, scope.record)"
+                  @confirm="handleRowDelete(scope.index, scope.record)"
                 >
                   <a-button type="link" size="small" danger>
                     删除
@@ -186,6 +187,7 @@
 
 <script setup lang="ts">
 import { cloneDeep } from 'lodash-es';
+import type { Key } from 'ant-design-vue/es/table/interface';
 import { Api, type DataVo, columns, fileColumns, rules } from './data';
 import AssociativeArray from '@/utils/AssociativeArray';
 import DataStandardsTree from '@/pages/projectarchive/components/DataStandardsTree.vue';
@@ -205,17 +207,27 @@ const props = defineProps({
   isAdd: {
     type: Boolean,
     default: true
+  },
+  breadcrumbs: {
+    type: Array,
+    default: () => []
   }
 });
 
 // 定义事件
-const emits = defineEmits(['update:open', 'close']);
+const emits = defineEmits(['update:open', 'update:breadcrumbs', 'close', 'ok']);
 const openValue = useVModel(props, 'open', emits);
+const breadcrumbs = useVModel(props, 'breadcrumbs', emits);
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 
-const associativeArray = new AssociativeArray();
+const PRIMARY_KEY = 'dataStandardsId';
+interface defineDataV0 extends DataVo {
+  [PRIMARY_KEY]: string | number
+  parentPath: string
+}
+
+const associativeArray = new AssociativeArray(); // 已选全部附件
 const reactHeight = ref<number>(0);
-const breadcrumbs = ref<string[]>([]);
 const selectNode = ref<any>({});
 const filterColumns = shallowRef(columns.filter((e: any) => !e.hide));
 const filterFileColumns = shallowRef(fileColumns.filter((e: any) => !e.hide));
@@ -242,6 +254,14 @@ const { state, initQuery } = useTableQuery({
     dataStandardCatalogId: null
   },
   afterQuery: (res) => {
+    res.forEach((e: any) => {
+      e[PRIMARY_KEY] = e.id;
+      e.parentPath = e.dataStandards.split('/').slice(0, -1).join('/') || '/';
+      delete e.id;
+    });
+
+    console.log(res);
+
     return res;
   }
 });
@@ -251,26 +271,38 @@ const { state: fileState } = useTableQuery({
 });
 
 const rowSelection = ref({
+  selectedRowKeys: [] as Key[],
   checkStrictly: false,
   onSelect: (record: any, selected: boolean, selectedRows: any[]) => {
     // console.log(record, selected, selectedRows);
     selected
       ? selectedRows.forEach((e) => {
-          associativeArray.set(e.id, toRaw(e));
+          delete e.createTime;
+          associativeArray.set(e[PRIMARY_KEY], toRaw(e));
         })
-      : associativeArray.remove(record.id);
-    console.log(associativeArray.values);
+      : associativeArray.remove(record[PRIMARY_KEY]);
+    rowSelection.value.selectedRowKeys = associativeArray.keys;
   },
   onSelectAll: (selected: boolean, selectedRows: any[], changeRows: any[]) => {
     // console.log(selected, selectedRows, changeRows);
     selected
       ? selectedRows.forEach((e) => {
-          associativeArray.set(e.id, toRaw(e));
+          delete e.createTime;
+          associativeArray.set(e[PRIMARY_KEY], toRaw(e));
         })
       : changeRows.forEach((e) => {
-          associativeArray.remove(e.id);
+          associativeArray.remove(e[PRIMARY_KEY]);
         });
-    console.log(associativeArray.values);
+    rowSelection.value.selectedRowKeys = associativeArray.keys;
+  }
+});
+
+const fileRowSelection = ref({
+  selectedRowKeys: [] as Key[],
+  checkStrictly: false,
+  onChange: (changableRowKeys: Key[]) => {
+    fileRowSelection.value.selectedRowKeys = changableRowKeys;
+    console.log('selectedRowKeys changed: ', changableRowKeys);
   }
 });
 
@@ -328,12 +360,29 @@ function handleAddFileList() {
 
 /**
  * 删除功能
+ */
+async function handleDelete() {
+  fileRowSelection.value.selectedRowKeys.forEach((e) => {
+    const index = fileState.dataSource.findIndex(item => item[PRIMARY_KEY] === e);
+    associativeArray.remove(e);
+    fileState.dataSource.splice(index, 1);
+  });
+  rowSelection.value.selectedRowKeys = rowSelection.value.selectedRowKeys.filter(e => !fileRowSelection.value.selectedRowKeys.includes(e));
+  fileRowSelection.value.selectedRowKeys = [];
+  total.dataStandards = fileState.dataSource.length;
+  total.file = fileState.dataSource.reduce((a, b) => a + (b.sl || 0), 0);
+}
+
+/**
+ * row 行删除功能
  * @param index
  * @param row
  */
-async function handleDelete(index: number, row: DataVo) {
-  // associativeArray.remove(row.id);
+async function handleRowDelete(index: number, row: defineDataV0) {
+  associativeArray.remove(row.id);
   fileState.dataSource.splice(index, 1);
+  fileRowSelection.value.selectedRowKeys = fileRowSelection.value.selectedRowKeys.filter(e => e !== row[PRIMARY_KEY]);
+  rowSelection.value.selectedRowKeys = rowSelection.value.selectedRowKeys.filter(e => e !== row[PRIMARY_KEY]);
   total.dataStandards = fileState.dataSource.length;
   total.file = fileState.dataSource.reduce((a, b) => a + (b.sl || 0), 0);
 }
@@ -349,11 +398,16 @@ function handleInfo(row?: DataVo) {
   modal.title = '数据标准详情';
 }
 
-function handleClose() { }
+// 全部取消
+function handleClose() {
+  openValue.value = false;
+  emits('close', fileState.dataSource);
+}
 
 // 向父组件发送事件
 function handleOk() {
-  emits('close', fileState.dataSource);
+  openValue.value = false;
+  emits('ok', fileState.dataSource);
 };
 
 onMounted(() => {

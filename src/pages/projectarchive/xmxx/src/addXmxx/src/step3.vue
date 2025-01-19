@@ -65,7 +65,7 @@ import type { ConsultTableModel } from '@/api/list/table-list';
 
 const emit = defineEmits(['prevStep', 'nextStep']);
 // const message = useMessage();
-
+const xmxxid = inject('xmxxid') as string;
 const open = ref(false);
 const columns = shallowRef([
   {

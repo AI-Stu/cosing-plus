@@ -31,6 +31,7 @@
             <TableRightToolbar
               v-model:filter-columns="filterColumns"
               v-model:table-size="tableSize"
+              v-model:loading="state.loading"
               :columns="columns"
               @reset-query="initQuery"
             />
@@ -80,7 +81,14 @@
     </a-row>
 
     <!-- 添加目录对话框 -->
-    <a-modal v-model:open="catalog.visible" title="添加数据标准目录" @ok="saveCatalog">
+    <a-modal
+      v-model:open="catalog.visible"
+      title="添加数据标准目录"
+      :ok-button-props="{
+        disabled: loading.isButton,
+      }"
+      @ok="saveCatalog"
+    >
       <a-form :model="catalog.form" class="w-full" :label-col="labelCol">
         <a-form-item label="父目录名称" name="parentName" :rules="[{ required: true, message: '请选择父目录' }]">
           <a-input v-model:value="catalog.form.parentName" :maxlength="20" placeholder="" disabled />
@@ -95,7 +103,13 @@
     </a-modal>
 
     <!-- 添加或修改数据标准对话框 -->
-    <a-modal v-model:open="modal.visible" :title="modal.title" @ok="submitForm" @cancel="handleCancel">
+    <a-modal
+      v-model:open="modal.visible" :title="modal.title"
+      :ok-button-props="{
+        disabled: loading.isButton,
+      }"
+      @ok="submitForm" @cancel="handleCancel"
+    >
       <a-form
         ref="dataStandardsFormRef"
         :model="formData" class="w-full"
@@ -145,6 +159,10 @@ const message = useMessage();
 const dictStore = useDictStore();
 
 const reactHeight = ref<number>(0);
+
+const loading = reactive({
+  isButton: false
+});
 
 /**
  * 数据标准目录
@@ -217,7 +235,10 @@ function addStandardsCatalog() {
 
 /** 新增目录 */
 async function saveCatalog() {
-  await Api.ADD_CATALOG_API(catalog.form);
+  loading.isButton = true;
+  await Api.ADD_CATALOG_API(catalog.form).finally(() => {
+    loading.isButton = false;
+  });
   catalog.visible = false;
   message.success('添加成功');
   Api.LIST_CATALOG_API({
@@ -259,12 +280,17 @@ async function submitForm() {
   if (!modal.disabled) {
     formData.value.dataStandardCatalogId = catalog.form.pid;
     delete formData.value.createTime;
+    loading.isButton = true;
     if (formData.value.id) {
-      await Api.UPDATE_API(formData.value);
+      await Api.UPDATE_API(formData.value).finally(() => {
+        loading.isButton = false;
+      });
       message.success('修改成功');
     }
     else {
-      await Api.ADD_API(formData.value);
+      await Api.ADD_API(formData.value).finally(() => {
+        loading.isButton = false;
+      });
       message.success('新增成功');
     }
     initQuery();

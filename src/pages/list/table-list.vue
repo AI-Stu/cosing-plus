@@ -92,7 +92,7 @@
       <template #extra>
         <a-space size="middle">
           <a-tooltip title="刷新">
-            <ReloadOutlined @click="onSearch" />
+            <ReloadOutlined :class="loading && 'rotate-element'" @click="onSearch" />
           </a-tooltip>
           <a-tooltip title="密度">
             <a-dropdown trigger="click">

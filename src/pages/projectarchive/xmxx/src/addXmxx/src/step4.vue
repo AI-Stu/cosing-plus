@@ -70,6 +70,7 @@
 const emit = defineEmits(['finish']);
 const router = useRouter();
 
+const xmxxid = inject('xmxxid') as string;
 // 数据
 const columns = [
   {

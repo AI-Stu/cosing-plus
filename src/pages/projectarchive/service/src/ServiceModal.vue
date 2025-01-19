@@ -79,11 +79,10 @@
 import type { ConsultTableModel, ConsultTableParams } from '@/api/list/table-list';
 
 defineOptions({ name: 'ServiceModal' });
-const props = defineProps({
-  open: {
-    type: Boolean,
-    default: false
-  }
+const props = withDefaults(defineProps<{
+  open: boolean
+}>(), {
+  open: false
 });
 
 // 定义事件

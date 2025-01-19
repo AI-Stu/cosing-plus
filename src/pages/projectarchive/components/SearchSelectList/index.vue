@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SeacrhSelectListOptions, SelectListType } from './types';
+import type { SeacrhSelectListOptions, SelectListType } from './data';
 
 defineOptions({
   name: 'SearchSelectList'

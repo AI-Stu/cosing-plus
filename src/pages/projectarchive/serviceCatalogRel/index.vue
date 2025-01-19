@@ -64,8 +64,8 @@
 <script setup lang="ts">
 import { h } from 'vue';
 import { PlusOutlined, RedoOutlined, SearchOutlined } from '@ant-design/icons-vue';
-import type { SeacrhSelectListOptions, SelectListType } from '../components/types';
-import SearchSelectList from '../components/SearchSelectList.vue';
+import type { SeacrhSelectListOptions, SelectListType } from '../components/SearchSelectList/data';
+import SearchSelectList from '../components/SearchSelectList/index.vue';
 
 defineOptions({
   name: 'SportsEvtent'

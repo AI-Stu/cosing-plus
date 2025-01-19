@@ -95,14 +95,16 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
     loading: false,
     queryParams: {},
     dataSource: [],
-    rowSelections: {
+    rowSelections: assign({
       selectedRowKeys: [],
       selectedRows: [],
       onChange(selectedRowKeys: any[], selectedRows: any[]) {
+        console.log(selectedRowKeys, selectedRows);
+
         state.rowSelections.selectedRowKeys = selectedRowKeys;
         state.rowSelections.selectedRows = selectedRows;
       }
-    },
+    } as TableRowSelectionsProps, _options.rowSelections),
     queryOnMounted: true,
     pagination:
       assign({

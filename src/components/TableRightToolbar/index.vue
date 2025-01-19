@@ -1,7 +1,7 @@
 <template>
   <a-space size="middle">
     <a-tooltip title="刷新">
-      <ReloadOutlined @click="handleResetQuery" />
+      <ReloadOutlined :class="loading && 'rotate-element'" @click="handleResetQuery" />
     </a-tooltip>
     <a-tooltip title="密度">
       <a-dropdown trigger="click">
@@ -59,14 +59,19 @@ const props = defineProps({
   tableSize: {
     type: String as () => 'small' | 'middle' | 'large',
     default: 'middle'
+  },
+  loading: {
+    type: Boolean,
+    default: false
   }
 });
 
-const emits = defineEmits(['update:filterColumns', 'update:tableSize', 'resetQuery', 'sizeChange']);
+const emits = defineEmits(['update:filterColumns', 'update:tableSize', 'update:loading', 'resetQuery', 'sizeChange']);
 const columnsValueKey = 'dataIndex';
 const columnsLabelKey = 'title';
 const dropdownVisible = ref(false);
 const tableSize = useVModel(props, 'tableSize', emits);
+const loading = useVModel(props, 'loading', emits);
 const selectList = reactive([props.tableSize]);
 const sizeItems = ref<MenuProps['items']>([
   {

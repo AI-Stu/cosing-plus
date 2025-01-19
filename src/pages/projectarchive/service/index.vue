@@ -113,8 +113,8 @@
 import { h } from 'vue';
 import to from 'await-to-js';
 import { CheckCircleFilled, PlusOutlined, RedoOutlined, SearchOutlined } from '@ant-design/icons-vue';
-import type { SelectListType } from '../components/types';
-import SearchSelectList from '../components/SearchSelectList.vue';
+import type { SelectListType } from '../components/SearchSelectList/data';
+import SearchSelectList from '../components/SearchSelectList/index.vue';
 import { delServiceApi, listServiceApi } from '@/api/projectarchive/service';
 import type { ServiceQuery } from '@/api/projectarchive/service/types';
 

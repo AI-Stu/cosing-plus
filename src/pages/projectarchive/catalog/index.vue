@@ -56,7 +56,13 @@
     </div>
 
     <!-- 添加目录对话框 -->
-    <a-modal v-model:open="catalog.visible" :title="catalog.title" @ok="saveCatalog">
+    <a-modal
+      v-model:open="catalog.visible"
+      :ok-button-props="{
+        disabled: loading.isButton,
+      }"
+      :title="catalog.title" @ok="saveCatalog"
+    >
       <a-form :model="catalog.form" :rules="catalog.formRules" class="w-full">
         <a-form-item label="父目录名称" name="parentName">
           <a-input v-model:value="catalog.form.parentName" :maxlength="20" placeholder="" disabled />
@@ -111,6 +117,10 @@ defineOptions({
 });
 const ElMessage = useMessage();
 const dictStore = useDictStore();
+
+const loading = reactive({
+  isButton: false
+});
 
 const tree = reactive<{
   data: DataNode[]
@@ -337,11 +347,14 @@ function clickBatchExport() {
 
 function saveCatalog() {
   console.log(tree.selectedKeys);
+  loading.isButton = true;
   addCatalogApi(catalog.form).then((res) => {
     if (res.code === 200) {
       catalog.visible = false;
       queryTreeData();
     }
+  }).finally(() => {
+    loading.isButton = false;
   });
 }
 

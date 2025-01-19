@@ -47,5 +47,5 @@ export function delXmxxDataStandardsRelApi(id: string | number | Array<string | 
  * @param xmxxid
  */
 export function saveXmxxDataStandardsListApi(xmxxid: string | number, data: XmxxDataStandardsRelVO[]) {
-  return useDelete(`${BASE_API}/projectarchive/xmxxEx/saveXmxxDataStandardsList/${xmxxid}`, data);
+  return usePost(`${BASE_API}/projectarchive/xmxxEx/saveXmxxDataStandardsList/${xmxxid}`, data);
 };

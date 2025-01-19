@@ -110,8 +110,8 @@ import {
 } from '@ant-design/icons-vue';
 import { h } from 'vue';
 import to from 'await-to-js';
-import type { SeacrhSelectListOptions, SelectListType } from '../components/types';
-import SearchSelectList from '../components/SearchSelectList.vue';
+import type { SeacrhSelectListOptions, SelectListType } from '../components/SearchSelectList/data';
+import SearchSelectList from '../components/SearchSelectList/index.vue';
 import { delXmxxApi, listXmxxApi } from '@/api/projectarchive/xmxx';
 import type { XmxxQuery } from '@/api/projectarchive/xmxx/types';
 

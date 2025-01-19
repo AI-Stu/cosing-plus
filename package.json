@@ -32,6 +32,7 @@
     "@antv/l7": "catalog:",
     "@cosing/tsconfig": "workspace:*",
     "@ctrl/tinycolor": "catalog:",
+    "@types/spark-md5": "catalog:",
     "@v-c/utils": "catalog:",
     "@vueuse/core": "catalog:",
     "ant-design-vue": "catalog:",
@@ -44,6 +45,7 @@
     "lodash-es": "catalog:",
     "mitt": "catalog:",
     "pinia": "catalog:",
+    "spark-md5": "catalog:",
     "vue": "catalog:",
     "vue-i18n": "catalog:",
     "vue-router": "catalog:"

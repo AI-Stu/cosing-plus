@@ -27,10 +27,10 @@
       </a-button>
       <a-table
         style="margin-bottom: 10px;"
-        :loading="loading"
+        :loading="state.loading"
         :columns="filterColumns"
         :pagination="false"
-        :data-source="dataSource"
+        :data-source="state.dataSource"
         size="small"
       >
         <template #bodyCell="scope">
@@ -72,93 +72,59 @@
       <h4>附件除数据标准内已有选项，缺失项可以自行添加。</h4>
     </div>
 
-    <DataModal :open="visible.madel" @close="visible.madel = false" />
+    <DataModal v-model:open="visible.madel" @close="visible.madel = false" @ok="handleOk" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { cloneDeep, isEqual } from 'lodash-es';
+import { Api, columns } from './data';
 import DataModal from '@/pages/projectarchive/components/DataStandardsModal/index.vue';
-import { delXmxxDataStandardsRelApi, listXmxxDataStandardsRelApi, saveXmxxDataStandardsListApi } from '@/api/projectarchive/xmxxDataStandardsRel';
 import type { XmxxDataStandardsRelVO } from '@/api/projectarchive/xmxxDataStandardsRel/types';
 
 const emit = defineEmits(['prevStep', 'nextStep']);
 const xmxxid = inject('xmxxid') as string;
 const message = useMessage();
 
-const columns = shallowRef([
-  {
-    title: '序号',
-    dataIndex: 'id'
-  },
-  {
-    title: '数据标准',
-    dataIndex: 'dataStandards'
-  },
-  {
-    title: '父级目录',
-    dataIndex: 'desc',
-    ellipsis: true
-  },
-  {
-    title: '技术标准',
-    dataIndex: 'skillStandards',
-    ellipsis: true
-  },
-  {
-    title: '附件',
-    dataIndex: 'sl',
-    width: 50
-  },
-  {
-    title: '操作',
-    dataIndex: 'action',
-    width: 80
-  }
-]);
-const visible = reactive({
+let resetData: XmxxDataStandardsRelVO[] = []; // 优化提交
+const filterColumns = shallowRef(columns.filter((e: any) => !e.hide));
+const visible = ref({
   alert: true,
   madel: false
 });
-const loading = shallowRef(false);
+const dataSource = shallowRef<XmxxDataStandardsRelVO[]>([]);
+const { state, initQuery } = useTableQuery({
+  queryApi: Api.LIST_API,
+  queryOnMounted: false,
+  queryParams: {
+    xmid: null,
+    pageNum: 1,
+    pageSize: 5000
+  },
+  afterQuery: (res) => {
+    res.forEach((e: any) => {
+      e.parentPath = e.dataStandards.split('/').slice(0, -1).join('/') || '/';
+    });
+
+    resetData = cloneDeep(res) as unknown as any[];
+    return res;
+  }
+});
+
 const total = reactive({
   dataStandards: 0,
   file: 0
 });
-const dataSource = shallowRef<XmxxDataStandardsRelVO[]>([]);
-const getCheckList = computed(() => columns.value.map(item => item.dataIndex));
-let resetData: XmxxDataStandardsRelVO[] = []; // 优化提交
 
-watch(() => dataSource, () => {
-  total.dataStandards = dataSource.value.length;
-  total.file = dataSource.value.reduce((a, b) => a + (b.sl || 0), 0);
+watch(() => state.dataSource, (value) => {
+  total.dataStandards = value.length;
+  total.file = value.reduce((a, b) => a + (b.sl || 0), 0);
 });
-
-/**
- * 过滤
- *
- */
-function filterAction(value: string[]) {
-  return columns.value.filter((item) => {
-    if (value.includes(item.dataIndex)) {
-      // 为true时，循环遍历的值会暴露出去
-      return true;
-    }
-    return false;
-  });
-}
-// 备份columns
-const filterColumns = ref(filterAction(getCheckList.value));
 
 // 获取列表
 function getList() {
-  loading.value = true;
-  const queryParams = { xmid: xmxxid, pageNum: 1, pageSize: 2000 };
-  listXmxxDataStandardsRelApi(queryParams).then((res) => {
-    resetData = cloneDeep(res.rows);
-  }).finally(() => {
-    loading.value = false;
-  });
+  state.queryParams.xmid = xmxxid;
+  initQuery();
 }
 
 /**
@@ -167,11 +133,18 @@ function getList() {
  * @param record
  */
 async function handleDelete(index: number, record: XmxxDataStandardsRelVO) {
-  if (record.id) {
-    await delXmxxDataStandardsRelApi(record.id);
+  if (record.xmid && record.id) {
+    await Api.DEL_API(record.id);
   }
-  dataSource.value.splice(index, 1);
+  state.dataSource.splice(index, 1);
   message.success('删除成功');
+}
+
+function handleOk(rows: []) {
+  console.log('handleOk', rows);
+
+  // const values = groupBy(rows, 'class');
+  state.dataSource = cloneDeep([...toRaw(state.dataSource), ...rows]);
 }
 
 // 上一步
@@ -182,8 +155,8 @@ function prevStep() {
 // 下一步
 async function nextStep() {
   if (xmxxid) {
-    if (!isEqual(resetData, dataSource.value)) {
-      await saveXmxxDataStandardsListApi(xmxxid, dataSource.value);
+    if (!isEqual(resetData, state.dataSource)) {
+      await Api.SAVE_API(xmxxid, state.dataSource);
       resetData = cloneDeep(dataSource.value);
       message.success('保存成功');
     }

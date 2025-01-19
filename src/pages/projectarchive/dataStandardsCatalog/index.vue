@@ -55,6 +55,7 @@
         <TableRightToolbar
           v-model:filter-columns="filterColumns"
           v-model:table-size="tableSize"
+          v-model:loading="state.loading"
           :columns="columns"
           @reset-query="initQuery"
         />
