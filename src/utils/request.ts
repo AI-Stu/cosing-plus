@@ -100,7 +100,7 @@ async function requestHandler(config: InternalAxiosRequestConfig & RequestConfig
 
   // FormData数据去请求头Content-Type
   if (config.data instanceof FormData) {
-    delete config.headers['Content-Type'];
+    config.headers['Content-Type'] = 'multipart/form-data';
   }
 
   // 增加多语言的配置
@@ -160,11 +160,15 @@ function responseHandler(response: any): ResponseBody<any> | AxiosResponse<any> 
     description: msg,
     duration: 3
   });
+
+  token.value = null;
   if ([
     HttpStatusEnum.UNAUTHORIZED,
     HttpStatusEnum.UNAUTHORIZED_TENANT,
     HttpStatusEnum.AUTHENTICATION_FAILED
   ].includes(code)) {
+    console.log(code);
+
     /**
      * 这里处理清空用户信息和token的逻辑，后续扩展
      */
@@ -172,7 +176,7 @@ function responseHandler(response: any): ResponseBody<any> | AxiosResponse<any> 
     router.push({
       path: '/login',
       query: {
-        redirect: router.currentRoute.value.fullPath
+        redirect: window.location.pathname
       }
     }).then(() => {});
   }

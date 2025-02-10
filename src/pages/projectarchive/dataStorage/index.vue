@@ -3,8 +3,8 @@
     <a-card>
       <div flex items-center mb-4 justify-between>
         <div flex items-center>
-          <a-upload :file-list="fileTable.fileList" :before-upload="handleBeforeUpload" :show-upload-list="false" multiple>
-            <a-button type="primary" shape="round" :icon="h(CloudUploadOutlined)" @click="handleUpload">
+          <a-upload :before-upload="handleBeforeUpload" :show-upload-list="false" multiple>
+            <a-button type="primary" shape="round" :icon="h(CloudUploadOutlined)">
               上传
             </a-button>
           </a-upload>
@@ -40,11 +40,11 @@
         </div>
 
         <a-flex align="center">
-          <a-button v-if="fileTable.fileList.length > 0" class="mr-4" type="link" size="small" @click="fileTable.open = true">
+          <a-button v-if="fileTable.files.length > 0" class="mr-4" type="link" size="small" @click="fileTable.open = true">
             <template #icon>
-              <SyncOutlined :class="fileTable.loading && 'rotate-element'" />
+              <SyncOutlined :class="fileTableLoading && 'rotate-element'" />
             </template>
-            <span>正在上传 {{ fileTable.fileList.length }} 个文件</span>
+            <span>正在上传 {{ fileTable.files.length }} 个文件</span>
           </a-button>
           <a-input-search
             v-model:value="searchValue"
@@ -187,7 +187,7 @@
       </a-form>
     </a-modal>
 
-    <FileTable v-model:open="fileTable.open" v-model:files="fileTable.files" />
+    <FileTable v-model:open="fileTable.open" v-model:files="fileTable.files" @refresh="initQuery" />
   </page-container>
 </template>
 
@@ -205,7 +205,7 @@ import Icon, {
   UnorderedListOutlined
 } from '@ant-design/icons-vue';
 import { h } from 'vue';
-import type { FormInstance, ModalProps, UploadFile } from 'ant-design-vue';
+import type { FormInstance, ModalProps } from 'ant-design-vue';
 import { cloneDeep } from 'lodash-es';
 import type { FileType } from 'ant-design-vue/es/upload/interface';
 import { Api, type DataVo, ROOT_FOLDER, columns, rules } from './data';
@@ -213,7 +213,7 @@ import FolderIcon from './src/icon/FolderIcon.vue';
 import FolderLockIcon from './src/icon/FolderLockIcon.vue';
 import FileTable from './src/FileTable/index.vue';
 import AssociativeArray from '@/utils/AssociativeArray';
-import type { FileVo } from '@/api/projectarchive/fileUpload/types';
+import type { FileUploadProps } from '@/composables/upload-file';
 
 defineOptions({
   name: 'DataStorage'
@@ -286,15 +286,15 @@ const modal = reactive<ModalProps>({
 
 const fileTable = reactive<{
   open: boolean
-  loading: boolean
-  fileList: UploadFile[]
-  files: FileVo[]
+  files: FileUploadProps[]
 }>({
   open: false,
-  loading: true,
-  fileList: [],
   files: []
 });
+
+const fileTableLoading = computed(() =>
+  !!fileTable.files?.find((e: FileUploadProps) => ['uploading', 'wait', 'analysis', 'done'].includes(e.status))
+);
 
 // 文件上传之前
 function handleBeforeUpload(file: FileType) {
@@ -307,24 +307,20 @@ function handleBeforeUpload(file: FileType) {
     return false;
   }
 
-  const fileUpload: FileVo = {
+  const fileUpload: FileUploadProps = {
     name: file.name,
     size: file.size,
-    prefix: file.type,
     path: formData.value.filePath,
     pid: formData.value.pid,
-    status: 'wait',
-    percent: 50,
+    status: 'pending',
+    percent: 0,
     uid: file.uid,
     file
   };
 
   fileTable.files = [...fileTable.files, fileUpload];
-  fileTable.fileList = [...(fileTable.fileList || []), file];
 
-  fileTable.open = false;
-
-  console.log(fileTable.fileList);
+  fileTable.open = true;
   return false;
 }
 

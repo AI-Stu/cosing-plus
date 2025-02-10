@@ -6,7 +6,7 @@ const BASE_API = import.meta.env.VITE_APP_BASE_API_DEV;
  * 初始化分片上传
  * @param {FileUploadForm} data
  */
-export function initFileApi(data: FileUploadForm) {
+export function createUploadTaskApi(data: FileUploadForm) {
   return usePost(`${BASE_API}/projectarchive/filemanage/upload/chunk/init`, data);
 };
 
@@ -15,7 +15,11 @@ export function initFileApi(data: FileUploadForm) {
  * @param {FileUploadForm} data
  */
 export function uploadFileApi(data: FileChunkFrom) {
-  return usePost(`${BASE_API}/projectarchive/filemanage/upload`, data);
+  return usePost(`${BASE_API}/projectarchive/filemanage/upload`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
 };
 
 /**

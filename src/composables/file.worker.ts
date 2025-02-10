@@ -12,7 +12,8 @@ ctx.onmessage = async ({
     file,
     chunkSize,
     startIndex,
-    endIndex
+    endIndex,
+    isMd5
   }
 }) => {
   chunkSize = chunkSize ?? 3 * 1024 ** 2;
@@ -30,35 +31,31 @@ ctx.onmessage = async ({
     const chunkFile = file.slice(start, end);
     chunks.push(chunkFile);
 
-    const fileReader = new FileReader();
-    const promise = new Promise<void>((resolve, reject) => {
-      fileReader.onload = function (event: any) {
-        spark.append(event.target.result);
-        resolve();
-      };
-      fileReader.onerror = reject;
-      fileReader.readAsArrayBuffer(chunkFile);
-    });
-    promises.push(promise);
+    if (isMd5) {
+      const fileReader = new FileReader();
+      const promise = new Promise<void>((resolve, reject) => {
+        fileReader.onload = function (event: any) {
+          spark.append(event.target.result);
+          resolve();
+        };
+        fileReader.onerror = reject;
+        fileReader.readAsArrayBuffer(chunkFile);
+      });
+      promises.push(promise);
+    }
+
     currentChunk++;
   }
 
   try {
-    console.log('chunks', chunks);
-
     await Promise.all(promises);
-    const MD5 = spark.end();
+    const MD5 = isMd5 ? spark.end() : '';
     ctx.postMessage({
-      MD5,
-      chunks
-    });
-    console.log({
-      MD5,
-      chunks
+      chunks,
+      ...(isMd5 && { MD5 })
     });
   }
   catch (error) {
-    console.error(error);
     ctx.postMessage({
       error
     });
@@ -66,7 +63,6 @@ ctx.onmessage = async ({
 };
 
 ctx.onerror = (e) => {
-  console.error(e);
   ctx.postMessage({
     error: e.message
   });

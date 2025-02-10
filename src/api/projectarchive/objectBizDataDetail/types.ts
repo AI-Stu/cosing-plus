@@ -22,6 +22,11 @@ export interface ObjectBizDataDetailVO {
   /**
    * $column.columnComment
    */
+  uploadId: string
+
+  /**
+   * $column.columnComment
+   */
   hash: string
 
   /**
@@ -75,6 +80,11 @@ export interface ObjectBizDataDetailForm extends BaseEntity {
   /**
    * $column.columnComment
    */
+  uploadId: string
+
+  /**
+   * $column.columnComment
+   */
   hash?: string
 
   /**
@@ -120,6 +130,11 @@ export interface ObjectBizDataDetailQuery extends PageQuery {
    * $column.columnComment
    */
   fileId?: string | number
+
+  /**
+   * $column.columnComment
+   */
+  uploadId: string
 
   /**
    * $column.columnComment

@@ -156,8 +156,8 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
         state.pagination.total = total ?? 0;
       }
     }
-    catch (e) {
-      throw new Error(`Query Failed: ${e}`);
+    catch (e: any) {
+      throw new Error(`Query Failed: ${e?.msg || e}`);
     }
     finally {
       state.loading = false;

@@ -114,14 +114,14 @@ export function useTreeQuery(_options: Partial<TreeQueryOptions>) {
     defaultSelectedKeys: [],
     loadedKeys: [],
     expandedKeys: [],
-    rowSelections: {
+    rowSelections: assign({
       selectedRowKeys: [],
       selectedRows: [],
       onChange(selectedRowKeys: any[], selectedRows: any[]) {
         state.rowSelections.selectedRowKeys = selectedRowKeys;
         state.rowSelections.selectedRows = selectedRows;
       }
-    },
+    } as TreeRowSelectionsProps, _options.rowSelections),
     queryOnMounted: true,
     expand: false,
     loadData: async (treeNode: EventDataNode) => {
@@ -145,8 +145,8 @@ export function useTreeQuery(_options: Partial<TreeQueryOptions>) {
       state.dataSource = [...state.dataSource];
       return Promise.resolve();
     },
-    beforeQueryNode: (data: DataNode) => {},
-    buildfilter: () => {},
+    beforeQueryNode() {},
+    buildfilter() {},
     expandChange() {
       state.expand = !state.expand;
     },
@@ -221,8 +221,8 @@ export function useTreeQuery(_options: Partial<TreeQueryOptions>) {
         state.dataSource = _data ?? [];
       }
     }
-    catch (e) {
-      throw new Error(`Query Failed: ${e}`);
+    catch (e: any) {
+      throw new Error(`Query Failed: ${e?.msg || e}`);
     }
     finally {
       state.loading = false;

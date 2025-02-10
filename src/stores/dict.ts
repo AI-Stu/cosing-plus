@@ -65,6 +65,8 @@ export const useDictStore = defineStore('dict', () => {
               );
             }
             setDict(dictType, res.value[dictType] || []);
+          }).catch((err) => {
+            console.log('获取字典数据失败', err);
           });
         }
       });

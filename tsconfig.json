@@ -13,5 +13,5 @@
     "allowImportingTsExtensions": true
   },
   // "references": [{ "path": "./tsconfig.node.json" }],
-  "include": ["./src/**/*.ts", "./src/**/*.d.ts", "./src/**/*.tsx", "./src/**/*.vue", "./types/**/*.d.ts", "src/pages/projectarchive/dataStorage/src/FileTable/file.worker1.js", "src/pages/projectarchive/dataStorage/src/FileTable/file.utils.js", "src/pages/projectarchive/dataStorage/src/FileTable/file.worker copy .js"]
+  "include": ["./src/**/*.ts", "./src/**/*.d.ts", "./src/**/*.tsx", "./src/**/*.vue", "./types/**/*.d.ts"]
 }

@@ -1,5 +1,3 @@
-import type { FileType } from 'ant-design-vue/es/upload/interface';
-
 export interface FileUploadForm extends BaseEntity {
   /**
    * 文件ID
@@ -78,34 +76,5 @@ export interface FileChunkFrom extends FormData {
    * 当前切片索引
    */
   partNumber?: number
-
-}
-
-export interface FileVo extends FileUploadForm {
-
-  /**
-   * 父文件夹id
-   */
-  pid?: number | string
-
-  /**
-   * 待传文件 （前端自定义）
-   */
-  file?: File | FileType
-
-  /**
-   * 上传状态
-   */
-  status?: 'error' | 'success' | 'done' | 'uploading' | 'removed' | 'wait'
-
-  /**
-   * 上传uid
-   */
-  uid?: string
-
-  /**
-   * 上传进度
-   */
-  percent?: number
 
 }

@@ -85,7 +85,7 @@ export interface DataStorageForm extends BaseEntity {
   /**
    * 是否发布服务
    */
-  ispublish?: string
+  ispublish?: number
 
   /**
    * 文件大小

@@ -53,7 +53,7 @@ export function getServiceListApi(query?: ServiceQuery) {
 
 /**
  * 批量保存项目数据标准关系
- * @param query
+ * @param param
  * @returns {Promise<any>} 结果列表
  */
 export function saveServiceCatalogRelApi(param?: any) {
