@@ -146,6 +146,7 @@ import type { LoginAccountParams, LoginMobileParams } from '@/api/system/login';
 const message = useMessage();
 const notification = useNotification();
 const appStore = useAppStore();
+
 const { layoutSetting } = storeToRefs(appStore);
 const router = useRouter();
 const token = useAuthorization();
@@ -183,7 +184,7 @@ const { counter, pause, reset, resume, isActive } = useInterval(1000, {
  */
 async function initTenantList() {
   const { data } = await getTenantListApi();
-  tenantOptions.value = (data?.voList || []).map(e => ({
+  tenantOptions.value = (data?.voList || []).map((e: any) => ({
     value: e.tenantId,
     label: e.companyName
   }));
@@ -235,6 +236,7 @@ async function submit() {
     });
 
     token.value = data?.access_token;
+
     notification.success({
       message: '登录成功',
       description: '欢迎回来！',

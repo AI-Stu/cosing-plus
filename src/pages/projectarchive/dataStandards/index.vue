@@ -65,7 +65,7 @@
                     编辑
                   </a-button>
                   <a-popconfirm
-                    title="确定删除该条数据？" ok-text="确定" cancel-text="取消"
+                    title="确定删除该条数据？"
                     @confirm="handleDelete(scope.index, scope.record)"
                   >
                     <a-button v-if="hasAccess([AccessKey.DEL])" type="link" size="small" danger>
@@ -148,6 +148,7 @@ import { h } from 'vue';
 import { PlusOutlined } from '@ant-design/icons-vue';
 import { AccessKey, Api, type DataVo, columns, rules } from './data';
 import DataStandardsTree from '@/pages/projectarchive/components/DataStandardsTree.vue';
+import { TableRightToolbar } from '@/components/Table';
 
 defineOptions({
   name: 'DataStandards'

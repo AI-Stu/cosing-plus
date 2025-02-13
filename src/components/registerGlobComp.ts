@@ -7,9 +7,8 @@
  */
 import DictTag from './DictTag/index.vue';
 import ImagePreview from './ImagePreview/index.vue';
-import TableRightToolbar from './TableRightToolbar/index.vue';
 
-const compList = [DictTag, ImagePreview, TableRightToolbar];
+const compList = [DictTag, ImagePreview];
 
 export function registerGlobComp(app: { component: (arg0: any, arg1: any) => void }) {
   compList.forEach((comp) => {

@@ -9,7 +9,10 @@
             </template>
             <template #end3>
               <a-select
-                v-model:value="region" :options="regionList" mode="tags" size="small" placeholder="不限" :max-tag-count="1" :max-tag-text-length="60"
+                v-model:value="region" :options="regionList"
+                mode="tags" size="small" placeholder="不限"
+                :max-tag-count="1"
+                :max-tag-text-length="60"
                 style="width: 200px;"
               />
             </template>

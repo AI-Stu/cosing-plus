@@ -95,6 +95,7 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
     loading: false,
     queryParams: {},
     dataSource: [],
+    columns: [],
     rowSelections: assign({
       selectedRowKeys: [],
       selectedRows: [],
@@ -143,7 +144,7 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
     try {
       await state.beforeQuery();
       const { rows, total } = await state.queryApi({
-        current: state.pagination.current,
+        pageNum: state.pagination.current,
         pageSize: state.pagination.pageSize,
         column: state.pagination.column,
         order: state.pagination.order,
@@ -172,9 +173,9 @@ export function useTableQuery(_options: Partial<TableQueryOptions>) {
   }
 
   // 初始化查询
-  function initQuery() {
+  async function initQuery() {
     state.pagination.current = 1;
-    query();
+    await query();
   }
 
   onMounted(() => {

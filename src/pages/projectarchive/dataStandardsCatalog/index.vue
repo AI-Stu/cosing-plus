@@ -136,6 +136,7 @@ import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
 import type { FormInstance } from 'ant-design-vue';
 import { addDataStandardsCatalogApi, delDataStandardsCatalogApi, getDataStandardsCatalogApi, listDataStandardsCatalogApi, updateDataStandardsCatalogApi } from '@/api/projectarchive/dataStandardsCatalog';
 import type { DataStandardsCatalogForm, DataStandardsCatalogQuery, DataStandardsCatalogVO } from '@/api/projectarchive/dataStandardsCatalog/types';
+import { TableRightToolbar } from '@/components/Table';
 
 defineOptions({
   name: 'DataStandardsCatalog'

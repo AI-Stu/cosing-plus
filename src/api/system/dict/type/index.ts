@@ -3,7 +3,7 @@ import type { DictTypeForm, DictTypeQuery, DictTypeVO } from './types';
 const BASE_API = import.meta.env.VITE_APP_BASE_API_DEV;
 
 // 查询字典类型列表
-export function listType(query: DictTypeQuery) {
+export function listTypeApi(query: DictTypeQuery) {
   return useGet<DictTypeVO[]>(`${BASE_API}/system/dict/type/list`, query);
 }
 

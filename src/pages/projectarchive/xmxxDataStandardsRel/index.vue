@@ -117,7 +117,7 @@
 <script setup lang="ts">
 import type { FormInstance } from 'ant-design-vue';
 import { AccessKey, Api, type DataVo, columns, rules } from './data';
-
+import { TableRightToolbar } from '@/components/Table';
 import DataStandardsTree from '@/pages/projectarchive/components/DataStandardsTree.vue';
 
 defineOptions({

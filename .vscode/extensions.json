@@ -1,3 +1,5 @@
 {
-  "recommendations": ["johnsoncodehk.volarjs-labs", "Vue.volar"]
+  "recommendations": [
+    "Vue.volar"
+  ]
 }

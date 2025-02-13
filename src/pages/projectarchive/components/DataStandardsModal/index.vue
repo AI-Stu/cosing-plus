@@ -191,6 +191,7 @@ import type { Key } from 'ant-design-vue/es/table/interface';
 import { Api, type DataVo, columns, fileColumns, rules } from './data';
 import AssociativeArray from '@/utils/AssociativeArray';
 import DataStandardsTree from '@/pages/projectarchive/components/DataStandardsTree.vue';
+import { TableRightToolbar } from '@/components/Table';
 
 defineOptions({
   name: 'DataStandardsModal'

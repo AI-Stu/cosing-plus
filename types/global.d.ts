@@ -94,5 +94,9 @@ declare global {
     pageNum: number
     pageSize: number
   }
+
+  declare interface Fn<T = any, R = T> {
+    (...arg: T[]): R
+  }
 }
 export {};

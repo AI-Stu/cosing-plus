@@ -125,6 +125,7 @@ defineOptions({
 const message = useMessage();
 const router = useRouter();
 const dictStore = useDictStore();
+
 const { sys_service_type } = toRefs<any>(dictStore.getDict('sys_service_type'));
 const SYS_SERVICE_TYPE = computed(() => sys_service_type?.value.reduce((acc: any, cur: any) => {
   acc[cur.value] = cur.label;

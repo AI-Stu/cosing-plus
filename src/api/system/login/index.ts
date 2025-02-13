@@ -24,7 +24,7 @@ export function loginApi(params: LoginAccountParams | LoginMobileParams) {
 
 /** 退出登录 */
 export function logoutApi() {
-  return useGet(`${BASE_API}/auth/logout`);
+  return usePost(`${BASE_API}/auth/logout`);
 }
 
 /**

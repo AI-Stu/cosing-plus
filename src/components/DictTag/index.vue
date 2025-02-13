@@ -43,11 +43,13 @@ interface Props {
 const values = computed(() => {
   if (!props.value)
     return [];
-  return Array.isArray(props.value) ? props.value.map(item => `${item}`) : String(props.value).split(props.separator);
+  return Array.isArray(props.value)
+    ? props.value.map(item => `${item}`)
+    : String(props.value).split(props.separator);
 });
 
 const unmatch = computed(() => {
-  if (props.options?.length === 0 || props.value === '' || props.value === null || typeof props.value === 'undefined')
+  if (props.options?.length === 0 || (props.value ?? '') === '')
     return false;
   // 传入值为非数组
   let unmatch = false; // 添加一个标志来判断是否有未匹配项
@@ -62,7 +64,7 @@ const unmatch = computed(() => {
 const unmatchArray = computed(() => {
   // 记录未匹配的项
   const itemUnmatchArray: Array<string | number> = [];
-  if (props.value !== '' && props.value !== null && typeof props.value !== 'undefined') {
+  if ((props.value ?? '') !== '') {
     values.value.forEach((item) => {
       if (!props.options.some(v => v.value === item)) {
         itemUnmatchArray.push(item);

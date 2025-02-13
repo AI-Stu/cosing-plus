@@ -236,14 +236,15 @@ export function useTreeQuery(_options: Partial<TreeQueryOptions>) {
   }
 
   // 初始化查询
-  function initQuery() {
+  async function initQuery() {
     state.dataSource = [];
     state.loadedKeys = [];
     state.expandedKeys = [];
-    query().then(() => {
-      state.defaultSelectedKeys = [state.dataSource[0].key];
-      state.rowSelections.selectedRowKeys = [state.dataSource[0].key];
+    await query().catch((err) => {
+      return Promise.reject(err);
     });
+    state.defaultSelectedKeys = [state.dataSource[0].key];
+    state.rowSelections.selectedRowKeys = [state.dataSource[0].key];
   }
 
   // 新增子节点

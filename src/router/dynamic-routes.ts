@@ -49,30 +49,6 @@ export default [
           title: '项目管理'
         }
       }
-      // {
-      //   path: '/projectManagement/addSportsEvtent',
-      //   name: 'AddSportsEvtent',
-      //   component: () => import('@/pages/projectManagement/sportsEvtent/components/AddSportsEvtent/index.vue'),
-      //   meta: {
-      //     title: '创建项目'
-      //   }
-      // }
-      // {
-      //   path: '/projectManagement/projectData',
-      //   name: 'projectData',
-      //   component: () => import('@/pages/projectManagement/projectData/index.vue'),
-      //   meta: {
-      //     title: '项目数据管理'
-      //   }
-      // },
-      // {
-      //   path: '/projectManagement/oneMapDirectory',
-      //   name: 'oneMapDirectory',
-      //   component: () => import('@/pages/projectManagement/projectData/index.vue'),
-      //   meta: {
-      //     title: '一张图目录管理'
-      //   }
-      // }
     ]
   },
   {

@@ -97,6 +97,7 @@ import CrudTableModal from './components/crud-table-modal.vue';
 import type { CrudTableModel } from '@/api/list/crud-table';
 import { deleteApi, getListApi } from '@/api/list/crud-table';
 import { useTableQuery } from '@/composables/table-query';
+import { TableRightToolbar } from '@/components/Table';
 
 const message = useMessage();
 

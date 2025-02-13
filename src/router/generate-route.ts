@@ -158,6 +158,7 @@ export function generateTreeRoutes(menus: MenuData) {
       }
     } as RouteRecordRaw;
     const menu = formatMenu(route);
+
     routeDataMap.set(menuItem.id, route);
     menuDataMap.set(menuItem.id, menu);
   }
